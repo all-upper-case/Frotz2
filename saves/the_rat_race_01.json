@@ -1,0 +1,316 @@
+{
+  "narrative_thread": null,
+  "blueprint": "The Hallway connects to the Bedroom (west), Bathroom (east), Closet (north), and Stairs (down to the Kitchen). The Kitchen leads to the Living Room (south) and Garage (west). The front door is in the Living Room. Additional rooms like a Home Office or Laundry Room may branch off later if needed.",
+  "meta": {
+    "total_tokens": 16505
+  },
+  "player": {
+    "current_room": "room_46e20fa0",
+    "inventory": [
+      "phone",
+      "keys",
+      "work_clothes"
+    ],
+    "worn": [],
+    "description": "You are wearing a faded, oversized t-shirt with a cartoon cat on it and plaid flannel pajama pants. Your hair is tangled from sleep, and there\u2019s a faint crease on your cheek from the pillow. You look like you\u2019ve just rolled out of bed, which, to be fair, you have.",
+    "aliases": [
+      "me",
+      "self",
+      "player"
+    ]
+  },
+  "characters": {},
+  "rooms": {
+    "room_start": {
+      "id": "room_start",
+      "name": "Bedroom",
+      "description": "Your bedroom is a shrine to the grind\u2014a queen-sized bed with rumpled sheets, a nightstand cluttered with lotion bottles and a half-empty glass of water, and a dresser topped with a mirror reflecting your sleep-creased face. The walls are painted a soothing beige, though the color does little to soften the fluorescent glow of the alarm clock. A pair of slippers sits haphazardly near the bed, and your work clothes from yesterday are draped over a chair in the corner, as if waiting for an encore.\n\nYou can see here: alarm clock, nightstand, slippers, work clothes, bed, dresser, jewelry box.\n\nYou can see here: alarm clock, nightstand, slippers, work clothes, bed, dresser, jewelry box.\n\nYou can see here: alarm clock, nightstand, slippers, work clothes, bed, dresser, jewelry box.\n\nYou can see here: alarm clock, nightstand, slippers, work clothes, bed, dresser, jewelry box.\n\nYou can see here: alarm clock, nightstand, slippers, bed, dresser, jewelry box.\n\nYou can see here: alarm clock, nightstand, slippers, bed, dresser, jewelry box.",
+      "base_description": null,
+      "exits": {
+        "east": "room_e1dc6778"
+      },
+      "items": [
+        "alarm_clock",
+        "nightstand",
+        "slippers",
+        "bed",
+        "dresser",
+        "jewelry_box"
+      ],
+      "characters": [],
+      "visited": true
+    },
+    "room_e1dc6778": {
+      "id": "room_e1dc6778",
+      "name": "Hallway",
+      "description": "The hallway stretches before you, a narrow corridor of beige carpet and off-white walls that seem to absorb the morning light rather than reflect it. A faint scent of lemon cleaner lingers, though it does little to mask the underlying mustiness of an old house. The air hums with the quiet whir of the furnace kicking on, and the distant drip of a faucet echoes from somewhere deeper in the house. A row of framed family photos lines the wall, their glass surfaces smudged with fingerprints, as if someone had recently paused to scrutinize them. To the east, the bathroom door stands slightly ajar, revealing a sliver of the sink and mirror beyond. A narrow closet door looms to the north, its brass knob tarnished with age.\n\nYou can see here: family photos, thermostat, umbrella stand, junk mail.",
+      "base_description": "The hallway stretches before you, a narrow corridor of beige carpet and off-white walls that seem to absorb the morning light rather than reflect it. A faint scent of lemon cleaner lingers, though it does little to mask the underlying mustiness of an old house. The air hums with the quiet whir of the furnace kicking on, and the distant drip of a faucet echoes from somewhere deeper in the house. A row of framed family photos lines the wall, their glass surfaces smudged with fingerprints, as if someone had recently paused to scrutinize them. To the east, the bathroom door stands slightly ajar, revealing a sliver of the sink and mirror beyond. A narrow closet door looms to the north, its brass knob tarnished with age.",
+      "exits": {
+        "west": "room_start",
+        "east": "room_46e20fa0",
+        "north": "room_c9f2ce68",
+        "down": "room_7117c3ea"
+      },
+      "items": [
+        "item_hallway_family_photos",
+        "item_hallway_thermostat",
+        "item_hallway_umbrella_stand",
+        "item_hallway_junk_mail"
+      ],
+      "characters": [],
+      "visited": false
+    },
+    "room_46e20fa0": {
+      "id": "room_46e20fa0",
+      "name": "Bathroom",
+      "description": "The bathroom is a cramped, utilitarian space, its once-white tiles now yellowed with age and streaked with grime in the grout lines. The air is thick with the scent of damp towels and the sharp tang of toothpaste mingling with the faint, sour undertone of last night\u2019s forgotten glass of water on the sink. A fluorescent light buzzes overhead, casting a harsh glow that exaggerates every imperfection\u2014the chipped edge of the sink, the peeling sticker on the mirror, the way the shower curtain sags slightly from its rod. The linoleum floor is cold beneath your feet, and a single, half-used bar of soap sits in a cracked dish, its surface slick with moisture. To the west, the hallway beckons, while the faint sound of a toilet tank refilling drifts from somewhere beyond the shower curtain.\n\nYou can see here: toothbrush, shower curtain, medicine cabinet, towel rack.\n\nYou can see here: toothbrush, shower curtain, medicine cabinet, towel rack.\n\nYou can see here: toothbrush, shower curtain, medicine cabinet, towel rack.\n\nYou can see here: toothbrush, shower curtain, medicine cabinet, towel rack.",
+      "base_description": null,
+      "exits": {
+        "west": "room_e1dc6778"
+      },
+      "items": [
+        "item_9a7b3c2d",
+        "item_5e8f1a4b",
+        "item_2c9d6e5f",
+        "item_7f3a8b1c"
+      ],
+      "characters": [],
+      "visited": false
+    },
+    "room_c9f2ce68": {
+      "id": "room_c9f2ce68",
+      "name": "Unknown",
+      "description": null,
+      "base_description": null,
+      "exits": {
+        "south": "room_e1dc6778"
+      },
+      "items": [],
+      "characters": [],
+      "visited": false
+    },
+    "room_7117c3ea": {
+      "id": "room_7117c3ea",
+      "name": "Unknown",
+      "description": null,
+      "base_description": null,
+      "exits": {
+        "up": "room_e1dc6778"
+      },
+      "items": [],
+      "characters": [],
+      "visited": false
+    }
+  },
+  "items": {
+    "alarm_clock": {
+      "id": "alarm_clock",
+      "name": "alarm clock",
+      "aliases": [
+        "clock",
+        "alarm",
+        "digital clock"
+      ],
+      "description": "A cheap, plastic digital alarm clock with a cracked screen. The time reads 6:30 AM, and the alarm is still blaring its obnoxious beep-beep-beep. The buttons are sticky from years of use, and the back is missing a battery cover. It\u2019s the kind of thing you\u2019d replace if you ever had the time.",
+      "carryable": true,
+      "visible": true
+    },
+    "nightstand": {
+      "id": "nightstand",
+      "name": "nightstand",
+      "aliases": [
+        "stand",
+        "bedside table",
+        "table"
+      ],
+      "description": "A small, wooden nightstand with a single drawer. The surface is a graveyard of lotion bottles, a half-empty glass of water, and a dog-eared paperback novel you\u2019ve been meaning to finish. The drawer is slightly ajar, revealing a tangle of charging cables and a lone AA battery.",
+      "carryable": false,
+      "visible": true
+    },
+    "slippers": {
+      "id": "slippers",
+      "name": "slippers",
+      "aliases": [
+        "house slippers",
+        "fluffy slippers",
+        "shoes"
+      ],
+      "description": "A pair of plush, pink slippers with little bows on the toes. They\u2019re worn at the heels and smell faintly of lavender fabric softener. Comfortable, but not exactly office-appropriate.",
+      "carryable": true,
+      "visible": true
+    },
+    "work_clothes": {
+      "id": "work_clothes",
+      "name": "work clothes",
+      "aliases": [
+        "clothes",
+        "outfit",
+        "blouse",
+        "skirt",
+        "yesterday's clothes"
+      ],
+      "description": "A wrinkled blouse and a pencil skirt, both in shades of corporate gray. They\u2019re draped over the chair like a deflated version of yourself. The blouse has a coffee stain near the hem, and the skirt\u2019s zipper is half-undone. You\u2019ll need to change before heading out.",
+      "carryable": true,
+      "visible": true
+    },
+    "bed": {
+      "id": "bed",
+      "name": "bed",
+      "aliases": [
+        "mattress",
+        "sheets",
+        "blanket"
+      ],
+      "description": "A queen-sized bed with a rumpled duvet and a single, lumpy pillow. The sheets are tangled from a night of tossing and turning, and the mattress sags slightly in the middle. It\u2019s not the most comfortable bed in the world, but it\u2019s yours\u2014at least until the next paycheck.",
+      "carryable": false,
+      "visible": true
+    },
+    "dresser": {
+      "id": "dresser",
+      "name": "dresser",
+      "aliases": [
+        "chest",
+        "drawers",
+        "mirror"
+      ],
+      "description": "A tall, wooden dresser with a mirror attached to the top. The mirror reflects your tired face back at you, complete with bedhead and dark circles under your eyes. The drawers are slightly crooked, and one of them sticks when you try to open it. The top of the dresser is home to a jewelry box, a hairbrush, and a bottle of perfume you rarely use.",
+      "carryable": false,
+      "visible": true
+    },
+    "jewelry_box": {
+      "id": "jewelry_box",
+      "name": "jewelry box",
+      "aliases": [
+        "box",
+        "small box",
+        "earrings box"
+      ],
+      "description": "A small, velvet-lined jewelry box with a tarnished brass clasp. Inside, a few pairs of stud earrings and a thin silver necklace lie tangled together. The velvet is worn in spots, and the hinge creaks when you open it. It\u2019s not much, but it\u2019s yours.",
+      "carryable": true,
+      "visible": true
+    },
+    "phone": {
+      "id": "phone",
+      "name": "cell phone",
+      "aliases": [
+        "phone",
+        "mobile",
+        "flip phone",
+        "nokia"
+      ],
+      "description": "A sleek, silver flip phone with a tiny screen and a keypad that\u2019s seen better days. The battery icon shows it\u2019s at 42%, which is just enough to get you through the morning if you don\u2019t spend too long texting. There\u2019s a crack in the corner of the screen from that one time you dropped it in the parking lot.",
+      "carryable": true,
+      "visible": true
+    },
+    "keys": {
+      "id": "keys",
+      "name": "house keys",
+      "aliases": [
+        "keys",
+        "keychain",
+        "car keys"
+      ],
+      "description": "A jangly set of keys on a keychain shaped like a coffee cup. The house key, car key, and a tiny bottle opener dangle from the ring. The metal is cold to the touch, and the keychain smells faintly of gasoline from the last time you filled up your tank.",
+      "carryable": true,
+      "visible": true
+    },
+    "item_hallway_family_photos": {
+      "id": "item_hallway_family_photos",
+      "name": "family photos",
+      "aliases": [
+        "photos",
+        "pictures",
+        "framed photos",
+        "family pictures"
+      ],
+      "description": "A mismatched collection of framed photos, most of them at least a decade old. There\u2019s you at age ten, grinning with missing teeth in front of a birthday cake. Another shows your parents on their wedding day, looking impossibly young. The most recent one is from last Christmas, your face slightly blurred from the camera\u2019s slow shutter. The frames are dusty, and one of them is slightly crooked, as if someone bumped it in passing.",
+      "carryable": false,
+      "visible": true
+    },
+    "item_hallway_thermostat": {
+      "id": "item_hallway_thermostat",
+      "name": "thermostat",
+      "aliases": [
+        "temperature control",
+        "heater control",
+        "furnace control"
+      ],
+      "description": "A digital thermostat mounted on the wall, its screen glowing faintly with the current temperature: 72 degrees. The buttons are worn from years of use, and the plastic cover is slightly yellowed. A thin layer of dust has settled in the crevices around the display. It\u2019s set to \u2018Auto,\u2019 which means the furnace will kick on if the temperature drops below 70.",
+      "carryable": false,
+      "visible": true
+    },
+    "item_hallway_umbrella_stand": {
+      "id": "item_hallway_umbrella_stand",
+      "name": "umbrella stand",
+      "aliases": [
+        "stand",
+        "umbrellas",
+        "rain stand"
+      ],
+      "description": "A tall, cylindrical umbrella stand made of dark wicker. It\u2019s stuffed with a hodgepodge of umbrellas\u2014some cheap and collapsible, others sturdy and wooden-handled. A few of them are slightly damp, as if they\u2019ve been used recently and not properly dried. At the bottom of the stand, a single black dress shoe lies forgotten, its mate nowhere in sight.",
+      "carryable": false,
+      "visible": true
+    },
+    "item_hallway_junk_mail": {
+      "id": "item_hallway_junk_mail",
+      "name": "junk mail",
+      "aliases": [
+        "mail",
+        "pile of mail",
+        "envelopes",
+        "advertisements"
+      ],
+      "description": "A small stack of junk mail and flyers, left on the narrow console table beneath the family photos. Most of it is addressed to \u2018Occupant\u2019 or \u2018Resident,\u2019 but a few pieces bear your name in bold, blocky letters. There\u2019s a coupon for a local pizza place, a credit card offer, and what looks like a utility bill buried at the bottom. The envelopes are slightly crumpled, as if someone had flipped through them absentmindedly before tossing them here.",
+      "carryable": true,
+      "visible": true
+    },
+    "item_9a7b3c2d": {
+      "id": "item_9a7b3c2d",
+      "name": "toothbrush",
+      "aliases": [
+        "brush",
+        "tooth brush",
+        "oral brush"
+      ],
+      "description": "A slightly frayed toothbrush, its bristles splayed from overuse. The blue handle is faded, and there\u2019s a faint ring of toothpaste residue near the base. It\u2019s yours, though you can\u2019t remember the last time you replaced it.",
+      "carryable": true,
+      "visible": true
+    },
+    "item_5e8f1a4b": {
+      "id": "item_5e8f1a4b",
+      "name": "shower curtain",
+      "aliases": [
+        "curtain",
+        "plastic curtain",
+        "shower liner"
+      ],
+      "description": "A cheap, mildew-speckled shower curtain, its once-opaque surface now translucent in patches from years of use. It\u2019s printed with a faded pattern of seashells and starfish, though the colors have long since washed out. The bottom hem is damp and slightly curled, and a few of the plastic rings that hold it to the rod are cracked.",
+      "carryable": false,
+      "visible": true
+    },
+    "item_2c9d6e5f": {
+      "id": "item_2c9d6e5f",
+      "name": "medicine cabinet",
+      "aliases": [
+        "cabinet",
+        "mirror cabinet",
+        "bathroom cabinet"
+      ],
+      "description": "A mirrored medicine cabinet mounted above the sink. The glass is smudged with fingerprints, and the silver frame is tarnished along the edges. The door creaks slightly when opened, revealing a cluttered interior of half-empty pill bottles, a tube of expired ointment, and a lone razor blade. The back of the cabinet is lined with yellowed contact paper, peeling at the corners.",
+      "carryable": false,
+      "visible": true
+    },
+    "item_7f3a8b1c": {
+      "id": "item_7f3a8b1c",
+      "name": "towel rack",
+      "aliases": [
+        "rack",
+        "towel bar",
+        "bathroom rack"
+      ],
+      "description": "A simple chrome towel rack mounted on the wall. One of the mounting brackets is loose, causing the bar to sag slightly. A damp hand towel hangs from it, its edges frayed and its color dulled from countless washes. The other hook is empty, save for a single, forgotten hair tie.",
+      "carryable": false,
+      "visible": true
+    }
+  }
+}

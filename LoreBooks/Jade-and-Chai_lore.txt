@@ -1,0 +1,6 @@
+WORLD_NAME: good_morning_gorgeous
+GENRE: Slice of Life.
+SETTING: An upper middle class house somewhere in the U.S., a 15 minute drive from a fairly large city. The home isn't quite luxurious, but it's a large, pricey, and well-maintained inheritance from Jade's late mother.
+PLAYER CHARACTER: A young woman named Jade (early twenties), quite attractive, single, skin the color of milk chocolate, kinky black hair. She works as a stripper in the city and last night was long and hard, but profitable. Her 18-year-old sister Chai is living in the very comfortable finished basement until she can finish high school and get on her feet.
+PLAYER GOAL: Recover from the hangover and aching muscles of last night, have a productive day, and hopefully even relax a little before it's time to go back to work again tonight.
+TONE: Dry humor; somewhat casual; both feminine and feminist; classic modern Interactive Fiction style.

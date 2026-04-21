@@ -1,0 +1,726 @@
+--- 2026-02-13 21:41:25 [GENESIS] ---
+[USAGE]: in=960 out=2513 tot=3473
+[OUTPUT]: {
+  "intro_text": "You wake up to the relentless buzzing of your phone alarm, the screen glowing with the time: 11:47 AM. The sunlight streaming through the blinds is far too cheerful for your current state. Your head throbs, your mouth feels like it\u2019s been stuffed with cotton, and every muscle in your body aches like you\u2019ve been run over by a truck\u2014twice. Last night\u2019s shift at the club was brutal, but the wad of cash in your nightstand drawer is a small consolation. Now, you just need to survive the day before it\u2019s time to do it all over again. Welcome home, Jade.",
+  "narrative_thread": "Jade is recovering from a grueling night of work, dealing with a hangover, exhaustion, and the mundane responsibilities of her suburban life. Her younger sister Chai is asleep in the basement, and Jade needs to navigate her morning routine before facing another shift at the club tonight. The player\u2019s immediate goal is to manage her physical state (hydration, pain, rest) while preparing for the evening ahead.",
+  "blueprint": "The immediate area consists of Jade\u2019s bedroom (starting location), connected to the following: north (hallway), east (en-suite bathroom), down (stairs to the first floor, which includes the kitchen, living room, and basement entrance). The basement is Chai\u2019s domain, currently off-limits unless Jade wants to risk waking her. The front door leads outside to the suburban neighborhood, but leaving the house isn\u2019t necessary yet. The focus is on the bedroom, bathroom, and kitchen for now.",
+  "starting_room_name": "Jade's Bedroom",
+  "starting_room_description": "Your bedroom is a sanctuary of soft chaos\u2014clothes strewn across the armchair in the corner, a half-empty bottle of water on the nightstand, and the faint scent of last night\u2019s perfume lingering in the air. The queen-sized bed, unmade and inviting, dominates the room, its sheets tangled from a restless sleep. A large window with half-drawn blinds lets in a strip of sunlight that cuts across the hardwood floor. To the north, a slightly ajar door leads to the hallway, while an open doorway to the east reveals the en-suite bathroom. The air is thick with the weight of exhaustion, but the promise of coffee downstairs is a distant beacon of hope.",
+  "player_description": "You are Jade, a strikingly attractive young woman in your early twenties, with skin the color of milk chocolate and a mane of kinky black hair that\u2019s currently a wild mess from sleep. You\u2019re wearing a thin, oversized sleep shirt that barely covers your thighs, its fabric clinging to your curves. Your feet are bare, toes digging into the plush carpet, and your body aches with the kind of soreness that only comes from a night of dancing in heels. Despite the exhaustion, there\u2019s a quiet resilience in your posture\u2014you\u2019ve survived worse than this.",
+  "new_exits": [
+    "north",
+    "east"
+  ],
+  "state_updates": [
+    {
+      "tool": "Description",
+      "name": "sleep shirt",
+      "description": "A threadbare, oversized sleep shirt that barely qualifies as clothing. It\u2019s soft from years of wear, the fabric thin enough to hint at what\u2019s underneath. The hem rides up dangerously high on your thighs, and the neckline is stretched out from too many nights of restless sleep. It\u2019s comfortable, though\u2014your go-to for lazy mornings like this.",
+      "aliases": [
+        "shirt",
+        "sleep shirt",
+        "nightshirt",
+        "tee"
+      ]
+    },
+    {
+      "tool": "Location",
+      "name": "sleep shirt",
+      "location": "worn"
+    },
+    {
+      "tool": "Description",
+      "name": "phone",
+      "description": "Your trusty smartphone, its screen cracked in one corner from an unfortunate incident at the club last month. It\u2019s currently displaying the time (11:47 AM) and a string of unread messages from coworkers and friends. The battery is at 42%, which is honestly better than you expected.",
+      "aliases": [
+        "smartphone",
+        "cell phone",
+        "mobile",
+        "device"
+      ]
+    },
+    {
+      "tool": "Location",
+      "name": "phone",
+      "location": "inventory"
+    },
+    {
+      "tool": "Description",
+      "name": "nightstand",
+      "description": "A sleek, modern nightstand made of dark wood, its surface cluttered with the detritus of your life: a half-empty glass of water, a tube of lip balm, a crumpled receipt from last night\u2019s tips, and a small drawer that\u2019s slightly ajar. The drawer looks like it might contain something useful\u2014or at least something you don\u2019t want to deal with right now.",
+      "aliases": [
+        "stand",
+        "table",
+        "bedside table"
+      ]
+    },
+    {
+      "tool": "Location",
+      "name": "nightstand",
+      "location": "here"
+    },
+    {
+      "tool": "Description",
+      "name": "glass of water",
+      "description": "A tall glass of water, half-full and slightly warm from sitting out all night. The condensation on the outside has long since dried, but it\u2019s still water\u2014better than nothing when your throat feels like sandpaper.",
+      "aliases": [
+        "water",
+        "glass",
+        "drink"
+      ]
+    },
+    {
+      "tool": "Location",
+      "name": "glass of water",
+      "location": "here"
+    },
+    {
+      "tool": "Description",
+      "name": "lip balm",
+      "description": "A small tube of cherry-flavored lip balm, its cap slightly greasy from use. Your lips are perpetually chapped from the dry air at the club, and this little tube is your lifeline. The label is worn, but the balm inside is still good.",
+      "aliases": [
+        "balm",
+        "chapstick",
+        "lip stuff"
+      ]
+    },
+    {
+      "tool": "Location",
+      "name": "lip balm",
+      "location": "here"
+    },
+    {
+      "tool": "Description",
+      "name": "receipt",
+      "description": "A crumpled receipt from last night\u2019s shift, the numbers scrawled in your own messy handwriting. It\u2019s a tally of your tips\u2014$287. Not bad for a Thursday, but not great either. The paper is soft from being handled, and the ink is smudged in places. You should probably save this for taxes, but let\u2019s be real\u2014that\u2019s not happening.",
+      "aliases": [
+        "paper",
+        "tip receipt",
+        "money receipt"
+      ]
+    },
+    {
+      "tool": "Location",
+      "name": "receipt",
+      "location": "here"
+    },
+    {
+      "tool": "Description",
+      "name": "nightstand drawer",
+      "description": "The small drawer of your nightstand, slightly ajar and begging to be opened. It\u2019s where you stash things you don\u2019t want to think about right now\u2014painkillers, condoms, a vibrator you haven\u2019t used in months, and maybe a few other odds and ends. The drawer itself is a little sticky from a spilled drink a few weeks ago.",
+      "aliases": [
+        "drawer",
+        "nightstand drawer",
+        "table drawer"
+      ]
+    },
+    {
+      "tool": "Location",
+      "name": "nightstand drawer",
+      "location": "here"
+    },
+    {
+      "tool": "Description",
+      "name": "armchair",
+      "description": "A plush, overstuffed armchair in the corner of your room, its fabric a faded floral pattern that clashes with the rest of your decor. It\u2019s currently serving as a makeshift laundry hamper, piled high with yesterday\u2019s clothes\u2014including the sequined dress you wore to work last night. The chair is comfortable, but the mound of fabric on it looks like it might topple over at any moment.",
+      "aliases": [
+        "chair",
+        "floral chair",
+        "laundry chair"
+      ]
+    },
+    {
+      "tool": "Location",
+      "name": "armchair",
+      "location": "here"
+    },
+    {
+      "tool": "Description",
+      "name": "sequined dress",
+      "description": "A slinky, backless sequined dress in a deep emerald green, the fabric clinging to the contours of the armchair like it\u2019s reluctant to let go. It\u2019s the dress you wore last night\u2014the one that earned you the most tips, but also the one that left your feet screaming in protest. The sequins are cool to the touch, and the fabric still smells faintly of the club\u2019s perfume and sweat.",
+      "aliases": [
+        "dress",
+        "club dress",
+        "green dress",
+        "sequin dress"
+      ]
+    },
+    {
+      "tool": "Location",
+      "name": "sequined dress",
+      "location": "here"
+    },
+    {
+      "tool": "Description",
+      "name": "high heels",
+      "description": "A pair of strappy, sky-high stilettos in black patent leather, their heels scuffed from last night\u2019s abuse. They\u2019re the kind of shoes that make your legs look amazing but also make you want to cry after an hour of wearing them. One of them is lying on its side, as if it collapsed in exhaustion after the long night.",
+      "aliases": [
+        "heels",
+        "shoes",
+        "stilettos",
+        "black heels"
+      ]
+    },
+    {
+      "tool": "Location",
+      "name": "high heels",
+      "location": "here"
+    },
+    {
+      "tool": "Description",
+      "name": "bed",
+      "description": "Your queen-sized bed, a mess of tangled sheets and rumpled pillows. The mattress is soft, the kind that swallows you whole when you lie down, and the sheets are a deep crimson that hides stains well. The bed is unmade, the blankets half on the floor, and the pillows are scattered haphazardly. It looks like the site of a minor battle\u2014one you lost.",
+      "aliases": [
+        "mattress",
+        "sheets",
+        "blankets",
+        "pillows"
+      ]
+    },
+    {
+      "tool": "Location",
+      "name": "bed",
+      "location": "here"
+    },
+    {
+      "tool": "Description",
+      "name": "blinds",
+      "description": "A set of horizontal blinds covering the large window, their slats slightly crooked from being opened and closed too many times. They\u2019re partially drawn, letting in a strip of sunlight that cuts across the room like a laser. The blinds are dusty, and one of the slats is bent out of shape, but they do their job\u2014mostly.",
+      "aliases": [
+        "window blinds",
+        "blinds",
+        "shades"
+      ]
+    },
+    {
+      "tool": "Location",
+      "name": "blinds",
+      "location": "here"
+    },
+    {
+      "tool": "Description",
+      "name": "carpet",
+      "description": "A plush, cream-colored carpet that covers the floor of your bedroom, soft underfoot and slightly worn in high-traffic areas. It\u2019s the kind of carpet that feels luxurious when you step on it barefoot, but it\u2019s also a magnet for dust and stray sequins from your club outfits. The sunlight streaming through the blinds illuminates a few stray fibers, making them glow like tiny threads of gold.",
+      "aliases": [
+        "rug",
+        "floor",
+        "floor covering"
+      ]
+    },
+    {
+      "tool": "Location",
+      "name": "carpet",
+      "location": "here"
+    }
+  ],
+  "_usage": {
+    "input_tokens": 960,
+    "output_tokens": 2513,
+    "total_tokens": 3473
+  }
+}
+
+--- 2026-02-13 21:46:30 [DM] ---
+[USAGE]: in=2913 out=437 tot=3350
+[OUTPUT]: {
+  "narrative": "You groan as you reach for your phone, the cracked screen glowing to life under your thumb. The brightness is almost painful, but you squint through the discomfort. There are 7 unread messages, all from the last few hours:\n\n1. **Tina (12:03 AM):** \"Girl, you KILLED it last night. That new routine? Chef\u2019s kiss. \ud83d\udc4c\ud83d\udd25\"\n2. **Marcus (1:17 AM):** \"Yo, you left your jacket at the bar. I\u2019ll drop it off later if you\u2019re home.\"\n3. **Chai (8:45 AM):** \"Jade, I borrowed your black hoodie. Hope that\u2019s cool. Also, can we get groceries today? We\u2019re out of literally everything.\"\n4. **Tina (9:30 AM):** \"Heads up, management\u2019s talking about changing the DJ again. If it\u2019s that dude with the EDM remixes of nursery rhymes, I\u2019m quitting.\"\n5. **Unknown (10:12 AM):** \"Hey, it\u2019s Marcus. Forgot to mention, I can swing by around 2 if that works for you.\"\n6. **Mom (10:47 AM):** \"Jade, call me when you get this. It\u2019s about Chai\u2019s school.\"\n7. **Chai (11:15 AM):** \"Never mind about the groceries. I\u2019ll just eat cereal for the 10th day in a row. \ud83d\ude43\"\n\nThe last message from Chai is still marked as \u2018delivered,\u2019 not \u2018read.\u2019 You sigh. Your sister\u2019s passive-aggressive texts are almost as exhausting as your hangover.",
+  "state_updates": [],
+  "narrative_summary_update": "Player checked their phone messages, revealing texts from coworkers, Marcus, Chai, and their mom. Chai\u2019s messages hint at needing groceries and borrowing clothes.",
+  "_usage": {
+    "input_tokens": 2913,
+    "output_tokens": 437,
+    "total_tokens": 3350
+  }
+}
+
+--- 2026-02-13 21:49:27 [DM] ---
+[USAGE]: in=2947 out=372 tot=3319
+[OUTPUT]: {
+  "narrative": "You reach for the half-empty glass of water on the nightstand, your fingers brushing against the cool surface. The water inside is lukewarm, but it\u2019s wet, and that\u2019s all that matters right now. You bring the glass to your lips and tilt it back, the water sliding down your throat like a soothing balm. It\u2019s not cold, but it\u2019s better than nothing\u2014your mouth feels less like a desert and more like a place where words might actually form again. The glass is empty far too quickly, but the dull throb in your head eases just a fraction. You set the glass back down with a soft *clink*, already feeling the faintest hint of relief.",
+  "state_updates": [
+    {
+      "tool": "Description",
+      "name": "glass of water",
+      "description": "An empty glass, its interior still damp from the water you just drank. The rim is smudged with your lip balm, leaving a faint cherry scent behind. It\u2019s light in your hand now, devoid of its previous purpose."
+    },
+    {
+      "tool": "Location",
+      "name": "glass of water",
+      "location": "here"
+    },
+    {
+      "tool": "Description",
+      "name": "self",
+      "description": "You\u2019re still wearing the threadbare sleep shirt, its fabric clinging to your skin. Your throat feels slightly less parched, though your head still pulses with the remnants of last night\u2019s overindulgence. The faint taste of cherry lingers from the lip balm you unconsciously smeared on the glass."
+    }
+  ],
+  "narrative_summary_update": "Jade drank the water, easing her dehydration slightly.",
+  "_usage": {
+    "input_tokens": 2947,
+    "output_tokens": 372,
+    "total_tokens": 3319
+  }
+}
+
+--- 2026-02-13 22:02:52 [DM] ---
+[USAGE]: in=2962 out=960 tot=3922
+[OUTPUT]: {
+  "narrative": "You slide the nightstand drawer open with a soft *creak*, the sticky wood resisting slightly before giving way. Inside, the chaos of your life is on full display: a jumble of painkillers, a half-empty box of condoms (expired, oops), a dusty vibrator you haven\u2019t touched in months, and a few crumpled dollar bills from last night\u2019s tips. There\u2019s also a small bottle of ibuprofen\u2014your saving grace right now\u2014and a crumpled pack of gum. The drawer smells faintly of old perfume and desperation, but the ibuprofen is what catches your eye. Your head is still pounding, and these little pills might just save your morning.",
+  "state_updates": [
+    {
+      "tool": "Description",
+      "name": "nightstand drawer",
+      "description": "The small drawer of your nightstand, now fully open. It\u2019s a treasure trove of forgotten things: a bottle of ibuprofen, a half-empty box of condoms (expired), a dusty vibrator, a few crumpled dollar bills, and a pack of gum. The drawer is sticky from a spilled drink weeks ago, and the contents are a little disorganized, but the ibuprofen is what you\u2019re after right now.",
+      "aliases": [
+        "drawer"
+      ]
+    },
+    {
+      "tool": "Description",
+      "name": "ibuprofen",
+      "description": "A small, unassuming bottle of ibuprofen, its label slightly faded. The cap is childproof, which is ironic given the contents. There are about a dozen pills left inside, and they\u2019re calling your name. Your head is still throbbing, and these might be the only thing standing between you and a day of misery.",
+      "aliases": [
+        "painkillers",
+        "pills",
+        "medicine"
+      ]
+    },
+    {
+      "tool": "Location",
+      "name": "ibuprofen",
+      "location": "here"
+    },
+    {
+      "tool": "Description",
+      "name": "condoms",
+      "description": "A half-empty box of condoms, the expiration date long past. The box is slightly crushed, and the foil wrappers inside look a little worse for wear. You should probably throw these out, but old habits die hard.",
+      "aliases": [
+        "rubbers"
+      ]
+    },
+    {
+      "tool": "Location",
+      "name": "condoms",
+      "location": "here"
+    },
+    {
+      "tool": "Description",
+      "name": "vibrator",
+      "description": "A dusty, neglected vibrator, its pink silicone surface slightly faded from lack of use. It\u2019s one of those cheap, rechargeable ones you picked up on a whim, and it\u2019s been gathering dust in the drawer for months. The battery is probably dead by now, but it\u2019s not like you\u2019ve had the energy to test it lately.",
+      "aliases": [
+        "toy"
+      ]
+    },
+    {
+      "tool": "Location",
+      "name": "vibrator",
+      "location": "here"
+    },
+    {
+      "tool": "Description",
+      "name": "dollar bills",
+      "description": "A few crumpled dollar bills, remnants of last night\u2019s tips. They\u2019re wrinkled and a little damp from being shoved in the drawer, but they\u2019re still usable. There\u2019s about $12 here\u2014enough for a coffee and a bagel if you\u2019re feeling fancy.",
+      "aliases": [
+        "cash",
+        "money"
+      ]
+    },
+    {
+      "tool": "Location",
+      "name": "dollar bills",
+      "location": "here"
+    },
+    {
+      "tool": "Description",
+      "name": "gum",
+      "description": "A crumpled pack of spearmint gum, its wrapper slightly torn. There are only three pieces left inside, but they\u2019re better than nothing. Your mouth feels like it\u2019s been stuffed with cotton, and this might help\u2014if you can get the damn wrapper open.",
+      "aliases": [
+        "pack of gum"
+      ]
+    },
+    {
+      "tool": "Location",
+      "name": "gum",
+      "location": "here"
+    }
+  ],
+  "narrative_summary_update": "Jade searched the nightstand drawer, revealing ibuprofen, condoms, a vibrator, crumpled dollar bills, and gum. The ibuprofen is now visible in the room.",
+  "_usage": {
+    "input_tokens": 2962,
+    "output_tokens": 960,
+    "total_tokens": 3922
+  }
+}
+
+--- 2026-02-13 22:05:42 [DM] ---
+[USAGE]: in=3402 out=538 tot=3940
+[OUTPUT]: {
+  "narrative": "You reach for the empty glass and the bottle of ibuprofen on the nightstand. The glass is cool and light in your hand, its rim still faintly smelling of cherry from your lip balm. The ibuprofen bottle is stubborn\u2014its childproof cap resists for a moment before clicking open with a satisfying *pop*. You shake two pills into your palm; they rattle like tiny marbles, promising relief. The bottle itself is slightly sticky from the spilled drink weeks ago, but you ignore that for now. Your head still throbs, but the pills in your hand feel like a small victory.",
+  "state_updates": [
+    {
+      "tool": "Description",
+      "name": "glass of water",
+      "description": "An empty glass, its interior still damp. It\u2019s cool in your hand, the rim smudged with cherry lip balm. You\u2019re holding it now, though it\u2019s not clear why\u2014maybe out of habit, or maybe because you\u2019re not quite ready to let go of the illusion of hydration."
+    },
+    {
+      "tool": "Location",
+      "name": "glass of water",
+      "location": "inventory"
+    },
+    {
+      "tool": "Description",
+      "name": "ibuprofen",
+      "description": "A small bottle of ibuprofen, its cap now off. Two pills are missing, and the bottle feels lighter in your hand. The label is faded, but the promise of relief is still fresh. You\u2019re holding it now, ready to stash it somewhere more convenient\u2014or maybe just cling to it like a lifeline."
+    },
+    {
+      "tool": "Location",
+      "name": "ibuprofen",
+      "location": "inventory"
+    },
+    {
+      "tool": "Description",
+      "name": "self",
+      "description": "You\u2019re standing in your sleep shirt, which is doing little to hide the fact that you\u2019re still half-asleep. In one hand, you\u2019re clutching an empty glass, and in the other, a bottle of ibuprofen. Your hair is a wild halo around your head, and your lips are slightly parted, as if you\u2019re about to say something\u2014but all that comes out is a groan as your head pulses again."
+    }
+  ],
+  "narrative_summary_update": "Jade picked up the empty glass and the ibuprofen bottle, taking two pills in preparation for her hangover. The glass and bottle are now in her inventory.",
+  "_usage": {
+    "input_tokens": 3402,
+    "output_tokens": 538,
+    "total_tokens": 3940
+  }
+}
+
+--- 2026-02-13 22:07:31 [ARCHITECT] ---
+[USAGE]: in=1627 out=864 tot=2491
+[OUTPUT]: {
+  "room_name": "En-Suite Bathroom",
+  "room_description": "The en-suite bathroom is a cramped but functional space, tiled in sterile white with a faintly grimy grout line that betrays its age. The air is thick with the scent of damp towels and the lingering musk of last night\u2019s hurried shower\u2014cheap coconut shampoo and something sharper, like the ghost of spilled vodka. A single frosted window above the toilet lets in a weak, diffused light, casting everything in a sickly yellow hue that does nothing for your pounding headache. The sink, a porcelain relic with a chipped edge, is cluttered with half-empty bottles of skincare products, a toothbrush precariously balanced on the faucet, and a tube of lip balm that\u2019s rolled into the corner. The shower curtain, a faded floral print, sags slightly where it\u2019s come unhooked at one end, revealing the mildew-streaked tub beneath. To the west, the doorway leads back into your bedroom, while a narrow cabinet hangs above the toilet, its mirror reflecting your current state of disarray back at you with unflinching honesty.",
+  "new_exits": [
+    "west"
+  ],
+  "blueprint_update": "The en-suite bathroom (east of Jade\u2019s bedroom) is now fully detailed. The immediate focus remains on the bedroom, bathroom, and kitchen, but the hallway to the north of the bedroom may lead to additional rooms (e.g., linen closet, Chai\u2019s temporary room upstairs) if the player explores further. The basement (Chai\u2019s domain) is still off-limits unless Jade risks waking her.",
+  "state_updates": [
+    {
+      "tool": "Description",
+      "name": "toothbrush",
+      "description": "A neon-pink toothbrush with frayed bristles, leaning against the faucet like it\u2019s too exhausted to stand upright. It\u2019s seen better days, but so have you.",
+      "aliases": [
+        "brush",
+        "tooth brush",
+        "pink toothbrush"
+      ]
+    },
+    {
+      "tool": "Location",
+      "name": "toothbrush",
+      "location": "here"
+    },
+    {
+      "tool": "Description",
+      "name": "shower curtain",
+      "description": "A faded floral shower curtain, its once-vibrant pattern now muted by years of hard water stains and soap scum. One hook has popped free, leaving a gap that reveals the mildew creeping up the edge of the tub. It\u2019s seen things, this curtain. Things it won\u2019t forget.",
+      "aliases": [
+        "curtain",
+        "floral curtain",
+        "shower"
+      ]
+    },
+    {
+      "tool": "Location",
+      "name": "shower curtain",
+      "location": "here"
+    },
+    {
+      "tool": "Description",
+      "name": "medicine cabinet",
+      "description": "A narrow mirrored cabinet above the toilet, its silvered surface marred by fingerprints and the occasional smudge of toothpaste. The door doesn\u2019t quite close properly, leaving a sliver of the interior visible\u2014bottles of expired cold medicine, a half-used tube of acne cream, and a razor that\u2019s seen better days.",
+      "aliases": [
+        "cabinet",
+        "mirror",
+        "mirror cabinet"
+      ]
+    },
+    {
+      "tool": "Location",
+      "name": "medicine cabinet",
+      "location": "here"
+    },
+    {
+      "tool": "Description",
+      "name": "damp towel",
+      "description": "A damp, rumpled towel draped over the edge of the tub, still slightly damp from last night\u2019s post-shift scrub-down. It smells faintly of coconut and sweat, a scent that\u2019s equal parts comforting and nauseating in your current state.",
+      "aliases": [
+        "towel",
+        "bath towel",
+        "wet towel"
+      ]
+    },
+    {
+      "tool": "Location",
+      "name": "damp towel",
+      "location": "here"
+    }
+  ],
+  "_usage": {
+    "input_tokens": 1627,
+    "output_tokens": 864,
+    "total_tokens": 2491
+  }
+}
+
+--- 2026-02-13 22:09:20 [DM] ---
+[USAGE]: in=2613 out=449 tot=3062
+[OUTPUT]: {
+  "narrative": "You turn on the faucet, the pipes groaning in protest as cold water splashes into the glass. The sound is jarringly loud in the quiet bathroom, each droplet echoing like a tiny hammer against your skull. You fill the glass to the brim, the water so cold it makes your fingers ache. The ibuprofen bottle is still clutched in your other hand, its cap off, the two pills rattling inside like a reminder of your suffering. You tip them into your palm\u2014small, white, and unassuming\u2014and toss them back, chasing them with a long gulp of water. The pills stick in your throat for a second, but you swallow hard, the water washing them down. The glass is now half-empty, its sides slick with condensation. The ibuprofen bottle feels lighter, the pills gone, but the promise of relief lingers like a distant hope.",
+  "state_updates": [
+    {
+      "tool": "Description",
+      "name": "glass of water",
+      "description": "A glass filled with cold water, its sides beaded with condensation. It\u2019s cool and heavy in your hand, the water inside clear and refreshing. The rim is smudged with cherry lip balm, and the glass itself is slightly damp from earlier use.",
+      "aliases": [
+        "glass",
+        "water glass"
+      ]
+    },
+    {
+      "tool": "Description",
+      "name": "ibuprofen",
+      "description": "A small bottle of ibuprofen, its cap off and its contents depleted by two pills. The bottle is nearly empty, the label faded but still legible. It\u2019s light in your hand, a hollow reminder of the relief you\u2019re waiting for.",
+      "aliases": [
+        "pills",
+        "painkillers"
+      ]
+    },
+    {
+      "tool": "Location",
+      "name": "ibuprofen",
+      "location": "here"
+    }
+  ],
+  "narrative_summary_update": "Jade filled the glass with water and swallowed the last two ibuprofen pills, leaving the empty bottle on the bathroom counter.",
+  "_usage": {
+    "input_tokens": 2613,
+    "output_tokens": 449,
+    "total_tokens": 3062
+  }
+}
+
+--- 2026-02-13 22:11:06 [DM] ---
+[USAGE]: in=2606 out=316 tot=2922
+[OUTPUT]: {
+  "narrative": "You turn toward the medicine cabinet\u2019s mirror, wincing as the movement sends a fresh wave of throbbing through your skull. The reflection staring back at you is a masterclass in \"hot mess.\" Your kinky black hair is a wild halo of tangles, frizzed out in every direction like you\u2019ve been electrocuted. The sleep shirt\u2014once oversized and cozy\u2014now clings to your curves in all the wrong (or right, depending on who\u2019s asking) ways, the thin fabric doing little to hide the fact that you skipped the bra last night. Your skin, usually a rich milk-chocolate tone, looks sallow and dull under the bathroom\u2019s sickly yellow light, and the dark circles under your eyes could rival a raccoon\u2019s. A faint smudge of last night\u2019s eyeliner lingers under your left eye, and your lips are chapped, the cherry lip balm you applied earlier now long gone. You look like you\u2019ve been through a war. And lost. Badly.\n\nThe mirror doesn\u2019t lie, but it\u2019s also not exactly kind. You poke at the dark circles, as if that\u2019ll magically make them disappear, then sigh. At least you\u2019re not still wearing last night\u2019s glitter. That\u2019s a win, right?",
+  "state_updates": [],
+  "narrative_summary_update": "Jade examines her reflection in the medicine cabinet mirror, noting her disheveled appearance after a rough night.",
+  "_usage": {
+    "input_tokens": 2606,
+    "output_tokens": 316,
+    "total_tokens": 2922
+  }
+}
+
+--- 2026-02-13 22:12:45 [DM] ---
+[USAGE]: in=2623 out=296 tot=2919
+[OUTPUT]: {
+  "narrative": "The toilet is a standard-issue porcelain throne, its seat slightly askew and its bowl stained with the faintest ring of... well, let\u2019s just say it\u2019s seen better days. The flush handle is loose, wobbling ominously when you nudge it with your foot. A roll of toilet paper dangles precariously from the holder, its last few sheets clinging to the cardboard tube like they\u2019re afraid of what comes next. The scent of lemon-scented cleaner lingers, but it\u2019s fighting a losing battle against the general aura of \u2018this bathroom has seen things.\u2019",
+  "state_updates": [
+    {
+      "tool": "Description",
+      "name": "toilet",
+      "description": "A standard-issue porcelain toilet with a slightly askew seat and a loose flush handle. The bowl is stained, and the roll of toilet paper is nearly empty, its last sheets clinging to the cardboard tube. The scent of lemon cleaner can't quite mask the room's lived-in history.",
+      "aliases": [
+        "porcelain throne",
+        "commode",
+        "john"
+      ]
+    },
+    {
+      "tool": "Location",
+      "name": "toilet",
+      "location": "here"
+    }
+  ],
+  "narrative_summary_update": "Examined the toilet, noting its worn and slightly grimy state.",
+  "_usage": {
+    "input_tokens": 2623,
+    "output_tokens": 296,
+    "total_tokens": 2919
+  }
+}
+
+--- 2026-02-13 22:13:38 [DM] ---
+[USAGE]: in=2713 out=219 tot=2932
+[OUTPUT]: {
+  "narrative": "You take a long, critical look at yourself in the medicine cabinet mirror, wincing as the harsh fluorescent light of the bathroom amplifies every flaw. Your reflection is a mess\u2014dark circles under your eyes, skin dull and sallow, hair a wild tangle of kinky black curls that look like they\u2019ve been through a wind tunnel. Your sleep shirt, a threadbare relic from some long-forgotten college boyfriend, clings to your frame, the fabric so thin it leaves little to the imagination. The hem rides up high on your thighs, and the neckline is stretched out, one shoulder slipping off to reveal the strap of a black lace bra underneath. Your lips are dry and cracked, and there\u2019s a faint smudge of last night\u2019s makeup still clinging to your cheekbone. You look like hell, but at least you\u2019re *your* kind of hell.",
+  "state_updates": [],
+  "narrative_summary_update": "Player examined their disheveled appearance in the mirror.",
+  "_usage": {
+    "input_tokens": 2713,
+    "output_tokens": 219,
+    "total_tokens": 2932
+  }
+}
+
+--- 2026-02-13 22:14:26 [DM] ---
+[USAGE]: in=2725 out=201 tot=2926
+[OUTPUT]: {
+  "narrative": "You lower yourself onto the toilet seat with a groan, the cold porcelain sending a brief, unwelcome shiver up your spine. The seat wobbles slightly under your weight, a reminder of its age and the countless other mornings it\u2019s borne the brunt of your post-shift exhaustion. The scent of lemon cleaner rises faintly from the bowl, but it\u2019s not enough to mask the room\u2019s lived-in history\u2014or the fact that you\u2019re pretty sure you forgot to flush last night. The relief of sitting is short-lived; your head still throbs, and the damp towel draped over the tub seems to mock your current state of disarray. At least the toilet paper is within arm\u2019s reach, though the roll is perilously close to empty.",
+  "state_updates": [],
+  "narrative_summary_update": "Jade sits on the toilet, enduring the discomfort of her hangover and the room's grimy details.",
+  "_usage": {
+    "input_tokens": 2725,
+    "output_tokens": 201,
+    "total_tokens": 2926
+  }
+}
+
+--- 2026-02-13 22:15:07 [DM] ---
+[USAGE]: in=2746 out=443 tot=3189
+[OUTPUT]: {
+  "narrative": "You shift uncomfortably on the toilet, the porcelain cold against your thighs despite the sleep shirt\u2019s thin fabric. The act itself is a relief\u2014your bladder has been screaming at you since you first cracked an eye open this morning. The stream is weak at first, then stronger, a steady hiss against the water in the bowl. The scent of lemon cleaner rises faintly, doing little to mask the room\u2019s lived-in musk. Your head throbs in time with the sound, a dull reminder of last night\u2019s excesses. When you\u2019re finally done, you give a half-hearted wipe with the last few sheets of toilet paper, the cardboard tube rattling ominously in your hand. The flush handle is loose, but it does its job with a gurgle and a swirl of water. You lean back, exhaling slowly, the weight of exhaustion pressing down on you like a wet blanket. The bathroom feels even grimier now, if that\u2019s possible.",
+  "state_updates": [
+    {
+      "tool": "Description",
+      "name": "toilet",
+      "description": "A standard-issue porcelain toilet with a slightly askew seat and a loose flush handle. The bowl is now freshly flushed, though the stains remain, and the roll of toilet paper is completely empty, reduced to a sad cardboard tube. The scent of lemon cleaner lingers faintly, but it\u2019s fighting a losing battle against the room\u2019s other, less pleasant odors."
+    },
+    {
+      "tool": "Description",
+      "name": "self",
+      "description": "You\u2019re still wearing the threadbare sleep shirt, its hem riding up dangerously high on your thighs. Your muscles ache, and your head pounds, but at least your bladder is no longer screaming at you. You feel marginally more human, though the hangover is still very much in residence."
+    }
+  ],
+  "narrative_summary_update": "Jade relieved herself on the toilet, emptying the roll of toilet paper in the process. She feels slightly more functional but is still battling her hangover.",
+  "_usage": {
+    "input_tokens": 2746,
+    "output_tokens": 443,
+    "total_tokens": 3189
+  }
+}
+
+--- 2026-02-13 22:16:10 [DM] ---
+[USAGE]: in=3518 out=370 tot=3888
+[OUTPUT]: {
+  "narrative": "You bring the glass to your lips and tilt it back, the cool water rushing down your throat in a single, greedy gulp. It\u2019s refreshing, almost painfully so, and for a moment, the cotton-mouth haze lifts just enough to make you feel marginally human. The glass is empty far too quickly, but your stomach sloshes with satisfaction. You set the glass back on the nightstand with a soft *clink*, leaving it next to the lip balm and the crumpled receipt. The condensation on the outside of the glass beads down onto the wood, leaving a faint ring.",
+  "state_updates": [
+    {
+      "tool": "Description",
+      "name": "glass of water",
+      "description": "An empty glass, its sides still beaded with the ghost of condensation. The rim is smudged with cherry lip balm, and the bottom is foggy from the last of the water. It sits on the nightstand, waiting to be refilled\u2014or ignored."
+    },
+    {
+      "tool": "Location",
+      "name": "glass of water",
+      "location": "here"
+    },
+    {
+      "tool": "Description",
+      "name": "self",
+      "description": "You\u2019re still wearing the threadbare sleep shirt, its hem riding up your thighs. Your mouth feels less like a desert now, but the hangover throb in your skull hasn\u2019t gone anywhere. The dehydration is slightly better, though\u2014enough to make the room stop spinning, at least."
+    }
+  ],
+  "narrative_summary_update": "Jade drank all the water in the glass, leaving it empty on the nightstand. Her dehydration is slightly improved, but the hangover persists.",
+  "_usage": {
+    "input_tokens": 3518,
+    "output_tokens": 370,
+    "total_tokens": 3888
+  }
+}
+
+--- 2026-02-13 22:17:15 [DM] ---
+[USAGE]: in=3540 out=176 tot=3716
+[OUTPUT]: {
+  "narrative": "The pile of clothes on the armchair is a chaotic mix of yesterday\u2019s outfits and forgotten laundry. At the top, your sequined dress glints weakly in the sunlight, its emerald fabric still clinging to the shape of last night\u2019s performance. Beneath it, a pair of skinny jeans, a lace bralette, and a few crumpled tank tops peek out, their fabrics wrinkled from being discarded in a hurry. The high heels lie abandoned at the base of the chair, one on its side like it gave up halfway through the night. The whole mess smells faintly of perfume, sweat, and the faintest hint of desperation\u2014yours, probably.",
+  "state_updates": [],
+  "narrative_summary_update": "Player examined the clothes on the armchair.",
+  "_usage": {
+    "input_tokens": 3540,
+    "output_tokens": 176,
+    "total_tokens": 3716
+  }
+}
+
+--- 2026-02-13 22:17:57 [ARCHITECT] ---
+[USAGE]: in=1788 out=912 tot=2700
+[OUTPUT]: {
+  "room_name": "Upstairs Hallway",
+  "room_description": "The upstairs hallway stretches before you, a narrow corridor bathed in the muted glow of a single overhead light fixture. The walls, painted a soft eggshell white, are adorned with a few framed photos\u2014mostly blurry snapshots of you and Chai from better days, their edges slightly curled with age. The hardwood floor creaks underfoot, a familiar sound that makes you wince as it echoes through the quiet house. To the south, your bedroom door stands ajar, a sliver of your messy sanctuary visible through the gap. A linen closet door to the east is slightly open, revealing a sliver of neatly folded towels inside. Further down the hall to the north, a closed door likely leads to the guest room\u2014now Chai\u2019s temporary domain upstairs. The air smells faintly of laundry detergent and the lingering scent of last night\u2019s takeout, a reminder that neither of you has bothered to clean up yet. A faint hum of the refrigerator downstairs drifts up, mixing with the occasional creak of the house settling.",
+  "new_exits": [
+    "south",
+    "east",
+    "north"
+  ],
+  "blueprint_update": "The upstairs hallway is now fully detailed, connecting Jade\u2019s bedroom to the linen closet (east) and Chai\u2019s temporary room (north). The basement remains unexplored unless Jade risks waking Chai. Focus on expanding the linen closet and Chai\u2019s room if the player explores further.",
+  "state_updates": [
+    {
+      "tool": "Description",
+      "name": "framed photos",
+      "description": "A small cluster of framed photos lines the hallway wall. Most are candid shots of you and Chai\u2014laughing at a beach, posing awkwardly in front of a Christmas tree, or mugging for the camera at some long-forgotten family gathering. The glass on one frame is cracked, and another is slightly askew, as if someone bumped into it in a hurry.",
+      "aliases": [
+        "photos",
+        "pictures",
+        "family photos",
+        "frames"
+      ]
+    },
+    {
+      "tool": "Location",
+      "name": "framed photos",
+      "location": "here"
+    },
+    {
+      "tool": "Description",
+      "name": "overhead light",
+      "description": "A simple, dome-shaped light fixture hangs from the ceiling, casting a warm but dim glow over the hallway. The bulb flickers occasionally, as if it\u2019s on its last legs. The pull chain dangles just within reach, swaying slightly from the movement of air in the house.",
+      "aliases": [
+        "light",
+        "ceiling light",
+        "hallway light",
+        "fixture"
+      ]
+    },
+    {
+      "tool": "Location",
+      "name": "overhead light",
+      "location": "here"
+    },
+    {
+      "tool": "Description",
+      "name": "linen closet door",
+      "description": "The door to the linen closet is slightly ajar, revealing a sliver of the interior. The door itself is a plain, white-painted wood, its surface marred by a few scuff marks and a sticky spot near the handle\u2014likely from Chai\u2019s habit of grabbing towels with syrup-covered hands. A small, handwritten note is taped to the door: \"Knock first. -C.\"",
+      "aliases": [
+        "closet door",
+        "door",
+        "linen door",
+        "white door"
+      ]
+    },
+    {
+      "tool": "Location",
+      "name": "linen closet door",
+      "location": "here"
+    },
+    {
+      "tool": "Description",
+      "name": "hallway rug",
+      "description": "A thin, beige runner rug stretches down the length of the hallway, its edges frayed from years of use. It does little to muffle the creaking of the floorboards beneath, but it adds a touch of warmth to the otherwise bare corridor. A small stain near the center\u2014probably wine or coffee\u2014has faded but never quite disappeared.",
+      "aliases": [
+        "rug",
+        "runner",
+        "carpet",
+        "hallway carpet"
+      ]
+    },
+    {
+      "tool": "Location",
+      "name": "hallway rug",
+      "location": "here"
+    }
+  ],
+  "_usage": {
+    "input_tokens": 1788,
+    "output_tokens": 912,
+    "total_tokens": 2700
+  }
+}
+

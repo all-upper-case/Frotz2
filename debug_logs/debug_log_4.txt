@@ -1,0 +1,336 @@
+--- 2026-02-12 00:52:13 [GENESIS] ---
+[USAGE]: in=646 out=2308 tot=2954
+[OUTPUT]: {
+  "intro_text": "You wake to the insistent buzz of your alarm, the morning light filtering through the blinds like a half-hearted apology. The scent of stale coffee lingers in the air, a reminder of yesterday\u2019s forgotten brew. Chai, your perpetually unimpressed orange cat, glares at you from the foot of the bed as if to say, *\u2018You\u2019re late. Again.\u2019* The clock on your nightstand reads 7:12 AM\u2014plenty of time, if you move fast. But first, you need to get ready for work.",
+  "narrative_thread": "The player character is a young professional woman preparing for her workday in a cozy but slightly cluttered suburban home. The immediate goal is to navigate her morning routine efficiently, though the dry humor and small obstacles (like a mischievous cat or a misplaced item) may complicate things. The tone is lighthearted but grounded, with a focus on immersive, second-person narration and interactive problem-solving.",
+  "blueprint": "The Bedroom connects to a narrow Hallway. The Hallway leads to the Bathroom (east), the Stairs (north) down to the Kitchen, and a small Closet (west). The Kitchen connects to a Backyard (south) and the Living Room (east). The Living Room has an exit to the Front Door (north). The Bedroom also has a window (south) that can be opened, though it\u2019s currently shut.",
+  "starting_room": {
+    "name": "Your Bedroom",
+    "description": "Your bedroom is a sanctuary of soft chaos: a queen-sized bed with rumpled sheets, a nightstand cluttered with lip balm, a half-read novel, and a charging phone. The walls are painted a soothing sage green, though the paint is chipped near the baseboard where Chai has taken to sharpening his claws. A dresser stands against the far wall, its surface adorned with a jewelry dish, a framed photo of you and your college friends, and a half-empty glass of water that\u2019s been there since Tuesday. The air smells faintly of lavender from the diffuser on the windowsill, though it\u2019s doing little to mask the underlying scent of cat litter from the hallway.",
+    "items": [
+      {
+        "id": "bed",
+        "name": "bed",
+        "aliases": [
+          "queen bed",
+          "mattress",
+          "sheets",
+          "blanket"
+        ],
+        "description": "A well-loved queen-sized bed with a slightly lumpy mattress. The sheets are a tangled mess of cotton and fleece, and the pillow bears the faint imprint of your face. Chai has claimed the foot of the bed as his throne, though he\u2019ll grudgingly move if you insist. Underneath, you can just make out the dust bunnies that have taken up residence.",
+        "is_carryable": false
+      },
+      {
+        "id": "nightstand",
+        "name": "nightstand",
+        "aliases": [
+          "stand",
+          "table",
+          "bedside table"
+        ],
+        "description": "A small, rickety nightstand made of particleboard. It\u2019s seen better days\u2014one of the drawers sticks, and the other is slightly ajar, revealing a tangle of charging cables. On top, your phone lies face-down, its screen glowing with unread notifications. Beside it, a tube of cherry-flavored lip balm and a dog-eared copy of *The Night Circus* wait patiently for your attention.",
+        "is_carryable": false
+      },
+      {
+        "id": "phone",
+        "name": "phone",
+        "aliases": [
+          "smartphone",
+          "cell phone",
+          "mobile"
+        ],
+        "description": "Your trusty smartphone, its case slightly cracked from that time you dropped it in the parking lot at Target. The screen is lit up with a reminder: *\u2018Work: 8:30 AM. Don\u2019t forget your lunch!\u2019* Below that, a text from your mom reads: *\u2018Did you eat breakfast? Love you.\u2019* The battery is at 42%.",
+        "is_carryable": true
+      },
+      {
+        "id": "lip_balm",
+        "name": "lip balm",
+        "aliases": [
+          "balm",
+          "chapstick",
+          "cherry lip balm"
+        ],
+        "description": "A tube of cherry-flavored lip balm, its cap slightly greasy from overuse. It\u2019s your go-to for dry mornings, though you can never seem to find it when you need it. The label is peeling at the edges, a testament to its frequent travels in your purse.",
+        "is_carryable": true
+      },
+      {
+        "id": "book",
+        "name": "book",
+        "aliases": [
+          "novel",
+          "The Night Circus",
+          "paperback"
+        ],
+        "description": "A well-worn copy of *The Night Circus* by Erin Morgenstern. The spine is creased, and the pages are slightly yellowed from being read and re-read. You\u2019ve been meaning to finish it for weeks, but life (and Chai\u2019s insistence on sitting on your chest at 5 AM) keeps getting in the way. The bookmark is stuck somewhere around page 187.",
+        "is_carryable": true
+      },
+      {
+        "id": "glass_of_water",
+        "name": "glass of water",
+        "aliases": [
+          "water",
+          "glass",
+          "drinking glass"
+        ],
+        "description": "A half-empty glass of water that\u2019s been sitting on your nightstand since Tuesday. The water is room temperature and slightly cloudy, with a few stray cat hairs floating on the surface. You *really* should have drunk this before now.",
+        "is_carryable": true
+      },
+      {
+        "id": "diffuser",
+        "name": "diffuser",
+        "aliases": [
+          "lavender diffuser",
+          "aromatherapy diffuser",
+          "scent diffuser"
+        ],
+        "description": "A sleek, modern essential oil diffuser that puffs out gentle clouds of lavender-scented mist. It\u2019s supposed to help you relax, but right now it\u2019s just adding to the general humidity of the room. The water level is low, and the light inside cycles through soft pastels like a mood ring for your sinuses.",
+        "is_carryable": true
+      },
+      {
+        "id": "dresser",
+        "name": "dresser",
+        "aliases": [
+          "chest of drawers",
+          "bureau",
+          "wooden dresser"
+        ],
+        "description": "A sturdy but slightly outdated dresser made of dark wood. The top drawer is slightly open, revealing a tangle of socks and underwear. On top, a jewelry dish holds a few pairs of earrings, a tangled necklace, and your grandmother\u2019s silver locket. Beside it, a framed photo of you and your college friends at a tailgate\u2014you\u2019re all wearing matching foam fingers and grinning like idiots. The glass is smudged with fingerprints.",
+        "is_carryable": false
+      },
+      {
+        "id": "jewelry_dish",
+        "name": "jewelry dish",
+        "aliases": [
+          "dish",
+          "earring dish",
+          "small dish"
+        ],
+        "description": "A small, ceramic dish shaped like a leaf. It\u2019s meant to hold your jewelry, but right now it\u2019s just a chaotic pile of earrings, a tangled necklace, and your grandmother\u2019s silver locket. The locket is slightly tarnished, but you\u2019ve never gotten around to polishing it. Inside is a tiny photo of your grandma when she was young\u2014she\u2019s wearing a polka-dot dress and laughing at something off-camera.",
+        "is_carryable": true
+      },
+      {
+        "id": "photo",
+        "name": "photo",
+        "aliases": [
+          "framed photo",
+          "picture",
+          "college photo"
+        ],
+        "description": "A 5x7 framed photo of you and your college friends at a tailgate. You\u2019re all wearing matching foam fingers, and the background is a blur of beer cans and football jerseys. You remember that day\u2014it was freezing, but you\u2019d all had just enough to drink to ignore the cold. Your friend Jess is mid-laugh, her mouth open in a way that suggests she\u2019s about to say something ridiculous. The glass is smudged with fingerprints, probably from the last time you showed it to a visitor and said, *\u2018Oh yeah, that was a good day.\u2019*",
+        "is_carryable": true
+      },
+      {
+        "id": "chai",
+        "name": "Chai",
+        "aliases": [
+          "cat",
+          "orange cat",
+          "your cat",
+          "fluffy menace"
+        ],
+        "description": "A large, perpetually unimpressed orange tabby with a white chest and paws. Chai is currently sprawled across the foot of your bed, his tail flicking lazily as he watches you with the disdain of a monarch surveying a particularly dull subject. His fur is slightly matted in places, a sign that he\u2019s due for a brushing, but he\u2019s made it clear that he will *not* tolerate such indignities before his morning nap. His green eyes track your every movement, as if daring you to disturb his slumber.",
+        "is_carryable": false
+      }
+    ],
+    "new_exits": [
+      "north",
+      "east"
+    ]
+  },
+  "starting_inventory": [
+    {
+      "id": "pajamas",
+      "name": "pajamas",
+      "aliases": [
+        "pjs",
+        "sleepwear",
+        "flannel pants",
+        "t-shirt"
+      ],
+      "description": "A set of cozy flannel pajamas with a pattern of tiny coffee cups. The pants are slightly too long, and the shirt has a small hole near the hem from where Chai got a little *too* enthusiastic during playtime. They\u2019re soft, warm, and\u2014most importantly\u2014comfortable enough to sleep in for days. You\u2019re wearing them now, though you\u2019ll need to change before work.",
+      "is_carryable": false
+    },
+    {
+      "id": "slippers",
+      "name": "slippers",
+      "aliases": [
+        "house slippers",
+        "fluffy slippers",
+        "shoes"
+      ],
+      "description": "A pair of plush, sheep-shaped slippers that your mom bought you as a joke last Christmas. They\u2019re ridiculously soft, with little black eyes and a pink nose on each one. The soles are slightly worn, and one of the ears is starting to come unstitched. You love them anyway, even if they do make you look like a five-year-old.",
+      "is_carryable": true
+    }
+  ],
+  "_usage": {
+    "input_tokens": 646,
+    "output_tokens": 2308,
+    "total_tokens": 2954
+  }
+}
+
+--- 2026-02-12 00:53:31 [DM] ---
+[USAGE]: in=2541 out=204 tot=2745
+[OUTPUT]: {
+  "narrative": "The digital clock on your nightstand glows a soft blue, its numbers sharp and unyielding: 7:15 AM. The colon between the hours and minutes blinks steadily, like a metronome counting down the seconds until you\u2019re officially late. A small crack runs along the bottom corner of the screen, a souvenir from the time you knocked it off the nightstand in a sleep-deprived haze. The alarm icon is still lit, a silent testament to the fact that you hit snooze at least twice before dragging yourself upright.",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [],
+  "room_remove": [],
+  "wear_add": [],
+  "wear_remove": [],
+  "create_items": [],
+  "update_description": {},
+  "current_room_base_description": "",
+  "player_description_update": "",
+  "item_visibility_update": {},
+  "narrative_summary_update": "",
+  "_usage": {
+    "input_tokens": 2541,
+    "output_tokens": 204,
+    "total_tokens": 2745
+  }
+}
+
+--- 2026-02-12 01:03:12 [DM] ---
+[USAGE]: in=2343 out=201 tot=2544
+[OUTPUT]: {
+  "narrative": "You reach over to the nightstand and pluck your phone from its nest of charging cables. The screen is still lit with the reminder about work and your mom\u2019s text, the battery icon a glaring 42%. The case is slightly warm from being plugged in all night, and the crack along the bottom edge catches the light as you turn it over in your hand. Chai flicks his tail in mild disapproval at the disturbance, but otherwise remains sprawled across the bed like a furry, judgmental rug.",
+  "inventory_add": [
+    "phone"
+  ],
+  "room_remove": [
+    "phone"
+  ],
+  "inventory_remove": [],
+  "room_add": [],
+  "wear_add": [],
+  "wear_remove": [],
+  "create_items": [],
+  "update_description": {},
+  "current_room_base_description": "",
+  "player_description_update": "",
+  "item_visibility_update": {},
+  "narrative_summary_update": "",
+  "_usage": {
+    "input_tokens": 2343,
+    "output_tokens": 201,
+    "total_tokens": 2544
+  }
+}
+
+--- 2026-02-12 01:04:17 [DM] ---
+[USAGE]: in=2345 out=296 tot=2641
+[OUTPUT]: {
+  "narrative": "You pick up your phone and tap out a quick message to your mom: *\u2018Good morning! Just woke up, getting ready for work. Love you too.\u2019* You add a heart emoji for good measure. Almost immediately, three dots appear as she starts typing a reply. A second later, her message pops up: *\u2018Don\u2019t forget to eat something! And brush Chai for me. \ud83d\ude0a\u2019* You glance at Chai, who is now licking his paw with the intensity of a cat who has never once in his life been brushed willingly. The phone buzzes again\u2014this time it\u2019s a photo of your mom\u2019s breakfast: a towering stack of pancakes with a pat of butter melting on top. The caption reads: *\u2018Wish you were here!\u2019* You sigh and set the phone back on the nightstand, its screen dimming after a few seconds.",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [],
+  "room_remove": [],
+  "wear_add": [],
+  "wear_remove": [],
+  "create_items": [],
+  "update_description": {},
+  "current_room_base_description": "",
+  "player_description_update": "",
+  "item_visibility_update": {},
+  "narrative_summary_update": "Texted mom a good morning message. She reminded you to eat breakfast and brush Chai (unlikely).",
+  "_usage": {
+    "input_tokens": 2345,
+    "output_tokens": 296,
+    "total_tokens": 2641
+  }
+}
+
+--- 2026-02-12 01:05:50 [DM] ---
+[USAGE]: in=2362 out=239 tot=2601
+[OUTPUT]: {
+  "narrative": "You peer out the window, squinting against the morning light. The view reveals a quiet suburban street lined with maple trees, their leaves just beginning to turn a fiery orange. A neighbor\u2019s golden retriever trots down the sidewalk, its tail wagging lazily, while a jogger in neon spandex zips past in the opposite direction. The sky is a clear, crisp blue, with only a few wispy clouds drifting lazily overhead. A faint breeze stirs the curtains, carrying the scent of freshly cut grass and the distant hum of a lawnmower. The windowsill itself is dusty, with a few dead bugs tucked into the corners\u2014remnants of Chai\u2019s failed hunting attempts.",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [],
+  "room_remove": [],
+  "wear_add": [],
+  "wear_remove": [],
+  "create_items": [],
+  "update_description": {},
+  "current_room_base_description": "",
+  "player_description_update": "",
+  "item_visibility_update": {},
+  "narrative_summary_update": "",
+  "_usage": {
+    "input_tokens": 2362,
+    "output_tokens": 239,
+    "total_tokens": 2601
+  }
+}
+
+--- 2026-02-12 01:07:31 [DM] ---
+[USAGE]: in=2342 out=352 tot=2694
+[OUTPUT]: {
+  "narrative": "You turn your attention to the closet, a narrow, sliding-door affair that\u2019s seen better days. The left door is slightly off its track, and the right one has a small dent near the bottom\u2014courtesy of Chai\u2019s enthusiastic pouncing during one of his many failed attempts to catch a moth. The doors are made of that faux-wood paneling that was popular in the '90s, and the handles are brass-colored but tarnished from years of use.\n\nInside, the closet is a testament to your organizational skills (or lack thereof). Hanging on the rod are a few work blouses, a couple of dresses you haven\u2019t worn in months, and a lone hoodie that\u2019s seen better days. The floor is a minefield of shoes\u2014mostly flats, a pair of sneakers, and your one pair of \u2018fancy\u2019 heels that you wear maybe twice a year. A few empty hangers dangle forlornly, and a lone sock peeks out from under a pile of scarves. The back of the closet is shrouded in darkness, but you can just make out the outline of a shoebox that might contain... something. Maybe old photos? Or tax documents you\u2019ve been meaning to shred? Hard to say.",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [],
+  "room_remove": [],
+  "wear_add": [],
+  "wear_remove": [],
+  "create_items": [],
+  "update_description": {},
+  "current_room_base_description": "",
+  "player_description_update": "",
+  "item_visibility_update": {},
+  "narrative_summary_update": "",
+  "_usage": {
+    "input_tokens": 2342,
+    "output_tokens": 352,
+    "total_tokens": 2694
+  }
+}
+
+--- 2026-02-12 01:08:20 [DM] ---
+[USAGE]: in=2344 out=144 tot=2488
+[OUTPUT]: {
+  "narrative": "You scan the room but don\u2019t see a shoebox anywhere\u2014under the bed, on the dresser, or tucked into the closet. Chai flicks his tail as if to say, *\u2018Nice try, but you\u2019re imagining things.\u2019*",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [],
+  "room_remove": [],
+  "wear_add": [],
+  "wear_remove": [],
+  "create_items": [],
+  "update_description": {},
+  "current_room_base_description": "",
+  "player_description_update": "",
+  "item_visibility_update": {},
+  "narrative_summary_update": "",
+  "_usage": {
+    "input_tokens": 2344,
+    "output_tokens": 144,
+    "total_tokens": 2488
+  }
+}
+
+--- 2026-02-12 01:08:37 [DM] ---
+[USAGE]: in=2342 out=303 tot=2645
+[OUTPUT]: {
+  "narrative": "You turn toward the closet\u2014a narrow, bi-fold door affair tucked into the corner of your bedroom. The doors are slightly ajar, revealing a sliver of the chaos within. The left door has a small dent near the bottom, a souvenir from the time you tried to move the dresser by yourself and misjudged the distance. The right door\u2019s mirror is smudged with fingerprints and a few stray cat hairs, evidence of Chai\u2019s occasional attempts to \u2018help\u2019 you pick outfits. Inside, the closet is a testament to your organizational skills (or lack thereof): hanging clothes jostle for space with a pile of laundry you\u2019ve been meaning to fold for *days*, and the floor is a minefield of shoes, half of which are missing their mates. A single bare bulb flickers weakly, casting long shadows over the mess. At the very back, you can just make out the corner of a storage bin labeled \u2018WINTER STUFF\u2019 in your own handwriting, though you have no memory of actually labeling it.",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [],
+  "room_remove": [],
+  "wear_add": [],
+  "wear_remove": [],
+  "create_items": [],
+  "update_description": {},
+  "current_room_base_description": "",
+  "player_description_update": "",
+  "item_visibility_update": {},
+  "narrative_summary_update": "",
+  "_usage": {
+    "input_tokens": 2342,
+    "output_tokens": 303,
+    "total_tokens": 2645
+  }
+}
+

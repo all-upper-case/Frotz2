@@ -1,0 +1,234 @@
+{
+  "narrative_thread": "",
+  "blueprint": "The Bedroom connects to a narrow Hallway. The Hallway leads to the Bathroom (east), the Stairs (north) down to the Kitchen, and a small Closet (west). The Kitchen connects to a Backyard (south) and the Living Room (east). The Living Room has an exit to the Front Door (north). The Bedroom also has a window (south) that can be opened, though it\u2019s currently shut.",
+  "meta": {
+    "total_tokens": 21312
+  },
+  "player": {
+    "current_room": "room_start",
+    "inventory": [
+      "pajamas",
+      "slippers",
+      "phone"
+    ],
+    "worn": [],
+    "description": "",
+    "aliases": [
+      "me",
+      "self",
+      "player"
+    ]
+  },
+  "characters": {},
+  "rooms": {
+    "room_start": {
+      "id": "room_start",
+      "name": "Your Bedroom",
+      "description": "Your bedroom is a sanctuary of soft chaos: a queen-sized bed with rumpled sheets, a nightstand cluttered with lip balm, a half-read novel, and a charging phone. The walls are painted a soothing sage green, though the paint is chipped near the baseboard where Chai has taken to sharpening his claws. A dresser stands against the far wall, its surface adorned with a jewelry dish, a framed photo of you and your college friends, and a half-empty glass of water that\u2019s been there since Tuesday. The air smells faintly of lavender from the diffuser on the windowsill, though it\u2019s doing little to mask the underlying scent of cat litter from the hallway.\n\nYou can see here: bed, nightstand, lip balm, book, glass of water, diffuser, dresser, jewelry dish, photo, Chai.",
+      "base_description": "Your bedroom is a sanctuary of soft chaos: a queen-sized bed with rumpled sheets, a nightstand cluttered with lip balm, a half-read novel, and a charging phone. The walls are painted a soothing sage green, though the paint is chipped near the baseboard where Chai has taken to sharpening his claws. A dresser stands against the far wall, its surface adorned with a jewelry dish, a framed photo of you and your college friends, and a half-empty glass of water that\u2019s been there since Tuesday. The air smells faintly of lavender from the diffuser on the windowsill, though it\u2019s doing little to mask the underlying scent of cat litter from the hallway.",
+      "exits": {
+        "north": "room_40c4d076",
+        "east": "room_9de8c4a8"
+      },
+      "items": [
+        "bed",
+        "nightstand",
+        "lip_balm",
+        "book",
+        "glass_of_water",
+        "diffuser",
+        "dresser",
+        "jewelry_dish",
+        "photo",
+        "chai"
+      ],
+      "characters": [],
+      "visited": true
+    },
+    "room_40c4d076": {
+      "id": "room_40c4d076",
+      "name": "Unknown",
+      "description": null,
+      "base_description": "...",
+      "exits": {
+        "south": "room_start"
+      },
+      "items": [],
+      "characters": [],
+      "visited": false
+    },
+    "room_9de8c4a8": {
+      "id": "room_9de8c4a8",
+      "name": "Unknown",
+      "description": null,
+      "base_description": "...",
+      "exits": {
+        "west": "room_start"
+      },
+      "items": [],
+      "characters": [],
+      "visited": false
+    }
+  },
+  "items": {
+    "bed": {
+      "id": "bed",
+      "name": "bed",
+      "aliases": [
+        "queen bed",
+        "mattress",
+        "sheets",
+        "blanket"
+      ],
+      "description": "A well-loved queen-sized bed with a slightly lumpy mattress. The sheets are a tangled mess of cotton and fleece, and the pillow bears the faint imprint of your face. Chai has claimed the foot of the bed as his throne, though he\u2019ll grudgingly move if you insist. Underneath, you can just make out the dust bunnies that have taken up residence.",
+      "carryable": false,
+      "visible": true
+    },
+    "nightstand": {
+      "id": "nightstand",
+      "name": "nightstand",
+      "aliases": [
+        "stand",
+        "table",
+        "bedside table"
+      ],
+      "description": "A small, rickety nightstand made of particleboard. It\u2019s seen better days\u2014one of the drawers sticks, and the other is slightly ajar, revealing a tangle of charging cables. On top, your phone lies face-down, its screen glowing with unread notifications. Beside it, a tube of cherry-flavored lip balm and a dog-eared copy of *The Night Circus* wait patiently for your attention.",
+      "carryable": false,
+      "visible": true
+    },
+    "phone": {
+      "id": "phone",
+      "name": "phone",
+      "aliases": [
+        "smartphone",
+        "cell phone",
+        "mobile"
+      ],
+      "description": "Your trusty smartphone, its case slightly cracked from that time you dropped it in the parking lot at Target. The screen is lit up with a reminder: *\u2018Work: 8:30 AM. Don\u2019t forget your lunch!\u2019* Below that, a text from your mom reads: *\u2018Did you eat breakfast? Love you.\u2019* The battery is at 42%.",
+      "carryable": true,
+      "visible": true
+    },
+    "lip_balm": {
+      "id": "lip_balm",
+      "name": "lip balm",
+      "aliases": [
+        "balm",
+        "chapstick",
+        "cherry lip balm"
+      ],
+      "description": "A tube of cherry-flavored lip balm, its cap slightly greasy from overuse. It\u2019s your go-to for dry mornings, though you can never seem to find it when you need it. The label is peeling at the edges, a testament to its frequent travels in your purse.",
+      "carryable": true,
+      "visible": true
+    },
+    "book": {
+      "id": "book",
+      "name": "book",
+      "aliases": [
+        "novel",
+        "the night circus",
+        "paperback"
+      ],
+      "description": "A well-worn copy of *The Night Circus* by Erin Morgenstern. The spine is creased, and the pages are slightly yellowed from being read and re-read. You\u2019ve been meaning to finish it for weeks, but life (and Chai\u2019s insistence on sitting on your chest at 5 AM) keeps getting in the way. The bookmark is stuck somewhere around page 187.",
+      "carryable": true,
+      "visible": true
+    },
+    "glass_of_water": {
+      "id": "glass_of_water",
+      "name": "glass of water",
+      "aliases": [
+        "water",
+        "glass",
+        "drinking glass"
+      ],
+      "description": "A half-empty glass of water that\u2019s been sitting on your nightstand since Tuesday. The water is room temperature and slightly cloudy, with a few stray cat hairs floating on the surface. You *really* should have drunk this before now.",
+      "carryable": true,
+      "visible": true
+    },
+    "diffuser": {
+      "id": "diffuser",
+      "name": "diffuser",
+      "aliases": [
+        "lavender diffuser",
+        "aromatherapy diffuser",
+        "scent diffuser"
+      ],
+      "description": "A sleek, modern essential oil diffuser that puffs out gentle clouds of lavender-scented mist. It\u2019s supposed to help you relax, but right now it\u2019s just adding to the general humidity of the room. The water level is low, and the light inside cycles through soft pastels like a mood ring for your sinuses.",
+      "carryable": true,
+      "visible": true
+    },
+    "dresser": {
+      "id": "dresser",
+      "name": "dresser",
+      "aliases": [
+        "chest of drawers",
+        "bureau",
+        "wooden dresser"
+      ],
+      "description": "A sturdy but slightly outdated dresser made of dark wood. The top drawer is slightly open, revealing a tangle of socks and underwear. On top, a jewelry dish holds a few pairs of earrings, a tangled necklace, and your grandmother\u2019s silver locket. Beside it, a framed photo of you and your college friends at a tailgate\u2014you\u2019re all wearing matching foam fingers and grinning like idiots. The glass is smudged with fingerprints.",
+      "carryable": false,
+      "visible": true
+    },
+    "jewelry_dish": {
+      "id": "jewelry_dish",
+      "name": "jewelry dish",
+      "aliases": [
+        "dish",
+        "earring dish",
+        "small dish"
+      ],
+      "description": "A small, ceramic dish shaped like a leaf. It\u2019s meant to hold your jewelry, but right now it\u2019s just a chaotic pile of earrings, a tangled necklace, and your grandmother\u2019s silver locket. The locket is slightly tarnished, but you\u2019ve never gotten around to polishing it. Inside is a tiny photo of your grandma when she was young\u2014she\u2019s wearing a polka-dot dress and laughing at something off-camera.",
+      "carryable": true,
+      "visible": true
+    },
+    "photo": {
+      "id": "photo",
+      "name": "photo",
+      "aliases": [
+        "framed photo",
+        "picture",
+        "college photo"
+      ],
+      "description": "A 5x7 framed photo of you and your college friends at a tailgate. You\u2019re all wearing matching foam fingers, and the background is a blur of beer cans and football jerseys. You remember that day\u2014it was freezing, but you\u2019d all had just enough to drink to ignore the cold. Your friend Jess is mid-laugh, her mouth open in a way that suggests she\u2019s about to say something ridiculous. The glass is smudged with fingerprints, probably from the last time you showed it to a visitor and said, *\u2018Oh yeah, that was a good day.\u2019*",
+      "carryable": true,
+      "visible": true
+    },
+    "chai": {
+      "id": "chai",
+      "name": "Chai",
+      "aliases": [
+        "cat",
+        "orange cat",
+        "your cat",
+        "fluffy menace"
+      ],
+      "description": "A large, perpetually unimpressed orange tabby with a white chest and paws. Chai is currently sprawled across the foot of your bed, his tail flicking lazily as he watches you with the disdain of a monarch surveying a particularly dull subject. His fur is slightly matted in places, a sign that he\u2019s due for a brushing, but he\u2019s made it clear that he will *not* tolerate such indignities before his morning nap. His green eyes track your every movement, as if daring you to disturb his slumber.",
+      "carryable": false,
+      "visible": true
+    },
+    "pajamas": {
+      "id": "pajamas",
+      "name": "pajamas",
+      "aliases": [
+        "pjs",
+        "sleepwear",
+        "flannel pants",
+        "t-shirt"
+      ],
+      "description": "A set of cozy flannel pajamas with a pattern of tiny coffee cups. The pants are slightly too long, and the shirt has a small hole near the hem from where Chai got a little *too* enthusiastic during playtime. They\u2019re soft, warm, and\u2014most importantly\u2014comfortable enough to sleep in for days. You\u2019re wearing them now, though you\u2019ll need to change before work.",
+      "carryable": false,
+      "visible": true
+    },
+    "slippers": {
+      "id": "slippers",
+      "name": "slippers",
+      "aliases": [
+        "house slippers",
+        "fluffy slippers",
+        "shoes"
+      ],
+      "description": "A pair of plush, sheep-shaped slippers that your mom bought you as a joke last Christmas. They\u2019re ridiculously soft, with little black eyes and a pink nose on each one. The soles are slightly worn, and one of the ears is starting to come unstitched. You love them anyway, even if they do make you look like a five-year-old.",
+      "carryable": true,
+      "visible": true
+    }
+  }
+}

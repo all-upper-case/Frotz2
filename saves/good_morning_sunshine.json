@@ -1,0 +1,176 @@
+{
+  "narrative_thread": "The shrill bleat of your alarm clock yanks you from a dream already slipping through your fingers like smoke. You groan, rolling over to slap at the snooze button\u2014only to freeze as a furry weight shifts against your ribs. Miso, your calico cat, blinks up at you with one green eye, her tail flicking in slow, deliberate judgment. 'Yeah, yeah,' you mutter, scratching behind her ears. 'Five more minutes.' But the clock on your nightstand glows 6:47 AM in accusatory red digits. Work starts at nine, and the commute is a nightmare. Time to move. It is 6:47 AM on a weekday morning. You are running late, but not disastrously so. The house is quiet except for the hum of the refrigerator and Miso\u2019s occasional chirps. You need to shower, dress, eat, and leave\u2014preferably in that order\u2014but the universe has other plans.",
+  "blueprint": "The immediate area consists of: 1) Your Bedroom (starting location), connected to 2) the Hallway (north), which branches into 3) the Bathroom (east), 4) the Kitchen (west), and 5) the Living Room (south, via the Hallway). The front door is in the Living Room, leading outside. Closets and minor storage spaces are tucked into the Hallway and Bedroom.",
+  "meta": {
+    "total_tokens": 2430
+  },
+  "player": {
+    "current_room": "room_start",
+    "inventory": [
+      "phone",
+      "house_keys"
+    ],
+    "worn": [],
+    "description": "You\u2019re in your mid-twenties, with the kind of face that\u2019s pleasant but forgettable\u2014symmetrical enough, but nothing that stops traffic. Your dark brown hair is usually a mess in the mornings, and today is no exception. You\u2019re wearing an old college T-shirt and flannel pajama pants, both slightly rumpled from sleep. A faint scar on your left knee (from a childhood bike accident) peeks out from under the fabric. Your nails are bitten to the quick, a habit you\u2019ve never quite kicked.",
+    "aliases": [
+      "me",
+      "self",
+      "player"
+    ]
+  },
+  "characters": {},
+  "rooms": {
+    "room_start": {
+      "id": "room_start",
+      "name": "Your Bedroom",
+      "description": "The bedroom is a shrine to procrastination and half-finished hobbies. A queen-sized bed, unmade, dominates the space, its sheets tangled from a restless night. The walls are a soothing pale blue, though the paint is chipped near the baseboard where Miso occasionally sharpens her claws. A dresser stands against one wall, its surface cluttered with loose change, a half-empty glass of water, and a framed photo of you and your college friends at a beach bonfire. The air smells faintly of lavender from the candle you lit last night (and forgot to blow out). A window above the bed lets in weak, gray morning light, hinting at another overcast day.",
+      "base_description": "The bedroom is a shrine to procrastination and half-finished hobbies. A queen-sized bed, unmade, dominates the space, its sheets tangled from a restless night. The walls are a soothing pale blue, though the paint is chipped near the baseboard where Miso occasionally sharpens her claws. A dresser stands against one wall, its surface cluttered with loose change, a half-empty glass of water, and a framed photo of you and your college friends at a beach bonfire. The air smells faintly of lavender from the candle you lit last night (and forgot to blow out). A window above the bed lets in weak, gray morning light, hinting at another overcast day.",
+      "exits": {
+        "north": "room_14835c12"
+      },
+      "items": [
+        "bed",
+        "nightstand",
+        "alarm_clock",
+        "dresser",
+        "photo",
+        "window",
+        "miso",
+        "pajamas"
+      ],
+      "characters": [],
+      "visited": true
+    },
+    "room_14835c12": {
+      "id": "room_14835c12",
+      "name": "Unknown",
+      "description": null,
+      "base_description": "...",
+      "exits": {
+        "south": "room_start"
+      },
+      "items": [],
+      "characters": [],
+      "visited": false
+    }
+  },
+  "items": {
+    "bed": {
+      "id": "bed",
+      "name": "bed",
+      "aliases": [
+        "mattress",
+        "sheets",
+        "blanket"
+      ],
+      "description": "A well-loved queen-sized bed with a slightly lumpy mattress. The sheets are a tangled mess of cotton and fleece, and the pillow still bears the faint impression of your head. Miso has claimed the foot of the bed as her throne, her calico fur a stark contrast against the dark blue comforter.",
+      "carryable": false,
+      "visible": true
+    },
+    "nightstand": {
+      "id": "nightstand",
+      "name": "nightstand",
+      "aliases": [
+        "table",
+        "stand",
+        "bedside table"
+      ],
+      "description": "A rickety wooden nightstand, its surface scarred by years of rings from forgotten coffee mugs. The top drawer is slightly ajar, revealing a tangle of charging cables and a dog-eared romance novel. A digital alarm clock sits on top, its red numbers blinking 6:47 AM in silent reproach.",
+      "carryable": false,
+      "visible": true
+    },
+    "alarm_clock": {
+      "id": "alarm_clock",
+      "name": "alarm clock",
+      "aliases": [
+        "clock",
+        "digital clock"
+      ],
+      "description": "A cheap plastic alarm clock with a snooze button that\u2019s been pressed one too many times. The display glows 6:47 AM, and the alarm is still blaring weakly, a tinny electronic chirp that sets your teeth on edge. The battery compartment is held together with a piece of tape.",
+      "carryable": true,
+      "visible": true
+    },
+    "dresser": {
+      "id": "dresser",
+      "name": "dresser",
+      "aliases": [
+        "chest",
+        "drawers"
+      ],
+      "description": "A sturdy oak dresser, its surface a graveyard of loose change, receipts, and a single earring you\u2019ve been meaning to find the match for. The top drawer is slightly open, revealing a jumble of socks and underwear. A framed photo of you and your friends sits near the edge, its glass smudged with fingerprints.",
+      "carryable": false,
+      "visible": true
+    },
+    "photo": {
+      "id": "photo",
+      "name": "framed photo",
+      "aliases": [
+        "picture",
+        "photo",
+        "frame"
+      ],
+      "description": "A 5x7 photo of you and your college friends at a beach bonfire. You\u2019re all sunburned and grinning, arms slung around each other\u2019s shoulders. The firelight casts long shadows, and someone\u2019s holding a red Solo cup just out of frame. You remember that night\u2014how the ocean smelled like salt and how you all swore you\u2019d stay close forever. The frame is dusty, and the glass is smudged.",
+      "carryable": true,
+      "visible": true
+    },
+    "window": {
+      "id": "window",
+      "name": "window",
+      "aliases": [
+        "pane",
+        "glass"
+      ],
+      "description": "A large window above the bed, its blinds half-drawn to let in the weak morning light. The view outside is unremarkable: a stretch of overgrown lawn, a neighbor\u2019s fence, and a sky the color of wet concrete. A thin layer of dust coats the sill, and a dead fly lies on its back near the frame.",
+      "carryable": false,
+      "visible": true
+    },
+    "miso": {
+      "id": "miso",
+      "name": "Miso",
+      "aliases": [
+        "cat",
+        "calico",
+        "kitty"
+      ],
+      "description": "A plump calico cat with a coat like a patchwork quilt\u2014black, orange, and white in uneven splotches. She\u2019s currently sprawled across the foot of the bed, one paw dangling off the edge. Her green eyes are half-lidded, watching you with the lazy disdain only a cat can muster. She flicks her tail when you look at her, as if to say, 'Yes, I\u2019m judging you. What of it?'",
+      "carryable": true,
+      "visible": true
+    },
+    "pajamas": {
+      "id": "pajamas",
+      "name": "pajamas",
+      "aliases": [
+        "pjs",
+        "clothes",
+        "shirt",
+        "pants"
+      ],
+      "description": "A ratty old college T-shirt (Go State!) and a pair of flannel pajama pants with tiny penguins on them. The shirt is soft from years of washing, the fabric thin in places. The pants are slightly too long, the cuffs frayed from being stepped on. You\u2019ve had these since freshman year, and they\u2019re basically your security blanket at this point.",
+      "carryable": true,
+      "visible": true
+    },
+    "phone": {
+      "id": "phone",
+      "name": "phone",
+      "aliases": [
+        "cell phone",
+        "smartphone",
+        "mobile"
+      ],
+      "description": "A slightly cracked smartphone with a case that\u2019s seen better days. The screen is lit up with a notification: '3 missed calls from Mom.' The battery is at 42%, and the background is a photo of you and Miso from last Christmas, her face pressed against yours in a rare moment of feline affection. The case is sticky from where you spilled soda on it last week.",
+      "carryable": true,
+      "visible": true
+    },
+    "house_keys": {
+      "id": "house_keys",
+      "name": "house keys",
+      "aliases": [
+        "keys",
+        "keychain"
+      ],
+      "description": "A jangly set of keys on a keychain shaped like a slice of pizza. There\u2019s the house key, the mailbox key, a key to your old apartment you\u2019ve never bothered to remove, and a tiny USB drive you don\u2019t remember the purpose of. The pizza keychain is chipped, and the pepperoni is barely visible anymore.",
+      "carryable": true,
+      "visible": true
+    }
+  }
+}

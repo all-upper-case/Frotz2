@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Z-MACHINE</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <div class="crt-lines"></div>
+
+    <div class="main-layout">
+        <div class="mobile-header">
+            <span class="brand">Z-MACHINE</span>
+            <button id="hud-toggle">DATA PAD</button>
+        </div>
+
+        <div class="terminal" id="terminal">
+            <div id="log"></div>
+        </div>
+
+        <div class="input-area">
+            <span class="prompt-char">></span>
+            <input type="text" id="cmd-input" autocomplete="off" placeholder="Enter command...">
+            <button id="send-btn">SEND</button>
+        </div>
+    </div>
+
+    <div class="hud" id="hud">
+        <div class="hud-content">
+            <div class="hud-scroll">
+                <div class="panel">
+                    <h3>LOCATION</h3>
+                    <div id="stat-loc">Unknown</div>
+                </div>
+                <div class="panel">
+                    <h3>EXITS</h3>
+                    <div id="stat-exits">--</div>
+                </div>
+                <div class="panel">
+                    <h3>STATUS</h3>
+                    <ul id="stat-inv"></ul>
+                </div>
+                <div class="panel">
+                    <h3>METRICS</h3>
+                    <div id="stat-tokens">Tokens: 0</div>
+                </div>
+
+                <hr>
+
+                <div class="panel settings-panel">
+                    <h3>SETTINGS</h3>
+                    <div class="setting-row">
+                        <label>Theme:</label>
+                        <select id="theme-select">
+                            <option value="retro">Retro CRT</option>
+                            <option value="clean">Clean / Dark</option>
+                        </select>
+                    </div>
+                    <div class="setting-row">
+                        <label>Font Size:</label>
+                        <input type="range" id="font-size-range" min="12" max="24" value="16">
+                    </div>
+                    <button id="debug-btn" style="width:100%; margin-bottom:10px; background:#330; color:#ff0; border:1px solid #ff0;">RAW AI DEBUG</button>
+                    <button id="matrix-btn" style="width:100%; margin-top:10px; background:#004400; color:#0f0; border:1px solid #0f0;">ENTER MATRIX (SYNC)</button>
+                </div>
+            </div>
+
+            <div class="hud-footer">
+                <button id="reset-btn" onclick="resetWorld()">HARD RESET WORLD</button>
+                <button id="hud-close">CLOSE PAD</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- DEBUG MODAL -->
+    <div id="debug-modal" class="modal hidden">
+        <div class="modal-content" style="border-color: #ff0; color: #ff0;">
+            <div class="modal-header" style="border-color: #ff0;">
+                <h2>LAST API PAYLOAD</h2>
+                <button id="debug-close" style="color:#ff0; background:none; border:none; cursor:pointer;">X</button>
+            </div>
+            <div class="modal-body">
+                <div id="debug-content" style="white-space: pre-wrap; font-family: monospace; font-size: 0.85em; color: #ccc;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- GOD MODE MODAL -->
+    <div id="god-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>WORLD STATE HARMONIZER</h2>
+                <button id="god-close">X</button>
+            </div>
+            <div class="modal-body">
+                <table id="god-table">
+                    <thead>
+                        <tr>
+                            <th>Item Name</th>
+                            <th>Current Loc</th>
+                            <th>New Location</th>
+                            <th>Fix Description?</th>
+                        </tr>
+                    </thead>
+                    <tbody id="god-tbody"></tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button id="god-save">APPLY REALITY PATCH</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

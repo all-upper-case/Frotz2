@@ -1,0 +1,276 @@
+{
+  "narrative_thread": "You wake up to the soft, insistent purring of Pussycat curled against your neck, her calico fur a warm weight against your skin. The alarm clock blares from the nightstand, its shrill cry cutting through the fog of sleep. Work starts in an hour, and you\u2019re nowhere near ready. The scent of stale coffee lingers in the air, a reminder of last night\u2019s half-finished cup. Time to get moving. The player character, a young professional woman, must navigate her morning routine to prepare for work. The immediate goal is to gather essentials (clothing, keys, etc.), interact with her cat, and leave the house on time. The tone is dry, observational, and slightly self-deprecating, with a focus on mundane but relatable details. The cat, Pussycat, may serve as both a source of minor obstacles and comic relief.",
+  "blueprint": "The starting room is the player\u2019s bedroom, located on the second floor of a suburban house. Adjacent rooms include:\n- **Bathroom** (east of the bedroom): Contains toiletries, a shower, and a mirror.\n- **Hallway** (south of the bedroom): Leads to the stairs down to the first floor. Other doors along the hallway include a linen closet and a spare room.\n- **First Floor**: Includes the kitchen (east of the stairs), living room (south of the stairs), and front door (south of the living room). The kitchen connects to a small pantry and the garage (via a side door).\n- **Outside**: The front yard and driveway, where the player\u2019s car is parked. The mailbox is near the curb.",
+  "meta": {
+    "total_tokens": 3146
+  },
+  "player": {
+    "current_room": "room_start",
+    "inventory": [
+      "pajama_top",
+      "pajama_bottoms",
+      "underwear",
+      "phone"
+    ],
+    "worn": [],
+    "description": "You look ordinary.",
+    "aliases": [
+      "me",
+      "self",
+      "player"
+    ]
+  },
+  "characters": {},
+  "rooms": {
+    "room_start": {
+      "id": "room_start",
+      "name": "Bedroom",
+      "description": "Your bedroom is a study in controlled chaos\u2014clothes draped over the chair in the corner, a half-read book splayed open on the nightstand, and the faint scent of lavender from the diffuser on your dresser. Morning light filters through the half-open blinds, casting long shadows across the hardwood floor. The door to the east leads to the bathroom, while the hallway lies to the south. Your bed, rumpled and inviting, is the only thing in the room that looks like it\u2019s been properly put to use. Pussycat blinks up at you from her perch on your pillow, tail flicking lazily.",
+      "base_description": "Your bedroom is a study in controlled chaos\u2014clothes draped over the chair in the corner, a half-read book splayed open on the nightstand, and the faint scent of lavender from the diffuser on your dresser. Morning light filters through the half-open blinds, casting long shadows across the hardwood floor. The door to the east leads to the bathroom, while the hallway lies to the south. Your bed, rumpled and inviting, is the only thing in the room that looks like it\u2019s been properly put to use. Pussycat blinks up at you from her perch on your pillow, tail flicking lazily.",
+      "exits": {
+        "east": "room_c3ac2570",
+        "south": "room_15356170"
+      },
+      "items": [
+        "bed",
+        "nightstand",
+        "alarm_clock",
+        "book",
+        "chair",
+        "clothes_pile",
+        "dresser",
+        "diffuser",
+        "jewelry_dish",
+        "photo",
+        "blinds",
+        "pussycat"
+      ],
+      "characters": [],
+      "visited": true
+    },
+    "room_c3ac2570": {
+      "id": "room_c3ac2570",
+      "name": "Unknown",
+      "description": null,
+      "base_description": "...",
+      "exits": {
+        "west": "room_start"
+      },
+      "items": [],
+      "characters": [],
+      "visited": false
+    },
+    "room_15356170": {
+      "id": "room_15356170",
+      "name": "Unknown",
+      "description": null,
+      "base_description": "...",
+      "exits": {
+        "north": "room_start"
+      },
+      "items": [],
+      "characters": [],
+      "visited": false
+    }
+  },
+  "items": {
+    "bed": {
+      "id": "bed",
+      "name": "bed",
+      "aliases": [
+        "mattress",
+        "sheets",
+        "blanket",
+        "pillow"
+      ],
+      "description": "A queen-sized bed with a slightly lumpy mattress, dressed in mismatched sheets and a comforter that\u2019s seen better days. The pillow still bears the faint impression of your head, and Pussycat has claimed the other one as her throne. The blankets are tangled, evidence of a restless night.",
+      "carryable": false,
+      "visible": true
+    },
+    "nightstand": {
+      "id": "nightstand",
+      "name": "nightstand",
+      "aliases": [
+        "table",
+        "stand",
+        "bedside table"
+      ],
+      "description": "A small, wooden nightstand cluttered with the detritus of daily life: a half-empty glass of water, a charging cable coiled like a snake, a bookmark peeking out from the pages of a novel, and your alarm clock, which is currently screeching its displeasure at the morning.",
+      "carryable": false,
+      "visible": true
+    },
+    "alarm_clock": {
+      "id": "alarm_clock",
+      "name": "alarm clock",
+      "aliases": [
+        "clock",
+        "alarm",
+        "buzzer"
+      ],
+      "description": "A cheap digital alarm clock with a cracked screen. It\u2019s currently blaring an obnoxious beeping noise, the numbers flashing 7:15 AM in angry red digits. The snooze button is temptingly large, but you know from experience that hitting it will only delay the inevitable.",
+      "carryable": true,
+      "visible": true
+    },
+    "book": {
+      "id": "book",
+      "name": "book",
+      "aliases": [
+        "novel",
+        "paperback",
+        "reading material"
+      ],
+      "description": "A well-worn paperback novel with a creased spine and dog-eared pages. The cover features a dramatic illustration of a stormy sea and a brooding hero. You were halfway through it last night before exhaustion took over. The bookmark\u2014a receipt from the grocery store\u2014protrudes from the pages like a flag.",
+      "carryable": true,
+      "visible": true
+    },
+    "chair": {
+      "id": "chair",
+      "name": "chair",
+      "aliases": [
+        "desk chair",
+        "seat",
+        "clothes chair"
+      ],
+      "description": "A wooden chair that has become a de facto laundry hamper. A pile of clothes\u2014some clean, some questionable\u2014spills over the seat and onto the floor. The chair itself is sturdy but slightly wobbly, a relic from your college days.",
+      "carryable": false,
+      "visible": true
+    },
+    "clothes_pile": {
+      "id": "clothes_pile",
+      "name": "pile of clothes",
+      "aliases": [
+        "clothes",
+        "laundry",
+        "pile",
+        "heap"
+      ],
+      "description": "A precarious mountain of fabric teetering on the edge of collapse. The clothes range from work-appropriate blouses to pajama pants you swear you\u2019ve never seen before. Somewhere in this mess is the outfit you *meant* to wear today, but good luck finding it.",
+      "carryable": false,
+      "visible": true
+    },
+    "dresser": {
+      "id": "dresser",
+      "name": "dresser",
+      "aliases": [
+        "chest",
+        "drawers",
+        "bureau"
+      ],
+      "description": "A tall, wooden dresser with six drawers, each slightly ajar. The top is home to a diffuser (currently silent), a jewelry dish overflowing with mismatched earrings, and a framed photo of you and your college friends at a beach trip. The drawers are a mix of organized and chaotic\u2014socks in one, a tangle of belts in another.",
+      "carryable": false,
+      "visible": true
+    },
+    "diffuser": {
+      "id": "diffuser",
+      "name": "diffuser",
+      "aliases": [
+        "oil diffuser",
+        "aromatherapy diffuser",
+        "scent diffuser"
+      ],
+      "description": "A sleek, glass diffuser filled with water and a few drops of lavender essential oil. It\u2019s currently off, but the faint scent of lavender still lingers in the air. A small LED light at the base glows softly when it\u2019s on, casting a calming blue hue.",
+      "carryable": true,
+      "visible": true
+    },
+    "jewelry_dish": {
+      "id": "jewelry_dish",
+      "name": "jewelry dish",
+      "aliases": [
+        "dish",
+        "earring dish",
+        "trinket dish"
+      ],
+      "description": "A small, ceramic dish shaped like a leaf, filled with an assortment of earrings, rings, and bracelets. Most of the earrings are missing their mates, and the rings are tangled together in a metallic knot. A single pearl stud glints up at you, taunting you with its loneliness.",
+      "carryable": true,
+      "visible": true
+    },
+    "photo": {
+      "id": "photo",
+      "name": "framed photo",
+      "aliases": [
+        "photo",
+        "picture",
+        "frame",
+        "beach photo"
+      ],
+      "description": "A 5x7 photo in a simple wooden frame. It\u2019s a snapshot of you and your college friends at the beach, arms slung around each other, grinning like idiots. The photo is slightly faded, and the edges are curling. You remember that trip fondly\u2014it was the last time you all saw each other before life got in the way.",
+      "carryable": true,
+      "visible": true
+    },
+    "blinds": {
+      "id": "blinds",
+      "name": "blinds",
+      "aliases": [
+        "window blinds",
+        "shades",
+        "window coverings"
+      ],
+      "description": "White, plastic blinds that have seen better days. They\u2019re half-open, allowing a sliver of morning light to spill into the room. One of the slats is cracked, and the cord is tangled into a knot that would make a sailor weep.",
+      "carryable": false,
+      "visible": true
+    },
+    "pussycat": {
+      "id": "pussycat",
+      "name": "Pussycat",
+      "aliases": [
+        "cat",
+        "calico",
+        "kitty",
+        "feline"
+      ],
+      "description": "A plump, calico cat with a coat that looks like it was painted by a drunk artist\u2014patches of orange, black, and white in no discernible pattern. She\u2019s currently sprawled across your pillow, blinking at you with an expression that\u2019s equal parts innocence and judgment. Her tail flicks lazily, and she lets out a soft *mrrp* as if to say, *You\u2019re late.*",
+      "carryable": true,
+      "visible": true
+    },
+    "pajama_top": {
+      "id": "pajama_top",
+      "name": "pajama top",
+      "aliases": [
+        "top",
+        "pajama shirt",
+        "shirt",
+        "sleep shirt"
+      ],
+      "description": "A thin, cotton pajama top with a faded floral print. It\u2019s comfortable but slightly wrinkled, and the hem is fraying. The fabric is soft from years of washing, and it smells faintly of laundry detergent and sleep.",
+      "carryable": true,
+      "visible": true
+    },
+    "pajama_bottoms": {
+      "id": "pajama_bottoms",
+      "name": "pajama bottoms",
+      "aliases": [
+        "bottoms",
+        "pajama pants",
+        "pants",
+        "sleep pants"
+      ],
+      "description": "A pair of loose, drawstring pajama pants in a matching floral print to your top. They\u2019re a little too long, and the cuffs are slightly frayed. The waistband is stretched out, but they\u2019re your favorite pair\u2014comfortable enough to sleep in, but not so ratty that you\u2019d be embarrassed if someone saw you in them.",
+      "carryable": true,
+      "visible": true
+    },
+    "underwear": {
+      "id": "underwear",
+      "name": "underwear",
+      "aliases": [
+        "panties",
+        "underpants",
+        "briefs"
+      ],
+      "description": "A pair of basic, cotton underwear in a neutral beige. They\u2019re comfortable and practical, if a little boring. The elastic is still holding strong, but the fabric has that slightly pilled texture that comes from too many trips through the wash.",
+      "carryable": true,
+      "visible": true
+    },
+    "phone": {
+      "id": "phone",
+      "name": "phone",
+      "aliases": [
+        "smartphone",
+        "cell phone",
+        "mobile"
+      ],
+      "description": "A sleek smartphone with a cracked screen, nestled in a well-loved case covered in cat stickers. The battery is at 42%, and the lock screen displays a notification: *Work: Stand-up meeting at 9 AM.* You groan internally. The phone is slightly warm, as if it\u2019s been charging all night.",
+      "carryable": true,
+      "visible": true
+    }
+  }
+}

@@ -1,0 +1,287 @@
+{
+  "narrative_log": [
+    "You wake with a groan, the morning sun filtering through the blinds of your bedroom like an unwelcome interrogator. The sheets are tangled around your legs, and the scent of last night\u2019s perfume\u2014cheap vanilla and desperation\u2014lingers in the air. Your head throbs in time with the distant hum of the refrigerator downstairs, a metronome for the hangover symphony playing behind your eyes. Jade, you think, *get up*. The day isn\u2019t going to ruin itself. Jade has just woken up in her bedroom after a long night of work. She\u2019s hungover, sore, and in desperate need of hydration and caffeine. The house is quiet, suggesting her sister Chai is either still asleep or already out. The immediate goal is to recover physically (water, painkillers, food) and mentally (shower, relaxation) before prepping for another night at the club. The basement, where Chai lives, is off-limits for now\u2014Jade respects her sister\u2019s space, but there\u2019s an unspoken tension about Chai\u2019s future and Jade\u2019s role in it."
+  ],
+  "blueprint": "The immediate area consists of the following connected spaces:\n- **Jade\u2019s Bedroom (starting location)**: Upstairs, east of the hallway. Contains a bed, nightstand, closet, and en-suite bathroom (south). The bedroom door leads west to the upstairs hallway.\n- **Upstairs Hallway**: Connects Jade\u2019s bedroom (east), the guest bathroom (north), and the stairs (south) leading down to the first floor. A linen closet is tucked under the stairs.\n- **Guest Bathroom**: North of the hallway, small but functional.\n- **First Floor**: Accessible via stairs from the hallway. Includes the living room (east), kitchen (north), and front entryway (west). The basement door is in the kitchen, leading down to Chai\u2019s space.\n- **Basement (Chai\u2019s Domain)**: South of the kitchen. Off-limits for now, but contains Chai\u2019s bedroom, a small lounge area, and a laundry room. The basement has its own exterior door to the backyard.",
+  "meta": {
+    "total_tokens": 4036
+  },
+  "player": {
+    "current_room": "room_start",
+    "inventory": [
+      "i_d58b2a"
+    ],
+    "worn": [
+      "i_83168b",
+      "i_2cdb7e",
+      "i_25c8b0"
+    ],
+    "description": "You are Jade, a woman in her early twenties with skin the color of milk chocolate and a mane of kinky black hair that\u2019s currently a wild halo around your head. You\u2019re wearing a thin, sweat-dampened tank top that clings to your curves and a pair of boy-short underwear\u2014both remnants of last night\u2019s outfit, now serving as pajamas. A delicate silver anklet, a gift from your late mother, glints around your left ankle. Your body aches in that specific way that only comes from hours of dancing in heels, and your head feels like it\u2019s been stuffed with cotton and then set on fire.",
+    "aliases": [
+      "me",
+      "self",
+      "player"
+    ]
+  },
+  "characters": {},
+  "rooms": {
+    "room_start": {
+      "id": "room_start",
+      "name": "Jade\u2019s Bedroom",
+      "description": "The bedroom is a study in controlled chaos: a queen-sized bed with rumpled sheets, a nightstand cluttered with half-empty water glasses and a charging phone, and a full-length mirror leaning against the wall, its surface smudged with last night\u2019s makeup. A large window, framed by heavy curtains, lets in a sliver of sunlight that cuts across the hardwood floor like a laser. The air is thick with the scent of sleep and stale perfume. To the west, the bedroom door stands slightly ajar, leading to the upstairs hallway. A smaller door to the south opens into your en-suite bathroom.\n\nYou can see here: bed, nightstand, half-empty water glass, ibuprofen bottle, crumpled receipt, romance novel, full-length mirror, bedroom door, en-suite bathroom door, throw blanket, closet.",
+      "base_description": "The bedroom is a study in controlled chaos: a queen-sized bed with rumpled sheets, a nightstand cluttered with half-empty water glasses and a charging phone, and a full-length mirror leaning against the wall, its surface smudged with last night\u2019s makeup. A large window, framed by heavy curtains, lets in a sliver of sunlight that cuts across the hardwood floor like a laser. The air is thick with the scent of sleep and stale perfume. To the west, the bedroom door stands slightly ajar, leading to the upstairs hallway. A smaller door to the south opens into your en-suite bathroom.",
+      "exits": {
+        "west": "room_e1bd73df",
+        "south": "room_6d0d8c4d"
+      },
+      "items": [
+        "i_333650",
+        "i_430ca9",
+        "i_900938",
+        "i_e306b8",
+        "i_81732c",
+        "i_e5bbac",
+        "i_3c1067",
+        "i_cbef39",
+        "i_689290",
+        "i_51365e",
+        "i_31b5c6"
+      ],
+      "characters": [],
+      "visited": true
+    },
+    "room_e1bd73df": {
+      "id": "room_e1bd73df",
+      "name": "Unknown",
+      "description": null,
+      "base_description": "...",
+      "exits": {
+        "east": "room_start"
+      },
+      "items": [],
+      "characters": [],
+      "visited": false
+    },
+    "room_6d0d8c4d": {
+      "id": "room_6d0d8c4d",
+      "name": "Unknown",
+      "description": null,
+      "base_description": "...",
+      "exits": {
+        "north": "room_start"
+      },
+      "items": [],
+      "characters": [],
+      "visited": false
+    }
+  },
+  "items": {
+    "i_83168b": {
+      "id": "i_83168b",
+      "name": "tank top",
+      "aliases": [
+        "tank top",
+        "top",
+        "shirt",
+        "black tank top",
+        "spaghetti strap top"
+      ],
+      "description": "A thin, black spaghetti-strap tank top, now slightly damp with sweat. It\u2019s one of your favorites for lounging, though it\u2019s seen better days. The fabric is soft from countless washes, and it clings to your skin just enough to be comfortable without being restrictive.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_2cdb7e": {
+      "id": "i_2cdb7e",
+      "name": "boy-short underwear",
+      "aliases": [
+        "boy-short underwear",
+        "underwear",
+        "panties",
+        "black underwear",
+        "boy shorts"
+      ],
+      "description": "A pair of black boy-short underwear, the kind that hugs your hips and doesn\u2019t ride up. They\u2019re comfortable, if a little too snug after last night\u2019s exertions. The elastic is starting to fray at the edges, but they\u2019re still your go-to for sleeping in.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_25c8b0": {
+      "id": "i_25c8b0",
+      "name": "silver anklet",
+      "aliases": [
+        "silver anklet",
+        "anklet",
+        "silver chain",
+        "heart anklet",
+        "mother\u2019s anklet"
+      ],
+      "description": "A delicate silver anklet with a tiny heart charm. It\u2019s thin and lightweight, barely noticeable unless you\u2019re looking for it. The clasp is a little loose, but you\u2019ve never had the heart to get it fixed. It was your mother\u2019s, and it\u2019s one of the few things you have left of her.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_d58b2a": {
+      "id": "i_d58b2a",
+      "name": "smartphone",
+      "aliases": [
+        "smartphone",
+        "phone",
+        "cell phone",
+        "mobile",
+        "cracked phone"
+      ],
+      "description": "A slightly cracked smartphone, its screen lit up with notifications. The battery is at 34%, and there\u2019s a text from your manager at the club: *\u2018Don\u2019t forget\u2014shift starts at 9 tonight. VIPs confirmed, so dress to impress.\u2019* The phone is warm from charging overnight, and the case is sticky with spilled energy drink.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_333650": {
+      "id": "i_333650",
+      "name": "bed",
+      "aliases": [
+        "bed",
+        "queen bed",
+        "mattress",
+        "bedframe",
+        "sheets"
+      ],
+      "description": "A queen-sized bed with a plush, slightly lumpy mattress. The sheets are tangled and half-kicked onto the floor, and the pillows are askew. A single, sweat-dampened spot on the pillowcase marks where your head was resting. The bedframe is a simple wooden design, sturdy but unremarkable. A throw blanket, half on the floor, looks inviting if you could just muster the energy to pull it up.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_430ca9": {
+      "id": "i_430ca9",
+      "name": "nightstand",
+      "aliases": [
+        "nightstand",
+        "stand",
+        "bedside table",
+        "table",
+        "night table"
+      ],
+      "description": "A small, cluttered nightstand made of dark wood. On top of it sits a half-empty glass of water (now lukewarm), a bottle of ibuprofen with the cap off, your charging phone, and a crumpled receipt from last night\u2019s bar tab. The drawer is slightly ajar, revealing a tangle of charging cables and a well-worn romance novel with a dog-eared page.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_900938": {
+      "id": "i_900938",
+      "name": "half-empty water glass",
+      "aliases": [
+        "half-empty water glass",
+        "water glass",
+        "glass",
+        "glass of water",
+        "lukewarm water"
+      ],
+      "description": "A tall glass of water, now lukewarm and slightly cloudy from sitting out overnight. It\u2019s half-empty\u2014or half-full, depending on how optimistic you\u2019re feeling this morning. The glass is smudged with fingerprints, and a faint ring of lipstick marks the rim.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_e306b8": {
+      "id": "i_e306b8",
+      "name": "ibuprofen bottle",
+      "aliases": [
+        "ibuprofen bottle",
+        "painkillers",
+        "pills",
+        "medicine",
+        "ibuprofen",
+        "bottle"
+      ],
+      "description": "A small, orange plastic bottle of ibuprofen. The cap is off, and a few pills have spilled onto the nightstand. The label is faded, but you can still make out the dosage: 200mg. The bottle is half-full, which is either a good sign or a bad one, depending on how you look at it.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_81732c": {
+      "id": "i_81732c",
+      "name": "crumpled receipt",
+      "aliases": [
+        "crumpled receipt",
+        "receipt",
+        "bar tab",
+        "paper",
+        "crumpled paper"
+      ],
+      "description": "A crumpled receipt from last night\u2019s bar tab. The total is eye-watering, but the list of drinks is even more so: three vodka sodas, two tequila shots, and a \u2018mystery cocktail\u2019 that you don\u2019t remember ordering. The ink is smudged in places, and the paper smells faintly of spilled alcohol and regret.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_e5bbac": {
+      "id": "i_e5bbac",
+      "name": "romance novel",
+      "aliases": [
+        "romance novel",
+        "book",
+        "paperback",
+        "novel",
+        "romance book"
+      ],
+      "description": "A well-worn paperback romance novel with a shirtless pirate on the cover. The pages are yellowed with age, and the spine is creased from being read and re-read. A dog-eared page marks your progress\u2014somewhere around the part where the heroine is about to be ravished by the brooding duke. The title is *\u2018The Duke\u2019s Forbidden Desire,\u2019* which, let\u2019s be honest, is a little on the nose.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_3c1067": {
+      "id": "i_3c1067",
+      "name": "full-length mirror",
+      "aliases": [
+        "full-length mirror",
+        "mirror",
+        "looking glass",
+        "vanity mirror"
+      ],
+      "description": "A tall, full-length mirror leaning against the wall. The glass is smudged with last night\u2019s makeup\u2014foundation, mascara, and a little bit of glitter that refuses to come off. Your reflection is a mess: hair wild, eyes bloodshot, and skin shiny with sweat. The mirror\u2019s frame is wooden and slightly chipped at the edges, but it\u2019s still sturdy enough to hold your weight if you lean on it.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_cbef39": {
+      "id": "i_cbef39",
+      "name": "bedroom door",
+      "aliases": [
+        "bedroom door",
+        "door",
+        "wooden door",
+        "hallway door"
+      ],
+      "description": "A solid wooden door, slightly ajar, leading to the upstairs hallway. The doorknob is brass and slightly tarnished, and the hinges creak if you open it too quickly. A faint draft seeps through the gap, carrying the scent of coffee and something faintly sweet\u2014maybe Chai\u2019s been baking again.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_689290": {
+      "id": "i_689290",
+      "name": "en-suite bathroom door",
+      "aliases": [
+        "en-suite bathroom door",
+        "bathroom door",
+        "white door",
+        "door to bathroom"
+      ],
+      "description": "A white-painted door leading to your en-suite bathroom. The paint is chipped near the bottom, revealing the wood underneath. The door is closed, but you can hear the faint drip of the sink faucet from here. A small, handwritten note is taped to the door: *\u2018Clean me. Love, Past You.\u2019* Past You was optimistic.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_51365e": {
+      "id": "i_51365e",
+      "name": "throw blanket",
+      "aliases": [
+        "throw blanket",
+        "blanket",
+        "knitted blanket",
+        "burgundy blanket"
+      ],
+      "description": "A soft, knitted throw blanket in a shade of deep burgundy. It\u2019s half on the bed and half on the floor, as if you kicked it off in your sleep. The fabric is warm and slightly fuzzy, and it smells faintly of fabric softener and the lavender sachet you keep in your closet.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_31b5c6": {
+      "id": "i_31b5c6",
+      "name": "closet",
+      "aliases": [
+        "closet",
+        "walk-in closet",
+        "wardrobe",
+        "clothes closet"
+      ],
+      "description": "A large, walk-in closet filled with clothes, shoes, and the occasional forgotten sex toy. The door is slightly ajar, revealing a tangle of hangers and a pile of laundry that may or may not be clean. A faint scent of lavender and leather wafts out, courtesy of the sachets you keep on the shelves. The overhead light flickers ominously when you turn it on.",
+      "carryable": true,
+      "visible": true
+    }
+  },
+  "pending_notifications": []
+}

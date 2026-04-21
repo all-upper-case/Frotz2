@@ -1,0 +1,86 @@
+{
+  "narrative_thread": "The shrill scream of your alarm clock jolts you from a dream about spreadsheets and lukewarm coffee. You peel one eye open, squinting at the glowing digits of your nightstand clock: 7:15 AM. Work starts at 8:30, but the snooze button has already claimed its first victim this morning. The air smells faintly of last night\u2019s takeout and the faint, lingering despair of a Sunday evening spent pretending you\u2019d \u2018get your life together.\u2019 Welcome to Monday. Time to adult. The player character has overslept slightly and is now in a race against the clock to get ready for work. The morning routine is fraught with minor obstacles\u2014missing keys, a finicky coffee maker, and the ever-present temptation to crawl back into bed. The player must navigate their suburban home, gathering necessary items and making small decisions that will determine whether they arrive at work on time, frazzled, or fashionably late (but with coffee).",
+  "player": {
+    "current_room": "room_start",
+    "inventory": [
+      "keys"
+    ]
+  },
+  "rooms": {
+    "room_start": {
+      "id": "room_start",
+      "name": "Your Bedroom",
+      "description": "Your bedroom is a testament to half-finished personal projects and the eternal struggle between \u2018I\u2019ll deal with this later\u2019 and \u2018I need to Marie Kondo my life.\u2019 The queen-sized bed, unmade since yesterday (or was it the day before?), dominates the room, its rumpled sheets a siren song calling you back to unconsciousness. A thin layer of dust coats the dresser, where a framed photo of you and your college friends\u2014grinning drunkenly at a tailgate\u2014serves as a reminder that your social life has devolved into \u2018liking\u2019 their Facebook posts. The blinds are drawn, but a sliver of sunlight sneaks through, illuminating a path of discarded clothes leading to the door. To the east, the hallway beckons, while the north wall is adorned with a closet that may or may not contain something presentable to wear.",
+      "exits": {
+        "north": "room_7635989c",
+        "east": "room_39883871"
+      },
+      "items": [
+        "alarm_clock",
+        "phone",
+        "pajamas",
+        "laundry_pile",
+        "bed"
+      ],
+      "visited": true
+    },
+    "room_7635989c": {
+      "id": "room_7635989c",
+      "name": "Unknown",
+      "description": null,
+      "exits": {
+        "south": "room_start"
+      },
+      "items": [],
+      "visited": false
+    },
+    "room_39883871": {
+      "id": "room_39883871",
+      "name": "Unknown",
+      "description": null,
+      "exits": {
+        "west": "room_start"
+      },
+      "items": [],
+      "visited": false
+    }
+  },
+  "items": {
+    "alarm_clock": {
+      "id": "alarm_clock",
+      "name": "alarm clock",
+      "description": "A sleek, black digital alarm clock with a snooze button that has seen more action than a Netflix \u2018Skip Intro\u2019 button. The time reads 7:15, though the red \u2018AM\u2019 indicator is flickering ominously, as if questioning your life choices. The alarm is still blaring, a relentless BEEP-BEEP-BEEP that feels like it\u2019s drilling directly into your skull.",
+      "carryable": true
+    },
+    "phone": {
+      "id": "phone",
+      "name": "your phone",
+      "description": "A flip phone\u2014yes, you\u2019re still clinging to the early 2000s like a lifeline\u2014rests on the nightstand. The screen is cracked in one corner, a battle scar from that time you dropped it while trying to silence the alarm. There\u2019s a single unread text from your mom: \u2018Don\u2019t forget to eat breakfast! Love you!\u2019 You can\u2019t decide if that\u2019s sweet or passive-aggressive.",
+      "carryable": true
+    },
+    "pajamas": {
+      "id": "pajamas",
+      "name": "your pajamas",
+      "description": "A set of flannel pajamas adorned with tiny, dancing tacos. They\u2019re comfortable, if not exactly office-appropriate. The elastic waistband has given up on life, and the left pant leg is slightly longer than the right, giving you a lopsided gait when you walk. You\u2019ve had these since college, and they\u2019ve survived three moves, two breakups, and one questionable decision to wear them to a gas station at 2 AM.",
+      "carryable": true
+    },
+    "laundry_pile": {
+      "id": "laundry_pile",
+      "name": "pile of laundry",
+      "description": "A precarious mountain of clothes teeters on the floor near the closet. It\u2019s a mix of \u2018maybe clean, maybe not\u2019 and \u2018definitely dirty but I\u2019ll pretend I didn\u2019t see the stain.\u2019 A lone sock peeks out from the top, as if waving for help. You\u2019re pretty sure there\u2019s a work-appropriate outfit buried in there somewhere, but excavating it might require a hazmat suit.",
+      "carryable": false
+    },
+    "bed": {
+      "id": "bed",
+      "name": "bed",
+      "description": "Your bed is a sanctuary of chaos. The sheets are tangled, the pillows are askew, and the comforter has migrated to the foot of the bed, as if it, too, is trying to escape the morning. The mattress sags slightly in the middle, a silent testament to the countless hours you\u2019ve spent here, staring at the ceiling and wondering how you ended up in this particular version of adulthood. The alarm clock\u2019s incessant beeping is the only thing keeping you from diving back in.",
+      "carryable": false
+    },
+    "keys": {
+      "id": "keys",
+      "name": "your keys",
+      "description": "A jingling set of keys attached to a keychain shaped like a slice of pizza. The keys to your car, your house, and your mailbox are all here, along with a single mystery key that you\u2019ve never identified but are too afraid to throw away. The pizza keychain is slightly greasy, a relic from a late-night drive-thru run that you don\u2019t remember but clearly enjoyed.",
+      "carryable": true
+    }
+  }
+}

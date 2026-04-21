@@ -1,0 +1,28 @@
+run = ["gunicorn", "--bind", "0.0.0.0:5000", "--timeout", "120", "main:app"]
+entrypoint = "main.py"
+modules = ["python-3.11"]
+
+hidden = [".pythonlibs"]
+
+[nix]
+channel = "stable-24_05"
+
+[deployment]
+run = ["gunicorn", "--bind", "0.0.0.0:5000", "--timeout", "120", "main:app"]
+deploymentTarget = "cloudrun"
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+[agent]
+expertMode = true
+
+# Changed to single brackets to satisfy the 'expected table' requirement
+[workflows.bulk_update]
+name = "Bulk Update"
+author = "Josie"
+
+[[workflows.bulk_update.tasks]]
+task = "shell.exec"
+args = { cmd = "python apply_updates.py" }

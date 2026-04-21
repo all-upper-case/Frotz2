@@ -1,0 +1,6 @@
+WORLD_NAME: the_emerald_star
+GENRE: Slice of Life.
+SETTING: The Emerald Star, an upscale club in a major U.S. city. The main attraction is the strippers and dancers, but the club also features a casino, two bar areas, a black-tie restaurant, and a hotel/resort on the upper stories of the building.
+PLAYER CHARACTER: A 21 year old woman named Jade who strips and does private dances at Emerald. She is remarkably attractive, with skin the color of milk chocolate, kinky black hair, and gorgeous curves.
+PLAYER GOAL: Make money, make the guests and management happy, and have fun.
+TONE: Modern realism; some dry humor; sex appeal; classic modern Interactive Fiction style.

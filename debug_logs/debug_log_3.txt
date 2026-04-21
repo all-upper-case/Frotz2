@@ -1,0 +1,418 @@
+--- 2026-02-11 23:51:48 [GENESIS] ---
+[USAGE]: in=559 out=1716 tot=2275
+[OUTPUT]: {
+  "intro_text": "You wake to the insistent buzzing of your alarm clock, its shrill cry slicing through the fog of sleep like a knife through day-old bread. The room is dim, the early morning light filtering through the blinds in lazy stripes. Your head throbs slightly\u2014last night\u2019s wine was a mistake, but hey, at least you didn\u2019t text your ex. Again. The orange furball curled at the foot of your bed stirs, blinking at you with judgmental green eyes. It\u2019s time to get ready for work, but first, you\u2019ll have to navigate the minefield of your own morning routine.",
+  "narrative_thread": "It is 6:45 AM. You overslept by fifteen minutes. The cat, Miso, is already awake and unimpressed. Your goal: leave the house by 8:00 AM, fully dressed, caffeinated, and preferably not smelling like a distillery.",
+  "blueprint": "The immediate area consists of: 1) Your Bedroom (starting location), 2) The Hallway (north), leading to 3) The Bathroom (east from hallway), 4) The Kitchen (west from hallway), and 5) The Living Room (south from hallway). The front door is in the living room, but it\u2019s locked and alarmed. Your keys and work bag are somewhere in this mess.",
+  "player_description": "You\u2019re in your mid-twenties, with tousled auburn hair that\u2019s currently doing its best impression of a bird\u2019s nest. Your pajamas\u2014a faded set of blue flannel pants and a threadbare tank top\u2014cling to you in all the wrong places. Your face is bare, save for the smudged remnants of last night\u2019s mascara, and your breath could probably strip paint. Despite the chaos, there\u2019s an undeniable attractiveness to you, like a well-loved book with a few dog-eared pages. Miso, your perpetually unimpressed orange cat, is your only witness to this morning\u2019s disarray.",
+  "starting_room": {
+    "name": "Your Bedroom",
+    "description": "The bedroom is a testament to your life\u2019s current state: a mix of half-finished projects, discarded clothing, and the faint scent of desperation. The queen-sized bed, unmade and rumpled, dominates the space, its sheets tangled like your thoughts. A nightstand clutters one side, its surface littered with empty water glasses, a half-melted candle, and a romance novel you\u2019ve been meaning to finish. The closet door hangs ajar, revealing a chaotic array of hangers and shoeboxes. A dresser, its surface dusty, stands against the far wall, topped with a mirror that reflects your current state of dishevelment. The air is thick with the musk of sleep and the faintest hint of last night\u2019s takeout.",
+    "items": [
+      {
+        "id": "alarm_clock",
+        "name": "alarm clock",
+        "aliases": [
+          "clock",
+          "buzzer",
+          "alarm"
+        ],
+        "description": "A sleek, digital alarm clock with a cracked screen. It\u2019s currently displaying 6:45 AM in angry red numbers, its incessant beeping having finally roused you from slumber. The snooze button is worn smooth from overuse.",
+        "is_carryable": true
+      },
+      {
+        "id": "bed",
+        "name": "bed",
+        "aliases": [
+          "mattress",
+          "sheets",
+          "blanket"
+        ],
+        "description": "A queen-sized bed with a sagging mattress and a comforter that\u2019s seen better days. The sheets are tangled, and the pillows are scattered. One corner of the bed is occupied by Miso, who regards you with the disdain of a monarch surveying a peasant.",
+        "is_carryable": false
+      },
+      {
+        "id": "nightstand",
+        "name": "nightstand",
+        "aliases": [
+          "stand",
+          "table"
+        ],
+        "description": "A small, wooden nightstand cluttered with the detritus of your life. There\u2019s an empty water glass, a half-melted lavender-scented candle, and a well-worn copy of *The Duke\u2019s Secret Bride* by your favorite romance author. A drawer is slightly open, revealing a tangle of charging cables and old receipts.",
+        "is_carryable": false
+      },
+      {
+        "id": "closet",
+        "name": "closet",
+        "aliases": [
+          "wardrobe",
+          "clothes closet"
+        ],
+        "description": "A walk-in closet that\u2019s more of a walk-*over* closet, given the state of its floor. Clothes hang haphazardly from hangers, some still in dry-cleaning bags, others discarded in piles. Shoeboxes teeter precariously on the top shelf, and a lone sock dangles from a doorknob. The air smells faintly of fabric softener and regret.",
+        "is_carryable": false
+      },
+      {
+        "id": "dresser",
+        "name": "dresser",
+        "aliases": [
+          "chest",
+          "drawers"
+        ],
+        "description": "A sturdy oak dresser, its surface dusty and cluttered. A mirror hangs above it, reflecting your current state of disarray. The top drawer is slightly open, revealing a jumble of socks and underwear. The other drawers are closed, but you know from experience they\u2019re no less chaotic inside.",
+        "is_carryable": false
+      },
+      {
+        "id": "miso",
+        "name": "Miso",
+        "aliases": [
+          "cat",
+          "orange cat",
+          "furball"
+        ],
+        "description": "Miso is a large, fluffy orange cat with a perpetually unimpressed expression. His green eyes regard you with a mix of disdain and mild curiosity, as if he\u2019s already decided you\u2019re not worth his time but hasn\u2019t ruled out the possibility of food. His tail flicks lazily, and he\u2019s currently sprawled across the foot of your bed like he owns the place.",
+        "is_carryable": false
+      },
+      {
+        "id": "pajamas",
+        "name": "pajamas",
+        "aliases": [
+          "pjs",
+          "flannel pants",
+          "tank top"
+        ],
+        "description": "A faded set of blue flannel pants and a threadbare white tank top. The pants have a small hole near the left knee, and the tank top is stretched out from years of use. They\u2019re comfortable, but they\u2019re not exactly office-appropriate. The faint scent of fabric softener and last night\u2019s wine clings to them.",
+        "is_carryable": true
+      }
+    ],
+    "new_exits": [
+      "north"
+    ]
+  },
+  "starting_inventory": [
+    {
+      "id": "phone",
+      "name": "phone",
+      "aliases": [
+        "cell phone",
+        "smartphone",
+        "mobile"
+      ],
+      "description": "A slightly cracked smartphone with a battery life hovering at 12%. The lock screen displays a notification: *3 missed calls from Mom*. There\u2019s also a text from your boss, sent at 6:30 AM: *\u2018Don\u2019t forget the Thompson report is due today. No excuses.\u2019* The phone feels heavier than usual in your hand.",
+      "is_carryable": true
+    },
+    {
+      "id": "wine_glass",
+      "name": "wine glass",
+      "aliases": [
+        "glass",
+        "red wine glass"
+      ],
+      "description": "A stemless wine glass with a faint lipstick stain on the rim. The bottom is sticky with the remnants of last night\u2019s cabernet, and there\u2019s a smudge of your fingerprint on the side. It\u2019s empty, but the scent of alcohol lingers, a reminder of your questionable life choices.",
+      "is_carryable": true
+    }
+  ],
+  "_usage": {
+    "input_tokens": 559,
+    "output_tokens": 1716,
+    "total_tokens": 2275
+  }
+}
+
+--- 2026-02-11 23:57:36 [DM] ---
+[USAGE]: in=2136 out=546 tot=2682
+[OUTPUT]: {
+  "narrative": "You grope blindly for the alarm clock, your fingers finally closing around its sleek, cracked body. With a satisfying *click*, the incessant beeping ceases, leaving behind a blessed silence\u2014well, almost. Miso takes this opportunity to let out a disgruntled *mrrow* from the foot of the bed, as if to say, *Finally. I\u2019ve been awake for hours.* The clock now displays 6:46 AM in glaring red digits, a stark reminder that you\u2019re already behind schedule. The room feels marginally less hostile without the alarm\u2019s shrill cry, but the weight of the day ahead settles over you like a damp blanket.",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [],
+  "room_remove": [],
+  "wear_add": [],
+  "wear_remove": [],
+  "update_description": {
+    "alarm_clock": "A sleek, digital alarm clock with a cracked screen. It now displays 6:46 AM in red numbers, its beeping mercifully silenced. The snooze button is worn smooth from overuse, and the silence it\u2019s granted you feels like a small victory."
+  },
+  "new_item_definitions": {},
+  "current_room_base_description": "The bedroom is a testament to your life\u2019s current state: a mix of half-finished projects, discarded clothing, and the faint scent of desperation. The queen-sized bed, unmade and rumpled, dominates the space, its sheets tangled like your thoughts. A nightstand clutters one side, its surface littered with empty water glasses, a half-melted candle, and a romance novel you\u2019ve been meaning to finish. The closet door hangs ajar, revealing a chaotic array of hangers and shoeboxes. A dresser, its surface dusty, stands against the far wall, topped with a mirror that reflects your current state of dishevelment. The air is thick with the musk of sleep and the faintest hint of last night\u2019s takeout. Miso, your perpetually unimpressed orange cat, flicks his tail lazily from his perch at the foot of the bed, as if to say, *Well? Are we getting up or what?*",
+  "player_description_update": "",
+  "item_visibility_update": {},
+  "narrative_summary_update": "The alarm is off, but the clock is ticking. You\u2019ve got just over an hour to transform from a disheveled mess into a functioning adult. Miso is judging you.",
+  "_usage": {
+    "input_tokens": 2136,
+    "output_tokens": 546,
+    "total_tokens": 2682
+  }
+}
+
+--- 2026-02-12 00:01:44 [DM] ---
+[USAGE]: in=1864 out=214 tot=2078
+[OUTPUT]: {
+  "narrative": "You glance down at your faded blue flannel pajama pants and threadbare white tank top. They\u2019re already on you, clinging to your body like a second skin. Miso lets out a slow blink, as if to say, *\u2018Really? You\u2019re *proud* of this?\u2019*",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [],
+  "room_remove": [],
+  "wear_add": [],
+  "wear_remove": [],
+  "update_description": {},
+  "new_item_definitions": {},
+  "current_room_base_description": "",
+  "player_description_update": "You\u2019re currently wearing a pair of faded blue flannel pajama pants with a small hole near the left knee and a stretched-out white tank top. The ensemble screams *\u2018I gave up\u2019* more than it screams *\u2018professional.\u2019* Miso\u2019s judgmental gaze is almost palpable.",
+  "item_visibility_update": {},
+  "narrative_summary_update": "",
+  "_usage": {
+    "input_tokens": 1864,
+    "output_tokens": 214,
+    "total_tokens": 2078
+  }
+}
+
+--- 2026-02-12 00:03:35 [DM] ---
+[USAGE]: in=1715 out=477 tot=2192
+[OUTPUT]: {
+  "narrative": "You carefully place the sticky wine glass on the cluttered nightstand, next to the empty water glass and the half-melted lavender candle. The glass wobbles slightly before settling, as if judging your decision to leave it there. Miso watches with mild interest, his tail flicking as if to say, *\u001cFinally, a responsible choice.\u001d* The nightstand now looks even more like a shrine to questionable life choices.",
+  "inventory_remove": [
+    "wine_glass"
+  ],
+  "room_add": [
+    {
+      "id": "wine_glass_nightstand",
+      "name": "wine glass",
+      "aliases": [
+        "glass",
+        "red wine glass",
+        "stemless wine glass"
+      ],
+      "description": "A stemless wine glass with a faint lipstick stain on the rim. It sits precariously on the nightstand, its sticky residue glistening in the morning light. The scent of last night\u0019s cabernet still lingers, a silent testament to your *relaxation* techniques. The glass looks out of place among the other clutter, like a relic of a less responsible era.",
+      "carryable": true,
+      "visible": true
+    }
+  ],
+  "new_item_definitions": {
+    "wine_glass_nightstand": {
+      "name": "wine glass",
+      "aliases": [
+        "glass",
+        "red wine glass",
+        "stemless wine glass"
+      ],
+      "description": "A stemless wine glass with a faint lipstick stain on the rim. It sits precariously on the nightstand, its sticky residue glistening in the morning light. The scent of last night\u0019s cabernet still lingers, a silent testament to your *relaxation* techniques. The glass looks out of place among the other clutter, like a relic of a less responsible era.",
+      "is_carryable": true
+    }
+  },
+  "narrative_summary_update": "The wine glass is now on the nightstand, joining the other artifacts of your evening routine. The room feels slightly less chaotic, though Miso\u0019s judgment remains unchanged.",
+  "_usage": {
+    "input_tokens": 1715,
+    "output_tokens": 477,
+    "total_tokens": 2192
+  }
+}
+
+--- 2026-02-12 00:06:47 [ARCHITECT] ---
+[USAGE]: in=614 out=983 tot=1597
+[OUTPUT]: {
+  "name": "The Hallway",
+  "description": "The narrow hallway stretches before you, its walls a bland eggshell white that somehow manages to feel both sterile and lived-in. A thin strip of worn beige carpet muffles your footsteps, though it does little to absorb the faint scent of last night's takeout\u2014something garlicky, now stale. To the east, a slightly ajar door reveals the tiled expanse of the bathroom, where the hum of an old exhaust fan lingers like a sleepy insect. To the west, the hallway opens into the kitchen, where the dim glow of the digital clock on the microwave casts a faint blue hue. A single framed photo of you and Miso, taken during a rare moment of feline cooperation, hangs crookedly on the wall, its glass smudged with what might be paw prints or your own fingerprints from a late-night snack run. The air here is cooler than in your bedroom, carrying the faintest whisper of central air and the lingering musk of Miso\u2019s favorite napping spots.",
+  "new_exits": [
+    "south",
+    "east",
+    "west"
+  ],
+  "blueprint_update": "The immediate area consists of: 1) Your Bedroom (starting location, south), 2) The Hallway (current location), leading to 3) The Bathroom (east), 4) The Kitchen (west), and 5) The Living Room (south from hallway, unexplored). The front door is in the living room, but it\u2019s locked and alarmed. Your keys and work bag are somewhere in this mess.",
+  "items": [
+    {
+      "id": "item_hall_photo",
+      "name": "framed photo",
+      "aliases": [
+        "photo",
+        "picture",
+        "frame"
+      ],
+      "description": "A 4x6 photo of you and Miso, taken during one of the few times he deigned to sit still for more than three seconds. You\u2019re both squinting into the sunlight, Miso\u2019s orange fur glowing like a small, judgmental ember. The frame is cheap plastic, the kind that comes with a pre-inserted stock photo you\u2019re supposed to replace. You never did. The glass is smudged, and the back is slightly askew, as if Miso has taken it upon himself to investigate its contents at some point.",
+      "is_carryable": true
+    },
+    {
+      "id": "item_hall_rug",
+      "name": "beige carpet strip",
+      "aliases": [
+        "carpet",
+        "rug",
+        "hallway rug"
+      ],
+      "description": "A thin, utilitarian strip of carpet that runs the length of the hallway. It\u2019s seen better days\u2014frayed at the edges, slightly discolored from years of foot traffic, and dotted with a few mysterious stains that you\u2019ve long since given up trying to identify. It\u2019s the kind of carpet that\u2019s more functional than decorative, the kind that would be replaced if you ever got around to redecorating. Which you won\u2019t.",
+      "is_carryable": false
+    },
+    {
+      "id": "item_hall_light",
+      "name": "hallway light",
+      "aliases": [
+        "light",
+        "ceiling light",
+        "hall light"
+      ],
+      "description": "A single, unremarkable flush-mount ceiling light with a frosted glass cover. It\u2019s the kind of light that\u2019s bright enough to navigate the hallway but not so bright that it reveals every flaw in the paint job. The bulb flickers occasionally, a habit it\u2019s had for years, though it\u2019s never actually burned out. You\u2019ve considered replacing it, but the thought of balancing on a chair to unscrew the cover while Miso watches with amused disdain has always deterred you.",
+      "is_carryable": false
+    },
+    {
+      "id": "item_hall_jacket",
+      "name": "hoodie on hook",
+      "aliases": [
+        "hoodie",
+        "jacket",
+        "sweatshirt"
+      ],
+      "description": "A well-worn gray hoodie hangs from a hook on the wall, its sleeves slightly stretched from years of use. It smells faintly of fabric softener and the outdoors, though you can\u2019t remember the last time you actually wore it outside. The pockets are empty, save for a single crumpled receipt from the corner store, dated three weeks ago. The hoodie is one of those comfort items you keep around for lazy weekends, though lately, it\u2019s been serving more as a coat rack for Miso\u2019s occasional attempts at climbing the walls.",
+      "is_carryable": true
+    }
+  ],
+  "_usage": {
+    "input_tokens": 614,
+    "output_tokens": 983,
+    "total_tokens": 1597
+  }
+}
+
+--- 2026-02-12 00:08:12 [ARCHITECT] ---
+[USAGE]: in=909 out=927 tot=1836
+[OUTPUT]: {
+  "name": "The Bathroom",
+  "description": "The bathroom is a cramped but functional space, its once-white tiles now tinged with the faintest yellow from years of steam and hard water. The air is thick with the scent of damp towels and the sharp, antiseptic tang of mouthwash left uncapped on the sink. A flickering fluorescent light buzzes overhead, casting a harsh glow that does no favors to the dark circles under your eyes\u2014visible in the mirror above the sink, which is streaked with toothpaste splatters and a single, deliberate smear of lipstick (a failed attempt at a night-out look). The exhaust fan hums weakly, struggling to dispel the humidity clinging to the shower curtain, which sways slightly as if someone\u2014or something\u2014just brushed past it. To the west, the hallway beckons, its cooler air a relief after the bathroom\u2019s muggy embrace.",
+  "new_exits": [
+    "west"
+  ],
+  "blueprint_update": "The immediate area consists of: 1) Your Bedroom (south from hallway), 2) The Hallway (current west exit), leading to 3) The Bathroom (current location, east from hallway), 4) The Kitchen (west from hallway), and 5) The Living Room (south from hallway, unexplored). The front door remains locked and alarmed in the living room.",
+  "items": [
+    {
+      "id": "item_mirror_001",
+      "name": "mirror",
+      "aliases": [
+        "looking glass",
+        "reflection"
+      ],
+      "description": "The mirror is a standard-issue bathroom vanity model, its edges slightly fogged from years of use. Your reflection stares back at you\u2014hair slightly disheveled, the remnants of last night\u2019s mascara smudged under one eye. There\u2019s a small chip in the lower left corner, a souvenir from the time Miso knocked your hair straightener into the sink. The glass is cool to the touch, and if you press your palm against it, you can feel the faint vibration of the exhaust fan behind the wall.",
+      "is_carryable": false
+    },
+    {
+      "id": "item_towel_001",
+      "name": "damp towel",
+      "aliases": [
+        "towel",
+        "bath towel"
+      ],
+      "description": "A faded blue bath towel, still damp from your shower last night. It\u2019s draped haphazardly over the edge of the tub, one corner trailing onto the floor where Miso has kneaded it into a lumpy mess. The fabric smells faintly of your shampoo\u2014something floral and overpriced\u2014and the underlying mustiness of a towel left too long in a humid room. There\u2019s a small hole near the hem, likely from Miso\u2019s claws.",
+      "is_carryable": true
+    },
+    {
+      "id": "item_mouthwash_001",
+      "name": "uncapped mouthwash",
+      "aliases": [
+        "mouthwash",
+        "bottle of mouthwash"
+      ],
+      "description": "A half-empty bottle of minty mouthwash, its cap nowhere to be seen. The liquid inside sloshes ominously as you pick it up, and the scent is overpowering\u2014like a wintergreen bomb went off in your sinuses. The label is peeling at the edges, and someone (probably you) has scribbled \"DO NOT DRINK\" in permanent marker on the front, though the warning feels redundant given the alcohol content.",
+      "is_carryable": true
+    },
+    {
+      "id": "item_shower_curtain_001",
+      "name": "shower curtain",
+      "aliases": [
+        "curtain",
+        "plastic curtain"
+      ],
+      "description": "A cheap plastic shower curtain, its once-transparent surface now clouded with soap scum and hard water stains. It\u2019s printed with a pattern of tiny ducks, a gift from your aunt who insisted it was \"whimsical.\" The curtain sways slightly, as if disturbed by a draft, and the metal rings at the top creak when you tug on it. Behind it, the bathtub is visible\u2014a porcelain relic with a chipped edge and a stubborn ring of grime around the drain.",
+      "is_carryable": false
+    }
+  ],
+  "_usage": {
+    "input_tokens": 909,
+    "output_tokens": 927,
+    "total_tokens": 1836
+  }
+}
+
+--- 2026-02-12 00:09:50 [DM] ---
+[USAGE]: in=1617 out=1115 tot=2732
+[OUTPUT]: {
+  "narrative": "You peel off the faded blue flannel pajama pants, revealing a pair of slightly wrinkled but serviceable black underwear. The tank top follows, landing in a heap on the damp towel. The bathroom\u2019s chilly air raises goosebumps along your arms and legs, and Miso\u2014who has materialized in the doorway\u2014fixes you with a look of profound disappointment. *\u2018Finally,\u2019* his expression seems to say, *\u2018you\u2019re doing something productive.\u2019* The mirror reflects your current state: hair still disheveled, mascara still smudged, but at least you\u2019re one step closer to resembling a functional human being. The fluorescent light buzzes overhead, as if judging you.",
+  "inventory_remove": [],
+  "wear_remove": [
+    "pajama_pants",
+    "tank_top"
+  ],
+  "player_description_update": "You\u2019re standing in the bathroom wearing only a pair of black underwear. The cold tile beneath your feet is a stark contrast to the muggy air, and your reflection in the mirror is a masterpiece of *\u2018I overslept and now I\u2019m panicking.\u2019* Miso\u2019s judgmental gaze has intensified, if that\u2019s even possible. At least you\u2019re not wearing pajamas anymore\u2014progress, of a sort.",
+  "narrative_summary_update": "You\u2019re now in your underwear, and the bathroom feels even smaller. Miso\u2019s disapproval is a physical presence, and the clock is ticking louder than the fluorescent light.",
+  "new_item_definitions": {
+    "pajama_pants": {
+      "name": "faded blue flannel pajama pants",
+      "aliases": [
+        "pajama pants",
+        "pants",
+        "flannel pants"
+      ],
+      "description": "A pair of faded blue flannel pajama pants with a small hole near the left knee. They\u2019re soft from years of use, but the fabric is thin enough to betray the fact that you\u2019ve worn them far past their prime. The hole near the knee is a recent addition, courtesy of Miso\u2019s claws. They smell faintly of laundry detergent and regret.",
+      "is_carryable": true
+    },
+    "tank_top": {
+      "name": "stretched-out white tank top",
+      "aliases": [
+        "tank top",
+        "shirt",
+        "white tank"
+      ],
+      "description": "A white tank top that has seen better days. The fabric is stretched out at the neckline and under the arms, and there\u2019s a faint yellow stain near the hem\u2014coffee, maybe, or last week\u2019s takeout. It\u2019s the kind of shirt you wear when you\u2019ve given up on life, or at least on doing laundry. Miso has kneaded it into a lumpy mess, as if to emphasize its lack of dignity.",
+      "is_carryable": true
+    }
+  },
+  "inventory_add": [
+    "pajama_pants",
+    "tank_top"
+  ],
+  "item_visibility_update": {
+    "pajama_pants": true,
+    "tank_top": true
+  },
+  "room_add": [
+    {
+      "id": "pajama_pants",
+      "name": "faded blue flannel pajama pants",
+      "aliases": [
+        "pajama pants",
+        "pants",
+        "flannel pants"
+      ],
+      "description": "The pajama pants lie in a crumpled heap on the damp towel, as if they\u2019ve surrendered to the chaos of your morning. Miso has already begun to investigate, sniffing them with the disdain of a cat who knows he deserves better.",
+      "is_carryable": true,
+      "visible": true
+    },
+    {
+      "id": "tank_top",
+      "name": "stretched-out white tank top",
+      "aliases": [
+        "tank top",
+        "shirt",
+        "white tank"
+      ],
+      "description": "The tank top is draped over the pajama pants, its stretched-out neckline drooping like it\u2019s too tired to hold itself up. Miso has already claimed it as his next napping spot, judging by the way he\u2019s circling it.",
+      "is_carryable": true,
+      "visible": true
+    }
+  ],
+  "wear_add": [],
+  "update_description": {},
+  "current_room_base_description": "The bathroom is a cramped but functional space, its once-white tiles now tinged with the faintest yellow from years of steam and hard water. The air is thick with the scent of damp towels, mouthwash, and now, the faint musk of your discarded pajamas. The fluorescent light buzzes overhead, casting a harsh glow on the scene: your clothes in a heap, Miso\u2019s judgmental stare, and the ever-present reminder that you\u2019re running late.",
+  "room_remove": [],
+  "player_state": {
+    "current_room": "room_7269d1b0",
+    "inventory": [
+      "phone",
+      "pajama_pants",
+      "tank_top"
+    ],
+    "worn": []
+  },
+  "_usage": {
+    "input_tokens": 1617,
+    "output_tokens": 1115,
+    "total_tokens": 2732
+  }
+}
+

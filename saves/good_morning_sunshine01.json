@@ -1,0 +1,229 @@
+{
+  "narrative_thread": "The phone is now in your possession, though its battery life is precariously low.",
+  "blueprint": "The Bedroom connects to the Hallway. The Hallway connects to the Bathroom (east), Closet (west), and Stairs leading down to the Kitchen/Living Area. The Kitchen connects to the Backyard (via back door) and the Living Room. The Living Room connects to the Front Door (exit to the outside world). The Bathroom contains essential morning routine items. The Closet holds clothing and accessories.",
+  "meta": {
+    "total_tokens": 8167
+  },
+  "player": {
+    "current_room": "room_start",
+    "inventory": [
+      "pajamas",
+      "house_keys",
+      "phone"
+    ],
+    "worn": [],
+    "description": "",
+    "aliases": [
+      "me",
+      "self",
+      "player"
+    ]
+  },
+  "characters": {},
+  "rooms": {
+    "room_start": {
+      "id": "room_start",
+      "name": "Bedroom",
+      "description": "...\n\nYou can see here: bed, nightstand, glass of water, paperback novel, dresser, jewelry dish, framed photo, hairbrush, closet, Miso, alarm clock.",
+      "base_description": "...",
+      "exits": {
+        "east": "room_300cbb7a"
+      },
+      "items": [
+        "bed",
+        "nightstand",
+        "glass_of_water",
+        "paperback",
+        "dresser",
+        "jewelry_dish",
+        "photo",
+        "hairbrush",
+        "closet",
+        "miso",
+        "alarm_clock"
+      ],
+      "characters": [],
+      "visited": true
+    },
+    "room_300cbb7a": {
+      "id": "room_300cbb7a",
+      "name": "Unknown",
+      "description": null,
+      "base_description": null,
+      "exits": {
+        "west": "room_start"
+      },
+      "items": [],
+      "characters": [],
+      "visited": false
+    }
+  },
+  "items": {
+    "bed": {
+      "id": "bed",
+      "name": "bed",
+      "aliases": [
+        "mattress",
+        "sheets",
+        "blanket",
+        "pillow"
+      ],
+      "description": "A queen-sized bed with a slightly lumpy mattress, dressed in mismatched sheets and a comforter that's seen better days. The pillow is indented where your head was, and Miso has claimed the warm spot you left behind. The bed is unmade, as usual, with one corner of the fitted sheet stubbornly popped off the mattress.",
+      "carryable": false,
+      "visible": true
+    },
+    "nightstand": {
+      "id": "nightstand",
+      "name": "nightstand",
+      "aliases": [
+        "table",
+        "stand",
+        "bedside table"
+      ],
+      "description": "A small, wooden nightstand with a single drawer. The surface is a testament to your nightly routine: a glass of water (now room temperature), a charging phone, a tube of hand cream, and a bookmarked paperback novel. The drawer is slightly open, revealing a tangle of charging cables and a half-used pack of tissues.",
+      "carryable": false,
+      "visible": true
+    },
+    "phone": {
+      "id": "phone",
+      "name": "phone",
+      "aliases": [
+        "smartphone",
+        "cell phone",
+        "mobile",
+        "device"
+      ],
+      "description": "A slightly battered smartphone with a cracked corner on the screen. The case is a faded blue silicone, speckled with tiny scratches from daily use. The battery icon in the corner is a glaring red, warning you that it won't last much longer without a charge. The home screen is cluttered with app icons, most of which you haven't opened in months. There's a small sticker on the back, peeling at the edges, that reads \"World's Okayest Employee.\"",
+      "carryable": true,
+      "visible": true
+    },
+    "glass_of_water": {
+      "id": "glass_of_water",
+      "name": "glass of water",
+      "aliases": [
+        "water",
+        "glass",
+        "drink"
+      ],
+      "description": "A half-empty (or half-full, if you're feeling optimistic) glass of water. It's been sitting out overnight, so it's lost its chill and now tastes vaguely stale. The rim is smudged with your fingerprints, and there's a faint lipstick mark on one side.",
+      "carryable": true,
+      "visible": true
+    },
+    "paperback": {
+      "id": "paperback",
+      "name": "paperback novel",
+      "aliases": [
+        "book",
+        "novel",
+        "paperback"
+      ],
+      "description": "A well-loved paperback copy of 'The Night Circus' by Erin Morgenstern. The spine is creased, and the pages are slightly yellowed from being read and reread. A bookmark\u2014an old receipt from the coffee shop down the street\u2014protrudes about a third of the way through, marking your progress. The cover art is a swirl of red and black, depicting a circus tent under a starry sky.",
+      "carryable": true,
+      "visible": true
+    },
+    "dresser": {
+      "id": "dresser",
+      "name": "dresser",
+      "aliases": [
+        "chest",
+        "bureau",
+        "drawers"
+      ],
+      "description": "A sturdy wooden dresser with six drawers, each slightly ajar and overflowing with clothes. The top is a landscape of everyday life: a jewelry dish holding a few pairs of earrings and a tangled necklace, a small dish of loose change, a framed photo of you and your friends at a music festival, and a hairbrush with several strands of your hair still tangled in the bristles. A window above the dresser lets in a sliver of morning light.",
+      "carryable": false,
+      "visible": true
+    },
+    "jewelry_dish": {
+      "id": "jewelry_dish",
+      "name": "jewelry dish",
+      "aliases": [
+        "dish",
+        "tray",
+        "earrings dish"
+      ],
+      "description": "A small, ceramic dish shaped like a leaf, holding a few pairs of stud earrings, a silver chain necklace, and a single hoop earring whose mate is currently MIA. The dish is glazed in a muted green, and the edges are slightly chipped from years of use.",
+      "carryable": true,
+      "visible": true
+    },
+    "photo": {
+      "id": "photo",
+      "name": "framed photo",
+      "aliases": [
+        "photo",
+        "picture",
+        "frame"
+      ],
+      "description": "A 4x6 photo in a simple black frame, capturing a moment from last summer's music festival. You're in the center, arms slung around your two best friends, all of you grinning and slightly sunburned. The background is a blur of colorful tents and festival-goers. The photo is slightly dusty, as if it hasn't been touched in a while.",
+      "carryable": true,
+      "visible": true
+    },
+    "hairbrush": {
+      "id": "hairbrush",
+      "name": "hairbrush",
+      "aliases": [
+        "brush",
+        "comb"
+      ],
+      "description": "A plastic hairbrush with a few strands of your dark brown hair still tangled in the bristles. The handle is slightly sticky from hairspray, and the bristles are bent in a few places from years of use. It's seen better days, but it gets the job done.",
+      "carryable": true,
+      "visible": true
+    },
+    "closet": {
+      "id": "closet",
+      "name": "closet",
+      "aliases": [
+        "wardrobe",
+        "clothes closet"
+      ],
+      "description": "A walk-in closet that's seen better days. The door is slightly ajar, revealing a chaotic array of clothes on hangers, a pile of shoes in the corner, and a laundry basket overflowing with 'almost clean' items. A full-length mirror leans against one wall, its surface smudged with fingerprints. The air smells faintly of fabric softener and old perfume.",
+      "carryable": false,
+      "visible": true
+    },
+    "miso": {
+      "id": "miso",
+      "name": "Miso",
+      "aliases": [
+        "cat",
+        "calico",
+        "kitty"
+      ],
+      "description": "Miso is a calico cat with a patchwork of orange, black, and white fur. She's currently sprawled across your pillow, her tail flicking lazily as she watches you with an expression that's equal parts disdain and amusement. Her green eyes are half-lidded, as if she's already plotting how to trip you up today. She purrs softly as you look at her, but you know it's just a ploy to get extra treats later.",
+      "carryable": false,
+      "visible": true
+    },
+    "alarm_clock": {
+      "id": "alarm_clock",
+      "name": "alarm clock",
+      "aliases": [
+        "clock",
+        "alarm"
+      ],
+      "description": "A sleek, black alarm clock with a digital display. It\u2019s currently off, its screen dark and unassuming. The time reads 7:15 AM, though you\u2019re not sure if that\u2019s accurate\u2014you\u2019ve never bothered to set it properly. The snooze button is worn from overuse, a testament to your love-hate relationship with mornings.",
+      "carryable": true,
+      "visible": true
+    },
+    "pajamas": {
+      "id": "pajamas",
+      "name": "pajamas",
+      "aliases": [
+        "pjs",
+        "sleepwear",
+        "clothes"
+      ],
+      "description": "A set of soft, slightly worn pajamas: a faded gray tank top and matching shorts with tiny coffee cup prints. The fabric is thin from years of washing, and the shorts have a small hole near the hem. Comfortable, but not exactly office-appropriate.",
+      "carryable": false,
+      "visible": true
+    },
+    "house_keys": {
+      "id": "house_keys",
+      "name": "house keys",
+      "aliases": [
+        "keys",
+        "keychain"
+      ],
+      "description": "A small keychain holding your house key, car key, and a single, mysterious key you've never been able to identify. The keychain is a tiny, enamel cat charm\u2014Miso's namesake. The keys jingle softly as you move, a sound that's both comforting and a reminder of all the places you need to be today.",
+      "carryable": true,
+      "visible": true
+    }
+  }
+}

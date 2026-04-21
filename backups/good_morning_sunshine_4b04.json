@@ -1,0 +1,162 @@
+{
+  "narrative_thread": "You wake to the insistent buzzing of your alarm clock, its shrill cry piercing the quiet of your bedroom. The morning light filters through the blinds, casting faint stripes across the rumpled sheets. Another day, another dollar\u2014though, at this hour, the dollar feels more like a distant dream. Your calico cat, Miso, stretches languidly at the foot of the bed, her tail flicking with the kind of disdain only a cat can muster at the concept of mornings. Time to get up, unless you fancy explaining to your boss why you\u2019re late *again*. It is 7:00 AM on a weekday. You are running late\u2014again. Your goal is to get ready for work, feed Miso, and make it out the door before 8:00 AM. The house is quiet except for the hum of the refrigerator and the occasional creak of the floorboards. Miso is already judging your life choices.",
+  "blueprint": "The immediate area consists of: (1) Your bedroom, a cozy but cluttered space with a queen-sized bed, a dresser, and a nightstand. (2) The hallway, which leads to the bathroom to the north and the living room to the east. (3) The bathroom, small but functional, with a shower, sink, and mirror. (4) The living room, open and sunlit, connecting to the kitchen to the south. (5) The kitchen, where the coffee maker sits like a beacon of hope. (6) The front door, your ultimate escape route, located in the living room.",
+  "meta": {
+    "total_tokens": 2342
+  },
+  "player": {
+    "current_room": "room_start",
+    "inventory": [
+      "pajamas_01",
+      "underwear_01"
+    ],
+    "worn": [],
+    "description": "You are a mid-twenties woman with a lean, slightly sleep-deprived frame. Your dark brown hair is usually tied back in a messy bun by this hour, though right now it\u2019s a wild tangle from a night of tossing and turning. Your eyes, a warm hazel, are still heavy with sleep, and your skin has that just-woke-up pallor. You\u2019re wearing an oversized T-shirt that barely covers your thighs, and your feet are bare against the cool hardwood floor. Despite the chaos of the morning, there\u2019s a quiet determination in your posture\u2014you *will* make it to work on time today.",
+    "aliases": [
+      "me",
+      "self",
+      "player"
+    ]
+  },
+  "characters": {},
+  "rooms": {
+    "room_start": {
+      "id": "room_start",
+      "name": "Your Bedroom",
+      "description": "The bedroom is a sanctuary of soft chaos. The queen-sized bed, still unmade, dominates the space, its sheets tangled from a restless night. A dresser stands against one wall, its surface cluttered with an assortment of lotions, hair ties, and a half-empty glass of water. The nightstand holds a lamp, a book you\u2019ve been meaning to finish, and your phone, which is currently blaring an alarm that sounds suspiciously like a dying seagull. A window with half-drawn blinds lets in a sliver of morning light, illuminating the dust motes dancing in the air. The door to the hallway stands slightly ajar, offering a glimpse of the rest of the house.",
+      "base_description": "The bedroom is a sanctuary of soft chaos. The queen-sized bed, still unmade, dominates the space, its sheets tangled from a restless night. A dresser stands against one wall, its surface cluttered with an assortment of lotions, hair ties, and a half-empty glass of water. The nightstand holds a lamp, a book you\u2019ve been meaning to finish, and your phone, which is currently blaring an alarm that sounds suspiciously like a dying seagull. A window with half-drawn blinds lets in a sliver of morning light, illuminating the dust motes dancing in the air. The door to the hallway stands slightly ajar, offering a glimpse of the rest of the house.",
+      "exits": {
+        "north": "room_76ee0f3c",
+        "east": "room_6edaea8a"
+      },
+      "items": [
+        "bed_01",
+        "dresser_01",
+        "nightstand_01",
+        "phone_01",
+        "miso_01",
+        "window_01"
+      ],
+      "characters": [],
+      "visited": true
+    },
+    "room_76ee0f3c": {
+      "id": "room_76ee0f3c",
+      "name": "Unknown",
+      "description": null,
+      "base_description": "...",
+      "exits": {
+        "south": "room_start"
+      },
+      "items": [],
+      "characters": [],
+      "visited": false
+    },
+    "room_6edaea8a": {
+      "id": "room_6edaea8a",
+      "name": "Unknown",
+      "description": null,
+      "base_description": "...",
+      "exits": {
+        "west": "room_start"
+      },
+      "items": [],
+      "characters": [],
+      "visited": false
+    }
+  },
+  "items": {
+    "bed_01": {
+      "id": "bed_01",
+      "name": "bed",
+      "aliases": [
+        "queen bed",
+        "mattress",
+        "sheets"
+      ],
+      "description": "The bed is a mess of rumpled sheets and a single, slightly flattened pillow. The comforter has slid halfway onto the floor, as if you spent the night wrestling with it. A faint scent of lavender lingers\u2014your attempt at aromatherapy, though it\u2019s mostly just masking the smell of sleep and last night\u2019s takeout. Miso has claimed the foot of the bed as her throne, her calico fur a stark contrast against the pale blue sheets.",
+      "carryable": false,
+      "visible": true
+    },
+    "dresser_01": {
+      "id": "dresser_01",
+      "name": "dresser",
+      "aliases": [
+        "chest of drawers",
+        "wooden dresser"
+      ],
+      "description": "A sturdy but slightly scuffed wooden dresser, its surface a testament to your morning routine. A clutter of lotions, a hairbrush with a few strands of your hair still tangled in it, and a small dish holding earrings and a watch. The top drawer is slightly open, revealing a tangle of socks and underwear. The mirror above it reflects a version of you that looks even more exhausted than you feel.",
+      "carryable": false,
+      "visible": true
+    },
+    "nightstand_01": {
+      "id": "nightstand_01",
+      "name": "nightstand",
+      "aliases": [
+        "bedside table",
+        "small table"
+      ],
+      "description": "A modest nightstand, its surface barely visible beneath the detritus of your nighttime habits. A lamp with a slightly crooked shade casts a dim glow, though it\u2019s currently overshadowed by the blinding light of your phone\u2019s alarm. Next to the lamp sits a paperback novel with a bookmark stuck halfway through\u2014you\u2019ve been \u2018almost finished\u2019 with it for weeks. A half-empty glass of water, now lukewarm, completes the tableau.",
+      "carryable": false,
+      "visible": true
+    },
+    "phone_01": {
+      "id": "phone_01",
+      "name": "phone",
+      "aliases": [
+        "smartphone",
+        "cell phone",
+        "alarm"
+      ],
+      "description": "Your smartphone, a sleek but slightly battered device, is currently blaring an alarm that sounds like a digital rendition of a car horn. The screen is locked, displaying the time\u20147:00 AM\u2014and a notification from your boss: \u2018Don\u2019t forget the 8:30 meeting!\u2019 The battery icon glows ominously at 23%. You really need to charge this thing.",
+      "carryable": true,
+      "visible": true
+    },
+    "miso_01": {
+      "id": "miso_01",
+      "name": "Miso",
+      "aliases": [
+        "cat",
+        "calico cat",
+        "your cat"
+      ],
+      "description": "Miso is a calico cat with a coat that looks like it was painted by an artist who couldn\u2019t decide on a color scheme. Her fur is a patchwork of orange, black, and white, and her eyes are an unsettlingly bright green. Right now, she\u2019s perched at the foot of the bed, tail flicking with the slow, deliberate rhythm of a creature who knows she\u2019s in charge. She regards you with a mix of affection and judgment, as if to say, \u2018You\u2019re late. Again. I expected better.\u2019",
+      "carryable": false,
+      "visible": true
+    },
+    "window_01": {
+      "id": "window_01",
+      "name": "window",
+      "aliases": [
+        "blinds",
+        "morning light"
+      ],
+      "description": "A standard-issue bedroom window, its blinds half-drawn to let in a sliver of morning sunlight. The blinds are slightly dusty, and one of the slats is bent, casting a crooked shadow across the floor. Outside, the world is just waking up\u2014birds chirp, a neighbor\u2019s dog barks, and the distant hum of traffic promises the chaos of the day ahead.",
+      "carryable": false,
+      "visible": true
+    },
+    "pajamas_01": {
+      "id": "pajamas_01",
+      "name": "pajamas",
+      "aliases": [
+        "pjs",
+        "sleep shirt",
+        "oversized t-shirt"
+      ],
+      "description": "An oversized, faded T-shirt that you\u2019ve had since college. It\u2019s soft from countless washes and features a barely legible graphic of a band you don\u2019t listen to anymore. The shirt barely covers your thighs, and the fabric is slightly wrinkled from sleep. It\u2019s comfortable, but not exactly office-appropriate.",
+      "carryable": true,
+      "visible": true
+    },
+    "underwear_01": {
+      "id": "underwear_01",
+      "name": "underwear",
+      "aliases": [
+        "panties",
+        "briefs"
+      ],
+      "description": "A pair of basic cotton underwear, slightly stretched out from wear. They\u2019re comfortable, if unremarkable, and currently the only thing you\u2019re wearing beneath your pajama shirt. You make a mental note to do laundry soon\u2014this is the last clean pair.",
+      "carryable": true,
+      "visible": true
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "player": {
+    "current_room": "room_start",
+    "inventory": []
+  },
+  "rooms": {
+    "room_start": {
+      "id": "room_start",
+      "name": "The Stone Circle",
+      "description": "You stand within a circle of ancient monoliths. The air is cold. A path leads North.",
+      "exits": {
+        "north": "stub_01",
+        "south": null,
+        "east": null,
+        "west": null
+      },
+      "items": [
+        "item_rock"
+      ],
+      "visited": true
+    },
+    "stub_01": {
+      "id": "stub_01",
+      "name": "Simulated Room",
+      "description": "This is a simulated room description because the API key is missing.",
+      "exits": {
+        "south": "room_start"
+      },
+      "items": [],
+      "visited": false
+    }
+  },
+  "items": {
+    "item_rock": {
+      "id": "item_rock",
+      "name": "smooth rock",
+      "description": "A perfectly round, smooth grey stone.",
+      "carryable": true
+    }
+  },
+  "narrative_thread": ""
+}

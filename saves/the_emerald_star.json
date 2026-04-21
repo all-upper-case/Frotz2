@@ -1,0 +1,640 @@
+{
+  "narrative_log": [
+    "The neon glow of the Emerald Star pulses like a heartbeat against the city skyline, its promise of sin and spectacle drawing you in like a moth to flame. Tonight, like every night, the club hums with the electric thrum of bass-heavy music, the clink of glasses, and the low murmur of patrons hungry for distraction. You step into the warm, dimly lit embrace of the backstage area, the scent of perfume, sweat, and expensive liquor thick in the air. This is your kingdom\u2014your stage. Time to make it rain. Jade begins her shift at the Emerald Star, freshly changed into her stage outfit. The club is alive with activity: dancers preparing, bartenders mixing drinks, and guests filtering in. Her goal tonight is to earn as much as possible through stage performances, private dances, and tips. Management expects professionalism, but the regulars know her by name\u2014and her reputation. The immediate priority is to head to the dressing room to finalize her look before her set, but the allure of the casino floor or a quick drink at the bar might tempt her first.",
+    "The player examined the Polaroids pinned to the mirror, revealing a mix of candid and staged moments from the club, including a notable photo of a high roller from last Friday and a snapshot of Jade and another dancer named Lila.",
+    "Player checked their phone and found two messages: one from **Marcus** outlining tonight\u2019s schedule (stage at 9:30 PM, VIP private dance at 10:15 PM with *Mr. V*), and another from **Lila** warning that *Mr. V* is already in the club and that the new bouncer, *Darius*, is strict. The phone (32% battery) is now in the player\u2019s inventory. New characters introduced: **Marcus**, **Lila**, **Mr. V**, and **Darius**. New digital items created: *text_marcus_schedule* and *text_lila_tips*.",
+    "Player examined the two unread text messages on their phone\u2014one from **Marcus** outlining tonight\u2019s schedule and a VIP private dance with *Mr. V*, and another from **Lila** warning about *Mr. V*\u2019s mood and the new bouncer, *Darius*. Both messages are now read and accessible in the phone\u2019s inventory. The phone remains unlocked and at 32% battery."
+  ],
+  "blueprint": "1) VIP Lounge (east of casino floor, adjacent to private booths) \u2013 **COMPLETED** (ID: room_e51c65c0). 2) Main Bar (west of casino floor) \u2013 Planned (ID: room_1932343b). 3) Slot Machine Alcove (south of casino floor) \u2013 Planned (ID: room_aa3f5ad3). 4) Private Booths (east of VIP Lounge) \u2013 **NEW PLANNED** (ID: room_9c7d2e4f). 5) Exterior Patio (south of Slot Machine Alcove) \u2013 **NEW PLANNED** (ID: room_3a8b1c2d).",
+  "meta": {
+    "total_tokens": 29679
+  },
+  "player": {
+    "current_room": "room_e51c65c0",
+    "inventory": [
+      "i_53668d",
+      "i_3e4edb",
+      "i_295ed4"
+    ],
+    "worn": [
+      "i_3b78cd",
+      "i_2a875a",
+      "i_b3b9f7",
+      "i_1a243f",
+      "i_5ddcb1",
+      "i_f62457",
+      "i_1db4a3"
+    ],
+    "description": "You are Jade\u201421 years old, with skin like polished milk chocolate, a cascade of kinky black hair that tumbles past your shoulders, and curves that could make a saint sin. Tonight, you\u2019re dressed to kill in a shimmering emerald-green corset that cinches your waist and pushes your breasts up like an offering. The fabric clings to your hips, where a matching thong disappears beneath the swell of your ass. Your legs are sheathed in fishnet stockings, held up by delicate garters, and your feet are strapped into sky-high stilettos that click with every step. A choker with a tiny emerald pendant rests against your throat, and your wrists jingle with a stack of thin silver bangles. Your makeup is flawless: smoky eyes, glossy lips, and just enough glitter to catch the light like a disco ball.",
+    "aliases": [
+      "me",
+      "self",
+      "player"
+    ]
+  },
+  "characters": {},
+  "rooms": {
+    "room_start": {
+      "id": "room_start",
+      "name": "Dressing Room",
+      "description": "The dressing room is a sanctuary of controlled chaos\u2014a cramped but cozy space that smells of hairspray, leather, and the faint metallic tang of costume jewelry. The walls are lined with vanities, their surfaces cluttered with makeup palettes, half-empty bottles of perfume, and curling Polaroids of dancers in various states of undress. A full-length mirror dominates the far wall, its edges framed by flickering string lights. To the north, a heavy black curtain sways slightly, hinting at the stage beyond. A narrow door to the east leads to the backstage hallway, while the hum of the club\u2019s ventilation system fills the silence between songs.\n\nYou can see here: dressing room mirror, vanity table, makeup bag, perfume bottle, locker, wallet, black curtain, dressing room stool, polaroids.",
+      "base_description": "The dressing room is a sanctuary of controlled chaos\u2014a cramped but cozy space that smells of hairspray, leather, and the faint metallic tang of costume jewelry. The walls are lined with vanities, their surfaces cluttered with makeup palettes, half-empty bottles of perfume, and curling Polaroids of dancers in various states of undress. A full-length mirror dominates the far wall, its edges framed by flickering string lights. To the north, a heavy black curtain sways slightly, hinting at the stage beyond. A narrow door to the east leads to the backstage hallway, while the hum of the club\u2019s ventilation system fills the silence between songs.",
+      "exits": {
+        "north": "room_89431027",
+        "east": "room_046566e8"
+      },
+      "items": [
+        "i_92c478",
+        "i_87bbd7",
+        "i_fe2ba2",
+        "i_767c63",
+        "i_89594d",
+        "i_0852b2",
+        "i_c4d728",
+        "i_f62e87",
+        "i_1b0c56"
+      ],
+      "characters": [],
+      "visited": true
+    },
+    "room_89431027": {
+      "id": "room_89431027",
+      "name": "Unknown",
+      "description": null,
+      "base_description": "...",
+      "exits": {
+        "south": "room_start"
+      },
+      "items": [],
+      "characters": [],
+      "visited": false
+    },
+    "room_046566e8": {
+      "id": "room_046566e8",
+      "name": "Backstage Hallway",
+      "description": "The backstage hallway stretches before you, a narrow corridor bathed in the dim, moody glow of flickering track lighting. The air is thick with the scent of sweat, leather, and the faintest hint of cigarette smoke that clings to the walls despite the club\u2019s no-smoking policy. The walls are lined with glossy posters of past headliners\u2014some faded, others still vibrant\u2014each one a testament to the Emerald Star\u2019s long history of sin and spectacle. A few of the posters bear signatures in bold marker, scrawled across cleavage or lips in a way that feels both intimate and performative. The floor is covered in a worn, industrial-grade carpet that muffles your footsteps, the texture rough beneath your heels. To the **west**, the hallway opens back into the dressing room, the warm hum of conversation and the occasional burst of laughter spilling out. To the **east**, the corridor narrows slightly, the air growing heavier with the bass-heavy thump of music and the distant clink of glasses\u2014this must be the way to the private dance booths. A heavy fire door to the **south** stands slightly ajar, revealing a sliver of the casino floor beyond: the flash of neon, the chatter of dealers, and the occasional whoop of a winner. A small, battered table sits against the north wall, its surface littered with crumpled napkins, a half-empty bottle of cheap vodka, and a single, unlit cigarette left to curl in on itself like a forgotten secret. The hallway feels alive, pulsing with the energy of the club just beyond its walls, but here, in this liminal space, it\u2019s as if time moves a little slower\u2014just enough to catch your breath before the next performance.\n\nYou can see here: battered table, peeled poster, vodka bottle, unlit cigarette, fire door.",
+      "base_description": "The backstage hallway stretches before you, a narrow corridor bathed in the dim, moody glow of flickering track lighting. The air is thick with the scent of sweat, leather, and the faintest hint of cigarette smoke that clings to the walls despite the club\u2019s no-smoking policy. The walls are lined with glossy posters of past headliners\u2014some faded, others still vibrant\u2014each one a testament to the Emerald Star\u2019s long history of sin and spectacle. A few of the posters bear signatures in bold marker, scrawled across cleavage or lips in a way that feels both intimate and performative. The floor is covered in a worn, industrial-grade carpet that muffles your footsteps, the texture rough beneath your heels. To the **west**, the hallway opens back into the dressing room, the warm hum of conversation and the occasional burst of laughter spilling out. To the **east**, the corridor narrows slightly, the air growing heavier with the bass-heavy thump of music and the distant clink of glasses\u2014this must be the way to the private dance booths. A heavy fire door to the **south** stands slightly ajar, revealing a sliver of the casino floor beyond: the flash of neon, the chatter of dealers, and the occasional whoop of a winner. A small, battered table sits against the north wall, its surface littered with crumpled napkins, a half-empty bottle of cheap vodka, and a single, unlit cigarette left to curl in on itself like a forgotten secret. The hallway feels alive, pulsing with the energy of the club just beyond its walls, but here, in this liminal space, it\u2019s as if time moves a little slower\u2014just enough to catch your breath before the next performance.",
+      "exits": {
+        "west": "room_start",
+        "east": "room_593f33c6",
+        "south": "room_5a0ff8a2"
+      },
+      "items": [
+        "i_9cb461",
+        "i_1b5424",
+        "i_c0022d",
+        "i_489b53",
+        "i_9e9c60"
+      ],
+      "characters": [],
+      "visited": false
+    },
+    "room_593f33c6": {
+      "id": "room_593f33c6",
+      "name": "Unknown",
+      "description": null,
+      "base_description": null,
+      "exits": {
+        "west": "room_046566e8"
+      },
+      "items": [],
+      "characters": [],
+      "visited": false
+    },
+    "room_5a0ff8a2": {
+      "id": "room_5a0ff8a2",
+      "name": "Casino Floor",
+      "description": "The heavy fire door swings open with a groan, revealing the **casino floor**\u2014a cavernous, high-ceilinged space bathed in the sickly glow of neon and the flicker of slot machines. The air is thick with the scent of cigar smoke, spilled whiskey, and the faint metallic tang of coins sliding across green felt. The hum of conversation is a low, constant drone, punctuated by the sharp *clack* of poker chips, the rhythmic *shuffle* of cards, and the occasional burst of laughter or groan of disappointment. The walls are lined with dark wood paneling, their surfaces gleaming under the dim, amber lighting, while the ceiling is a maze of exposed pipes and industrial vents, their hum adding to the white noise of the room. A massive, chandelier-like fixture hangs over the center of the floor, its crystal droplets refracting the neon in a dizzying display of color\u2014reds, blues, and purples bleeding together like a bruise. To the **north**, the hallway yawns back toward the backstage area, its dim glow a stark contrast to the casino\u2019s garish brilliance. To the **east**, a roped-off section marks the VIP lounge, its plush velvet curtains swaying slightly as a bouncer\u2014*Darius*, broad-shouldered and expressionless\u2014stands guard, arms crossed. The **west** side of the room is dominated by a long, mahogany bar, its surface polished to a mirror shine, lined with patrons perched on leather stools. Behind it, a bartender in a crisp vest moves with practiced ease, mixing drinks with a flourish. The **south** wall is a wall of slot machines, their screens flashing with enticing promises of jackpots and bonuses, while a few scattered high-top tables dot the space between the bar and the gaming pits. A few dealers in sharp tuxedos work the tables, their voices smooth and practiced as they call out bets and wins. The floor itself is a patchwork of plush carpeting and polished hardwood, the transition between the two marked by a thin, brass strip that runs the length of the room. The energy here is electric, a mix of desperation and exhilaration, the kind of place where fortunes are made and lost in the blink of an eye. You can feel the weight of eyes on you as you step inside\u2014some appreciative, some calculating, all of them sizing you up in that way people do when they\u2019re deciding whether you\u2019re a mark or a player.\n\nYou can see here: brass rail, velvet rope, poker chip, slot machine, bouncer.",
+      "base_description": "The heavy fire door swings open with a groan, revealing the **casino floor**\u2014a cavernous, high-ceilinged space bathed in the sickly glow of neon and the flicker of slot machines. The air is thick with the scent of cigar smoke, spilled whiskey, and the faint metallic tang of coins sliding across green felt. The hum of conversation is a low, constant drone, punctuated by the sharp *clack* of poker chips, the rhythmic *shuffle* of cards, and the occasional burst of laughter or groan of disappointment. The walls are lined with dark wood paneling, their surfaces gleaming under the dim, amber lighting, while the ceiling is a maze of exposed pipes and industrial vents, their hum adding to the white noise of the room. A massive, chandelier-like fixture hangs over the center of the floor, its crystal droplets refracting the neon in a dizzying display of color\u2014reds, blues, and purples bleeding together like a bruise. To the **north**, the hallway yawns back toward the backstage area, its dim glow a stark contrast to the casino\u2019s garish brilliance. To the **east**, a roped-off section marks the VIP lounge, its plush velvet curtains swaying slightly as a bouncer\u2014*Darius*, broad-shouldered and expressionless\u2014stands guard, arms crossed. The **west** side of the room is dominated by a long, mahogany bar, its surface polished to a mirror shine, lined with patrons perched on leather stools. Behind it, a bartender in a crisp vest moves with practiced ease, mixing drinks with a flourish. The **south** wall is a wall of slot machines, their screens flashing with enticing promises of jackpots and bonuses, while a few scattered high-top tables dot the space between the bar and the gaming pits. A few dealers in sharp tuxedos work the tables, their voices smooth and practiced as they call out bets and wins. The floor itself is a patchwork of plush carpeting and polished hardwood, the transition between the two marked by a thin, brass strip that runs the length of the room. The energy here is electric, a mix of desperation and exhilaration, the kind of place where fortunes are made and lost in the blink of an eye. You can feel the weight of eyes on you as you step inside\u2014some appreciative, some calculating, all of them sizing you up in that way people do when they\u2019re deciding whether you\u2019re a mark or a player.",
+      "exits": {
+        "north": "room_046566e8",
+        "east": "room_e51c65c0",
+        "west": "room_1932343b",
+        "south": "room_aa3f5ad3"
+      },
+      "items": [
+        "i_d70c6e",
+        "i_df7c24",
+        "i_94ed62",
+        "i_239270",
+        "i_a330cd"
+      ],
+      "characters": [],
+      "visited": false
+    },
+    "room_e51c65c0": {
+      "id": "room_e51c65c0",
+      "name": "VIP Lounge",
+      "description": "The air here is thicker, heavier\u2014like the weight of money and secrets pressed into the very walls. The VIP Lounge is a dimly lit sanctuary of indulgence, its atmosphere a deliberate contrast to the chaotic energy of the casino floor. Plush, deep-red velvet drapes hang from floor-to-ceiling windows, their edges frayed just enough to suggest exclusivity rather than neglect. The walls are lined with dark mahogany paneling, inlaid with subtle gold filigree that catches the low light of the room\u2019s ambient glow. A long, curved bar of polished obsidian dominates the far wall, its surface reflecting the flicker of candlelight from a series of brass candelabras. The scent of aged whiskey, Cuban cigars, and something faintly floral\u2014like expensive perfume\u2014lingers in the air, mingling with the occasional whiff of leather from the high-backed booths that line the perimeter. The floor is a mosaic of black and white marble, cool and smooth beneath your feet, while the ceiling is a domed expanse of mirrored tiles, refracting the dim light into a thousand tiny stars. A low, rhythmic hum of conversation drifts through the space, punctuated by the occasional clink of a glass or the deep, resonant laugh of a man who\u2019s used to getting what he wants. To the **west**, the lounge opens back into the casino floor, the velvet rope and brass rail marking the boundary between the two worlds. To the **east**, a heavy, soundproofed door\u2014its surface etched with the club\u2019s logo\u2014leads to the private booths, where the real business of the Emerald Star is conducted. A few scattered high-top tables dot the space, their surfaces gleaming under the soft glow of the candelabras, while a single, unoccupied grand piano sits in the corner, its lid closed as if waiting for the right moment to be coaxed into song. The energy here is different\u2014quieter, more deliberate. This is where deals are made, where secrets are traded, and where the real players of the Emerald Star come to unwind. You can feel the weight of expectation in the air, the unspoken understanding that this is a place for the elite, the powerful, the ones who don\u2019t just play the game but own it.\n\nYou can see here: obsidian bar, brass candelabra, high-backed booth, grand piano, soundproofed door.",
+      "base_description": "The air here is thicker, heavier\u2014like the weight of money and secrets pressed into the very walls. The VIP Lounge is a dimly lit sanctuary of indulgence, its atmosphere a deliberate contrast to the chaotic energy of the casino floor. Plush, deep-red velvet drapes hang from floor-to-ceiling windows, their edges frayed just enough to suggest exclusivity rather than neglect. The walls are lined with dark mahogany paneling, inlaid with subtle gold filigree that catches the low light of the room\u2019s ambient glow. A long, curved bar of polished obsidian dominates the far wall, its surface reflecting the flicker of candlelight from a series of brass candelabras. The scent of aged whiskey, Cuban cigars, and something faintly floral\u2014like expensive perfume\u2014lingers in the air, mingling with the occasional whiff of leather from the high-backed booths that line the perimeter. The floor is a mosaic of black and white marble, cool and smooth beneath your feet, while the ceiling is a domed expanse of mirrored tiles, refracting the dim light into a thousand tiny stars. A low, rhythmic hum of conversation drifts through the space, punctuated by the occasional clink of a glass or the deep, resonant laugh of a man who\u2019s used to getting what he wants. To the **west**, the lounge opens back into the casino floor, the velvet rope and brass rail marking the boundary between the two worlds. To the **east**, a heavy, soundproofed door\u2014its surface etched with the club\u2019s logo\u2014leads to the private booths, where the real business of the Emerald Star is conducted. A few scattered high-top tables dot the space, their surfaces gleaming under the soft glow of the candelabras, while a single, unoccupied grand piano sits in the corner, its lid closed as if waiting for the right moment to be coaxed into song. The energy here is different\u2014quieter, more deliberate. This is where deals are made, where secrets are traded, and where the real players of the Emerald Star come to unwind. You can feel the weight of expectation in the air, the unspoken understanding that this is a place for the elite, the powerful, the ones who don\u2019t just play the game but own it.",
+      "exits": {
+        "west": "room_5a0ff8a2",
+        "east": "room_46a4f6a3"
+      },
+      "items": [
+        "i_e2460f",
+        "i_6f95ed",
+        "i_8bd63b",
+        "i_17bc37",
+        "i_816d84"
+      ],
+      "characters": [],
+      "visited": false
+    },
+    "room_1932343b": {
+      "id": "room_1932343b",
+      "name": "Unknown",
+      "description": null,
+      "base_description": null,
+      "exits": {
+        "east": "room_5a0ff8a2"
+      },
+      "items": [],
+      "characters": [],
+      "visited": false
+    },
+    "room_aa3f5ad3": {
+      "id": "room_aa3f5ad3",
+      "name": "Unknown",
+      "description": null,
+      "base_description": null,
+      "exits": {
+        "north": "room_5a0ff8a2"
+      },
+      "items": [],
+      "characters": [],
+      "visited": false
+    },
+    "room_46a4f6a3": {
+      "id": "room_46a4f6a3",
+      "name": "Unknown",
+      "description": null,
+      "base_description": null,
+      "exits": {
+        "west": "room_e51c65c0"
+      },
+      "items": [],
+      "characters": [],
+      "visited": false
+    }
+  },
+  "items": {
+    "i_3b78cd": {
+      "id": "i_3b78cd",
+      "name": "emerald-green corset",
+      "aliases": [
+        "emerald-green corset",
+        "corset",
+        "green corset",
+        "top"
+      ],
+      "description": "A tight, boned corset in deep emerald green, its satin fabric shimmering under the dressing room lights. It\u2019s designed to accentuate your waist and lift your breasts, leaving little to the imagination. The laces in the back are tied just loose enough to let you breathe\u2014barely.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_2a875a": {
+      "id": "i_2a875a",
+      "name": "matching thong",
+      "aliases": [
+        "matching thong",
+        "thong",
+        "panties",
+        "green thong",
+        "underwear"
+      ],
+      "description": "A scrap of emerald-green fabric that barely covers anything, the thong is more for show than function. The back is a thin string that disappears between your cheeks, while the front is just enough to tease. It matches your corset perfectly.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_b3b9f7": {
+      "id": "i_b3b9f7",
+      "name": "fishnet stockings",
+      "aliases": [
+        "fishnet stockings",
+        "stockings",
+        "fishnets",
+        "nets"
+      ],
+      "description": "Sheer black fishnet stockings that cling to your legs like a second skin. The diamond patterns stretch and flex as you move, and the seams run straight up the back of your thighs, disappearing beneath your corset. They\u2019re held up by delicate garters.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_1a243f": {
+      "id": "i_1a243f",
+      "name": "garter straps",
+      "aliases": [
+        "garter straps",
+        "garters",
+        "straps",
+        "garter clips"
+      ],
+      "description": "Thin, elastic straps that hold up your fishnet stockings. They\u2019re attached to the corset with tiny silver clips, the straps running down the outside of your thighs. The garters are more decorative than functional, but they add a touch of vintage burlesque to your look.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_5ddcb1": {
+      "id": "i_5ddcb1",
+      "name": "stiletto heels",
+      "aliases": [
+        "stiletto heels",
+        "heels",
+        "shoes",
+        "stilettos",
+        "pumps"
+      ],
+      "description": "A pair of sky-high stilettos in black patent leather, the heels so thin they could double as ice picks. The straps wrap around your ankles, buckling securely, and the soles are just thick enough to keep you from toppling over. They make your legs look endless and your ass even more pronounced.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_f62457": {
+      "id": "i_f62457",
+      "name": "emerald choker",
+      "aliases": [
+        "emerald choker",
+        "choker",
+        "necklace",
+        "pendant"
+      ],
+      "description": "A delicate silver choker with a single emerald pendant that rests in the hollow of your throat. The stone catches the light with every movement, drawing attention to your neckline. It\u2019s simple but elegant, the perfect finishing touch to your outfit.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_1db4a3": {
+      "id": "i_1db4a3",
+      "name": "silver bangles",
+      "aliases": [
+        "silver bangles",
+        "bangles",
+        "bracelets",
+        "jewelry"
+      ],
+      "description": "A stack of thin silver bangles that jingle softly with every movement. They\u2019re lightweight and comfortable, adding a bit of noise to your walk\u2014something the regulars seem to enjoy. The bangles are engraved with tiny, intricate patterns that catch the light.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_92c478": {
+      "id": "i_92c478",
+      "name": "dressing room mirror",
+      "aliases": [
+        "dressing room mirror",
+        "mirror",
+        "full-length mirror",
+        "vanity mirror"
+      ],
+      "description": "A large, full-length mirror framed by flickering string lights. The glass is smudged with fingerprints and old makeup, but it still reflects your image perfectly. The lights cast a warm, flattering glow, making the dressing room feel almost magical.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_87bbd7": {
+      "id": "i_87bbd7",
+      "name": "vanity table",
+      "aliases": [
+        "vanity table",
+        "vanity",
+        "table",
+        "makeup table"
+      ],
+      "description": "A cluttered vanity table littered with makeup, brushes, and half-empty bottles of perfume. The surface is a mess of lipsticks, eyeliners, and loose glitter, but everything has its place. A small stool sits in front of it, upholstered in worn velvet.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_fe2ba2": {
+      "id": "i_fe2ba2",
+      "name": "makeup bag",
+      "aliases": [
+        "makeup bag",
+        "bag",
+        "cosmetics bag",
+        "makeup"
+      ],
+      "description": "A sleek black makeup bag filled with all the essentials: foundation, concealer, eyeshadow palettes, mascara, lipstick, and a dozen other tools of the trade. The bag is slightly open, revealing a mess of brushes and compacts inside.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_767c63": {
+      "id": "i_767c63",
+      "name": "perfume bottle",
+      "aliases": [
+        "perfume bottle",
+        "perfume",
+        "scent",
+        "spray",
+        "bottle"
+      ],
+      "description": "A small, elegant bottle of perfume with a gold spray nozzle. The liquid inside is a deep amber color, and the scent is a mix of vanilla, jasmine, and something darker\u2014musky and intoxicating. The label reads 'Midnight Temptation.'",
+      "carryable": true,
+      "visible": true
+    },
+    "i_89594d": {
+      "id": "i_89594d",
+      "name": "locker",
+      "aliases": [
+        "locker",
+        "metal locker",
+        "storage",
+        "personal locker"
+      ],
+      "description": "A metal locker with a combination lock, tucked into the corner of the dressing room. It\u2019s where you keep your personal belongings\u2014phone, wallet, and a change of clothes for after your shift. The locker is slightly dented, a relic from the club\u2019s many years of use.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_53668d": {
+      "id": "i_53668d",
+      "name": "phone",
+      "aliases": [
+        "smartphone",
+        "cell phone",
+        "phone",
+        "mobile"
+      ],
+      "description": "A sleek smartphone with a cracked screen, now unlocked and displaying a dimmed home screen. The background is a selfie of you in full stage makeup, winking at the camera. The battery icon shows **32%**, and the notification bar lists two unread messages: one from **Manager: Marcus** and another from **Lila**. The phone is warm to the touch, its edges slightly worn from frequent use. A faint smudge of glitter from your fingers glints on the screen.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_0852b2": {
+      "id": "i_0852b2",
+      "name": "wallet",
+      "aliases": [
+        "wallet",
+        "money",
+        "purse",
+        "billfold"
+      ],
+      "description": "A small, worn leather wallet containing your ID, a few credit cards, and a wad of cash\u2014mostly ones and fives from last night\u2019s tips. There\u2019s also a condom tucked into one of the slots, just in case. The wallet is stuffed into the back of your locker.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_c4d728": {
+      "id": "i_c4d728",
+      "name": "black curtain",
+      "aliases": [
+        "black curtain",
+        "curtain",
+        "stage curtain",
+        "fabric"
+      ],
+      "description": "A heavy black curtain that separates the dressing room from the stage wings. It sways slightly, as if moved by a draft, and the faint thump of bass from the club\u2019s sound system vibrates through the fabric. The curtain is slightly frayed at the edges, a testament to years of use.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_f62e87": {
+      "id": "i_f62e87",
+      "name": "dressing room stool",
+      "aliases": [
+        "dressing room stool",
+        "stool",
+        "seat",
+        "chair"
+      ],
+      "description": "A small, upholstered stool in front of the vanity table. The velvet is worn and slightly stained, but it\u2019s comfortable enough to sit on while you touch up your makeup. The stool wobbles slightly if you shift your weight too much.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_1b0c56": {
+      "id": "i_1b0c56",
+      "name": "polaroids",
+      "aliases": [
+        "polaroids",
+        "photos",
+        "pictures",
+        "polaroid shots"
+      ],
+      "description": "A cluster of Polaroid photographs pinned to the edge of the dressing room mirror. The images capture a mix of candid and staged moments from the club\u2019s backstage life and performances. Some show dancers mid-laugh, others are posed shots with exaggerated expressions. One Polaroid stands out\u2014a blurry shot of a well-dressed man in a suit, his face half-hidden in shadow, timestamped *\u2018Last Friday, 2:17 AM\u2019*. Another is a close-up of a dancer\u2019s hand tracing the rim of a whiskey glass. One Polaroid is tucked behind the others\u2014a shot of you and another dancer, arms linked, with the caption *\u2018Jade & Lila\u2014Queens of the Star\u2019* scrawled in glitter pen at the bottom. The edges of the photos are curled from humidity, and the colors are slightly faded, but the energy in each one is still vibrant.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_3e4edb": {
+      "id": "i_3e4edb",
+      "name": "text_marcus_schedule",
+      "aliases": [
+        "text_marcus_schedule",
+        "marcus' message",
+        "schedule text",
+        "manager's text"
+      ],
+      "description": "A message from **Marcus**, the club\u2019s manager. The text is concise, with a no-nonsense tone that matches his reputation for efficiency. The timestamp reads *\u20188:47 PM\u2019*\u2014sent just a few minutes ago. The content is straightforward: *\u2018Jade\u2014stage at 9:30 PM sharp. VIP private dance at 10:15 PM with Mr. V. Don\u2019t keep him waiting. He\u2019s already in the club, and he\u2019s asking for you by name. Make it count.\u2019* The message carries the unspoken pressure of management expectations, but there\u2019s also a hint of trust\u2014Marcus knows you\u2019ll deliver. The text is unread until now, and the \u2018delivered\u2019 notification is still visible beneath it.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_295ed4": {
+      "id": "i_295ed4",
+      "name": "text_lila_tips",
+      "aliases": [
+        "text_lila_tips",
+        "lila's message",
+        "warning text",
+        "dancer's text"
+      ],
+      "description": "A message from **Lila**, your fellow dancer and confidante. Her tone is a mix of casual familiarity and urgency, the kind of warning only someone who\u2019s been in the trenches with you would send. The timestamp reads *\u20188:52 PM\u2019*\u2014just five minutes after Marcus\u2019s text, as if she wanted to make sure you got the heads-up before stepping on stage. The content reads: *\u2018Hey girl, just a heads-up\u2014Mr. V is already here, and he\u2019s in one of his moods. Also, watch out for the new bouncer, Darius. He\u2019s strict AF and doesn\u2019t mess around. Saw him turn away a regular for \u201cinappropriate behavior\u201d (read: the guy tried to touch me without a dance). Stay sharp.\u2019* The message is still marked as unread, and the \u2018delivered\u2019 notification lingers beneath it. There\u2019s a subtext of camaraderie here\u2014Lila\u2019s looking out for you, but she\u2019s also venting, her frustration with Darius bleeding through.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_9cb461": {
+      "id": "i_9cb461",
+      "name": "battered table",
+      "aliases": [
+        "battered table",
+        "table",
+        "napkin table",
+        "drink table",
+        "hallway table"
+      ],
+      "description": "A small, wobbly table pushed against the north wall. Its surface is sticky with spilled drinks and littered with crumpled napkins, a half-empty bottle of vodka (label peeled halfway off), and a single, unlit cigarette. The wood is scarred with initials and what looks like a hastily carved heart. It smells faintly of stale alcohol and ash.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_1b5424": {
+      "id": "i_1b5424",
+      "name": "peeled poster",
+      "aliases": [
+        "peeled poster",
+        "poster",
+        "sapphire poster",
+        "peeled wall art",
+        "dancer poster"
+      ],
+      "description": "A glossy poster of last year\u2019s headliner, *Sapphire*, hangs slightly askew on the wall. The edges are curling, and one corner has been peeled back to reveal the dull gray of the wall beneath. Sapphire\u2019s signature\u2014written in bold, looping script\u2014reads, *'To the girls who keep the fire burning. \u2014Sapphire'* beneath a lipstick kiss. The poster smells faintly of old glue and perfume.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_c0022d": {
+      "id": "i_c0022d",
+      "name": "vodka bottle",
+      "aliases": [
+        "vodka bottle",
+        "bottle",
+        "vodka",
+        "liquor bottle",
+        "ketel one"
+      ],
+      "description": "A half-empty bottle of *Ketel One* sits on the battered table, its label partially peeled away to reveal the glossy white underneath. The cap is loose, and the liquid inside sloshes slightly as you move. A few drops have spilled onto the table, leaving a sticky residue. The bottle feels cool to the touch, and the sharp, anise-like scent of vodka lingers in the air around it.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_489b53": {
+      "id": "i_489b53",
+      "name": "unlit cigarette",
+      "aliases": [
+        "unlit cigarette",
+        "cigarette",
+        "smoke",
+        "butt",
+        "unlit smoke"
+      ],
+      "description": "A single, unlit cigarette lies abandoned on the table, its tip slightly crushed as if someone had started to light it before changing their mind. The paper is slightly yellowed, and the filter is stained with what looks like lipstick. It smells faintly of tobacco and something sweet, like vanilla or cherry.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_9e9c60": {
+      "id": "i_9e9c60",
+      "name": "fire door",
+      "aliases": [
+        "fire door",
+        "door",
+        "casino door",
+        "south door",
+        "exit door"
+      ],
+      "description": "A heavy metal fire door stands slightly ajar to the south, its surface scratched and dented from years of use. A small, red 'EXIT' sign glows dimly above it, casting a faint crimson hue on the floor. Through the gap, you can see a sliver of the casino floor: the flash of neon, the flicker of slot machines, and the occasional glint of a high roller\u2019s watch. The door creaks slightly when touched, and the air that seeps through is cooler, carrying the sharp tang of cigarette smoke and the low murmur of dealers calling out bets.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_d70c6e": {
+      "id": "i_d70c6e",
+      "name": "brass rail",
+      "aliases": [
+        "brass rail",
+        "rail",
+        "brass strip",
+        "floor marking"
+      ],
+      "description": "A thin, polished brass strip runs along the floor, marking the transition between the plush carpet and the hardwood near the bar. It\u2019s cool to the touch and slightly worn in places, as if countless shoes and heels have scuffed it over the years. A few faint initials are scratched into the metal near the edge\u2014*\u2018M.V. + L.\u2019*\u2014likely the work of a drunken patron or a bored dealer.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_df7c24": {
+      "id": "i_df7c24",
+      "name": "velvet rope",
+      "aliases": [
+        "velvet rope",
+        "rope",
+        "vip rope",
+        "crimson barrier"
+      ],
+      "description": "A thick, crimson velvet rope hangs between two polished brass stands, cordoning off the VIP lounge. The fabric is plush and slightly worn, the nap flattened in places where hands have gripped it over the years. The rope sways gently, as if disturbed by the movement of air from the lounge beyond. A small, discreet plaque on one of the stands reads *\u2018VIP Access Only\u2019* in elegant script.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_94ed62": {
+      "id": "i_94ed62",
+      "name": "poker chip",
+      "aliases": [
+        "poker chip",
+        "chip",
+        "black chip",
+        "gambling token"
+      ],
+      "description": "A single, black poker chip lies abandoned on the edge of a high-top table, half-hidden beneath a crumpled napkin. It\u2019s cool and smooth to the touch, its surface etched with the Emerald Star\u2019s logo\u2014a stylized star with a serpent coiled around it. The chip feels heavier than it should, as if it\u2019s made of something denser than plastic. A faint scent of cigar smoke clings to it, as though it\u2019s been handled by someone who\u2019s been chain-smoking all night.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_239270": {
+      "id": "i_239270",
+      "name": "slot machine",
+      "aliases": [
+        "slot machine",
+        "machine",
+        "slot",
+        "broken slot"
+      ],
+      "description": "One of the slot machines near the south wall is slightly more worn than the others, its screen flickering intermittently as if struggling to stay alive. The buttons are sticky with what might be spilled soda or something stickier, and the tray at the bottom is empty except for a single, dusty quarter. A handwritten note taped to the side reads *\u2018Out of Order (Probably)\u2019* in smudged ink. Despite its state, the machine occasionally lets out a weak, electronic *ding*, as if protesting its neglect.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_a330cd": {
+      "id": "i_a330cd",
+      "name": "bouncer",
+      "aliases": [
+        "bouncer",
+        "darius",
+        "bouncer",
+        "security",
+        "big man"
+      ],
+      "description": "Darius, the new bouncer, is a mountain of a man\u2014easily 6\u20195\u201d with shoulders so broad they look like they could block out the sun. His dark skin is stretched tight over corded muscle, and his bald head gleams under the casino lights. He wears a tailored black suit that does little to hide his physique, and his expression is unreadable, his eyes scanning the room with the calm precision of someone who\u2019s seen it all. A small, wireless earpiece curls around his ear, and his hands are clasped loosely in front of him, fingers twitching slightly as if itching for action. He doesn\u2019t look at you directly, but you can feel his awareness of you, like a predator tracking prey without giving itself away.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_e2460f": {
+      "id": "i_e2460f",
+      "name": "obsidian bar",
+      "aliases": [
+        "obsidian bar",
+        "bar",
+        "obsidian counter",
+        "black bar",
+        "lounge bar"
+      ],
+      "description": "A sleek, curved bar of polished obsidian, its surface cool and smooth to the touch. The edge is slightly beveled, catching the dim light of the room in a way that makes it shimmer like liquid night. Behind it, a wall of mirrored shelves reflects an array of high-end liquors\u2014whiskeys aged in oak, rare tequilas, and bottles of champagne that cost more than most people\u2019s rent. A few crystal decanters sit half-full, their contents amber and inviting. The bar is manned by a bartender in a crisp black vest, his movements precise and unhurried, as if he\u2019s performed this dance a thousand times before. He doesn\u2019t look up as you enter, but you can tell he\u2019s aware of your presence\u2014his fingers pause for just a second on the glass he\u2019s polishing, a silent acknowledgment.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_6f95ed": {
+      "id": "i_6f95ed",
+      "name": "brass candelabra",
+      "aliases": [
+        "brass candelabra",
+        "candelabra",
+        "brass light",
+        "taper candle",
+        "candle holder"
+      ],
+      "description": "A tall, ornate candelabra of polished brass, its surface etched with intricate patterns of vines and leaves. Three black taper candles burn atop it, their flames casting long, dancing shadows across the walls. The wax drips slowly, pooling at the base in small, hardened rivulets. The scent of beeswax mingles with the other aromas of the lounge, adding to the sense of old-world luxury. If you listen closely, you can hear the faint *crackle* of the flames, a quiet counterpoint to the low murmur of conversation.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_8bd63b": {
+      "id": "i_8bd63b",
+      "name": "high-backed booth",
+      "aliases": [
+        "high-backed booth",
+        "booth",
+        "leather seat",
+        "vip seat",
+        "private booth"
+      ],
+      "description": "A deep, U-shaped booth upholstered in buttery-soft leather the color of aged bourbon. The seats are plush and inviting, worn just enough to suggest comfort rather than neglect. A small, dimmed lamp sits on the table in front of it, casting a warm, intimate glow over the space. The table itself is a slab of dark walnut, its surface polished to a mirror shine, with a single ashtray\u2014crystal, monogrammed with the club\u2019s logo\u2014sitting in the center. A few empty glasses and a half-finished bottle of whiskey suggest the booth was recently occupied, though its current inhabitants have vanished, leaving behind only the faintest trace of their presence: the lingering scent of cologne, the ghost of a laugh, the memory of a deal made in hushed tones.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_17bc37": {
+      "id": "i_17bc37",
+      "name": "grand piano",
+      "aliases": [
+        "grand piano",
+        "piano",
+        "black piano",
+        "grand",
+        "music"
+      ],
+      "description": "A stunning, black grand piano sits in the far corner of the lounge, its polished surface gleaming under the soft light. The lid is closed, but you can tell it\u2019s well-maintained\u2014no dust, no scratches, just the quiet promise of music waiting to be unleashed. The bench is tucked neatly beneath the keyboard, its velvet cushion a deep emerald green, matching the club\u2019s signature color. If you were to lift the lid, you\u2019d find the keys pristine, the strings tuned to perfection, ready to fill the room with something far more elegant than the usual hum of conversation. For now, though, it remains silent, a sleeping giant in the corner, biding its time.",
+      "carryable": true,
+      "visible": true
+    },
+    "i_816d84": {
+      "id": "i_816d84",
+      "name": "soundproofed door",
+      "aliases": [
+        "soundproofed door",
+        "door",
+        "private door",
+        "mahogany door",
+        "booth door"
+      ],
+      "description": "A heavy, reinforced door of dark mahogany, its surface etched with the club\u2019s logo\u2014a stylized emerald star, wreathed in vines. The door is slightly ajar, revealing only a sliver of darkness beyond, as if teasing you with the promise of what lies on the other side. The edges are lined with thick, soundproofing material, muffling whatever might be happening in the private booths beyond. A small, discreet plaque beside the door reads *\u2018Private Booths \u2013 Members Only,\u2019* though the warning feels more like an invitation than a deterrent. If you press your ear to the door, you might catch the faintest murmur of voices, the clink of ice in a glass, or the low, rhythmic thump of music\u2014something far more exclusive than what\u2019s playing out on the main floor.",
+      "carryable": true,
+      "visible": true
+    }
+  },
+  "pending_notifications": []
+}

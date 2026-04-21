@@ -1,0 +1,1848 @@
+--- 2026-02-10 16:52:54 [GENESIS] ---
+[SYSTEM]: 
+You are the 'Great Creator' for a high-fidelity Interactive Fiction (IF) engine. 
+Your task is to translate a high-level LORE BIBLE into a concrete starting state for a text adventure.
+
+INSTRUCTIONS:
+1. STYLE: Emulate the highest quality 80s/90s text adventures (Infocom/Legend). Use evocative, second-person ("You") narration.
+2. CONSISTENCY: Ensure the starting room and items are 100% faithful to the genre and tone in the Lore Bible.
+3. STRUCTURE: 
+   - 'intro_text': A moody, 1-2 paragraph opening that sets the scene before describing the room.
+   - 'starting_room': A detailed location with a name, sensory-rich description, and items.
+   - 'new_exits': Directions (n, s, e, w, u, d) that lead to UNEXPLORED areas.
+
+LORE BIBLE:
+GENRE: Slice of Life.
+SETTING: A suburban house in Somewhere, USA. The year is 2005.
+PLAYER CHARACTER: A professional young woman, moderately attractive.
+PLAYER GOAL: Get ready for work and make it out the door.
+TONE: Dry humor, casual, classic modern Interactive Fiction style, sarcastic at times.
+
+OUTPUT VALID JSON ONLY:
+{
+  "intro_text": "The opening narrative crawl.",
+  "narrative_thread": "A hidden internal summary of the plot state to start with.",
+  "starting_room": {
+    "name": "Starting Location Name",
+    "description": "Full sensory description of the starting room.",
+    "items": [
+        {
+          "id": "item_id", 
+          "name": "display name", 
+          "description": "The text seen when the player 'examines' this item.", 
+          "is_carryable": true
+        }
+    ],
+    "new_exits": ["north", "east"] 
+  },
+  "starting_inventory": [
+      {
+        "id": "item_id", 
+        "name": "display name", 
+        "description": "Detailed examine text.", 
+        "is_carryable": true
+      }
+  ]
+}
+
+[USER]: Initiate World Genesis.
+[OUTPUT]: {
+  "intro_text": "The shrill scream of your alarm clock jolts you from a dream about spreadsheets and lukewarm coffee. You peel one eye open, squinting at the glowing digits of your nightstand clock: 7:15 AM. Work starts at 8:30, but the snooze button has already claimed its first victim this morning. The air smells faintly of last night\u2019s takeout and the faint, lingering despair of a Sunday evening spent pretending you\u2019d \u2018get your life together.\u2019 Welcome to Monday. Time to adult.",
+  "narrative_thread": "The player character has overslept slightly and is now in a race against the clock to get ready for work. The morning routine is fraught with minor obstacles\u2014missing keys, a finicky coffee maker, and the ever-present temptation to crawl back into bed. The player must navigate their suburban home, gathering necessary items and making small decisions that will determine whether they arrive at work on time, frazzled, or fashionably late (but with coffee).",
+  "starting_room": {
+    "name": "Your Bedroom",
+    "description": "Your bedroom is a testament to half-finished personal projects and the eternal struggle between \u2018I\u2019ll deal with this later\u2019 and \u2018I need to Marie Kondo my life.\u2019 The queen-sized bed, unmade since yesterday (or was it the day before?), dominates the room, its rumpled sheets a siren song calling you back to unconsciousness. A thin layer of dust coats the dresser, where a framed photo of you and your college friends\u2014grinning drunkenly at a tailgate\u2014serves as a reminder that your social life has devolved into \u2018liking\u2019 their Facebook posts. The blinds are drawn, but a sliver of sunlight sneaks through, illuminating a path of discarded clothes leading to the door. To the east, the hallway beckons, while the north wall is adorned with a closet that may or may not contain something presentable to wear.",
+    "items": [
+      {
+        "id": "alarm_clock",
+        "name": "alarm clock",
+        "description": "A sleek, black digital alarm clock with a snooze button that has seen more action than a Netflix \u2018Skip Intro\u2019 button. The time reads 7:15, though the red \u2018AM\u2019 indicator is flickering ominously, as if questioning your life choices. The alarm is still blaring, a relentless BEEP-BEEP-BEEP that feels like it\u2019s drilling directly into your skull.",
+        "is_carryable": true
+      },
+      {
+        "id": "phone",
+        "name": "your phone",
+        "description": "A flip phone\u2014yes, you\u2019re still clinging to the early 2000s like a lifeline\u2014rests on the nightstand. The screen is cracked in one corner, a battle scar from that time you dropped it while trying to silence the alarm. There\u2019s a single unread text from your mom: \u2018Don\u2019t forget to eat breakfast! Love you!\u2019 You can\u2019t decide if that\u2019s sweet or passive-aggressive.",
+        "is_carryable": true
+      },
+      {
+        "id": "pajamas",
+        "name": "your pajamas",
+        "description": "A set of flannel pajamas adorned with tiny, dancing tacos. They\u2019re comfortable, if not exactly office-appropriate. The elastic waistband has given up on life, and the left pant leg is slightly longer than the right, giving you a lopsided gait when you walk. You\u2019ve had these since college, and they\u2019ve survived three moves, two breakups, and one questionable decision to wear them to a gas station at 2 AM.",
+        "is_carryable": true
+      },
+      {
+        "id": "laundry_pile",
+        "name": "pile of laundry",
+        "description": "A precarious mountain of clothes teeters on the floor near the closet. It\u2019s a mix of \u2018maybe clean, maybe not\u2019 and \u2018definitely dirty but I\u2019ll pretend I didn\u2019t see the stain.\u2019 A lone sock peeks out from the top, as if waving for help. You\u2019re pretty sure there\u2019s a work-appropriate outfit buried in there somewhere, but excavating it might require a hazmat suit.",
+        "is_carryable": false
+      },
+      {
+        "id": "bed",
+        "name": "bed",
+        "description": "Your bed is a sanctuary of chaos. The sheets are tangled, the pillows are askew, and the comforter has migrated to the foot of the bed, as if it, too, is trying to escape the morning. The mattress sags slightly in the middle, a silent testament to the countless hours you\u2019ve spent here, staring at the ceiling and wondering how you ended up in this particular version of adulthood. The alarm clock\u2019s incessant beeping is the only thing keeping you from diving back in.",
+        "is_carryable": false
+      }
+    ],
+    "new_exits": [
+      "north",
+      "east"
+    ]
+  },
+  "starting_inventory": [
+    {
+      "id": "keys",
+      "name": "your keys",
+      "description": "A jingling set of keys attached to a keychain shaped like a slice of pizza. The keys to your car, your house, and your mailbox are all here, along with a single mystery key that you\u2019ve never identified but are too afraid to throw away. The pizza keychain is slightly greasy, a relic from a late-night drive-thru run that you don\u2019t remember but clearly enjoyed.",
+      "is_carryable": true
+    }
+  ]
+}
+
+--- 2026-02-10 16:53:23 [GENESIS] ---
+[SYSTEM]: 
+You are the 'Great Creator' for a high-fidelity Interactive Fiction (IF) engine. 
+Your task is to translate a high-level LORE BIBLE into a concrete starting state for a text adventure.
+
+INSTRUCTIONS:
+1. STYLE: Emulate the highest quality 80s/90s text adventures (Infocom/Legend). Use evocative, second-person ("You") narration.
+2. CONSISTENCY: Ensure the starting room and items are 100% faithful to the genre and tone in the Lore Bible.
+3. STRUCTURE: 
+   - 'intro_text': A moody, 1-2 paragraph opening that sets the scene before describing the room.
+   - 'starting_room': A detailed location with a name, sensory-rich description, and items.
+   - 'new_exits': Directions (n, s, e, w, u, d) that lead to UNEXPLORED areas.
+
+LORE BIBLE:
+GENRE: Slice of Life.
+SETTING: A suburban house in Somewhere, USA. The year is 2005.
+PLAYER CHARACTER: A professional young woman, moderately attractive.
+PLAYER GOAL: Get ready for work and make it out the door.
+TONE: Dry humor, casual, classic modern Interactive Fiction style, sarcastic at times.
+
+OUTPUT VALID JSON ONLY:
+{
+  "intro_text": "The opening narrative crawl.",
+  "narrative_thread": "A hidden internal summary of the plot state to start with.",
+  "starting_room": {
+    "name": "Starting Location Name",
+    "description": "Full sensory description of the starting room.",
+    "items": [
+        {
+          "id": "item_id", 
+          "name": "display name", 
+          "description": "The text seen when the player 'examines' this item.", 
+          "is_carryable": true
+        }
+    ],
+    "new_exits": ["north", "east"] 
+  },
+  "starting_inventory": [
+      {
+        "id": "item_id", 
+        "name": "display name", 
+        "description": "Detailed examine text.", 
+        "is_carryable": true
+      }
+  ]
+}
+
+[USER]: Initiate World Genesis.
+[OUTPUT]: {
+  "intro_text": "The shrill screech of your alarm clock pierces the early morning haze, dragging you from the clutches of a dream you can no longer recall. The glow of 6:17 AM seeps through the blinds, casting long, lazy stripes across the room. You groan, rolling over to silence the offending noise. Another day, another dollar\u2014or so the saying goes. Time to face the music: coffee, commute, and the inevitable Monday morning meeting you\u2019ve already forgotten the agenda for. But first, you\u2019ve got to get out of bed. The floor is cold, the air is still, and the snooze button is calling your name like a siren song. You resist. Barely.",
+  "narrative_thread": "The player character has overslept slightly, adding a layer of urgency to the morning routine. The goal is to navigate the mundane tasks of getting ready for work while dealing with minor obstacles (missing keys, a finicky coffee maker, a closet full of questionable fashion choices). The tone is wry and observational, with a focus on the small, relatable frustrations of daily life. The player\u2019s inventory starts with only the clothes on their back\u2014literally.",
+  "starting_room": {
+    "name": "Your Bedroom",
+    "description": "The bedroom is a shrine to procrastination and half-finished projects. The queen-sized bed, unmade since... well, you can\u2019t remember, dominates the space. A nightstand clutters the left side, its surface a graveyard of empty water glasses, a dog-eared paperback, and a lamp that\u2019s seen better days. Across the room, a dresser stands guard over a pile of laundry\u2014clean, but definitely not folded. The closet door hangs slightly ajar, revealing a dark abyss of questionable fashion choices. A faint hum of traffic drifts in from the open window, mingling with the distant bark of a neighbor\u2019s dog. The carpet beneath your feet is plush but worn, a testament to years of pacing during late-night phone calls and existential crises. To the east, a door leads to the hallway, while a window to the north offers a view of the backyard\u2014currently just a sea of dew-covered grass and a trampoline that hasn\u2019t been used since 2003.",
+    "items": [
+      {
+        "id": "unmade_bed",
+        "name": "unmade bed",
+        "description": "A queen-sized disaster zone of tangled sheets, a lumpy pillow, and a comforter that\u2019s seen better days. The mattress sags slightly in the middle, a silent testament to years of restless sleep. A single sock clings to the edge, as if it\u2019s too exhausted to fall to the floor. You could make it, but why bother? It\u2019ll just get unmade again tonight.",
+        "is_carryable": false
+      },
+      {
+        "id": "nightstand",
+        "name": "nightstand",
+        "description": "A wooden nightstand, its surface scarred by rings from forgotten drinks and the occasional hot coffee mug. The top drawer is slightly open, revealing a tangle of charging cables, a half-empty bottle of hand lotion, and a single, sad AA battery. On top, a stack of unread magazines teeters precariously next to a lamp with a shade that\u2019s slightly askew. A framed photo of you and your college friends\u2014circa 2001\u2014gathers dust next to a glass of water that\u2019s been there so long it\u2019s probably a science experiment now.",
+        "is_carryable": false
+      },
+      {
+        "id": "laundry_pile",
+        "name": "pile of laundry",
+        "description": "A mountain of clean-but-unfolded clothes, rising like a textile Everest from the floor. Most of it is work-appropriate, but there\u2019s a suspicious amount of yoga pants and oversized sweatshirts mixed in. A lone sock peeks out from the top, daring you to find its mate. The pile smells faintly of fabric softener and regret.",
+        "is_carryable": false
+      },
+      {
+        "id": "closet_door",
+        "name": "closet door",
+        "description": "A bi-fold closet door, slightly ajar, revealing a dark and mysterious interior. The door itself is a relic of the 90s, with a faux wood finish that\u2019s seen better days. A single shoelace dangles from the handle, as if someone\u2014or something\u2014tried to escape but gave up halfway. The closet beckons, but you\u2019re not sure you\u2019re ready to face what\u2019s inside.",
+        "is_carryable": false
+      },
+      {
+        "id": "alarm_clock",
+        "name": "alarm clock",
+        "description": "A digital alarm clock, its red numbers glowing 6:18 AM with the urgency of a countdown to doom. The plastic casing is yellowed with age, and the snooze button is worn smooth from overuse. The alarm is currently silenced, but the memory of its shrill cry still echoes in your skull. A thin layer of dust coats the top, interrupted only by a single fingerprint\u2014yours, from when you smacked it into submission a few minutes ago.",
+        "is_carryable": true
+      },
+      {
+        "id": "window",
+        "name": "window",
+        "description": "A large window, its blinds half-open, offering a view of the backyard. The glass is slightly fogged from the morning chill, and a thin layer of pollen dusts the sill. Outside, the world is still waking up: birds chirp lazily, a squirrel darts across the lawn, and the neighbor\u2019s dog barks at nothing in particular. The window is locked, but the latch looks like it hasn\u2019t been tested in years.",
+        "is_carryable": false
+      }
+    ],
+    "new_exits": [
+      "east"
+    ]
+  },
+  "starting_inventory": [
+    {
+      "id": "pajamas",
+      "name": "pajamas",
+      "description": "A set of well-worn flannel pajamas, their once-vibrant plaid pattern now faded to a muted blur. The pants are slightly too long, pooling around your ankles, and the shirt has a small coffee stain near the hem\u2014courtesy of last night\u2019s late-night snack. They\u2019re comfortable, but not exactly office-appropriate. The fabric smells faintly of lavender detergent and the faintest hint of desperation.",
+      "is_carryable": false
+    },
+    {
+      "id": "phone",
+      "name": "cell phone",
+      "description": "A flip phone, its silver exterior scratched from years of being tossed into purses and dropped onto nightstands. The screen displays a single notification: \"1 New Voicemail.\" The battery icon is at 42%, which is either a blessing or a curse\u2014you haven\u2019t decided yet. The phone is silent, but you can feel its judgmental gaze, as if it\u2019s disappointed you haven\u2019t upgraded to a smartphone yet.",
+      "is_carryable": true
+    }
+  ]
+}
+
+--- 2026-02-10 16:54:04 [DM] ---
+[SYSTEM]: 
+You are the 'Dungeon Master' (DM) for a classic Interactive Fiction game.
+You interpret user inputs and narrate the results based on the world state and lore.
+
+YOUR CONTEXT:
+- Lore Bible: GENRE: Slice of Life.
+SETTING: A suburban house in Somewhere, USA. The year is 2005.
+PLAYER CHARACTER: A professional young woman, moderately attractive.
+PLAYER GOAL: Get ready for work and make it out the door.
+TONE: Dry humor, casual, classic modern Interactive Fiction style, sarcastic at times.
+- Narrative Thread: The shrill screech of your alarm clock pierces the early morning haze, dragging you from the clutches of a dream you can no longer recall. The glow of 6:17 AM seeps through the blinds, casting long, lazy stripes across the room. You groan, rolling over to silence the offending noise. Another day, another dollar—or so the saying goes. Time to face the music: coffee, commute, and the inevitable Monday morning meeting you’ve already forgotten the agenda for. But first, you’ve got to get out of bed. The floor is cold, the air is still, and the snooze button is calling your name like a siren song. You resist. Barely. The player character has overslept slightly, adding a layer of urgency to the morning routine. The goal is to navigate the mundane tasks of getting ready for work while dealing with minor obstacles (missing keys, a finicky coffee maker, a closet full of questionable fashion choices). The tone is wry and observational, with a focus on the small, relatable frustrations of daily life. The player’s inventory starts with only the clothes on their back—literally.
+- Current Room State: {"id": "room_start", "name": "Your Bedroom", "description": "The bedroom is a shrine to procrastination and half-finished projects. The queen-sized bed, unmade since... well, you can\u2019t remember, dominates the space. A nightstand clutters the left side, its surface a graveyard of empty water glasses, a dog-eared paperback, and a lamp that\u2019s seen better days. Across the room, a dresser stands guard over a pile of laundry\u2014clean, but definitely not folded. The closet door hangs slightly ajar, revealing a dark abyss of questionable fashion choices. A faint hum of traffic drifts in from the open window, mingling with the distant bark of a neighbor\u2019s dog. The carpet beneath your feet is plush but worn, a testament to years of pacing during late-night phone calls and existential crises. To the east, a door leads to the hallway, while a window to the north offers a view of the backyard\u2014currently just a sea of dew-covered grass and a trampoline that hasn\u2019t been used since 2003.", "exits": {"east": "room_2886c631"}, "items": ["unmade_bed", "nightstand", "laundry_pile", "closet_door", "alarm_clock", "window"], "visited": true}
+- Player Inventory: [{"id": "pajamas", "name": "pajamas", "description": "A set of well-worn flannel pajamas, their once-vibrant plaid pattern now faded to a muted blur. The pants are slightly too long, pooling around your ankles, and the shirt has a small coffee stain near the hem\u2014courtesy of last night\u2019s late-night snack. They\u2019re comfortable, but not exactly office-appropriate. The fabric smells faintly of lavender detergent and the faintest hint of desperation.", "carryable": false}, {"id": "phone", "name": "cell phone", "description": "A flip phone, its silver exterior scratched from years of being tossed into purses and dropped onto nightstands. The screen displays a single notification: \"1 New Voicemail.\" The battery icon is at 42%, which is either a blessing or a curse\u2014you haven\u2019t decided yet. The phone is silent, but you can feel its judgmental gaze, as if it\u2019s disappointed you haven\u2019t upgraded to a smartphone yet.", "carryable": true}]
+
+YOUR INSTRUCTIONS:
+1. PARSING: Interpret intent (n, s, e, w, x, i, l, or complex actions like 'search the desk').
+2. NARRATION:
+   - Use second-person ("You"). 
+   - If an action is impossible, explain why in-character (e.g., "The door is rusted shut; your strength is not enough.").
+   - If an action is successful, describe the sensory result.
+3. STATE UPDATES:
+   - If the player takes an item: Put its ID in 'inventory_add' and 'room_remove'.
+   - If they drop it: Put it in 'inventory_remove' and 'room_add'.
+   - If an item's state changes (e.g., 'sharpen sword'): Update its 'update_description'.
+4. NARRATIVE THREAD:
+   - Use 'narrative_summary_update' to summarize major developments for the Architect's future use.
+
+OUTPUT VALID JSON ONLY:
+{
+  "narrative": "The text the player sees.",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [],
+  "room_remove": [],
+  "update_description": { "item_id": "New description string" },
+  "narrative_summary_update": "Brief update on plot/world state."
+}
+
+[USER]: PLAYER ACTION: look out window
+[OUTPUT]: {
+  "narrative": "You shuffle over to the window, the carpet muffling your steps, and peer out into the backyard. The world outside is bathed in that peculiar early-morning light\u2014soft, golden, and entirely too cheerful for this hour. The dew-covered grass glistens like someone sprinkled it with cheap glitter, and the trampoline in the corner of the yard sags under the weight of its own irrelevance. A robin hops across the lawn, completely unaware of the existential dread creeping into your bones. Beyond the fence, the neighbor\u2019s dog\u2014some kind of terrier mix\u2014is already at it, barking at a squirrel like it\u2019s his job. The squirrel, for its part, looks thoroughly unimpressed. You sigh. Even nature is judging your life choices today.",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [],
+  "room_remove": [],
+  "update_description": {},
+  "narrative_summary_update": "Player observed the backyard, reinforcing the mundane, slightly melancholic tone of the morning."
+}
+
+--- 2026-02-10 16:57:14 [DM] ---
+[SYSTEM]: 
+You are the 'Dungeon Master' (DM) for a classic Interactive Fiction game.
+You interpret user inputs and narrate the results based on the world state and lore.
+
+YOUR CONTEXT:
+- Lore Bible: GENRE: Slice of Life.
+SETTING: A suburban house in Somewhere, USA. The year is 2005.
+PLAYER CHARACTER: A professional young woman, moderately attractive.
+PLAYER GOAL: Get ready for work and make it out the door.
+TONE: Dry humor, casual, classic modern Interactive Fiction style, sarcastic at times.
+- Narrative Thread: Player observed the backyard, reinforcing the mundane, slightly melancholic tone of the morning.
+- Current Room State: {"id": "room_start", "name": "Your Bedroom", "description": "The bedroom is a shrine to procrastination and half-finished projects. The queen-sized bed, unmade since... well, you can\u2019t remember, dominates the space. A nightstand clutters the left side, its surface a graveyard of empty water glasses, a dog-eared paperback, and a lamp that\u2019s seen better days. Across the room, a dresser stands guard over a pile of laundry\u2014clean, but definitely not folded. The closet door hangs slightly ajar, revealing a dark abyss of questionable fashion choices. A faint hum of traffic drifts in from the open window, mingling with the distant bark of a neighbor\u2019s dog. The carpet beneath your feet is plush but worn, a testament to years of pacing during late-night phone calls and existential crises. To the east, a door leads to the hallway, while a window to the north offers a view of the backyard\u2014currently just a sea of dew-covered grass and a trampoline that hasn\u2019t been used since 2003.", "exits": {"east": "room_2886c631"}, "items": ["unmade_bed", "nightstand", "laundry_pile", "closet_door", "alarm_clock", "window"], "visited": true}
+- Player Inventory: [{"id": "pajamas", "name": "pajamas", "description": "A set of well-worn flannel pajamas, their once-vibrant plaid pattern now faded to a muted blur. The pants are slightly too long, pooling around your ankles, and the shirt has a small coffee stain near the hem\u2014courtesy of last night\u2019s late-night snack. They\u2019re comfortable, but not exactly office-appropriate. The fabric smells faintly of lavender detergent and the faintest hint of desperation.", "carryable": false}, {"id": "phone", "name": "cell phone", "description": "A flip phone, its silver exterior scratched from years of being tossed into purses and dropped onto nightstands. The screen displays a single notification: \"1 New Voicemail.\" The battery icon is at 42%, which is either a blessing or a curse\u2014you haven\u2019t decided yet. The phone is silent, but you can feel its judgmental gaze, as if it\u2019s disappointed you haven\u2019t upgraded to a smartphone yet.", "carryable": true}]
+
+YOUR INSTRUCTIONS:
+1. PARSING: Interpret intent (n, s, e, w, x, i, l, or complex actions like 'search the desk').
+2. NARRATION:
+   - Use second-person ("You"). 
+   - If an action is impossible, explain why in-character (e.g., "The door is rusted shut; your strength is not enough.").
+   - If an action is successful, describe the sensory result.
+3. STATE UPDATES:
+   - If the player takes an item: Put its ID in 'inventory_add' and 'room_remove'.
+   - If they drop it: Put it in 'inventory_remove' and 'room_add'.
+   - If an item's state changes (e.g., 'sharpen sword'): Update its 'update_description'.
+4. NARRATIVE THREAD:
+   - Use 'narrative_summary_update' to summarize major developments for the Architect's future use.
+
+OUTPUT VALID JSON ONLY:
+{
+  "narrative": "The text the player sees.",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [],
+  "room_remove": [],
+  "update_description": { "item_id": "New description string" },
+  "narrative_summary_update": "Brief update on plot/world state."
+}
+
+[USER]: PLAYER ACTION: x paperback
+[OUTPUT]: {
+  "narrative": "You pick up the dog-eared paperback from the nightstand, its spine cracked from too many late-night reading sessions. The cover is faded, but you can still make out the title: *The Art of Procrastination: A Guide to Getting Nothing Done*. The pages are filled with your own scribbled notes in the margins\u2014mostly variations of \"I\u2019ll do this tomorrow\" and \"This is fine.\" The book falls open to a well-worn page, as if it\u2019s judging you for still not having finished it after all these months. The scent of old paper and faint coffee stains lingers in the air.",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [],
+  "room_remove": [],
+  "update_description": {},
+  "narrative_summary_update": ""
+}
+
+--- 2026-02-10 16:57:41 [DM] ---
+[SYSTEM]: 
+You are the 'Dungeon Master' (DM) for a classic Interactive Fiction game.
+You interpret user inputs and narrate the results based on the world state and lore.
+
+YOUR CONTEXT:
+- Lore Bible: GENRE: Slice of Life.
+SETTING: A suburban house in Somewhere, USA. The year is 2005.
+PLAYER CHARACTER: A professional young woman, moderately attractive.
+PLAYER GOAL: Get ready for work and make it out the door.
+TONE: Dry humor, casual, classic modern Interactive Fiction style, sarcastic at times.
+- Narrative Thread: 
+- Current Room State: {"id": "room_start", "name": "Your Bedroom", "description": "The bedroom is a shrine to procrastination and half-finished projects. The queen-sized bed, unmade since... well, you can\u2019t remember, dominates the space. A nightstand clutters the left side, its surface a graveyard of empty water glasses, a dog-eared paperback, and a lamp that\u2019s seen better days. Across the room, a dresser stands guard over a pile of laundry\u2014clean, but definitely not folded. The closet door hangs slightly ajar, revealing a dark abyss of questionable fashion choices. A faint hum of traffic drifts in from the open window, mingling with the distant bark of a neighbor\u2019s dog. The carpet beneath your feet is plush but worn, a testament to years of pacing during late-night phone calls and existential crises. To the east, a door leads to the hallway, while a window to the north offers a view of the backyard\u2014currently just a sea of dew-covered grass and a trampoline that hasn\u2019t been used since 2003.", "exits": {"east": "room_2886c631"}, "items": ["unmade_bed", "nightstand", "laundry_pile", "closet_door", "alarm_clock", "window"], "visited": true}
+- Player Inventory: [{"id": "pajamas", "name": "pajamas", "description": "A set of well-worn flannel pajamas, their once-vibrant plaid pattern now faded to a muted blur. The pants are slightly too long, pooling around your ankles, and the shirt has a small coffee stain near the hem\u2014courtesy of last night\u2019s late-night snack. They\u2019re comfortable, but not exactly office-appropriate. The fabric smells faintly of lavender detergent and the faintest hint of desperation.", "carryable": false}, {"id": "phone", "name": "cell phone", "description": "A flip phone, its silver exterior scratched from years of being tossed into purses and dropped onto nightstands. The screen displays a single notification: \"1 New Voicemail.\" The battery icon is at 42%, which is either a blessing or a curse\u2014you haven\u2019t decided yet. The phone is silent, but you can feel its judgmental gaze, as if it\u2019s disappointed you haven\u2019t upgraded to a smartphone yet.", "carryable": true}]
+
+YOUR INSTRUCTIONS:
+1. PARSING: Interpret intent (n, s, e, w, x, i, l, or complex actions like 'search the desk').
+2. NARRATION:
+   - Use second-person ("You"). 
+   - If an action is impossible, explain why in-character (e.g., "The door is rusted shut; your strength is not enough.").
+   - If an action is successful, describe the sensory result.
+3. STATE UPDATES:
+   - If the player takes an item: Put its ID in 'inventory_add' and 'room_remove'.
+   - If they drop it: Put it in 'inventory_remove' and 'room_add'.
+   - If an item's state changes (e.g., 'sharpen sword'): Update its 'update_description'.
+4. NARRATIVE THREAD:
+   - Use 'narrative_summary_update' to summarize major developments for the Architect's future use.
+
+OUTPUT VALID JSON ONLY:
+{
+  "narrative": "The text the player sees.",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [],
+  "room_remove": [],
+  "update_description": { "item_id": "New description string" },
+  "narrative_summary_update": "Brief update on plot/world state."
+}
+
+[USER]: PLAYER ACTION: inventory
+[OUTPUT]: {
+  "narrative": "You pat yourself down, taking stock of what you're currently lugging around. It's a short list:\n\n1. **Pajamas**: Still clinging to your body like a second skin. The flannel is soft, but the coffee stain is a glaring reminder that adulthood is just a series of small failures.\n2. **Cell phone**: Your trusty flip phone, silently judging your life choices. The battery is still at 42%, which feels like a metaphor for something, but you're too tired to unpack that right now.",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [],
+  "room_remove": [],
+  "update_description": {},
+  "narrative_summary_update": "Player reviewed inventory; no changes to items or state."
+}
+
+--- 2026-02-10 16:58:05 [DM] ---
+[SYSTEM]: 
+You are the 'Dungeon Master' (DM) for a classic Interactive Fiction game.
+You interpret user inputs and narrate the results based on the world state and lore.
+
+YOUR CONTEXT:
+- Lore Bible: GENRE: Slice of Life.
+SETTING: A suburban house in Somewhere, USA. The year is 2005.
+PLAYER CHARACTER: A professional young woman, moderately attractive.
+PLAYER GOAL: Get ready for work and make it out the door.
+TONE: Dry humor, casual, classic modern Interactive Fiction style, sarcastic at times.
+- Narrative Thread: Player reviewed inventory; no changes to items or state.
+- Current Room State: {"id": "room_start", "name": "Your Bedroom", "description": "The bedroom is a shrine to procrastination and half-finished projects. The queen-sized bed, unmade since... well, you can\u2019t remember, dominates the space. A nightstand clutters the left side, its surface a graveyard of empty water glasses, a dog-eared paperback, and a lamp that\u2019s seen better days. Across the room, a dresser stands guard over a pile of laundry\u2014clean, but definitely not folded. The closet door hangs slightly ajar, revealing a dark abyss of questionable fashion choices. A faint hum of traffic drifts in from the open window, mingling with the distant bark of a neighbor\u2019s dog. The carpet beneath your feet is plush but worn, a testament to years of pacing during late-night phone calls and existential crises. To the east, a door leads to the hallway, while a window to the north offers a view of the backyard\u2014currently just a sea of dew-covered grass and a trampoline that hasn\u2019t been used since 2003.", "exits": {"east": "room_2886c631"}, "items": ["unmade_bed", "nightstand", "laundry_pile", "closet_door", "alarm_clock", "window"], "visited": true}
+- Player Inventory: [{"id": "pajamas", "name": "pajamas", "description": "A set of well-worn flannel pajamas, their once-vibrant plaid pattern now faded to a muted blur. The pants are slightly too long, pooling around your ankles, and the shirt has a small coffee stain near the hem\u2014courtesy of last night\u2019s late-night snack. They\u2019re comfortable, but not exactly office-appropriate. The fabric smells faintly of lavender detergent and the faintest hint of desperation.", "carryable": false}, {"id": "phone", "name": "cell phone", "description": "A flip phone, its silver exterior scratched from years of being tossed into purses and dropped onto nightstands. The screen displays a single notification: \"1 New Voicemail.\" The battery icon is at 42%, which is either a blessing or a curse\u2014you haven\u2019t decided yet. The phone is silent, but you can feel its judgmental gaze, as if it\u2019s disappointed you haven\u2019t upgraded to a smartphone yet.", "carryable": true}]
+
+YOUR INSTRUCTIONS:
+1. PARSING: Interpret intent (n, s, e, w, x, i, l, or complex actions like 'search the desk').
+2. NARRATION:
+   - Use second-person ("You"). 
+   - If an action is impossible, explain why in-character (e.g., "The door is rusted shut; your strength is not enough.").
+   - If an action is successful, describe the sensory result.
+3. STATE UPDATES:
+   - If the player takes an item: Put its ID in 'inventory_add' and 'room_remove'.
+   - If they drop it: Put it in 'inventory_remove' and 'room_add'.
+   - If an item's state changes (e.g., 'sharpen sword'): Update its 'update_description'.
+4. NARRATIVE THREAD:
+   - Use 'narrative_summary_update' to summarize major developments for the Architect's future use.
+
+OUTPUT VALID JSON ONLY:
+{
+  "narrative": "The text the player sees.",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [],
+  "room_remove": [],
+  "update_description": { "item_id": "New description string" },
+  "narrative_summary_update": "Brief update on plot/world state."
+}
+
+[USER]: PLAYER ACTION: x clean laundry
+[OUTPUT]: {
+  "narrative": "You eye the pile of laundry with a mix of resignation and mild disgust. It's a towering monument to your procrastination, a mix of work blouses, casual tees, and at least one sock that may or may not have a mate. The clothes are clean\u2014you remember running the load a few days ago\u2014but they\u2019ve been sitting in the basket ever since, wrinkling themselves into a state of defiance. A faint scent of fabric softener lingers, but it\u2019s mostly overpowered by the musty aroma of \"I\u2019ll fold this later.\" The pile seems to mock you, daring you to tackle it before work. You glance at the clock. Yeah, no.",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [],
+  "room_remove": [],
+  "update_description": {},
+  "narrative_summary_update": "Player examined the clean laundry pile but took no action."
+}
+
+--- 2026-02-10 16:59:43 [DM] ---
+[SYSTEM]: 
+You are the 'Dungeon Master' (DM) for a classic Interactive Fiction game.
+You interpret user inputs and narrate the results based on the world state and lore.
+
+YOUR CONTEXT:
+- Lore Bible: GENRE: Slice of Life.
+SETTING: A suburban house in Somewhere, USA. The year is 2005.
+PLAYER CHARACTER: A professional young woman, moderately attractive.
+PLAYER GOAL: Get ready for work and make it out the door.
+TONE: Dry humor, casual, classic modern Interactive Fiction style, sarcastic at times.
+- Narrative Thread: Player examined the clean laundry pile but took no action.
+- Current Room State: {"id": "room_start", "name": "Your Bedroom", "description": "The bedroom is a shrine to procrastination and half-finished projects. The queen-sized bed, unmade since... well, you can\u2019t remember, dominates the space. A nightstand clutters the left side, its surface a graveyard of empty water glasses, a dog-eared paperback, and a lamp that\u2019s seen better days. Across the room, a dresser stands guard over a pile of laundry\u2014clean, but definitely not folded. The closet door hangs slightly ajar, revealing a dark abyss of questionable fashion choices. A faint hum of traffic drifts in from the open window, mingling with the distant bark of a neighbor\u2019s dog. The carpet beneath your feet is plush but worn, a testament to years of pacing during late-night phone calls and existential crises. To the east, a door leads to the hallway, while a window to the north offers a view of the backyard\u2014currently just a sea of dew-covered grass and a trampoline that hasn\u2019t been used since 2003.", "exits": {"east": "room_2886c631"}, "items": ["unmade_bed", "nightstand", "laundry_pile", "closet_door", "alarm_clock", "window"], "visited": true}
+- Player Inventory: [{"id": "pajamas", "name": "pajamas", "description": "A set of well-worn flannel pajamas, their once-vibrant plaid pattern now faded to a muted blur. The pants are slightly too long, pooling around your ankles, and the shirt has a small coffee stain near the hem\u2014courtesy of last night\u2019s late-night snack. They\u2019re comfortable, but not exactly office-appropriate. The fabric smells faintly of lavender detergent and the faintest hint of desperation.", "carryable": false}, {"id": "phone", "name": "cell phone", "description": "A flip phone, its silver exterior scratched from years of being tossed into purses and dropped onto nightstands. The screen displays a single notification: \"1 New Voicemail.\" The battery icon is at 42%, which is either a blessing or a curse\u2014you haven\u2019t decided yet. The phone is silent, but you can feel its judgmental gaze, as if it\u2019s disappointed you haven\u2019t upgraded to a smartphone yet.", "carryable": true}]
+
+YOUR INSTRUCTIONS:
+1. PARSING: Interpret intent (n, s, e, w, x, i, l, or complex actions like 'search the desk').
+2. NARRATION:
+   - Use second-person ("You"). 
+   - If an action is impossible, explain why in-character (e.g., "The door is rusted shut; your strength is not enough.").
+   - If an action is successful, describe the sensory result.
+3. STATE UPDATES:
+   - If the player takes an item: Put its ID in 'inventory_add' and 'room_remove'.
+   - If they drop it: Put it in 'inventory_remove' and 'room_add'.
+   - If an item's state changes (e.g., 'sharpen sword'): Update its 'update_description'.
+4. NARRATIVE THREAD:
+   - Use 'narrative_summary_update' to summarize major developments for the Architect's future use.
+
+OUTPUT VALID JSON ONLY:
+{
+  "narrative": "The text the player sees.",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [],
+  "room_remove": [],
+  "update_description": { "item_id": "New description string" },
+  "narrative_summary_update": "Brief update on plot/world state."
+}
+
+[USER]: PLAYER ACTION: remove pajamas
+[OUTPUT]: {
+  "narrative": "You peel off the flannel pajamas with a sigh, the fabric clinging slightly as if reluctant to let you go. The air in the room feels cooler against your skin, and you stand there for a moment, contemplating the existential dread of another workday. The pajamas lie in a crumpled heap at your feet, a silent testament to your procrastination. You\u2019re now standing in your underwear, which, thankfully, is at least clean\u2014though the same can\u2019t be said for your soul.",
+  "inventory_add": [],
+  "inventory_remove": [
+    "pajamas"
+  ],
+  "room_add": [
+    "pajamas"
+  ],
+  "room_remove": [],
+  "update_description": {
+    "item_id": "pajamas",
+    "description": "A discarded pile of flannel pajamas, now crumpled on the floor. The plaid pattern is even more faded in the harsh morning light, and the coffee stain near the hem seems to mock you. They whisper of comfort abandoned, of a simpler time before the tyranny of alarm clocks and spreadsheets."
+  },
+  "narrative_summary_update": "Player has removed their pajamas, now standing in their underwear. The pajamas are now on the floor in the bedroom."
+}
+
+--- 2026-02-10 17:00:54 [DM] ---
+[SYSTEM]: 
+You are the 'Dungeon Master' (DM) for a classic Interactive Fiction game.
+You interpret user inputs and narrate the results based on the world state and lore.
+
+YOUR CONTEXT:
+- Lore Bible: GENRE: Slice of Life.
+SETTING: A suburban house in Somewhere, USA. The year is 2005.
+PLAYER CHARACTER: A professional young woman, moderately attractive.
+PLAYER GOAL: Get ready for work and make it out the door.
+TONE: Dry humor, casual, classic modern Interactive Fiction style, sarcastic at times.
+- Narrative Thread: Player has removed their pajamas, now standing in their underwear. The pajamas are now on the floor in the bedroom.
+- Current Room State: {"id": "room_start", "name": "Your Bedroom", "description": "The bedroom is a shrine to procrastination and half-finished projects. The queen-sized bed, unmade since... well, you can\u2019t remember, dominates the space. A nightstand clutters the left side, its surface a graveyard of empty water glasses, a dog-eared paperback, and a lamp that\u2019s seen better days. Across the room, a dresser stands guard over a pile of laundry\u2014clean, but definitely not folded. The closet door hangs slightly ajar, revealing a dark abyss of questionable fashion choices. A faint hum of traffic drifts in from the open window, mingling with the distant bark of a neighbor\u2019s dog. The carpet beneath your feet is plush but worn, a testament to years of pacing during late-night phone calls and existential crises. To the east, a door leads to the hallway, while a window to the north offers a view of the backyard\u2014currently just a sea of dew-covered grass and a trampoline that hasn\u2019t been used since 2003.", "exits": {"east": "room_2886c631"}, "items": ["unmade_bed", "nightstand", "laundry_pile", "closet_door", "alarm_clock", "window", "pajamas"], "visited": true}
+- Player Inventory: [{"id": "phone", "name": "cell phone", "description": "A flip phone, its silver exterior scratched from years of being tossed into purses and dropped onto nightstands. The screen displays a single notification: \"1 New Voicemail.\" The battery icon is at 42%, which is either a blessing or a curse\u2014you haven\u2019t decided yet. The phone is silent, but you can feel its judgmental gaze, as if it\u2019s disappointed you haven\u2019t upgraded to a smartphone yet.", "carryable": true}]
+
+YOUR INSTRUCTIONS:
+1. PARSING: Interpret intent (n, s, e, w, x, i, l, or complex actions like 'search the desk').
+2. NARRATION:
+   - Use second-person ("You"). 
+   - If an action is impossible, explain why in-character (e.g., "The door is rusted shut; your strength is not enough.").
+   - If an action is successful, describe the sensory result.
+3. STATE UPDATES:
+   - If the player takes an item: Put its ID in 'inventory_add' and 'room_remove'.
+   - If they drop it: Put it in 'inventory_remove' and 'room_add'.
+   - If an item's state changes (e.g., 'sharpen sword'): Update its 'update_description'.
+4. NARRATIVE THREAD:
+   - Use 'narrative_summary_update' to summarize major developments for the Architect's future use.
+
+OUTPUT VALID JSON ONLY:
+{
+  "narrative": "The text the player sees.",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [],
+  "room_remove": [],
+  "update_description": { "item_id": "New description string" },
+  "narrative_summary_update": "Brief update on plot/world state."
+}
+
+[USER]: PLAYER ACTION: x pajamas
+[OUTPUT]: {
+  "narrative": "You eye the crumpled heap of your pajamas on the floor. They're a faded set of blue flannel, adorned with tiny white sheep that have long since lost their charm. The top is inside-out, as if you fought a silent battle with sleep last night and lost. The pants are twisted, one leg tucked into the other like they're hiding from the world. A faint scent of lavender fabric softener lingers, but it's mostly overpowered by the unmistakable aroma of 'I really need to do laundry soon.' The elastic waistband is stretched just enough to make you question whether they'll survive another wear. You resist the urge to kick them under the bed. Barely.",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [],
+  "room_remove": [],
+  "update_description": {},
+  "narrative_summary_update": ""
+}
+
+--- 2026-02-10 17:02:49 [DM] ---
+[SYSTEM]: 
+You are the 'Dungeon Master' (DM) for a classic Interactive Fiction game.
+You interpret user inputs and narrate the results based on the world state and lore.
+
+YOUR CONTEXT:
+- Lore Bible: GENRE: Slice of Life.
+SETTING: A suburban house in Somewhere, USA. The year is 2005.
+PLAYER CHARACTER: A professional young woman, moderately attractive.
+PLAYER GOAL: Get ready for work and make it out the door.
+TONE: Dry humor, casual, classic modern Interactive Fiction style, sarcastic at times.
+- Narrative Thread: 
+- Current Room State: {"id": "room_start", "name": "Your Bedroom", "description": "The bedroom is a shrine to procrastination and half-finished projects. The queen-sized bed, unmade since... well, you can\u2019t remember, dominates the space. A nightstand clutters the left side, its surface a graveyard of empty water glasses, a dog-eared paperback, and a lamp that\u2019s seen better days. Across the room, a dresser stands guard over a pile of laundry\u2014clean, but definitely not folded. The closet door hangs slightly ajar, revealing a dark abyss of questionable fashion choices. A faint hum of traffic drifts in from the open window, mingling with the distant bark of a neighbor\u2019s dog. The carpet beneath your feet is plush but worn, a testament to years of pacing during late-night phone calls and existential crises. To the east, a door leads to the hallway, while a window to the north offers a view of the backyard\u2014currently just a sea of dew-covered grass and a trampoline that hasn\u2019t been used since 2003.", "exits": {"east": "room_2886c631"}, "items": ["unmade_bed", "nightstand", "laundry_pile", "closet_door", "alarm_clock", "window", "pajamas"], "visited": true}
+- Player Inventory: [{"id": "phone", "name": "cell phone", "description": "A flip phone, its silver exterior scratched from years of being tossed into purses and dropped onto nightstands. The screen displays a single notification: \"1 New Voicemail.\" The battery icon is at 42%, which is either a blessing or a curse\u2014you haven\u2019t decided yet. The phone is silent, but you can feel its judgmental gaze, as if it\u2019s disappointed you haven\u2019t upgraded to a smartphone yet.", "carryable": true}]
+
+YOUR INSTRUCTIONS:
+1. PARSING: Interpret intent (n, s, e, w, x, i, l, or complex actions like 'search the desk').
+2. NARRATION:
+   - Use second-person ("You"). 
+   - If an action is impossible, explain why in-character (e.g., "The door is rusted shut; your strength is not enough.").
+   - If an action is successful, describe the sensory result.
+3. STATE UPDATES:
+   - If the player takes an item: Put its ID in 'inventory_add' and 'room_remove'.
+   - If they drop it: Put it in 'inventory_remove' and 'room_add'.
+   - If an item's state changes (e.g., 'sharpen sword'): Update its 'update_description'.
+4. NARRATIVE THREAD:
+   - Use 'narrative_summary_update' to summarize major developments for the Architect's future use.
+
+OUTPUT VALID JSON ONLY:
+{
+  "narrative": "The text the player sees.",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [],
+  "room_remove": [],
+  "update_description": { "item_id": "New description string" },
+  "narrative_summary_update": "Brief update on plot/world state."
+}
+
+[USER]: PLAYER ACTION: x me
+[OUTPUT]: {
+  "narrative": "You take a moment to assess yourself in the full-length mirror hanging on the back of your closet door. Your reflection is a mixed bag of \"I could be worse\" and \"Why do I do this to myself?\". Your dark brown hair is a tousled mess, the kind that suggests you either just rolled out of bed or are going for that \"effortlessly chic\" look that no one actually achieves without effort. Your eyes, a decent shade of hazel, are slightly puffy\u2014likely from that late-night reality TV binge. You're wearing your usual pajamas: a faded college t-shirt (Go State!) and plaid flannel pants that have seen better days. Your feet are bare, toes digging into the carpet like you're bracing for an earthquake. Overall, you look like someone who *might* have their life together, if you squint and ignore the laundry pile.",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [],
+  "room_remove": [],
+  "update_description": {},
+  "narrative_summary_update": "Player character has assessed their appearance; no significant changes to world state."
+}
+
+--- 2026-02-10 17:03:55 [ARCHITECT] ---
+[SYSTEM]: 
+You are the 'Lead Architect' for an Interactive Fiction engine. 
+Your purpose is to procedurally expand the world as the player moves into unexplored territory.
+
+GENERAL RULES:
+1. STYLE: Second-person ("You"). Moody, atmospheric, and classic.
+2. COHESION: Use the 'Lore Bible' and 'Narrative Thread' to ensure this room fits the overarching story.
+3. SENSORY LOGIC: Focus on visuals, sounds, and smells. Objects should feel heavy, old, or significant.
+4. GEOMETRY: The new room must logically exist in the direction the player just moved.
+
+CONTEXT:
+- Lore Bible: GENRE: Slice of Life.
+SETTING: A suburban house in Somewhere, USA. The year is 2005.
+PLAYER CHARACTER: A professional young woman, moderately attractive.
+PLAYER GOAL: Get ready for work and make it out the door.
+TONE: Dry humor, casual, classic modern Interactive Fiction style, sarcastic at times.
+- Current Narrative Thread: Player character has assessed their appearance; no significant changes to world state.
+- Previous Location: Your Bedroom (The bedroom is a shrine to procrastination and half-finished projects. The queen-sized bed, unmade since... well, you can’t remember, dominates the space. A nightstand clutters the left side, its surface a graveyard of empty water glasses, a dog-eared paperback, and a lamp that’s seen better days. Across the room, a dresser stands guard over a pile of laundry—clean, but definitely not folded. The closet door hangs slightly ajar, revealing a dark abyss of questionable fashion choices. A faint hum of traffic drifts in from the open window, mingling with the distant bark of a neighbor’s dog. The carpet beneath your feet is plush but worn, a testament to years of pacing during late-night phone calls and existential crises. To the east, a door leads to the hallway, while a window to the north offers a view of the backyard—currently just a sea of dew-covered grass and a trampoline that hasn’t been used since 2003.)
+- Movement Direction: e
+
+OUTPUT VALID JSON ONLY:
+{
+  "name": "New Room Title",
+  "description": "Sensory-rich description of this new area.",
+  "new_exits": ["south", "west"], // Directions leading to NEW unexplored areas.
+  "items": [
+    {
+      "id": "unique_item_id",
+      "name": "short name",
+      "description": "Full examine text.",
+      "is_carryable": true
+    }
+  ]
+}
+
+[USER]: The player has moved. Describe the new area.
+[OUTPUT]: {
+  "name": "The Hallway",
+  "description": "The hallway stretches before you like a time capsule of your own mediocrity. The walls, painted a forgettable shade of beige, are lined with framed photos\u2014most of them blurry, some of them featuring exes you\u2019d rather not remember, and one particularly unflattering shot of you at last year\u2019s office holiday party, mid-sneeze. The carpet here is thinner than in your bedroom, worn down by years of bare feet padding to the bathroom at 3 AM. A faint scent of lavender air freshener lingers, though it\u2019s fighting a losing battle against the underlying odor of old takeout and something vaguely musty. To the south, a door stands slightly ajar, revealing a sliver of the bathroom\u2014where the real chaos begins. To the west, the hallway opens into what you *think* is the living room, though it\u2019s hard to tell from here. A narrow console table hugs the wall beneath a flickering fluorescent light, its surface cluttered with unopened mail, a half-dead potted plant, and a landline phone that hasn\u2019t rung in months.",
+  "new_exits": [
+    "south",
+    "west"
+  ],
+  "items": [
+    {
+      "id": "unopened_mail_pile",
+      "name": "pile of unopened mail",
+      "description": "A leaning tower of envelopes, catalogs, and what might be a jury duty summons buried somewhere near the bottom. The topmost envelope is stamped with the words 'FINAL NOTICE' in bold red letters, but you\u2019ve been ignoring that one for at least a week. The paper feels thin and insubstantial, like it might dissolve if you breathe on it too hard.",
+      "is_carryable": true
+    },
+    {
+      "id": "dying_potted_plant",
+      "name": "half-dead potted plant",
+      "description": "A sad, skeletal thing that was probably a fern at some point. Now, it\u2019s mostly brown twigs and a single, defiant green leaf clinging to life. The soil is cracked and dry, and the pot itself is chipped on one side. You don\u2019t remember buying it, but it\u2019s been here long enough to feel like an indictment of your ability to keep anything alive.",
+      "is_carryable": true
+    },
+    {
+      "id": "landline_phone",
+      "name": "landline phone",
+      "description": "A relic of the 20th century, this corded phone is the color of dishwater and just as appealing. The receiver is slightly sticky, and the cord is tangled into a knot that would make a sailor weep. The voicemail light blinks red, but you\u2019ve long since given up on checking it. Who even calls landlines anymore?",
+      "is_carryable": false
+    }
+  ]
+}
+
+--- 2026-02-10 17:05:02 [DM] ---
+[SYSTEM]: 
+You are the 'Dungeon Master' (DM) for a classic Interactive Fiction game.
+You interpret user inputs and narrate the results based on the world state and lore.
+
+YOUR CONTEXT:
+- Lore Bible: GENRE: Slice of Life.
+SETTING: A suburban house in Somewhere, USA. The year is 2005.
+PLAYER CHARACTER: A professional young woman, moderately attractive.
+PLAYER GOAL: Get ready for work and make it out the door.
+TONE: Dry humor, casual, classic modern Interactive Fiction style, sarcastic at times.
+- Narrative Thread: Player character has assessed their appearance; no significant changes to world state.
+- Current Room State: {"id": "room_2886c631", "name": "The Hallway", "description": "The hallway stretches before you like a time capsule of your own mediocrity. The walls, painted a forgettable shade of beige, are lined with framed photos\u2014most of them blurry, some of them featuring exes you\u2019d rather not remember, and one particularly unflattering shot of you at last year\u2019s office holiday party, mid-sneeze. The carpet here is thinner than in your bedroom, worn down by years of bare feet padding to the bathroom at 3 AM. A faint scent of lavender air freshener lingers, though it\u2019s fighting a losing battle against the underlying odor of old takeout and something vaguely musty. To the south, a door stands slightly ajar, revealing a sliver of the bathroom\u2014where the real chaos begins. To the west, the hallway opens into what you *think* is the living room, though it\u2019s hard to tell from here. A narrow console table hugs the wall beneath a flickering fluorescent light, its surface cluttered with unopened mail, a half-dead potted plant, and a landline phone that hasn\u2019t rung in months.", "exits": {"west": "room_start", "south": "room_41056aac"}, "items": ["unopened_mail_pile", "dying_potted_plant", "landline_phone"], "visited": false}
+- Player Inventory: [{"id": "phone", "name": "cell phone", "description": "A flip phone, its silver exterior scratched from years of being tossed into purses and dropped onto nightstands. The screen displays a single notification: \"1 New Voicemail.\" The battery icon is at 42%, which is either a blessing or a curse\u2014you haven\u2019t decided yet. The phone is silent, but you can feel its judgmental gaze, as if it\u2019s disappointed you haven\u2019t upgraded to a smartphone yet.", "carryable": true}]
+
+YOUR INSTRUCTIONS:
+1. PARSING: Interpret intent (n, s, e, w, x, i, l, or complex actions like 'search the desk').
+2. NARRATION:
+   - Use second-person ("You"). 
+   - If an action is impossible, explain why in-character (e.g., "The door is rusted shut; your strength is not enough.").
+   - If an action is successful, describe the sensory result.
+3. STATE UPDATES:
+   - If the player takes an item: Put its ID in 'inventory_add' and 'room_remove'.
+   - If they drop it: Put it in 'inventory_remove' and 'room_add'.
+   - If an item's state changes (e.g., 'sharpen sword'): Update its 'update_description'.
+4. NARRATIVE THREAD:
+   - Use 'narrative_summary_update' to summarize major developments for the Architect's future use.
+
+OUTPUT VALID JSON ONLY:
+{
+  "narrative": "The text the player sees.",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [],
+  "room_remove": [],
+  "update_description": { "item_id": "New description string" },
+  "narrative_summary_update": "Brief update on plot/world state."
+}
+
+[USER]: PLAYER ACTION: x mail
+[OUTPUT]: {
+  "narrative": "You eye the unopened mail pile with the same enthusiasm you reserve for dental appointments. It's a leaning tower of envelopes, flyers, and what looks suspiciously like a jury duty summons. The top envelope is a credit card offer addressed to 'Current Resident,' because apparently, even corporations know you're too lazy to update your mailing address. Beneath it, a past-due notice from the electric company glares at you accusingly, as if it's your fault the rates went up. A single, crumpled coupon for 20% off at Pizza Hut is the only thing in this stack that doesn't make you want to crawl back into bed. The rest? Pure, unadulterated adulting.",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [],
+  "room_remove": [],
+  "update_description": {},
+  "narrative_summary_update": "Player examined the unopened mail pile; no changes to world state."
+}
+
+--- 2026-02-10 17:32:39 [DM] ---
+[SYSTEM]: 
+You are the 'Dungeon Master' (DM) for a classic Interactive Fiction game.
+You interpret user inputs and narrate the results based on the world state and lore.
+
+YOUR CONTEXT:
+- Lore Bible: GENRE: Slice of Life.
+SETTING: A suburban house in Somewhere, USA. The year is 2005.
+PLAYER CHARACTER: A professional young woman, moderately attractive.
+PLAYER GOAL: Get ready for work and make it out the door.
+TONE: Dry humor, casual, classic modern Interactive Fiction style, sarcastic at times.
+- Narrative Thread: Player examined the unopened mail pile; no changes to world state.
+- Current Room State: {"id": "room_2886c631", "name": "The Hallway", "description": "The hallway stretches before you like a time capsule of your own mediocrity. The walls, painted a forgettable shade of beige, are lined with framed photos\u2014most of them blurry, some of them featuring exes you\u2019d rather not remember, and one particularly unflattering shot of you at last year\u2019s office holiday party, mid-sneeze. The carpet here is thinner than in your bedroom, worn down by years of bare feet padding to the bathroom at 3 AM. A faint scent of lavender air freshener lingers, though it\u2019s fighting a losing battle against the underlying odor of old takeout and something vaguely musty. To the south, a door stands slightly ajar, revealing a sliver of the bathroom\u2014where the real chaos begins. To the west, the hallway opens into what you *think* is the living room, though it\u2019s hard to tell from here. A narrow console table hugs the wall beneath a flickering fluorescent light, its surface cluttered with unopened mail, a half-dead potted plant, and a landline phone that hasn\u2019t rung in months.", "exits": {"west": "room_start", "south": "room_41056aac"}, "items": ["unopened_mail_pile", "dying_potted_plant", "landline_phone"], "visited": false}
+- Player Inventory: [{"id": "phone", "name": "cell phone", "description": "A flip phone, its silver exterior scratched from years of being tossed into purses and dropped onto nightstands. The screen displays a single notification: \"1 New Voicemail.\" The battery icon is at 42%, which is either a blessing or a curse\u2014you haven\u2019t decided yet. The phone is silent, but you can feel its judgmental gaze, as if it\u2019s disappointed you haven\u2019t upgraded to a smartphone yet.", "carryable": true}]
+
+YOUR INSTRUCTIONS:
+1. PARSING: Interpret intent (n, s, e, w, x, i, l, or complex actions like 'search the desk').
+2. NARRATION:
+   - Use second-person ("You"). 
+   - If an action is impossible, explain why in-character.
+   - If an action is successful, describe the sensory result.
+3. STATE UPDATES:
+   - If the player takes an item: Put its ID in 'inventory_add' and 'room_remove'.
+   - If they drop it: Put it in 'inventory_remove' and 'room_add'.
+   - If an item's state changes (e.g., 'sharpen sword'): Update its 'update_description'.
+4. NARRATIVE THREAD:
+   - Use 'narrative_summary_update' to summarize major developments for the Architect's future use.
+
+OUTPUT VALID JSON ONLY:
+{
+  "narrative": "The text the player sees.",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [],
+  "room_remove": [],
+  "update_description": { "item_id": "New description string" },
+  "narrative_summary_update": "Brief update on plot/world state."
+}
+
+[USER]: PLAYER ACTION: x me
+[OUTPUT]: {
+  "narrative": "You take a long, hard look at yourself in the hallway mirror\u2014well, the closest thing you\u2019ve got to a mirror, which is the reflective surface of a framed photo of you and your college roommate at a tailgate in 2002. Your hair is a disaster, a half-hearted attempt at a side ponytail that\u2019s already coming undone. Your work blouse is wrinkled, like you pulled it straight from the laundry basket (because you did), and there\u2019s a suspicious stain near the collar that you *hope* is coffee. Your eyes are slightly bloodshot, and your mascara has smudged just enough to make you look like you\u2019ve been crying (you haven\u2019t, but the effect is the same). You sigh. \"This is fine,\" you mutter. \"Totally fine.\"",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [],
+  "room_remove": [],
+  "update_description": {},
+  "narrative_summary_update": "Player examined their own appearance; no changes to world state."
+}
+
+--- 2026-02-10 17:33:05 [DM] ---
+[SYSTEM]: 
+You are the 'Dungeon Master' (DM) for a classic Interactive Fiction game.
+You interpret user inputs and narrate the results based on the world state and lore.
+
+YOUR CONTEXT:
+- Lore Bible: GENRE: Slice of Life.
+SETTING: A suburban house in Somewhere, USA. The year is 2005.
+PLAYER CHARACTER: A professional young woman, moderately attractive.
+PLAYER GOAL: Get ready for work and make it out the door.
+TONE: Dry humor, casual, classic modern Interactive Fiction style, sarcastic at times.
+- Narrative Thread: Player examined their own appearance; no changes to world state.
+- Current Room State: {"id": "room_2886c631", "name": "The Hallway", "description": "The hallway stretches before you like a time capsule of your own mediocrity. The walls, painted a forgettable shade of beige, are lined with framed photos\u2014most of them blurry, some of them featuring exes you\u2019d rather not remember, and one particularly unflattering shot of you at last year\u2019s office holiday party, mid-sneeze. The carpet here is thinner than in your bedroom, worn down by years of bare feet padding to the bathroom at 3 AM. A faint scent of lavender air freshener lingers, though it\u2019s fighting a losing battle against the underlying odor of old takeout and something vaguely musty. To the south, a door stands slightly ajar, revealing a sliver of the bathroom\u2014where the real chaos begins. To the west, the hallway opens into what you *think* is the living room, though it\u2019s hard to tell from here. A narrow console table hugs the wall beneath a flickering fluorescent light, its surface cluttered with unopened mail, a half-dead potted plant, and a landline phone that hasn\u2019t rung in months.", "exits": {"west": "room_start", "south": "room_41056aac"}, "items": ["unopened_mail_pile", "dying_potted_plant", "landline_phone"], "visited": false}
+- Player Inventory: [{"id": "phone", "name": "cell phone", "description": "A flip phone, its silver exterior scratched from years of being tossed into purses and dropped onto nightstands. The screen displays a single notification: \"1 New Voicemail.\" The battery icon is at 42%, which is either a blessing or a curse\u2014you haven\u2019t decided yet. The phone is silent, but you can feel its judgmental gaze, as if it\u2019s disappointed you haven\u2019t upgraded to a smartphone yet.", "carryable": true}]
+
+YOUR INSTRUCTIONS:
+1. PARSING: Interpret intent (n, s, e, w, x, i, l, or complex actions like 'search the desk').
+2. NARRATION:
+   - Use second-person ("You"). 
+   - If an action is impossible, explain why in-character.
+   - If an action is successful, describe the sensory result.
+3. STATE UPDATES:
+   - If the player takes an item: Put its ID in 'inventory_add' and 'room_remove'.
+   - If they drop it: Put it in 'inventory_remove' and 'room_add'.
+   - If an item's state changes (e.g., 'sharpen sword'): Update its 'update_description'.
+4. NARRATIVE THREAD:
+   - Use 'narrative_summary_update' to summarize major developments for the Architect's future use.
+
+OUTPUT VALID JSON ONLY:
+{
+  "narrative": "The text the player sees.",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [],
+  "room_remove": [],
+  "update_description": { "item_id": "New description string" },
+  "narrative_summary_update": "Brief update on plot/world state."
+}
+
+[USER]: PLAYER ACTION: x my clothes
+[OUTPUT]: {
+  "narrative": "You glance down at your current ensemble, a masterpiece of \"I gave up but still need to look presentable.\" The blouse is a wrinkled mess of what was once a crisp white, now bearing the faint ghost of last night\u2019s takeout sauce near the hem. The slacks, a shade of gray that says \"business casual\" but whispers \"I own exactly three pairs of pants,\" cling to your legs with the enthusiasm of a teenager dragged to a family reunion. Your socks don\u2019t match, but at least they\u2019re both black. You\u2019re pretty sure one of them has a hole in the toe, but you\u2019ve decided ignorance is bliss. The outfit is completed by a pair of scuffed flats that have seen better days\u2014specifically, the day you bought them in 2002. You sigh. This is fine. You\u2019re fine. Everything is fine.",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [],
+  "room_remove": [],
+  "update_description": {},
+  "narrative_summary_update": "Player examined their clothes; no changes to world state."
+}
+
+--- 2026-02-10 17:34:00 [ARCHITECT] ---
+[SYSTEM]: 
+You are the 'Lead Architect' for an Interactive Fiction engine. 
+Your purpose is to procedurally expand the world as the player moves into unexplored territory.
+
+GENERAL RULES:
+1. STYLE: Second-person ("You"). Moody, atmospheric, and classic.
+2. COHESION: Use the 'Lore Bible' and 'Narrative Thread' to ensure this room fits the overarching story.
+3. SENSORY LOGIC: Focus on visuals, sounds, and smells. Objects should feel heavy, old, or significant.
+4. ALIASES: Generate 2-4 synonyms for every item (e.g. for 'rusty key', add ['key', 'rusty', 'iron key']).
+
+CONTEXT:
+- Lore Bible: GENRE: Slice of Life.
+SETTING: A suburban house in Somewhere, USA. The year is 2005.
+PLAYER CHARACTER: A professional young woman, moderately attractive.
+PLAYER GOAL: Get ready for work and make it out the door.
+TONE: Dry humor, casual, classic modern Interactive Fiction style, sarcastic at times.
+- Current Narrative Thread: Player examined their clothes; no changes to world state.
+- Previous Location: The Hallway (The hallway stretches before you like a time capsule of your own mediocrity. The walls, painted a forgettable shade of beige, are lined with framed photos—most of them blurry, some of them featuring exes you’d rather not remember, and one particularly unflattering shot of you at last year’s office holiday party, mid-sneeze. The carpet here is thinner than in your bedroom, worn down by years of bare feet padding to the bathroom at 3 AM. A faint scent of lavender air freshener lingers, though it’s fighting a losing battle against the underlying odor of old takeout and something vaguely musty. To the south, a door stands slightly ajar, revealing a sliver of the bathroom—where the real chaos begins. To the west, the hallway opens into what you *think* is the living room, though it’s hard to tell from here. A narrow console table hugs the wall beneath a flickering fluorescent light, its surface cluttered with unopened mail, a half-dead potted plant, and a landline phone that hasn’t rung in months.)
+- Movement Direction: s
+
+OUTPUT VALID JSON ONLY:
+{
+  "name": "New Room Title",
+  "description": "Sensory-rich description of this new area.",
+  "new_exits": ["south", "west"], 
+  "items": [
+    {
+      "id": "unique_item_id",
+      "name": "short name",
+      "aliases": ["synonym1", "synonym2", "noun"],
+      "description": "Full examine text.",
+      "is_carryable": true
+    }
+  ]
+}
+
+[USER]: The player has moved. Describe the new area.
+[OUTPUT]: {
+  "name": "The Bathroom",
+  "description": "The bathroom greets you with the kind of humidity that clings to your skin like a bad decision. The mirror above the sink is fogged at the edges, its silver backing peeling in one corner\u2014a relic from the '90s, like most of the decor in this house. The light is harsh, unflattering, the kind that exposes every pore and dark circle you\u2019ve earned from another night of scrolling through late-night infomercials. The shower curtain, a faded floral print, sways slightly, as if someone\u2014or something\u2014just brushed past it. The air smells of damp towels, expired vanilla body wash, and the faintest hint of mildew creeping in from the grout. The sink is a graveyard of half-empty toiletries: a bottle of foundation with a cracked cap, a tube of toothpaste squeezed from the middle, and a razor that\u2019s seen better days. To the north, the hallway beckons, slightly less oppressive than this fluorescent hellscape. The door to the east is closed\u2014probably for the best, given what\u2019s lurking behind it.",
+  "new_exits": [
+    "north"
+  ],
+  "items": [
+    {
+      "id": "foggy_mirror",
+      "name": "foggy mirror",
+      "aliases": [
+        "mirror",
+        "bathroom mirror",
+        "looking glass"
+      ],
+      "description": "The mirror is a cruel mistress. It\u2019s fogged enough to obscure the worst of your reflection, but not enough to hide the fact that you look like you\u2019ve been dragged backward through a hedge. The silver backing is peeling in one corner, revealing the cheap particleboard beneath. A smudge of last night\u2019s mascara lingers near the bottom, like a dark omen. You could probably wipe it clean, but do you really want to see what\u2019s underneath?",
+      "is_carryable": false
+    },
+    {
+      "id": "damp_towel",
+      "name": "damp towel",
+      "aliases": [
+        "towel",
+        "bath towel",
+        "wet towel"
+      ],
+      "description": "This towel is damp in that specific way that suggests it\u2019s been hanging here for days, slowly fermenting. It\u2019s a faded shade of blue, the edges frayed from too many washes. It smells like a mix of fabric softener and regret. You could use it to dry off, but the thought of pressing it to your face makes your skin crawl.",
+      "is_carryable": true
+    },
+    {
+      "id": "expired_body_wash",
+      "name": "expired body wash",
+      "aliases": [
+        "body wash",
+        "vanilla body wash",
+        "soap"
+      ],
+      "description": "The label on this bottle of body wash is peeling, the expiration date long since faded into obscurity. The liquid inside is a murky, off-white color, and the vanilla scent has soured into something vaguely chemical. It\u2019s the kind of thing you\u2019d throw out if you weren\u2019t too lazy to replace it. The cap is cracked, and a thin film of dried soap crusts the opening.",
+      "is_carryable": true
+    },
+    {
+      "id": "old_razor",
+      "name": "old razor",
+      "aliases": [
+        "razor",
+        "disposable razor",
+        "shaving razor"
+      ],
+      "description": "This razor has seen better days. The plastic handle is yellowed with age, and the blades are dull enough to make shaving feel like a form of self-flagellation. A few rust spots dot the metal, and the grip is slick with old soap scum. You\u2019re pretty sure you\u2019ve been using this same razor since college. It\u2019s a miracle you haven\u2019t given yourself a staph infection yet.",
+      "is_carryable": true
+    }
+  ]
+}
+
+--- 2026-02-10 19:17:12 [DM] ---
+[SYSTEM]: 
+You are the 'Dungeon Master' (DM) for a classic Interactive Fiction game.
+You interpret user inputs and narrate the results based on the world state and lore.
+
+YOUR CONTEXT:
+- Lore Bible: GENRE: Slice of Life.
+SETTING: A suburban house in Somewhere, USA. The year is 2005.
+PLAYER CHARACTER: A professional young woman, moderately attractive.
+PLAYER GOAL: Get ready for work and make it out the door.
+TONE: Dry humor, casual, classic modern Interactive Fiction style, sarcastic at times.
+- Narrative Thread: Player examined their clothes; no changes to world state.
+- Current Room State: {"id": "room_41056aac", "name": "The Bathroom", "description": "The bathroom greets you with the kind of humidity that clings to your skin like a bad decision. The mirror above the sink is fogged at the edges, its silver backing peeling in one corner\u2014a relic from the '90s, like most of the decor in this house. The light is harsh, unflattering, the kind that exposes every pore and dark circle you\u2019ve earned from another night of scrolling through late-night infomercials. The shower curtain, a faded floral print, sways slightly, as if someone\u2014or something\u2014just brushed past it. The air smells of damp towels, expired vanilla body wash, and the faintest hint of mildew creeping in from the grout. The sink is a graveyard of half-empty toiletries: a bottle of foundation with a cracked cap, a tube of toothpaste squeezed from the middle, and a razor that\u2019s seen better days. To the north, the hallway beckons, slightly less oppressive than this fluorescent hellscape. The door to the east is closed\u2014probably for the best, given what\u2019s lurking behind it.\n\nYou can see here: foggy mirror, damp towel, expired body wash, old razor.", "exits": {"north": "room_2886c631"}, "items": ["foggy_mirror", "damp_towel", "expired_body_wash", "old_razor"], "visited": false, "characters": [], "base_description": "The bathroom greets you with the kind of humidity that clings to your skin like a bad decision. The mirror above the sink is fogged at the edges, its silver backing peeling in one corner\u2014a relic from the '90s, like most of the decor in this house. The light is harsh, unflattering, the kind that exposes every pore and dark circle you\u2019ve earned from another night of scrolling through late-night infomercials. The shower curtain, a faded floral print, sways slightly, as if someone\u2014or something\u2014just brushed past it. The air smells of damp towels, expired vanilla body wash, and the faintest hint of mildew creeping in from the grout. The sink is a graveyard of half-empty toiletries: a bottle of foundation with a cracked cap, a tube of toothpaste squeezed from the middle, and a razor that\u2019s seen better days. To the north, the hallway beckons, slightly less oppressive than this fluorescent hellscape. The door to the east is closed\u2014probably for the best, given what\u2019s lurking behind it."}
+- Player Inventory: [{"id": "phone", "name": "cell phone", "description": "A flip phone, its silver exterior scratched from years of being tossed into purses and dropped onto nightstands. The screen displays a single notification: \"1 New Voicemail.\" The battery icon is at 42%, which is either a blessing or a curse\u2014you haven\u2019t decided yet. The phone is silent, but you can feel its judgmental gaze, as if it\u2019s disappointed you haven\u2019t upgraded to a smartphone yet.", "carryable": true, "aliases": [], "visible": true}]
+- Player Worn Items: []
+- Player State: {"current_room": "room_41056aac", "inventory": ["phone"], "description": "You look like someone trying to survive this strange place.", "aliases": ["me", "myself", "self", "player"], "worn": []}
+
+YOUR INSTRUCTIONS:
+1. PARSING: Interpret intent (n, s, e, w, x, i, l, or complex actions like 'search the desk').
+2. NARRATION:
+   - Use second-person ("You"). 
+   - If an action is impossible, explain why in-character.
+   - If an action is successful, describe the sensory result.
+3. STATE UPDATES:
+   - If the player takes an item: Put its ID in 'inventory_add' and 'room_remove'.
+   - If they drop it: Put it in 'inventory_remove' and 'room_add'.
+   - If they wear something: move it with 'wear_add'. If they remove clothing: move it with 'wear_remove'.
+   - If an item's state changes (e.g., 'sharpen sword'): Update its 'update_description'.
+   - If the room's static prose should change, set 'current_room_base_description'.
+   - If the player's examine-me prose should change, set 'player_description_update'.
+   - If something is hidden/revealed, set 'item_visibility_update' with item IDs and boolean values.
+4. ROBUSTNESS:
+   - Keep room prose stable; list-like presence should be handled by engine composition, not hardcoded into prose.
+   - Hidden items should remain invisible until revealed (searching, moving coverings, opening containers, etc.).
+   - Clothing layers should affect examine-me output through world-state updates.
+5. NARRATIVE THREAD:
+   - Use 'narrative_summary_update' to summarize major developments for the Architect's future use.
+
+OUTPUT VALID JSON ONLY:
+{
+  "narrative": "The text the player sees.",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [],
+  "room_remove": [],
+  "wear_add": [],
+  "wear_remove": [],
+  "update_description": { "item_id": "New description string" },
+  "current_room_base_description": "Optional revised base room prose",
+  "player_description_update": "Optional revised examine-me prose",
+  "item_visibility_update": { "item_id": true },
+  "narrative_summary_update": "Brief update on plot/world state."
+}
+
+[USER]: PLAYER ACTION: take razor
+[OUTPUT]: {
+  "narrative": "You reach for the old razor, its plastic handle slick with residual moisture. The blades are dull enough to make you question whether it\u2019s even worth the effort, but you figure it\u2019s better than showing up to work looking like you\u2019ve been dragged through a hedge backward. As you pick it up, a single rusted blade flakes off and spirals into the sink like a tiny, tragic confetti. The razor\u2019s weight is depressing, a reminder of how long it\u2019s been since you last bothered with self-care. Still, it\u2019s yours now. Congratulations on your questionable life choices.",
+  "inventory_add": [
+    "old_razor"
+  ],
+  "room_remove": [
+    "old_razor"
+  ],
+  "inventory_remove": [],
+  "room_add": [],
+  "wear_add": [],
+  "wear_remove": [],
+  "update_description": {},
+  "current_room_base_description": null,
+  "player_description_update": null,
+  "item_visibility_update": {},
+  "narrative_summary_update": "Player took the old razor from the bathroom sink."
+}
+
+--- 2026-02-10 19:21:55 [DM] ---
+[SYSTEM]: 
+You are the 'Dungeon Master' (DM) for a classic Interactive Fiction game.
+You interpret user inputs and narrate the results based on the world state and lore.
+
+YOUR CONTEXT:
+- Lore Bible: GENRE: Slice of Life.
+SETTING: A suburban house in Somewhere, USA. The year is 2005.
+PLAYER CHARACTER: A professional young woman, moderately attractive.
+PLAYER GOAL: Get ready for work and make it out the door.
+TONE: Dry humor, casual, classic modern Interactive Fiction style, sarcastic at times.
+- Narrative Thread: Player took the old razor from the bathroom sink.
+- Current Room State: {"id": "room_41056aac", "name": "The Bathroom", "description": "The bathroom greets you with the kind of humidity that clings to your skin like a bad decision. The mirror above the sink is fogged at the edges, its silver backing peeling in one corner\u2014a relic from the '90s, like most of the decor in this house. The light is harsh, unflattering, the kind that exposes every pore and dark circle you\u2019ve earned from another night of scrolling through late-night infomercials. The shower curtain, a faded floral print, sways slightly, as if someone\u2014or something\u2014just brushed past it. The air smells of damp towels, expired vanilla body wash, and the faintest hint of mildew creeping in from the grout. The sink is a graveyard of half-empty toiletries: a bottle of foundation with a cracked cap, a tube of toothpaste squeezed from the middle, and a razor that\u2019s seen better days. To the north, the hallway beckons, slightly less oppressive than this fluorescent hellscape. The door to the east is closed\u2014probably for the best, given what\u2019s lurking behind it.\n\nYou can see here: foggy mirror, damp towel, expired body wash, old razor.\n\nYou can see here: foggy mirror, damp towel, expired body wash.\n\nYou can see here: foggy mirror, damp towel, expired body wash.\n\nYou can see here: foggy mirror, damp towel, expired body wash.", "exits": {"north": "room_2886c631"}, "items": ["foggy_mirror", "damp_towel", "expired_body_wash"], "visited": false, "characters": [], "base_description": null}
+- Player Inventory: [{"id": "phone", "name": "cell phone", "description": "A flip phone, its silver exterior scratched from years of being tossed into purses and dropped onto nightstands. The screen displays a single notification: \"1 New Voicemail.\" The battery icon is at 42%, which is either a blessing or a curse\u2014you haven\u2019t decided yet. The phone is silent, but you can feel its judgmental gaze, as if it\u2019s disappointed you haven\u2019t upgraded to a smartphone yet.", "carryable": true, "aliases": [], "visible": true}, {"id": "old_razor", "name": "old razor", "aliases": ["razor", "disposable razor", "shaving razor"], "description": "This razor has seen better days. The plastic handle is yellowed with age, and the blades are dull enough to make shaving feel like a form of self-flagellation. A few rust spots dot the metal, and the grip is slick with old soap scum. You\u2019re pretty sure you\u2019ve been using this same razor since college. It\u2019s a miracle you haven\u2019t given yourself a staph infection yet.", "carryable": true, "visible": true}]
+- Player Worn Items: []
+- Player State: {"current_room": "room_41056aac", "inventory": ["phone", "old_razor"], "description": null, "aliases": ["me", "myself", "self", "player"], "worn": []}
+
+YOUR INSTRUCTIONS:
+1. PARSING: Interpret intent (n, s, e, w, x, i, l, or complex actions like 'search the desk').
+2. NARRATION:
+   - Use second-person ("You"). 
+   - If an action is impossible, explain why in-character.
+   - If an action is successful, describe the sensory result.
+3. STATE UPDATES:
+   - If the player takes an item: Put its ID in 'inventory_add' and 'room_remove'.
+   - If they drop it: Put it in 'inventory_remove' and 'room_add'.
+   - If they wear something: move it with 'wear_add'. If they remove clothing: move it with 'wear_remove'.
+   - If an item's state changes (e.g., 'sharpen sword'): Update its 'update_description'.
+   - If the room's static prose should change, set 'current_room_base_description'.
+   - If the player's examine-me prose should change, set 'player_description_update'.
+   - If something is hidden/revealed, set 'item_visibility_update' with item IDs and boolean values.
+4. ROBUSTNESS:
+   - Keep room prose stable; list-like presence should be handled by engine composition, not hardcoded into prose.
+   - Hidden items should remain invisible until revealed (searching, moving coverings, opening containers, etc.).
+   - Clothing layers should affect examine-me output through world-state updates.
+5. NARRATIVE THREAD:
+   - Use 'narrative_summary_update' to summarize major developments for the Architect's future use.
+
+OUTPUT VALID JSON ONLY:
+{
+  "narrative": "The text the player sees.",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [],
+  "room_remove": [],
+  "wear_add": [],
+  "wear_remove": [],
+  "update_description": { "item_id": "New description string" },
+  "current_room_base_description": "Optional revised base room prose",
+  "player_description_update": "Optional revised examine-me prose",
+  "item_visibility_update": { "item_id": true },
+  "narrative_summary_update": "Brief update on plot/world state."
+}
+
+[USER]: PLAYER ACTION: x door to the east
+[OUTPUT]: {
+  "narrative": "You turn your attention to the door on the east wall. It's a plain, white-painted door, slightly ajar, with a doorknob that wobbles ominously when you nudge it. The gap between the door and the frame is just wide enough to reveal a sliver of darkness beyond. A faint, musty odor seeps out, like old laundry and something vaguely metallic. The door itself is adorned with a single, faded sticker of a cartoon cat\u2014probably a relic from the previous occupant. The sticker is peeling at the edges, and the cat\u2019s grin looks more sinister than cute under the harsh bathroom lighting. You don\u2019t remember what\u2019s behind it, and honestly, you\u2019re not sure you *want* to remember.",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [],
+  "room_remove": [],
+  "wear_add": [],
+  "wear_remove": [],
+  "update_description": {},
+  "current_room_base_description": null,
+  "player_description_update": null,
+  "item_visibility_update": {},
+  "narrative_summary_update": "Player examined the mysterious east door in the bathroom. The door is slightly ajar, revealing darkness and a musty odor."
+}
+
+--- 2026-02-10 19:22:28 [DM] ---
+[SYSTEM]: 
+You are the 'Dungeon Master' (DM) for a classic Interactive Fiction game.
+You interpret user inputs and narrate the results based on the world state and lore.
+
+YOUR CONTEXT:
+- Lore Bible: GENRE: Slice of Life.
+SETTING: A suburban house in Somewhere, USA. The year is 2005.
+PLAYER CHARACTER: A professional young woman, moderately attractive.
+PLAYER GOAL: Get ready for work and make it out the door.
+TONE: Dry humor, casual, classic modern Interactive Fiction style, sarcastic at times.
+- Narrative Thread: Player examined the mysterious east door in the bathroom. The door is slightly ajar, revealing darkness and a musty odor.
+- Current Room State: {"id": "room_41056aac", "name": "The Bathroom", "description": "The bathroom greets you with the kind of humidity that clings to your skin like a bad decision. The mirror above the sink is fogged at the edges, its silver backing peeling in one corner\u2014a relic from the '90s, like most of the decor in this house. The light is harsh, unflattering, the kind that exposes every pore and dark circle you\u2019ve earned from another night of scrolling through late-night infomercials. The shower curtain, a faded floral print, sways slightly, as if someone\u2014or something\u2014just brushed past it. The air smells of damp towels, expired vanilla body wash, and the faintest hint of mildew creeping in from the grout. The sink is a graveyard of half-empty toiletries: a bottle of foundation with a cracked cap, a tube of toothpaste squeezed from the middle, and a razor that\u2019s seen better days. To the north, the hallway beckons, slightly less oppressive than this fluorescent hellscape. The door to the east is closed\u2014probably for the best, given what\u2019s lurking behind it.\n\nYou can see here: foggy mirror, damp towel, expired body wash, old razor.\n\nYou can see here: foggy mirror, damp towel, expired body wash.\n\nYou can see here: foggy mirror, damp towel, expired body wash.\n\nYou can see here: foggy mirror, damp towel, expired body wash.\n\nYou can see here: foggy mirror, damp towel, expired body wash.", "exits": {"north": "room_2886c631"}, "items": ["foggy_mirror", "damp_towel", "expired_body_wash"], "visited": false, "characters": [], "base_description": null}
+- Player Inventory: [{"id": "phone", "name": "cell phone", "description": "A flip phone, its silver exterior scratched from years of being tossed into purses and dropped onto nightstands. The screen displays a single notification: \"1 New Voicemail.\" The battery icon is at 42%, which is either a blessing or a curse\u2014you haven\u2019t decided yet. The phone is silent, but you can feel its judgmental gaze, as if it\u2019s disappointed you haven\u2019t upgraded to a smartphone yet.", "carryable": true, "aliases": [], "visible": true}, {"id": "old_razor", "name": "old razor", "aliases": ["razor", "disposable razor", "shaving razor"], "description": "This razor has seen better days. The plastic handle is yellowed with age, and the blades are dull enough to make shaving feel like a form of self-flagellation. A few rust spots dot the metal, and the grip is slick with old soap scum. You\u2019re pretty sure you\u2019ve been using this same razor since college. It\u2019s a miracle you haven\u2019t given yourself a staph infection yet.", "carryable": true, "visible": true}]
+- Player Worn Items: []
+- Player State: {"current_room": "room_41056aac", "inventory": ["phone", "old_razor"], "description": null, "aliases": ["me", "myself", "self", "player"], "worn": []}
+
+YOUR INSTRUCTIONS:
+1. PARSING: Interpret intent (n, s, e, w, x, i, l, or complex actions like 'search the desk').
+2. NARRATION:
+   - Use second-person ("You"). 
+   - If an action is impossible, explain why in-character.
+   - If an action is successful, describe the sensory result.
+3. STATE UPDATES:
+   - If the player takes an item: Put its ID in 'inventory_add' and 'room_remove'.
+   - If they drop it: Put it in 'inventory_remove' and 'room_add'.
+   - If they wear something: move it with 'wear_add'. If they remove clothing: move it with 'wear_remove'.
+   - If an item's state changes (e.g., 'sharpen sword'): Update its 'update_description'.
+   - If the room's static prose should change, set 'current_room_base_description'.
+   - If the player's examine-me prose should change, set 'player_description_update'.
+   - If something is hidden/revealed, set 'item_visibility_update' with item IDs and boolean values.
+4. ROBUSTNESS:
+   - Keep room prose stable; list-like presence should be handled by engine composition, not hardcoded into prose.
+   - Hidden items should remain invisible until revealed (searching, moving coverings, opening containers, etc.).
+   - Clothing layers should affect examine-me output through world-state updates.
+5. NARRATIVE THREAD:
+   - Use 'narrative_summary_update' to summarize major developments for the Architect's future use.
+
+OUTPUT VALID JSON ONLY:
+{
+  "narrative": "The text the player sees.",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [],
+  "room_remove": [],
+  "wear_add": [],
+  "wear_remove": [],
+  "update_description": { "item_id": "New description string" },
+  "current_room_base_description": "Optional revised base room prose",
+  "player_description_update": "Optional revised examine-me prose",
+  "item_visibility_update": { "item_id": true },
+  "narrative_summary_update": "Brief update on plot/world state."
+}
+
+[USER]: PLAYER ACTION: Open door to the east
+[OUTPUT]: {
+  "narrative": "You reach for the east door, your fingers brushing against the chipped paint. The hinges creak like a horror movie sound effect as you push it open wider. The darkness beyond is thick, almost tangible, and the musty odor rolls out in a wave\u2014like wet cardboard and something faintly metallic. A narrow staircase descends into the black, the wooden steps groaning under the weight of decades of neglect. A single, flickering bulb hangs from the ceiling at the bottom, casting long, wavering shadows that seem to twist unnaturally. The air is cold, clammy, and carries the faintest whisper of... is that *music*? A distant, warped tune, like a music box playing just out of sync. The doorframe is lined with peeling wallpaper, the pattern long faded into something indistinct and unsettling. You\u2019re pretty sure this wasn\u2019t in the home inspection report when you bought the house. The stairs lead down into what can only be described as \"the basement that time forgot.\"",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [],
+  "room_remove": [],
+  "wear_add": [],
+  "wear_remove": [],
+  "update_description": {},
+  "current_room_base_description": "The bathroom greets you with the kind of humidity that clings to your skin like a bad decision. The mirror above the sink is fogged at the edges, its silver backing peeling in one corner\u2014a relic from the '90s, like most of the decor in this house. The light is harsh, unflattering, the kind that exposes every pore and dark circle you\u2019ve earned from another night of scrolling through late-night infomercials. The shower curtain, a faded floral print, sways slightly, as if someone\u2014or something\u2014just brushed past it. The air smells of damp towels, expired vanilla body wash, and the faintest hint of mildew creeping in from the grout. The sink is a graveyard of half-empty toiletries: a bottle of foundation with a cracked cap, a tube of toothpaste squeezed from the middle, and a razor that\u2019s seen better days. To the north, the hallway beckons, slightly less oppressive than this fluorescent hellscape. The door to the east is now fully open, revealing a narrow staircase descending into darkness. The musty odor of the basement below is unmistakable, and the faint sound of a warped music box drifts upward, sending an involuntary shiver down your spine.\n\nYou can see here: foggy mirror, damp towel, expired body wash, old razor.",
+  "player_description_update": null,
+  "item_visibility_update": {},
+  "narrative_summary_update": "The east door in the bathroom has been opened, revealing a previously hidden staircase leading down to a basement. The basement emits a musty, metallic odor and faint, eerie music. The player has not yet descended the stairs."
+}
+
+--- 2026-02-10 19:23:02 [DM] ---
+[SYSTEM]: 
+You are the 'Dungeon Master' (DM) for a classic Interactive Fiction game.
+You interpret user inputs and narrate the results based on the world state and lore.
+
+YOUR CONTEXT:
+- Lore Bible: GENRE: Slice of Life.
+SETTING: A suburban house in Somewhere, USA. The year is 2005.
+PLAYER CHARACTER: A professional young woman, moderately attractive.
+PLAYER GOAL: Get ready for work and make it out the door.
+TONE: Dry humor, casual, classic modern Interactive Fiction style, sarcastic at times.
+- Narrative Thread: The east door in the bathroom has been opened, revealing a previously hidden staircase leading down to a basement. The basement emits a musty, metallic odor and faint, eerie music. The player has not yet descended the stairs.
+- Current Room State: {"id": "room_41056aac", "name": "The Bathroom", "description": "The bathroom greets you with the kind of humidity that clings to your skin like a bad decision. The mirror above the sink is fogged at the edges, its silver backing peeling in one corner\u2014a relic from the '90s, like most of the decor in this house. The light is harsh, unflattering, the kind that exposes every pore and dark circle you\u2019ve earned from another night of scrolling through late-night infomercials. The shower curtain, a faded floral print, sways slightly, as if someone\u2014or something\u2014just brushed past it. The air smells of damp towels, expired vanilla body wash, and the faintest hint of mildew creeping in from the grout. The sink is a graveyard of half-empty toiletries: a bottle of foundation with a cracked cap, a tube of toothpaste squeezed from the middle, and a razor that\u2019s seen better days. To the north, the hallway beckons, slightly less oppressive than this fluorescent hellscape. The door to the east is now fully open, revealing a narrow staircase descending into darkness. The musty odor of the basement below is unmistakable, and the faint sound of a warped music box drifts upward, sending an involuntary shiver down your spine.\n\nYou can see here: foggy mirror, damp towel, expired body wash, old razor.\n\nYou can see here: foggy mirror, damp towel, expired body wash.", "exits": {"north": "room_2886c631"}, "items": ["foggy_mirror", "damp_towel", "expired_body_wash"], "visited": false, "characters": [], "base_description": "The bathroom greets you with the kind of humidity that clings to your skin like a bad decision. The mirror above the sink is fogged at the edges, its silver backing peeling in one corner\u2014a relic from the '90s, like most of the decor in this house. The light is harsh, unflattering, the kind that exposes every pore and dark circle you\u2019ve earned from another night of scrolling through late-night infomercials. The shower curtain, a faded floral print, sways slightly, as if someone\u2014or something\u2014just brushed past it. The air smells of damp towels, expired vanilla body wash, and the faintest hint of mildew creeping in from the grout. The sink is a graveyard of half-empty toiletries: a bottle of foundation with a cracked cap, a tube of toothpaste squeezed from the middle, and a razor that\u2019s seen better days. To the north, the hallway beckons, slightly less oppressive than this fluorescent hellscape. The door to the east is now fully open, revealing a narrow staircase descending into darkness. The musty odor of the basement below is unmistakable, and the faint sound of a warped music box drifts upward, sending an involuntary shiver down your spine.\n\nYou can see here: foggy mirror, damp towel, expired body wash, old razor."}
+- Player Inventory: [{"id": "phone", "name": "cell phone", "description": "A flip phone, its silver exterior scratched from years of being tossed into purses and dropped onto nightstands. The screen displays a single notification: \"1 New Voicemail.\" The battery icon is at 42%, which is either a blessing or a curse\u2014you haven\u2019t decided yet. The phone is silent, but you can feel its judgmental gaze, as if it\u2019s disappointed you haven\u2019t upgraded to a smartphone yet.", "carryable": true, "aliases": [], "visible": true}, {"id": "old_razor", "name": "old razor", "aliases": ["razor", "disposable razor", "shaving razor"], "description": "This razor has seen better days. The plastic handle is yellowed with age, and the blades are dull enough to make shaving feel like a form of self-flagellation. A few rust spots dot the metal, and the grip is slick with old soap scum. You\u2019re pretty sure you\u2019ve been using this same razor since college. It\u2019s a miracle you haven\u2019t given yourself a staph infection yet.", "carryable": true, "visible": true}]
+- Player Worn Items: []
+- Player State: {"current_room": "room_41056aac", "inventory": ["phone", "old_razor"], "description": null, "aliases": ["me", "myself", "self", "player"], "worn": []}
+
+YOUR INSTRUCTIONS:
+1. PARSING: Interpret intent (n, s, e, w, x, i, l, or complex actions like 'search the desk').
+2. NARRATION:
+   - Use second-person ("You"). 
+   - If an action is impossible, explain why in-character.
+   - If an action is successful, describe the sensory result.
+3. STATE UPDATES:
+   - If the player takes an item: Put its ID in 'inventory_add' and 'room_remove'.
+   - If they drop it: Put it in 'inventory_remove' and 'room_add'.
+   - If they wear something: move it with 'wear_add'. If they remove clothing: move it with 'wear_remove'.
+   - If an item's state changes (e.g., 'sharpen sword'): Update its 'update_description'.
+   - If the room's static prose should change, set 'current_room_base_description'.
+   - If the player's examine-me prose should change, set 'player_description_update'.
+   - If something is hidden/revealed, set 'item_visibility_update' with item IDs and boolean values.
+4. ROBUSTNESS:
+   - Keep room prose stable; list-like presence should be handled by engine composition, not hardcoded into prose.
+   - Hidden items should remain invisible until revealed (searching, moving coverings, opening containers, etc.).
+   - Clothing layers should affect examine-me output through world-state updates.
+5. NARRATIVE THREAD:
+   - Use 'narrative_summary_update' to summarize major developments for the Architect's future use.
+
+OUTPUT VALID JSON ONLY:
+{
+  "narrative": "The text the player sees.",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [],
+  "room_remove": [],
+  "wear_add": [],
+  "wear_remove": [],
+  "update_description": { "item_id": "New description string" },
+  "current_room_base_description": "Optional revised base room prose",
+  "player_description_update": "Optional revised examine-me prose",
+  "item_visibility_update": { "item_id": true },
+  "narrative_summary_update": "Brief update on plot/world state."
+}
+
+[USER]: PLAYER ACTION: close door
+[OUTPUT]: {
+  "narrative": "You reach for the east door, your fingers brushing against the cool, slightly damp wood. With a firm push, the door swings shut with a soft *click*, sealing off the narrow staircase and the unsettling basement beyond. The warped music box melody is abruptly muffled, as if someone turned down the volume on a ghostly radio. The musty, metallic odor lingers for a moment before dissipating, replaced by the familiar scent of expired vanilla body wash and mildew. The bathroom feels marginally less creepy now, though the shower curtain still sways slightly, as if mocking your attempt to reclaim normalcy.",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [],
+  "room_remove": [],
+  "wear_add": [],
+  "wear_remove": [],
+  "update_description": {},
+  "current_room_base_description": "The bathroom greets you with the kind of humidity that clings to your skin like a bad decision. The mirror above the sink is fogged at the edges, its silver backing peeling in one corner\u2014a relic from the '90s, like most of the decor in this house. The light is harsh, unflattering, the kind that exposes every pore and dark circle you\u2019ve earned from another night of scrolling through late-night infomercials. The shower curtain, a faded floral print, sways slightly, as if someone\u2014or something\u2014just brushed past it. The air smells of damp towels, expired vanilla body wash, and the faintest hint of mildew creeping in from the grout. The sink is a graveyard of half-empty toiletries: a bottle of foundation with a cracked cap, a tube of toothpaste squeezed from the middle, and a razor that\u2019s seen better days. To the north, the hallway beckons, slightly less oppressive than this fluorescent hellscape. The door to the east is now closed, its secrets temporarily locked away. The room feels almost normal again, if you ignore the way the shower curtain still seems to move on its own.\n\nYou can see here: foggy mirror, damp towel, expired body wash, old razor.",
+  "player_description_update": null,
+  "item_visibility_update": {},
+  "narrative_summary_update": "The player has closed the east door, sealing off the basement staircase and its eerie ambiance. The bathroom now feels slightly more mundane, though the lingering oddities (like the swaying shower curtain) persist."
+}
+
+--- 2026-02-10 20:22:24 [DM] ---
+[SYSTEM]: [DM SYSTEM PROMPT]
+[USER]: PLAYER ACTION: jump [LORE BIBLE CONTENTS] [NARRATIVE THREAD] [CURRENT ROOM STATE] [INVENTORY] [WORN ITEMS] [PLAYER STATE]
+[USAGE]: input=1670 output=251 total=1921 raw={"prompt_tokens": 1670, "total_tokens": 1921, "completion_tokens": 251, "num_cached_tokens": 1697}
+[OUTPUT]: {
+  "narrative": "You hop in place, knees bending slightly as you launch yourself a few inches off the ground. The hallway carpet, already thin and worn, does little to cushion your landing. The framed photos on the wall rattle ominously, and for a brief, horrifying moment, you swear the mid-sneeze holiday party photo tilts at a more unflattering angle. The landline phone on the console table lets out a muffled *thunk* as it shifts slightly. You land with a soft *whump*, and the hallway returns to its usual state of quiet mediocrity. Nothing has changed, except now your calves feel vaguely tighter, and you\u2019re pretty sure you just gave the potted plant a minor existential crisis.",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [],
+  "room_remove": [],
+  "wear_add": [],
+  "wear_remove": [],
+  "update_description": {},
+  "current_room_base_description": null,
+  "player_description_update": null,
+  "item_visibility_update": {},
+  "narrative_summary_update": "Player attempted a vertical leap in the hallway. The world remains unimpressed.",
+  "_usage": {
+    "input_tokens": 1670,
+    "output_tokens": 251,
+    "total_tokens": 1921,
+    "raw_usage": {
+      "prompt_tokens": 1670,
+      "total_tokens": 1921,
+      "completion_tokens": 251,
+      "num_cached_tokens": 1697
+    }
+  }
+}
+
+--- 2026-02-10 22:38:35 [DM] ---
+[SYSTEM]: [DM SYSTEM PROMPT]
+[USER]: PLAYER ACTION: x photos [LORE BIBLE CONTENTS] [NARRATIVE THREAD] [CURRENT ROOM STATE] [INVENTORY] [WORN ITEMS] [PLAYER STATE]
+[USAGE]: input=1477 output=271 total=1748 raw={"prompt_tokens": 1477, "total_tokens": 1748, "completion_tokens": 271, "num_cached_tokens": 1504}
+[OUTPUT]: {
+  "narrative": "You turn your attention to the framed photos lining the hallway walls. The first one is a blurry shot of you and your college roommate at a party, both of you mid-laugh, your faces slightly out of focus. The next frame holds a picture of your ex, Greg, grinning like he didn\u2019t ghost you after three months of dating. You wince\u2014why is this still here? Further down, there\u2019s the infamous office holiday party photo: your face contorted in a sneeze, your coworker Dave photobombing in the background with a thumbs-up. The rest are a mix of forgettable moments and people you vaguely recognize but can\u2019t quite place. None of them spark joy, but none of them are bad enough to warrant taking down, either. It\u2019s the visual equivalent of a shrug.",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [],
+  "room_remove": [],
+  "wear_add": [],
+  "wear_remove": [],
+  "update_description": {},
+  "current_room_base_description": null,
+  "player_description_update": null,
+  "item_visibility_update": {},
+  "narrative_summary_update": "Player examined the hallway photos, reinforcing the theme of mediocrity and unresolved nostalgia.",
+  "_usage": {
+    "input_tokens": 1477,
+    "output_tokens": 271,
+    "total_tokens": 1748,
+    "raw_usage": {
+      "prompt_tokens": 1477,
+      "total_tokens": 1748,
+      "completion_tokens": 271,
+      "num_cached_tokens": 1504
+    }
+  }
+}
+
+--- 2026-02-10 22:50:40 [DM] ---
+[SYSTEM]: [DM SYSTEM PROMPT]
+[USER]: PLAYER ACTION: x pjs [LORE BIBLE CONTENTS] [NARRATIVE THREAD] [CURRENT ROOM STATE] [INVENTORY] [WORN ITEMS] [PLAYER STATE]
+[USAGE]: input=1603 output=213 total=1816 raw={"prompt_tokens": 1603, "total_tokens": 1816, "completion_tokens": 213, "num_cached_tokens": 1630}
+[OUTPUT]: {
+  "narrative": "Your pajamas are a relic from a time when comfort was a priority. The flannel set is covered in a pattern of tiny, faded sheep\u2014ironic, given how little sleep you\u2019ve been getting lately. The top is slightly rumpled, the sleeves pushed up to your elbows, and the pants ride just a little too low on your hips, as if they\u2019re judging your life choices. The fabric is soft from years of washing, but there\u2019s a small coffee stain near the hem, a souvenir from last week\u2019s late-night work session. You\u2019re pretty sure these PJs are older than your current job.",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [],
+  "room_remove": [],
+  "wear_add": [],
+  "wear_remove": [],
+  "update_description": {},
+  "current_room_base_description": null,
+  "player_description_update": null,
+  "item_visibility_update": {},
+  "narrative_summary_update": null,
+  "_usage": {
+    "input_tokens": 1603,
+    "output_tokens": 213,
+    "total_tokens": 1816,
+    "raw_usage": {
+      "prompt_tokens": 1603,
+      "total_tokens": 1816,
+      "completion_tokens": 213,
+      "num_cached_tokens": 1630
+    }
+  }
+}
+
+--- 2026-02-10 22:51:33 [DM] ---
+[SYSTEM]: [DM SYSTEM PROMPT]
+[USER]: PLAYER ACTION: undress completely [LORE BIBLE CONTENTS] [NARRATIVE THREAD] [CURRENT ROOM STATE] [INVENTORY] [WORN ITEMS] [PLAYER STATE]
+[USAGE]: input=1377 output=312 total=1689 raw={"prompt_tokens": 1377, "total_tokens": 1689, "completion_tokens": 312, "num_cached_tokens": 1404}
+[OUTPUT]: {
+  "narrative": "You strip off your pajamas with the enthusiasm of someone who just remembered they have a 9 AM meeting. The fabric hits the floor with a soft *thwap*, and you stand there in your birthday suit, the morning air raising goosebumps along your arms. The neighbor\u2019s dog barks again\u2014probably at you. The window is still open, after all. You glance at the clock: 7:42 AM. Time is ticking, and you\u2019re now officially one step closer to being *that* person who shows up to work naked because they \u2018lost track of time.\u2019 Congratulations.",
+  "inventory_remove": [],
+  "room_add": [
+    "pajamas"
+  ],
+  "room_remove": [],
+  "wear_remove": [],
+  "player_description_update": "You are standing in the middle of your bedroom, completely naked. The carpet feels weirdly abrasive against your bare feet, and you\u2019re acutely aware of how long it\u2019s been since you last exfoliated. Your phone sits nearby, judging you silently. The open window seems to be judging you too, but that might just be the breeze.",
+  "item_visibility_update": {},
+  "inventory_add": [],
+  "wear_add": [],
+  "update_description": {},
+  "current_room_base_description": null,
+  "narrative_summary_update": "Player has undressed completely, adding pajamas to the room and updating their description to reflect their current state of undress.",
+  "_usage": {
+    "input_tokens": 1377,
+    "output_tokens": 312,
+    "total_tokens": 1689,
+    "raw_usage": {
+      "prompt_tokens": 1377,
+      "total_tokens": 1689,
+      "completion_tokens": 312,
+      "num_cached_tokens": 1404
+    }
+  }
+}
+
+--- 2026-02-10 22:54:02 [DM] ---
+[SYSTEM]: [DM SYSTEM PROMPT]
+[USER]: PLAYER ACTION: search pile of laundry [LORE BIBLE CONTENTS] [NARRATIVE THREAD] [CURRENT ROOM STATE] [INVENTORY] [WORN ITEMS] [PLAYER STATE]
+[USAGE]: input=1540 output=290 total=1830 raw={"prompt_tokens": 1540, "total_tokens": 1830, "completion_tokens": 290, "num_cached_tokens": 1567}
+[OUTPUT]: {
+  "narrative": "You dig through the pile of laundry with the enthusiasm of someone who\u2019s just remembered they have a job to get to. The top layer is mostly socks\u2014some clean, some suspiciously crusty, all mismatched. Beneath that, you uncover a few pairs of underwear (thankfully clean), a crumpled blouse that may or may not have been worn to last year\u2019s office holiday party, and a single, lonely mitten. At the very bottom, you find a crumpled receipt from the grocery store dated three weeks ago. It\u2019s for a single item: \"Disposable Razor (12-pack).\" You don\u2019t remember buying that. You *definitely* don\u2019t remember using eleven of them since then. The pile shifts ominously as you sift, releasing a faint scent of fabric softener and regret.",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [],
+  "room_remove": [],
+  "wear_add": [],
+  "wear_remove": [],
+  "update_description": {},
+  "current_room_base_description": null,
+  "player_description_update": null,
+  "item_visibility_update": {},
+  "narrative_summary_update": "Player searched the laundry pile, uncovering mundane items but nothing immediately useful for getting ready. The pile remains a testament to procrastination.",
+  "_usage": {
+    "input_tokens": 1540,
+    "output_tokens": 290,
+    "total_tokens": 1830,
+    "raw_usage": {
+      "prompt_tokens": 1540,
+      "total_tokens": 1830,
+      "completion_tokens": 290,
+      "num_cached_tokens": 1567
+    }
+  }
+}
+
+--- 2026-02-10 22:54:55 [DM] ---
+[SYSTEM]: [DM SYSTEM PROMPT]
+[USER]: PLAYER ACTION: x blouse [LORE BIBLE CONTENTS] [NARRATIVE THREAD] [CURRENT ROOM STATE] [INVENTORY] [WORN ITEMS] [PLAYER STATE]
+[USAGE]: input=1491 output=184 total=1675 raw={"prompt_tokens": 1491, "total_tokens": 1675, "completion_tokens": 184, "num_cached_tokens": 1518}
+[OUTPUT]: {
+  "narrative": "You scan the room for a blouse, but there\u2019s no sign of one. The laundry pile is a chaotic mix of socks, jeans, and the occasional bra, but no blouses. Maybe it\u2019s still in the closet? Or perhaps it\u2019s buried under the unmade bed, waiting to be discovered like some kind of fashion archaeology project. Either way, it\u2019s not here right now.",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [],
+  "room_remove": [],
+  "wear_add": [],
+  "wear_remove": [],
+  "update_description": {},
+  "current_room_base_description": null,
+  "player_description_update": null,
+  "item_visibility_update": {},
+  "narrative_summary_update": "Player searched for a blouse but did not find one in the current room state.",
+  "_usage": {
+    "input_tokens": 1491,
+    "output_tokens": 184,
+    "total_tokens": 1675,
+    "raw_usage": {
+      "prompt_tokens": 1491,
+      "total_tokens": 1675,
+      "completion_tokens": 184,
+      "num_cached_tokens": 1518
+    }
+  }
+}
+
+--- 2026-02-10 22:55:48 [DM] ---
+[SYSTEM]: [DM SYSTEM PROMPT]
+[USER]: PLAYER ACTION: open closet [LORE BIBLE CONTENTS] [NARRATIVE THREAD] [CURRENT ROOM STATE] [INVENTORY] [WORN ITEMS] [PLAYER STATE]
+[USAGE]: input=1507 output=453 total=1960 raw={"prompt_tokens": 1507, "total_tokens": 1960, "completion_tokens": 453, "num_cached_tokens": 1534}
+[OUTPUT]: {
+  "narrative": "You pull the closet door open with a creak that sounds suspiciously like a sigh of resignation. Inside, the darkness is less an absence of light and more a tangible force, as if the closet has been hoarding shadows since the Clinton administration. A single bare bulb dangles from a chain, swaying slightly as if disturbed by your intrusion. The light reveals a chaotic landscape: hangers clatter together like wind chimes in a hurricane, and the floor is a minefield of shoeboxes, half-empty laundry baskets, and at least one forgotten gym bag that smells faintly of regret and old protein bars. The clothes\u2014what you can see of them\u2014are a mix of professional blouses, faded band T-shirts, and that one sweater your aunt gave you for Christmas that you *swear* you\u2019ll wear someday. A few empty wire hangers sway ominously, as if judging your life choices. The scent of cedar and mothballs lingers, though whether it\u2019s from actual mothballs or just the general aura of neglect, you can\u2019t be sure. The closet is, in a word, *a lot*.\n\nYou can see here: hangers, shoeboxes, laundry baskets, gym bag, clothes (blouses, T-shirts, sweater).",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [
+    "hangers",
+    "shoeboxes",
+    "laundry_baskets",
+    "gym_bag",
+    "clothes"
+  ],
+  "room_remove": [],
+  "wear_add": [],
+  "wear_remove": [],
+  "update_description": {},
+  "current_room_base_description": null,
+  "player_description_update": null,
+  "item_visibility_update": {
+    "hangers": true,
+    "shoeboxes": true,
+    "laundry_baskets": true,
+    "gym_bag": true,
+    "clothes": true
+  },
+  "narrative_summary_update": "Player opened the closet, revealing its chaotic contents. The search for a blouse continues.",
+  "_usage": {
+    "input_tokens": 1507,
+    "output_tokens": 453,
+    "total_tokens": 1960,
+    "raw_usage": {
+      "prompt_tokens": 1507,
+      "total_tokens": 1960,
+      "completion_tokens": 453,
+      "num_cached_tokens": 1534
+    }
+  }
+}
+
+--- 2026-02-11 00:31:01 [GENESIS] ---
+[SYSTEM]: [GENESIS SYSTEM PROMPT]
+[USER]: Initiate World Genesis. [LORE BIBLE CONTENTS]
+[USAGE]: input=666 output=1531 total=2197
+[OUTPUT]: {
+  "intro_text": "You wake up to the shrill cry of your alarm clock, the digital numbers on the nightstand glowing 6:30 AM in harsh red. Another day, another dollar. The scent of stale coffee lingers from yesterday, and the faint hum of the refrigerator downstairs reminds you that the world outside this bedroom is already in motion. Time to get up, shake off the grogginess, and tackle the rat race\u2014again.",
+  "narrative_thread": "The player character is a young professional woman preparing for a typical workday in 2005 suburban America. The immediate goal is to navigate her morning routine, gather necessary items, and leave the house on time. The tone is dry, humorous, and grounded in the mundane realities of adult life. Small details (e.g., a forgotten lunch, a misplaced key) may add light challenges or flavor to the experience.",
+  "blueprint": "The starting room is the **Bedroom**, which connects to the **Hallway**. The Hallway leads to the **Bathroom** (east), **Closet** (north), and **Stairs** (down to the **Kitchen**). The Kitchen connects to the **Living Room** (south) and the **Garage** (west). The front door to the outside world is in the Living Room. Additional rooms like a **Home Office** or **Laundry Room** may branch off the Hallway or Kitchen later if needed.",
+  "starting_room": {
+    "name": "Bedroom",
+    "description": "Your bedroom is a shrine to the grind\u2014a queen-sized bed with rumpled sheets, a nightstand cluttered with lotion bottles and a half-empty glass of water, and a dresser topped with a mirror reflecting your sleep-creased face. The walls are painted a soothing beige, though the color does little to soften the fluorescent glow of the alarm clock. A pair of slippers sits haphazardly near the bed, and your work clothes from yesterday are draped over a chair in the corner, as if waiting for an encore.",
+    "items": [
+      {
+        "id": "alarm_clock",
+        "name": "alarm clock",
+        "aliases": [
+          "clock",
+          "alarm",
+          "digital clock"
+        ],
+        "description": "A cheap, plastic digital alarm clock with a cracked screen. The time reads 6:30 AM, and the alarm is still blaring its obnoxious beep-beep-beep. The buttons are sticky from years of use, and the back is missing a battery cover. It\u2019s the kind of thing you\u2019d replace if you ever had the time.",
+        "is_carryable": true
+      },
+      {
+        "id": "nightstand",
+        "name": "nightstand",
+        "aliases": [
+          "stand",
+          "bedside table",
+          "table"
+        ],
+        "description": "A small, wooden nightstand with a single drawer. The surface is a graveyard of lotion bottles, a half-empty glass of water, and a dog-eared paperback novel you\u2019ve been meaning to finish. The drawer is slightly ajar, revealing a tangle of charging cables and a lone AA battery.",
+        "is_carryable": false
+      },
+      {
+        "id": "slippers",
+        "name": "slippers",
+        "aliases": [
+          "house slippers",
+          "fluffy slippers",
+          "shoes"
+        ],
+        "description": "A pair of plush, pink slippers with little bows on the toes. They\u2019re worn at the heels and smell faintly of lavender fabric softener. Comfortable, but not exactly office-appropriate.",
+        "is_carryable": true
+      },
+      {
+        "id": "work_clothes",
+        "name": "work clothes",
+        "aliases": [
+          "clothes",
+          "outfit",
+          "blouse",
+          "skirt",
+          "yesterday's clothes"
+        ],
+        "description": "A wrinkled blouse and a pencil skirt, both in shades of corporate gray. They\u2019re draped over the chair like a deflated version of yourself. The blouse has a coffee stain near the hem, and the skirt\u2019s zipper is half-undone. You\u2019ll need to change before heading out.",
+        "is_carryable": true
+      },
+      {
+        "id": "bed",
+        "name": "bed",
+        "aliases": [
+          "mattress",
+          "sheets",
+          "blanket"
+        ],
+        "description": "A queen-sized bed with a rumpled duvet and a single, lumpy pillow. The sheets are tangled from a night of tossing and turning, and the mattress sags slightly in the middle. It\u2019s not the most comfortable bed in the world, but it\u2019s yours\u2014at least until the next paycheck.",
+        "is_carryable": false
+      },
+      {
+        "id": "dresser",
+        "name": "dresser",
+        "aliases": [
+          "chest",
+          "drawers",
+          "mirror"
+        ],
+        "description": "A tall, wooden dresser with a mirror attached to the top. The mirror reflects your tired face back at you, complete with bedhead and dark circles under your eyes. The drawers are slightly crooked, and one of them sticks when you try to open it. The top of the dresser is home to a jewelry box, a hairbrush, and a bottle of perfume you rarely use.",
+        "is_carryable": false
+      },
+      {
+        "id": "jewelry_box",
+        "name": "jewelry box",
+        "aliases": [
+          "box",
+          "small box",
+          "earrings box"
+        ],
+        "description": "A small, velvet-lined jewelry box with a tarnished brass clasp. Inside, a few pairs of stud earrings and a thin silver necklace lie tangled together. The velvet is worn in spots, and the hinge creaks when you open it. It\u2019s not much, but it\u2019s yours.",
+        "is_carryable": true
+      }
+    ],
+    "new_exits": [
+      "east"
+    ]
+  },
+  "starting_inventory": [
+    {
+      "id": "phone",
+      "name": "cell phone",
+      "aliases": [
+        "phone",
+        "mobile",
+        "flip phone",
+        "Nokia"
+      ],
+      "description": "A sleek, silver flip phone with a tiny screen and a keypad that\u2019s seen better days. The battery icon shows it\u2019s at 42%, which is just enough to get you through the morning if you don\u2019t spend too long texting. There\u2019s a crack in the corner of the screen from that one time you dropped it in the parking lot.",
+      "is_carryable": true
+    },
+    {
+      "id": "keys",
+      "name": "house keys",
+      "aliases": [
+        "keys",
+        "keychain",
+        "car keys"
+      ],
+      "description": "A jangly set of keys on a keychain shaped like a coffee cup. The house key, car key, and a tiny bottle opener dangle from the ring. The metal is cold to the touch, and the keychain smells faintly of gasoline from the last time you filled up your tank.",
+      "is_carryable": true
+    }
+  ],
+  "_usage": {
+    "input_tokens": 666,
+    "output_tokens": 1531,
+    "total_tokens": 2197,
+    "raw_usage": {
+      "prompt_tokens": 666,
+      "total_tokens": 2197,
+      "completion_tokens": 1531,
+      "num_cached_tokens": 693
+    }
+  }
+}
+
+--- 2026-02-11 00:38:08 [DM] ---
+[SYSTEM]: [DM SYSTEM PROMPT]
+[USER]: PLAYER ACTION: x my reflection
+[USAGE]: input=1601 output=255 total=1856
+[OUTPUT]: {
+  "narrative": "Your reflection in the dresser mirror stares back at you with the weary resignation of someone who has already lost a battle today. Your hair is a tousled mess, flattened on one side from sleep, and your eyes are half-lidded, as if debating whether to fully commit to the day. There\u2019s a faint crease on your cheek from the pillow, and your skin looks a little dull\u2014probably from that third glass of wine last night. You sigh. At least you don\u2019t have to impress anyone until you step into the office.",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [],
+  "room_remove": [],
+  "wear_add": [],
+  "wear_remove": [],
+  "update_description": {},
+  "current_room_base_description": null,
+  "player_description_update": "You look like someone who has just woken up and is already questioning all of their life choices. Your hair is a tousled mess, your eyes are half-lidded, and there\u2019s a faint crease on your cheek from the pillow. The morning light does you no favors.",
+  "item_visibility_update": {},
+  "narrative_summary_update": null,
+  "_usage": {
+    "input_tokens": 1601,
+    "output_tokens": 255,
+    "total_tokens": 1856,
+    "raw_usage": {
+      "prompt_tokens": 1601,
+      "total_tokens": 1856,
+      "completion_tokens": 255,
+      "num_cached_tokens": 1628
+    }
+  }
+}
+
+--- 2026-02-11 00:39:26 [DM] ---
+[SYSTEM]: [DM SYSTEM PROMPT]
+[USER]: PLAYER ACTION: take blouse
+[USAGE]: input=1427 output=131 total=1558
+[OUTPUT]: {
+  "narrative": "You scan the room but don't see a blouse anywhere. Your work clothes from yesterday are still draped over the chair, but no fresh blouse is in sight. Maybe it's in the closet or the laundry?",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [],
+  "room_remove": [],
+  "wear_add": [],
+  "wear_remove": [],
+  "update_description": {},
+  "current_room_base_description": null,
+  "player_description_update": null,
+  "item_visibility_update": {},
+  "narrative_summary_update": null,
+  "_usage": {
+    "input_tokens": 1427,
+    "output_tokens": 131,
+    "total_tokens": 1558,
+    "raw_usage": {
+      "prompt_tokens": 1427,
+      "total_tokens": 1558,
+      "completion_tokens": 131,
+      "num_cached_tokens": 1454
+    }
+  }
+}
+
+--- 2026-02-11 00:39:35 [DM] ---
+[SYSTEM]: [DM SYSTEM PROMPT]
+[USER]: PLAYER ACTION: take work clothes
+[USAGE]: input=1392 output=166 total=1558
+[OUTPUT]: {
+  "narrative": "You pluck the work clothes off the chair, shaking out the wrinkles with a practiced flick of your wrist. The fabric is slightly stiff from being left out overnight, and the faint scent of yesterday\u2019s perfume lingers on the collar. The blouse is still passable, but the skirt might need a quick once-over with the lint roller later.",
+  "inventory_add": [
+    "work_clothes"
+  ],
+  "room_remove": [
+    "work_clothes"
+  ],
+  "inventory_remove": [],
+  "room_add": [],
+  "wear_add": [],
+  "wear_remove": [],
+  "update_description": {},
+  "current_room_base_description": null,
+  "player_description_update": null,
+  "item_visibility_update": {},
+  "narrative_summary_update": "",
+  "_usage": {
+    "input_tokens": 1392,
+    "output_tokens": 166,
+    "total_tokens": 1558,
+    "raw_usage": {
+      "prompt_tokens": 1392,
+      "total_tokens": 1558,
+      "completion_tokens": 166,
+      "num_cached_tokens": 1419
+    }
+  }
+}
+
+--- 2026-02-11 00:43:08 [ARCHITECT] ---
+[SYSTEM]: [ARCHITECT SYSTEM PROMPT]
+[USER]: Move e from Bedroom
+[USAGE]: input=1099 output=882 total=1981
+[OUTPUT]: {
+  "name": "Hallway",
+  "description": "The hallway stretches before you, a narrow corridor of beige carpet and off-white walls that seem to absorb the morning light rather than reflect it. A faint scent of lemon cleaner lingers, though it does little to mask the underlying mustiness of an old house. The air hums with the quiet whir of the furnace kicking on, and the distant drip of a faucet echoes from somewhere deeper in the house. A row of framed family photos lines the wall, their glass surfaces smudged with fingerprints, as if someone had recently paused to scrutinize them. To the east, the bathroom door stands slightly ajar, revealing a sliver of the sink and mirror beyond. A narrow closet door looms to the north, its brass knob tarnished with age.",
+  "new_exits": [
+    "east",
+    "north",
+    "down"
+  ],
+  "blueprint_update": "The Hallway connects to the Bedroom (west), Bathroom (east), Closet (north), and Stairs (down to the Kitchen). The Kitchen leads to the Living Room (south) and Garage (west). The front door is in the Living Room. Additional rooms like a Home Office or Laundry Room may branch off later if needed.",
+  "items": [
+    {
+      "id": "item_hallway_family_photos",
+      "name": "family photos",
+      "aliases": [
+        "photos",
+        "pictures",
+        "framed photos",
+        "family pictures"
+      ],
+      "description": "A mismatched collection of framed photos, most of them at least a decade old. There\u2019s you at age ten, grinning with missing teeth in front of a birthday cake. Another shows your parents on their wedding day, looking impossibly young. The most recent one is from last Christmas, your face slightly blurred from the camera\u2019s slow shutter. The frames are dusty, and one of them is slightly crooked, as if someone bumped it in passing.",
+      "is_carryable": false
+    },
+    {
+      "id": "item_hallway_thermostat",
+      "name": "thermostat",
+      "aliases": [
+        "temperature control",
+        "heater control",
+        "furnace control"
+      ],
+      "description": "A digital thermostat mounted on the wall, its screen glowing faintly with the current temperature: 72 degrees. The buttons are worn from years of use, and the plastic cover is slightly yellowed. A thin layer of dust has settled in the crevices around the display. It\u2019s set to \u2018Auto,\u2019 which means the furnace will kick on if the temperature drops below 70.",
+      "is_carryable": false
+    },
+    {
+      "id": "item_hallway_umbrella_stand",
+      "name": "umbrella stand",
+      "aliases": [
+        "stand",
+        "umbrellas",
+        "rain stand"
+      ],
+      "description": "A tall, cylindrical umbrella stand made of dark wicker. It\u2019s stuffed with a hodgepodge of umbrellas\u2014some cheap and collapsible, others sturdy and wooden-handled. A few of them are slightly damp, as if they\u2019ve been used recently and not properly dried. At the bottom of the stand, a single black dress shoe lies forgotten, its mate nowhere in sight.",
+      "is_carryable": false
+    },
+    {
+      "id": "item_hallway_junk_mail",
+      "name": "junk mail",
+      "aliases": [
+        "mail",
+        "pile of mail",
+        "envelopes",
+        "advertisements"
+      ],
+      "description": "A small stack of junk mail and flyers, left on the narrow console table beneath the family photos. Most of it is addressed to \u2018Occupant\u2019 or \u2018Resident,\u2019 but a few pieces bear your name in bold, blocky letters. There\u2019s a coupon for a local pizza place, a credit card offer, and what looks like a utility bill buried at the bottom. The envelopes are slightly crumpled, as if someone had flipped through them absentmindedly before tossing them here.",
+      "is_carryable": true
+    }
+  ],
+  "_usage": {
+    "input_tokens": 1099,
+    "output_tokens": 882,
+    "total_tokens": 1981,
+    "raw_usage": {
+      "prompt_tokens": 1099,
+      "total_tokens": 1981,
+      "completion_tokens": 882,
+      "num_cached_tokens": 1126
+    }
+  }
+}
+
+--- 2026-02-11 00:44:19 [ARCHITECT] ---
+[SYSTEM]: [ARCHITECT SYSTEM PROMPT]
+[USER]: Move east from Hallway
+[USAGE]: input=1107 output=807 total=1914
+[OUTPUT]: {
+  "name": "Bathroom",
+  "description": "The bathroom is a cramped, utilitarian space, its once-white tiles now yellowed with age and streaked with grime in the grout lines. The air is thick with the scent of damp towels and the sharp tang of toothpaste mingling with the faint, sour undertone of last night\u2019s forgotten glass of water on the sink. A fluorescent light buzzes overhead, casting a harsh glow that exaggerates every imperfection\u2014the chipped edge of the sink, the peeling sticker on the mirror, the way the shower curtain sags slightly from its rod. The linoleum floor is cold beneath your feet, and a single, half-used bar of soap sits in a cracked dish, its surface slick with moisture. To the west, the hallway beckons, while the faint sound of a toilet tank refilling drifts from somewhere beyond the shower curtain.",
+  "new_exits": [
+    "west"
+  ],
+  "blueprint_update": "The Hallway connects to the Bedroom (west), Bathroom (east), Closet (north), and Stairs (down to the Kitchen). The Kitchen leads to the Living Room (south) and Garage (west). The front door is in the Living Room. Additional rooms like a Home Office or Laundry Room may branch off later if needed.",
+  "items": [
+    {
+      "id": "item_9a7b3c2d",
+      "name": "toothbrush",
+      "aliases": [
+        "brush",
+        "tooth brush",
+        "oral brush"
+      ],
+      "description": "A slightly frayed toothbrush, its bristles splayed from overuse. The blue handle is faded, and there\u2019s a faint ring of toothpaste residue near the base. It\u2019s yours, though you can\u2019t remember the last time you replaced it.",
+      "is_carryable": true
+    },
+    {
+      "id": "item_5e8f1a4b",
+      "name": "shower curtain",
+      "aliases": [
+        "curtain",
+        "plastic curtain",
+        "shower liner"
+      ],
+      "description": "A cheap, mildew-speckled shower curtain, its once-opaque surface now translucent in patches from years of use. It\u2019s printed with a faded pattern of seashells and starfish, though the colors have long since washed out. The bottom hem is damp and slightly curled, and a few of the plastic rings that hold it to the rod are cracked.",
+      "is_carryable": false
+    },
+    {
+      "id": "item_2c9d6e5f",
+      "name": "medicine cabinet",
+      "aliases": [
+        "cabinet",
+        "mirror cabinet",
+        "bathroom cabinet"
+      ],
+      "description": "A mirrored medicine cabinet mounted above the sink. The glass is smudged with fingerprints, and the silver frame is tarnished along the edges. The door creaks slightly when opened, revealing a cluttered interior of half-empty pill bottles, a tube of expired ointment, and a lone razor blade. The back of the cabinet is lined with yellowed contact paper, peeling at the corners.",
+      "is_carryable": false
+    },
+    {
+      "id": "item_7f3a8b1c",
+      "name": "towel rack",
+      "aliases": [
+        "rack",
+        "towel bar",
+        "bathroom rack"
+      ],
+      "description": "A simple chrome towel rack mounted on the wall. One of the mounting brackets is loose, causing the bar to sag slightly. A damp hand towel hangs from it, its edges frayed and its color dulled from countless washes. The other hook is empty, save for a single, forgotten hair tie.",
+      "is_carryable": false
+    }
+  ],
+  "_usage": {
+    "input_tokens": 1107,
+    "output_tokens": 807,
+    "total_tokens": 1914,
+    "raw_usage": {
+      "prompt_tokens": 1107,
+      "total_tokens": 1914,
+      "completion_tokens": 807,
+      "num_cached_tokens": 1134
+    }
+  }
+}
+
+--- 2026-02-11 00:45:38 [DM] ---
+[SYSTEM]: [DM SYSTEM PROMPT]
+[USER]: PLAYER ACTION: take razor blade
+[USAGE]: input=1733 output=155 total=1888
+[OUTPUT]: {
+  "narrative": "You scan the bathroom counter and the edges of the sink, but there\u2019s no razor blade in sight. The cracked soap dish holds only the half-used bar of soap, and the medicine cabinet is shut tight. If there\u2019s a razor blade here, it\u2019s well hidden\u2014or you\u2019re just not seeing it in your half-awake state.",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [],
+  "room_remove": [],
+  "wear_add": [],
+  "wear_remove": [],
+  "update_description": {},
+  "current_room_base_description": null,
+  "player_description_update": null,
+  "item_visibility_update": {},
+  "narrative_summary_update": "",
+  "_usage": {
+    "input_tokens": 1733,
+    "output_tokens": 155,
+    "total_tokens": 1888,
+    "raw_usage": {
+      "prompt_tokens": 1733,
+      "total_tokens": 1888,
+      "completion_tokens": 155,
+      "num_cached_tokens": 1760
+    }
+  }
+}
+
+--- 2026-02-11 00:45:52 [DM] ---
+[SYSTEM]: [DM SYSTEM PROMPT]
+[USER]: PLAYER ACTION: what am i wearing
+[USAGE]: input=1566 output=132 total=1698
+[OUTPUT]: {
+  "narrative": "You\u2019re not wearing anything at the moment. Just standing there in the harsh fluorescent light of the bathroom, feeling the chill of the linoleum underfoot. It\u2019s a bold choice, but not exactly office-appropriate.",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [],
+  "room_remove": [],
+  "wear_add": [],
+  "wear_remove": [],
+  "update_description": {},
+  "current_room_base_description": null,
+  "player_description_update": null,
+  "item_visibility_update": {},
+  "narrative_summary_update": null,
+  "_usage": {
+    "input_tokens": 1566,
+    "output_tokens": 132,
+    "total_tokens": 1698,
+    "raw_usage": {
+      "prompt_tokens": 1566,
+      "total_tokens": 1698,
+      "completion_tokens": 132,
+      "num_cached_tokens": 1593
+    }
+  }
+}
+
+--- 2026-02-11 00:46:06 [DM] ---
+[SYSTEM]: [DM SYSTEM PROMPT]
+[USER]: PLAYER ACTION: x my body
+[USAGE]: input=1584 output=271 total=1855
+[OUTPUT]: {
+  "narrative": "You glance down at yourself in the harsh fluorescent light. You're still wearing the same pajama set from last night\u2014a faded, oversized t-shirt with a cartoon cat on it and a pair of plaid flannel pants that have seen better days. The shirt is slightly askew, revealing one bare shoulder, and the pants are bunched up at the ankles. Your hair is a mess, tangled from sleep, and there\u2019s a faint crease on your cheek from the pillow. You look like you\u2019ve just rolled out of bed, which, to be fair, you have.",
+  "inventory_add": [],
+  "inventory_remove": [],
+  "room_add": [],
+  "room_remove": [],
+  "wear_add": [],
+  "wear_remove": [],
+  "update_description": {},
+  "current_room_base_description": null,
+  "player_description_update": "You are wearing a faded, oversized t-shirt with a cartoon cat on it and plaid flannel pajama pants. Your hair is tangled from sleep, and there\u2019s a faint crease on your cheek from the pillow. You look like you\u2019ve just rolled out of bed, which, to be fair, you have.",
+  "item_visibility_update": {},
+  "narrative_summary_update": null,
+  "_usage": {
+    "input_tokens": 1584,
+    "output_tokens": 271,
+    "total_tokens": 1855,
+    "raw_usage": {
+      "prompt_tokens": 1584,
+      "total_tokens": 1855,
+      "completion_tokens": 271,
+      "num_cached_tokens": 1611
+    }
+  }
+}
+
