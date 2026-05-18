@@ -105,6 +105,30 @@ def handle_command():
                     return jsonify({"response": f"Which one do you mean? ({options})", "state": get_ui_state()})
 
     # Deterministic Checks
+    if clean in ['help', '/help', '?']:
+        help_text = (
+            "### Z-MACHINE COMMAND GUIDE\n\n"
+            "**Exploration:**\n"
+            "- `look` (or `l`): Describe your current surroundings.\n"
+            "- `north`, `south`, `east`, `west`, `up`, `down` (or `n`, `s`, `e`, `w`, `u`, `d`): Move through the world.\n"
+            "- `examine [object]` (or `x [object]`): Look closely at something or yourself.\n\n"
+            "**Inventory:**\n"
+            "- `inventory` (or `i`): List what you are carrying and wearing.\n"
+            "- `take [object]`: Pick something up.\n"
+            "- `drop [object]`: Set something down.\n"
+            "- `wear [object]`: Put on clothing or armor.\n"
+            "- `remove [object]`: Take off clothing.\n\n"
+            "**System Commands:**\n"
+            "- `/models`: List available Venice AI models.\n"
+            "- `/model [ID]`: Switch the AI engine to a different model.\n"
+            "- `/reset`: Wipe the world and regenerate from `lore.txt`.\n"
+            "- **DATA PAD (HUD):** Use the sidebar to track metrics and use **THE MATRIX** (God Mode) to edit reality.\n\n"
+            "**Interaction:**\n"
+            "You can type almost anything! The AI Dungeon Master will interpret your intent. "
+            "Try: *'read the dusty journal'*, *'knock on the iron door'*, or *'search the desk'*"
+        )
+        return jsonify({"response": help_text, "state": get_ui_state()})
+
     if clean in ['i', 'inv', 'inventory']:
         p = world.data['player']
         items = [world.data['items'][i]['name'] for i in p['inventory'] if i in world.data['items']]
@@ -189,7 +213,7 @@ def god_update():
     sys_msg = world.god_mode_update(changes, ai)
 
     if sys_msg:
-        # Trigger immediate AI turn
+        # Trigger immediate AI turn for major reality shifts
         thread = world.get_narrative_history()
         context_dump = world.get_context_dump()
         full_input = f"[SYSTEM EVENT]\n{sys_msg}"
@@ -202,7 +226,7 @@ def god_update():
             "state": get_ui_state()
         })
 
-    return jsonify({"response": "No changes required.", "state": get_ui_state()})
+    return jsonify({"response": "Reality adjusted silently.", "state": get_ui_state()})
 
 @app.route('/get_debug', methods=['GET'])
 def get_debug():

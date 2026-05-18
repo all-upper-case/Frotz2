@@ -155,11 +155,15 @@ async function sendCommand() {
         try {
             const res = await fetch('/models');
             const data = await res.json();
-            let msg = "**Available Venice Models:**\n\n";
+            let msg = "### AVAILABLE VENICE MODELS\n\n";
             data.forEach(m => {
-                msg += `- **${m.id}** (Context: ${m.context_window})\n`;
+                const reasoning = m.reasoning ? "🧠 Reasoning Support" : "";
+                const pricePrompt = m.pricing && m.pricing.prompt ? (parseFloat(m.pricing.prompt) * 1000000).toFixed(2) : "?";
+                const priceComp = m.pricing && m.pricing.completion ? (parseFloat(m.pricing.completion) * 1000000).toFixed(2) : "?";
+                
+                msg += `- **${m.id}**\n  *${m.name}*\n  Context: ${m.context_window.toLocaleString()} tokens | ${reasoning}\n  Pricing: ${pricePrompt}/1M input, ${priceComp}/1M output\n\n`;
             });
-            msg += "\nType `/model [ID]` to switch.";
+            msg += "Type `/model [ID]` to switch.";
             appendLog(msg, 'system');
         } catch(e) { appendLog("Failed to fetch models.", 'error'); }
         return;
@@ -283,6 +287,8 @@ function renderMatrix(data) {
         // Main Row
         const tr = document.createElement('tr');
         tr.dataset.id = item.id;
+        tr.dataset.origAliases = item.aliases;
+        tr.dataset.origDesc = item.description;
 
         const tdName = document.createElement('td');
         tdName.textContent = item.name;
@@ -369,21 +375,28 @@ godSave.onclick = async () => {
             hasChange = true;
         }
 
-        // Send aliases/desc if they look modified or just always send
-        change.newAliases = aliasesInp.value;
-        change.newDescription = descInp.value;
+        // Check for manual edits
+        if (aliasesInp.value !== row.dataset.origAliases) {
+            change.newAliases = aliasesInp.value;
+            hasChange = true;
+        }
+        if (descInp.value !== row.dataset.origDesc) {
+            change.newDescription = descInp.value;
+            hasChange = true;
+        }
 
         if (fixInp.value.trim() !== '') {
             change.fixInstruction = fixInp.value.trim();
             hasChange = true;
         }
 
-        // We push all because we are sending the full alias/desc set to be safe
-        changes.push(change);
+        if (hasChange) {
+            changes.push(change);
+        }
     });
 
     if (changes.length === 0) {
-        alert("No items found.");
+        modal.classList.add('hidden');
         return;
     }
 

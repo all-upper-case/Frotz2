@@ -134,6 +134,15 @@ class WorldManager:
                 item = self.data['items'].get(iid)
                 if item: lines.append(f"- {item['name']} (ID: {iid}): {item['description']}")
 
+        lines.append("\n[CHARACTERS - Others present]")
+        for cid in room.get('characters', []):
+            char = self.data['characters'].get(cid)
+            if char:
+                items_text = ""
+                c_items = [self.data['items'][iid]['name'] for iid in char.get('items', []) if iid in self.data['items']]
+                if c_items: items_text = f" (Has: {', '.join(c_items)})"
+                lines.append(f"- {char['name']} (ID: {cid}): {char.get('description', '...').split('.')[0]}.{items_text}")
+
         lines.append("\n[ALL ROOMS - Global Map Context]")
         for rid, rdata in list(self.data['rooms'].items()):
             if not isinstance(rdata, dict): continue
@@ -334,6 +343,9 @@ class WorldManager:
         updates = outcome.get('state_updates', [])
         for up in updates:
             tool = up.get('tool', '').strip()
+            # Robust mapping for AI hallucinations
+            if tool in ["create_item", "create_room", "update_item"]: tool = "Description"
+            
             name = up.get('name', '').strip()
             if not name: continue
             clean_name = name.lower()
@@ -388,9 +400,30 @@ class WorldManager:
                     self.data['items'][iid]['carryable'] = False
                 elif loc == "here": self.data['rooms'][player['current_room']]['items'].append(iid)
                 else:
+                    # Check if location is a room
                     target_rid = self.find_room_id_by_name(loc)
-                    if target_rid: self.data['rooms'][target_rid]['items'].append(iid)
-                    else: self.data['rooms'][current_room_id]['items'].append(iid)
+                    if target_rid: 
+                        self.data['rooms'][target_rid]['items'].append(iid)
+                    else:
+                        # Assume it's an NPC/Character ID or name
+                        # We store NPC items in the characters dict
+                        char_id = None
+                        # Simple check: is this a known character ID or name?
+                        if loc in self.data['characters']:
+                            char_id = loc
+                        else:
+                            # Search by name
+                            for cid, cdata in self.data['characters'].items():
+                                if cdata.get('name', '').lower() == loc:
+                                    char_id = cid
+                                    break
+                        
+                        if char_id:
+                            self.data['characters'][char_id].setdefault('items', [])
+                            self.data['characters'][char_id]['items'].append(iid)
+                        else:
+                            # Fallback to current room
+                            self.data['rooms'][player['current_room']]['items'].append(iid)
 
         self.describe_room()
         self.save_game()
@@ -416,6 +449,8 @@ class WorldManager:
 
     def god_mode_update(self, changes, ai_interface):
         logs = []
+        trigger_narrative = False
+        
         for change in changes:
             iid = change['id']
             if iid not in self.data['items']: continue
@@ -423,12 +458,13 @@ class WorldManager:
 
             if 'newAliases' in change:
                 item['aliases'] = [a.strip().lower() for a in change['newAliases'].split(',')]
+            
             if 'newDescription' in change and change['newDescription']:
                 item['description'] = change['newDescription']
-                logs.append(f"{item['name']} description updated.")
 
             new_loc = change.get('newLocation')
             if new_loc:
+                trigger_narrative = True
                 player = self.data['player']
                 old_loc_name = "unknown"
                 for r in self.data['rooms'].values():
@@ -454,15 +490,16 @@ class WorldManager:
                 logs.append(f"Moved {item['name']} from {old_loc_name} to {loc_name_for_log}.")
 
             if change.get('fixInstruction'):
+                trigger_narrative = True
                 response = ai_interface.generate_fix(item['name'], item['description'], change['fixInstruction'])
                 if 'description' in response:
                     item['description'] = response['description']
-                    logs.append(f"{item['name']} auto-fixed by AI.")
+                    logs.append(f"{item['name']} auto-fixed by AI based on: {change['fixInstruction']}")
 
         self.describe_room()
         self.save_game()
 
-        if logs:
+        if trigger_narrative and logs:
             return "For continuity and error correction, the game engine has automatically applied the following changes:\n" + "\n".join(logs) + "\nIf these changes contradict recent narrative, please use the Description tool to write updated descriptions treating these changes as established facts."
         return None
 

@@ -12,11 +12,12 @@
     "Jade asked the girl if she is attracted to girls; the girl responded shyly and with a compliment, indicating a growing openness.",
     "Jade asked the girl if she wants to kiss; the girl shyly agreed and is now waiting for Jade to initiate the kiss.",
     "Jade grabbed the girl's throat and kissed her passionately; the girl is now aroused and responsive.",
-    "Jade told the girl to strip; the girl complied and is now nude."
+    "Jade told the girl to strip; the girl complied and is now nude.",
+    "Jade looked out the window and admired the garden view. The girl is watching Jade and petting the kitten."
   ],
   "blueprint": "The Manor Library (Start) -> North: Locked Heavy Oak Door (leads to Hallway) -> East: Bay Window (leads to Garden/Exterior) -> West: Book-lined Alcove. The room is effectively a closed loop for now, emphasizing isolation.",
   "meta": {
-    "total_tokens": 39082
+    "total_tokens": 42235
   },
   "player": {
     "current_room": "room_start",
