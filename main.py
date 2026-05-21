@@ -1,9 +1,14 @@
-import sys
 import os
 import re
 from flask import Flask, render_template, request, jsonify
 from world_manager import WorldManager
 from llm_interface import LLMInterface
+from llm_contracts import (
+    ContractError,
+    validate_genesis_response,
+    validate_room_response,
+    validate_turn_response,
+)
 
 app = Flask(__name__)
 world = WorldManager()
@@ -60,7 +65,7 @@ def reset_game():
     world.hard_reset()
     try:
         log_system("Calling Genesis AI...")
-        genesis_data = ai.generate_genesis()
+        genesis_data = validate_genesis_response(ai.generate_genesis())
 
         log_system("Initializing World DB...")
         intro = world.initialize_world(genesis_data)
@@ -71,6 +76,9 @@ def reset_game():
             "response": f"{intro}\n\n### {room['name']}\n{world.describe_room(room)}", 
             "state": get_ui_state()
         })
+    except ContractError as e:
+        log_system(f"Genesis response rejected: {str(e)}")
+        return jsonify({"response": f"Genesis Failed: {str(e)}", "state": None})
     except Exception as e:
         log_system(f"Genesis Failed: {str(e)}")
         return jsonify({"response": f"Genesis Failed: {str(e)}", "state": None})
@@ -79,7 +87,8 @@ def reset_game():
 def handle_command():
     if not world.is_initialized(): return jsonify({"response": "Uninitialized."})
 
-    user_input = request.json.get('input', '').strip()
+    payload = request.get_json(silent=True) or {}
+    user_input = payload.get('input', '').strip()
     clean = user_input.lower().strip()
     if not user_input: return jsonify({"response": ""})
 
@@ -162,7 +171,14 @@ def handle_command():
         map_sum = world.get_map_summary()
 
         log_system("Generating New Room...")
-        new_data = ai.generate_room(prev, user_input, thread, blueprint, map_sum)
+        try:
+            new_data = validate_room_response(ai.generate_room(prev, user_input, thread, blueprint, map_sum))
+        except ContractError as e:
+            world.data['player']['current_room'] = prev_id
+            world.save_game()
+            log_system(f"Room generation rejected: {str(e)}")
+            return jsonify({"response": f"Room generation failed: {str(e)}", "state": get_ui_state()})
+
         world.create_room_from_stub(target, new_data)
         room = world.get_room(target)
         return jsonify({"response": f"### {room['name']}\n{world.describe_room(room)}", "state": get_ui_state()})
@@ -180,7 +196,8 @@ def list_models():
 
 @app.route('/set_model', methods=['POST'])
 def set_model():
-    model_id = request.json.get('model')
+    payload = request.get_json(silent=True) or {}
+    model_id = payload.get('model')
     if model_id:
         ai.model = model_id
         return jsonify({"status": "success", "model": model_id})
@@ -197,7 +214,12 @@ def process_ai_turn(inp):
         sys_msg = "\n\n".join([f"[SYSTEM NOTICE: {m}]" for m in msgs])
         full_input = f"{sys_msg}\n\nPLAYER ACTION: {inp}"
 
-    outcome = ai.process_turn(full_input, thread, context_dump)
+    try:
+        outcome = validate_turn_response(ai.process_turn(full_input, thread, context_dump))
+    except ContractError as e:
+        log_system(f"DM response rejected: {str(e)}")
+        return jsonify({"response": f"AI turn failed: {str(e)}", "state": get_ui_state()})
+
     world.apply_outcome(outcome)
 
     return jsonify({"response": outcome.get("narrative", "..."), "state": get_ui_state()})
@@ -209,7 +231,8 @@ def get_god_state():
 
 @app.route('/god_update', methods=['POST'])
 def god_update():
-    changes = request.json.get('changes', [])
+    payload = request.get_json(silent=True) or {}
+    changes = payload.get('changes', [])
     sys_msg = world.god_mode_update(changes, ai)
 
     if sys_msg:
@@ -218,7 +241,12 @@ def god_update():
         context_dump = world.get_context_dump()
         full_input = f"[SYSTEM EVENT]\n{sys_msg}"
 
-        outcome = ai.process_turn(full_input, thread, context_dump)
+        try:
+            outcome = validate_turn_response(ai.process_turn(full_input, thread, context_dump))
+        except ContractError as e:
+            log_system(f"Reality-shift response rejected: {str(e)}")
+            return jsonify({"response": f"Reality shift narration failed: {str(e)}", "state": get_ui_state()})
+
         world.apply_outcome(outcome)
 
         return jsonify({
@@ -232,7 +260,7 @@ def god_update():
 def get_debug():
     if os.path.exists("last_turn_debug.txt"):
         with open("last_turn_debug.txt", "r", encoding="utf-8") as f:
-            return f.read()
+            return f.read(), 200, {"Content-Type": "application/json; charset=utf-8"}
     return jsonify({"error": "No debug info found."})
 
 def get_ui_state():
