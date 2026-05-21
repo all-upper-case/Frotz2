@@ -67,12 +67,16 @@ fontSizeRange.addEventListener('input', () => {
 
 async function triggerReset() {
     appendLog("READING LORE... CONSTRUCTING MATTER... (PLEASE WAIT)", 'system');
-    const res = await fetch('/reset', {method: 'POST'});
-    const data = await res.json();
+    try {
+        const res = await fetch('/reset', {method: 'POST'});
+        const data = await res.json();
 
-    log.innerHTML = ''; 
-    appendLog(data.response, 'system');
-    if (data.state) updateHUD(data.state);
+        log.innerHTML = ''; 
+        appendLog(data.response || "World reset failed.", data.state ? 'system' : 'error');
+        if (data.state) updateHUD(data.state);
+    } catch(e) {
+        appendLog("World reset failed.", 'error');
+    }
 }
 
 document.getElementById('send-btn').onclick = sendCommand;
@@ -102,6 +106,14 @@ debugBtn.onclick = async () => {
     try {
         const res = await fetch('/get_debug');
         const data = await res.json();
+        if (data.error) {
+            debugContent.textContent = data.error;
+            return;
+        }
+        if (!Array.isArray(data)) {
+            debugContent.textContent = "Debug payload was not in the expected format.";
+            return;
+        }
         
         // Find the most recent turn
         const latest = data[data.length - 1];
@@ -111,7 +123,7 @@ debugBtn.onclick = async () => {
             const usage = raw._usage || {};
             
             output += `=== SESSION METRICS ===\n`;
-            output += `Input: ${usage.input_tokens} | Output: ${usage.output_tokens} | Total: ${usage.total_tokens}\n\n`;
+            output += `Input: ${usage.input_tokens || 0} | Output: ${usage.output_tokens || 0} | Total: ${usage.total_tokens || 0}\n\n`;
             
             if (raw.reasoning_content) {
                 output += `=== AI REASONING ===\n${raw.reasoning_content}\n\n`;
@@ -133,10 +145,6 @@ debugBtn.onclick = async () => {
     }
 };
 debugClose.onclick = () => debugModal.classList.add('hidden');
-debugModal.onclick = (e) => {
-    if (e.target === debugModal) debugModal.classList.remove('hidden'); // Wait, should be add('hidden')
-};
-// Correction for logic
 debugModal.onclick = (e) => { if (e.target === debugModal) debugModal.classList.add('hidden'); };
 
 async function sendCommand() {
@@ -155,13 +163,18 @@ async function sendCommand() {
         try {
             const res = await fetch('/models');
             const data = await res.json();
+            if (!Array.isArray(data) || data.length === 0) {
+                appendLog("No Venice models are available. Check the API key and try again.", 'error');
+                return;
+            }
             let msg = "### AVAILABLE VENICE MODELS\n\n";
             data.forEach(m => {
-                const reasoning = m.reasoning ? "🧠 Reasoning Support" : "";
+                const reasoning = m.reasoning ? "Reasoning Support" : "";
                 const pricePrompt = m.pricing && m.pricing.prompt ? (parseFloat(m.pricing.prompt) * 1000000).toFixed(2) : "?";
                 const priceComp = m.pricing && m.pricing.completion ? (parseFloat(m.pricing.completion) * 1000000).toFixed(2) : "?";
+                const contextWindow = Number.isFinite(m.context_window) ? m.context_window.toLocaleString() : m.context_window;
                 
-                msg += `- **${m.id}**\n  *${m.name}*\n  Context: ${m.context_window.toLocaleString()} tokens | ${reasoning}\n  Pricing: ${pricePrompt}/1M input, ${priceComp}/1M output\n\n`;
+                msg += `- **${m.id}**\n  *${m.name}*\n  Context: ${contextWindow} tokens | ${reasoning}\n  Pricing: ${pricePrompt}/1M input, ${priceComp}/1M output\n\n`;
             });
             msg += "Type `/model [ID]` to switch.";
             appendLog(msg, 'system');
@@ -182,6 +195,8 @@ async function sendCommand() {
             const data = await res.json();
             if (data.status === 'success') {
                 appendLog(`Model switched to **${m}**.`, 'system');
+            } else {
+                appendLog("Failed to switch model.", 'error');
             }
         } catch(e) { appendLog("Failed to switch model.", 'error'); }
         return;
@@ -198,7 +213,7 @@ async function sendCommand() {
         });
         const data = await res.json();
 
-        appendLog(data.response, 'ai');
+        appendLog(data.response || "No response returned.", data.state ? 'ai' : 'error');
         if (data.state) updateHUD(data.state);
     } catch (e) {
         appendLog("Communication Error.", 'error');
@@ -272,30 +287,66 @@ matrixBtn.onclick = async () => {
     modal.classList.remove('hidden');
     godBody.innerHTML = '<tr><td colspan="4">Loading Reality...</td></tr>';
 
-    const res = await fetch('/get_god_state');
-    const data = await res.json();
-    renderMatrix(data);
+    try {
+        const res = await fetch('/get_god_state');
+        const data = await res.json();
+        renderMatrix(data);
+    } catch(e) {
+        godBody.innerHTML = '<tr><td colspan="4">Could not load reality state.</td></tr>';
+    }
 };
 
 modalClose.onclick = () => modal.classList.add('hidden');
 
+function appendLabeledInput(container, labelText, className, value, multiline = false) {
+    const wrapper = document.createElement('div');
+    wrapper.style.marginTop = '5px';
+
+    const label = document.createElement('strong');
+    label.textContent = labelText;
+    wrapper.appendChild(label);
+    wrapper.appendChild(document.createTextNode(' '));
+
+    const field = multiline ? document.createElement('textarea') : document.createElement('input');
+    field.className = className;
+    field.value = value || '';
+    if (multiline) {
+        field.style.width = '100%';
+        field.style.height = '60px';
+        field.style.background = '#222';
+        field.style.color = '#0f0';
+        field.style.border = '1px solid #444';
+    } else {
+        field.type = 'text';
+    }
+
+    wrapper.appendChild(field);
+    container.appendChild(wrapper);
+}
+
 function renderMatrix(data) {
     godBody.innerHTML = '';
-    const { items, rooms } = data;
+    const items = Array.isArray(data.items) ? data.items : [];
+    const rooms = Array.isArray(data.rooms) ? data.rooms : [];
+
+    if (items.length === 0) {
+        godBody.innerHTML = '<tr><td colspan="4">No items found in the current world.</td></tr>';
+        return;
+    }
 
     items.forEach(item => {
         // Main Row
         const tr = document.createElement('tr');
         tr.dataset.id = item.id;
-        tr.dataset.origAliases = item.aliases;
-        tr.dataset.origDesc = item.description;
+        tr.dataset.origAliases = item.aliases || '';
+        tr.dataset.origDesc = item.description || '';
 
         const tdName = document.createElement('td');
-        tdName.textContent = item.name;
+        tdName.textContent = item.name || '(unnamed item)';
         tr.appendChild(tdName);
 
         const tdLoc = document.createElement('td');
-        tdLoc.textContent = item.location;
+        tdLoc.textContent = item.location || 'Unknown';
         tr.appendChild(tdLoc);
 
         const tdNew = document.createElement('td');
@@ -340,12 +391,9 @@ function renderMatrix(data) {
         divDet.style.padding = "10px";
         divDet.style.background = "#080808";
 
-        // Aliases
-        divDet.innerHTML += `<div><strong>Aliases:</strong> <input type="text" class="edit-aliases" value="${item.aliases}"></div>`;
-        // Description
-        divDet.innerHTML += `<div style="margin-top:5px;"><strong>Description:</strong> <textarea class="edit-desc" style="width:100%; height:60px; background:#222; color:#0f0; border:1px solid #444;">${item.description}</textarea></div>`;
-        // AI Fix Prompt
-        divDet.innerHTML += `<div style="margin-top:5px;"><strong>Auto-Fix (AI):</strong> <input type="text" class="fix-prompt" placeholder="Reason for rewrite..."></div>`;
+        appendLabeledInput(divDet, 'Aliases:', 'edit-aliases', item.aliases || '');
+        appendLabeledInput(divDet, 'Description:', 'edit-desc', item.description || '', true);
+        appendLabeledInput(divDet, 'Auto-Fix (AI):', 'fix-prompt', '');
 
         tdDet.appendChild(divDet);
         trDet.appendChild(tdDet);
@@ -409,7 +457,7 @@ godSave.onclick = async () => {
         });
         const data = await res.json();
 
-        appendLog(data.response, 'system');
+        appendLog(data.response || "Reality patch completed.", data.state ? 'system' : 'error');
         if (data.state) updateHUD(data.state);
 
         godSave.textContent = "APPLY REALITY PATCH";
