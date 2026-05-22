@@ -27,6 +27,7 @@ def minimal_world():
         "blueprint": "A tiny neutral test world.",
         "meta": {"total_tokens": 0},
         "pending_notifications": [],
+        "recent_turns": [],
         "player": {
             "current_room": "room_start",
             "inventory": ["item_lantern"],
@@ -35,7 +36,18 @@ def minimal_world():
             "description": "You are a careful tester.",
             "aliases": ["me", "self", "player"],
         },
-        "characters": {},
+        "characters": {
+            "npc_curator": {
+                "id": "npc_curator",
+                "name": "Curator",
+                "aliases": ["keeper"],
+                "description": "A patient curator watches over the archive.",
+                "items": [],
+                "held": [],
+                "worn": [],
+                "body": [],
+            }
+        },
         "rooms": {
             "room_start": {
                 "id": "room_start",
@@ -43,8 +55,8 @@ def minimal_world():
                 "description": "A calm archive lined with labeled drawers.",
                 "base_description": "A calm archive lined with labeled drawers.",
                 "exits": {"north": "room_north"},
-                "items": ["item_key"],
-                "characters": [],
+                "items": ["item_key", "item_badge", "item_glove"],
+                "characters": ["npc_curator"],
                 "visited": True,
             },
             "room_north": {
@@ -72,6 +84,22 @@ def minimal_world():
                 "name": "silver key",
                 "aliases": ["key"],
                 "description": "A small silver key.",
+                "carryable": True,
+                "visible": True,
+            },
+            "item_badge": {
+                "id": "item_badge",
+                "name": "curator badge",
+                "aliases": ["badge"],
+                "description": "A simple identification badge.",
+                "carryable": True,
+                "visible": True,
+            },
+            "item_glove": {
+                "id": "item_glove",
+                "name": "linen glove",
+                "aliases": ["glove"],
+                "description": "A clean linen glove.",
                 "carryable": True,
                 "visible": True,
             },
