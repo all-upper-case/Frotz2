@@ -87,20 +87,6 @@
                     <button id="new-current-lore-btn">NEW GAME FROM CURRENT LORE</button>
                 </div>
 
-                <h3>CREATE LOREBOOK</h3>
-                <div class="lore-create-panel">
-                    <label for="new-lorebook-name">New file name</label>
-                    <input id="new-lorebook-name" type="text" placeholder="my_new_scenario.txt">
-
-                    <label for="new-lorebook-source">Start from</label>
-                    <select id="new-lorebook-source">
-                        <option value="">Blank structured template</option>
-                    </select>
-
-                    <button id="create-lorebook-btn">CREATE LOREBOOK</button>
-                    <div class="save-meta">Creates a new file in LoreBooks. You can then edit it in Replit, or start a new game from it after editing.</div>
-                </div>
-
                 <h3>LOREBOOKS</h3>
                 <div id="lorebook-list" class="save-list"></div>
 

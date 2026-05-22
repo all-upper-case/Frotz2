@@ -292,38 +292,6 @@ saveClose.onclick = () => saveModal.classList.add('hidden');
 saveModal.onclick = (e) => { if (e.target === saveModal) saveModal.classList.add('hidden'); };
 newCurrentLoreBtn.onclick = () => startNewGame(null);
 
-async function createLoreBook() {
-    const file = newLorebookName.value.trim();
-    const sourceFile = newLorebookSource.value;
-
-    if (!file) {
-        alert('Enter a file name for the new lorebook.');
-        return;
-    }
-
-    try {
-        const res = await fetch('/create_lorebook', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(sourceFile ? {file, source_file: sourceFile} : {file})
-        });
-        const data = await res.json();
-
-        if (data.status !== 'success') {
-            alert(data.message || 'Could not create lorebook.');
-            return;
-        }
-
-        newLorebookName.value = '';
-        appendLog(`Created lorebook **${data.file}**. Edit it in Replit, then start a new game from it when ready.`, 'system');
-        await refreshSaveManager();
-    } catch(e) {
-        alert('Could not create lorebook.');
-    }
-}
-
-createLorebookBtn.onclick = createLoreBook;
-
 // --- Debug Logic ---
 const debugBtn = document.getElementById('debug-btn');
 const debugModal = document.getElementById('debug-modal');

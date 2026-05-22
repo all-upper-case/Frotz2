@@ -201,38 +201,6 @@ li { margin-bottom: 5px; }
 .save-row button:disabled { opacity: 0.45; cursor: default; }
 .save-empty { color: #7aa5bd; font-style: italic; margin-bottom: 10px; }
 
-.lore-create-panel {
-    border: 1px solid #234;
-    background: #081018;
-    padding: 10px;
-    margin-bottom: 20px;
-}
-.lore-create-panel label {
-    display: block;
-    color: #8fd3ff;
-    font-size: 0.85em;
-    margin: 8px 0 4px 0;
-}
-.lore-create-panel input,
-.lore-create-panel select {
-    width: 100%;
-    background: #111;
-    color: #8fd3ff;
-    border: 1px solid #2aa8ff;
-    padding: 8px;
-    font-family: inherit;
-}
-.lore-create-panel button {
-    width: 100%;
-    margin-top: 10px;
-    background: #003355;
-    color: #8fd3ff;
-    border: 1px solid #2aa8ff;
-    padding: 10px;
-    font-family: inherit;
-    font-weight: bold;
-}
-
 table { width: 100%; border-collapse: collapse; }
 th { text-align: left; border-bottom: 1px solid #0f0; padding: 5px; }
 td { padding: 5px; border-bottom: 1px solid #333; vertical-align: middle; }

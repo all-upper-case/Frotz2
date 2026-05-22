@@ -222,42 +222,6 @@ def _write_lore_from_lorebook(filename):
         f.write(lore_text)
 
 
-@app.route('/create_lorebook', methods=['POST'])
-def create_lorebook():
-    payload = request.get_json(silent=True) or {}
-    filename = _safe_lorebook_filename(payload.get("file"))
-    if not filename:
-        return jsonify({"status": "error", "message": "Invalid lorebook filename."}), 400
-
-    if not os.path.exists("LoreBooks"):
-        os.makedirs("LoreBooks", exist_ok=True)
-
-    target_path = os.path.join("LoreBooks", filename)
-    if os.path.exists(target_path):
-        return jsonify({"status": "error", "message": "A lorebook with that name already exists."}), 400
-
-    source_file = payload.get("source_file")
-    try:
-        if source_file:
-            source_safe = _safe_filename(source_file)
-            if not source_safe:
-                return jsonify({"status": "error", "message": "Invalid source lorebook."}), 400
-            source_path = os.path.join("LoreBooks", source_safe)
-            if not os.path.exists(source_path):
-                return jsonify({"status": "error", "message": "Source lorebook not found."}), 404
-            with open(source_path, "r", encoding="utf-8") as f:
-                content = f.read()
-        else:
-            content = LOREBOOK_TEMPLATE.replace("WORLD_NAME: new_world", f"WORLD_NAME: {_world_name_from_lore_filename(filename)}", 1)
-
-        with open(target_path, "w", encoding="utf-8") as f:
-            f.write(content)
-
-        return jsonify({"status": "success", "file": filename})
-    except Exception as e:
-        return jsonify({"status": "error", "message": f"Could not create lorebook: {str(e)}"}), 400
-
-
 @app.route('/new_game', methods=['POST'])
 def new_game():
     global world
