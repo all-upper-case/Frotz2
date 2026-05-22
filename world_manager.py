@@ -472,13 +472,13 @@ class WorldManager:
 
     def _apply_item_location(self, iid, update):
         player = self.data['player']
-        self._remove_item_from_all_locations(iid)
-
         owner = update.get('owner')
         slot = update.get('slot')
         loc = update.get('location', '')
         loc_clean = loc.lower().strip() if isinstance(loc, str) else ''
 
+        owner_id = None
+        slot_clean = None
         if owner:
             owner_id = self.find_character_id_by_name(owner)
             if not owner_id: return False
@@ -486,6 +486,10 @@ class WorldManager:
                 slot_clean, _ = normalize_person_slot(slot)
             except ContractError:
                 return False
+
+        self._remove_item_from_all_locations(iid)
+
+        if owner_id:
             if owner_id == 'player':
                 self._place_item_for_player(iid, slot_clean)
             else:
