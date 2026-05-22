@@ -8,7 +8,7 @@ from llm_contracts import ContractError, normalize_person_slot, normalize_tool_n
 
 SAVE_DIR = "saves"
 BACKUP_DIR = "backups"
-RECENT_TURN_LIMIT = 3
+RECENT_TURN_LIMIT = 5
 
 DIRECTION_MAP = {
     "n": "north", "north": "north", "s": "south", "south": "south",
