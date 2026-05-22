@@ -196,30 +196,6 @@ class LLMInterface:
         )
         return self._req(sys, "Fix this item description.", "FIXER")
 
-    def _req_with_model(self, system, user, role, model):
-        original_model = self.model
-        try:
-            self.model = model or original_model
-            return self._req(system, user, role)
-        finally:
-            self.model = original_model
-
-    def audit_game(self, audit_context):
-        user = (
-            "Audit the following Frotz2 game context. Do not apply changes. "
-            "Return valid JSON with a single string field named response.\n\n"
-            + audit_context
-        )
-        return self._req_with_model(system_prompts.PROMPT_AUDITOR, user, "AUDITOR", AUDITOR_MODEL)
-
-    def continue_audit(self, messages):
-        user = (
-            "Continue this State Auditor conversation. Do not apply changes. "
-            "Return valid JSON with a single string field named response.\n\n"
-            + json.dumps(messages, ensure_ascii=False, indent=2)
-        )
-        return self._req_with_model(system_prompts.PROMPT_AUDITOR, user, "AUDITOR_CHAT", AUDITOR_MODEL)
-
 
     def get_available_models(self):
         if not VENICE_API_KEY: return []

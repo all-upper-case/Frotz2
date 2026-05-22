@@ -4,7 +4,6 @@ import re
 from flask import Flask, render_template, request, jsonify
 from world_manager import WorldManager
 from llm_interface import LLMInterface
-import system_prompts
 from llm_contracts import (
     ContractError,
     validate_genesis_response,

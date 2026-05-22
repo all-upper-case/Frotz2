@@ -143,23 +143,6 @@
         </div>
     </div>
 
-    <!-- AUDITOR MODAL -->
-    <div id="auditor-modal" class="modal hidden">
-        <div class="modal-content auditor-modal-content">
-            <div class="modal-header">
-                <h2>STATE AUDITOR</h2>
-                <button id="auditor-close">X</button>
-            </div>
-            <div class="modal-body auditor-body">
-                <div id="auditor-log"></div>
-            </div>
-            <div class="modal-footer auditor-input-row">
-                <input id="auditor-input" type="text" placeholder="Ask the auditor a follow-up...">
-                <button id="auditor-send">SEND</button>
-            </div>
-        </div>
-    </div>
-
     <!-- DEBUG MODAL -->
     <div id="debug-modal" class="modal hidden">
         <div class="modal-content" style="border-color: #ff0; color: #ff0;">

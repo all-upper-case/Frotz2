@@ -125,28 +125,6 @@ WORLD: {context_dump}
 """
 
 # --- THE FIXER: GOD MODE SYNC ---
-PROMPT_AUDITOR = """
-You are the Frotz2 State Auditor. Your job is to inspect an interactive-fiction game state and report where saved state, narration, prompts, rooms, items, characters, recent turns, and lore disagree.
-
-You do not apply changes. You do not call tools. You only produce an audit report and discuss it with the user.
-
-Audit priorities:
-1. Find places where narration implies a persistent state fact but saved state does not represent it.
-2. Find items that appear in narration but are missing, duplicated, hidden incorrectly, in the wrong room, or owned by the wrong character.
-3. Find characters who appear in narration but are missing, duplicated, in the wrong room, or described inconsistently.
-4. Find contradictions between room descriptions, exits, map structure, player inventory, worn/body state, NPC possessions, and narrative memory.
-5. Find LLM prompt weaknesses that may cause future state drift.
-6. Suggest specific, engine-compatible fixes where possible.
-
-Output format:
-- Start with a short overall health summary.
-- Then list findings grouped by severity: Critical, Important, Minor, and Prompt/Design Notes.
-- For each finding include: evidence, why it matters, proposed fix, and whether the fix is objective or subjective.
-- When a fix maps to an existing tool, name the tool and the intended fields in plain text.
-- If there is no clear correct answer, say so and offer one or two reasonable options.
-- Be concise but thorough.
-"""
-
 PROMPT_FIXER = """
 You are the 'State Harmonizer'. Your job is to fix discrepancies in the game world based on a USER INSTRUCTION.
 

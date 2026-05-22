@@ -340,64 +340,6 @@ li { margin-bottom: 5px; }
     font-family: 'Courier New', monospace;
 }
 
-.auditor-modal-content {
-    border-color: #a45cff;
-    color: #e5d0ff;
-}
-
-.auditor-body {
-    display: flex;
-    flex-direction: column;
-    min-height: 0;
-}
-
-#auditor-log {
-    flex: 1;
-    overflow-y: auto;
-    padding-bottom: 10px;
-}
-
-.auditor-msg {
-    border: 1px solid #3b2455;
-    background: #12091f;
-    margin-bottom: 10px;
-    padding: 10px;
-    color: #e5d0ff;
-}
-
-.auditor-user {
-    border-color: #a45cff;
-    background: #221144;
-}
-
-.auditor-system {
-    color: #c89dff;
-    font-style: italic;
-}
-
-.auditor-input-row {
-    display: flex;
-    gap: 8px;
-}
-
-#auditor-input {
-    flex: 1;
-    background: #08040f;
-    color: #e5d0ff;
-    border: 1px solid #a45cff;
-    padding: 10px;
-    font-family: inherit;
-}
-
-#auditor-send {
-    background: #221144;
-    color: #e5d0ff;
-    border: 1px solid #a45cff;
-    padding: 10px 14px;
-    font-family: inherit;
-    font-weight: bold;
-}
-
 table { width: 100%; border-collapse: collapse; }
 th { text-align: left; border-bottom: 1px solid #0f0; padding: 5px; }
 td { padding: 5px; border-bottom: 1px solid #333; vertical-align: middle; }
