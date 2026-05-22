@@ -4,6 +4,8 @@ Frotz2 asks the model for JSON objects and validates the response before mutatin
 
 The model-facing tool vocabulary is documented separately in `docs/LLM_TOOLS.md`. Those tool operations are intended to apply automatically after engine validation, with toggleable visibility levels for summary/debug/audit views. They are not intended to require manual approval for every ordinary state update.
 
+The per-turn context packet is documented in `docs/TURN_CONTEXT.md`. It should carry the authoritative current state, exact player command, recent full turns, and compact narrative memory into each DM turn.
+
 ## Shared Rules
 
 - The response must be a JSON object.
@@ -12,6 +14,7 @@ The model-facing tool vocabulary is documented separately in `docs/LLM_TOOLS.md`
 - `new_exits` must be a list when present. Missing or null `new_exits` becomes an empty list where the contract allows it.
 - Required string fields must be present and non-empty.
 - Tool calls should use canonical names from `docs/LLM_TOOLS.md` once the dispatcher exists; compatibility aliases remain supported during migration.
+- The turn packet should be treated as higher priority than older prose memory when they disagree.
 
 ## Genesis
 
