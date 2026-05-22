@@ -111,6 +111,88 @@ def test_context_dump_includes_recent_turns_and_npc_slots(tmp_path, monkeypatch,
     assert "Worn: linen glove" in context
 
 
+def test_apply_outcome_reports_accepted_legacy_tool_alias(tmp_path, monkeypatch, minimal_world):
+    monkeypatch.chdir(tmp_path)
+    manager = WorldManager()
+    manager.data = minimal_world
+    manager.ensure_schema()
+    outcome = {
+        "state_updates": [
+            {"tool": "Description", "name": "silver key", "description": "A brighter silver key."}
+        ]
+    }
+
+    manager.apply_outcome(outcome)
+
+    result = outcome["tool_results"][0]
+    assert result["tool"] == "describe_entity"
+    assert result["status"] == "accepted_with_repair"
+    assert result["compatibility_alias"] == "Description"
+    assert result["entity_id"] == "item_key"
+    assert manager.data["items"]["item_key"]["description"] == "A brighter silver key."
+
+
+def test_apply_outcome_reports_missing_slot_without_moving_item(tmp_path, monkeypatch, minimal_world):
+    monkeypatch.chdir(tmp_path)
+    manager = WorldManager()
+    manager.data = minimal_world
+    manager.ensure_schema()
+    outcome = {
+        "state_updates": [
+            {"tool": "move_entity", "target": "silver key", "owner": "Curator"}
+        ]
+    }
+
+    manager.apply_outcome(outcome)
+
+    result = outcome["tool_results"][0]
+    curator = manager.data["characters"]["npc_curator"]
+    assert result["status"] == "missing_slot"
+    assert result["owner_id"] == "npc_curator"
+    assert "item_key" in manager.data["rooms"]["room_start"]["items"]
+    assert "item_key" not in curator["held"]
+
+
+def test_apply_outcome_reports_missing_target_for_unknown_move(tmp_path, monkeypatch, minimal_world):
+    monkeypatch.chdir(tmp_path)
+    manager = WorldManager()
+    manager.data = minimal_world
+    manager.ensure_schema()
+    outcome = {
+        "state_updates": [
+            {"tool": "move_entity", "target": "glass key", "location": "here"}
+        ]
+    }
+
+    manager.apply_outcome(outcome)
+
+    result = outcome["tool_results"][0]
+    assert result["tool"] == "move_entity"
+    assert result["status"] == "missing_target"
+    assert result["target"] == "glass key"
+
+
+def test_recent_turn_context_includes_tool_results(tmp_path, monkeypatch, minimal_world):
+    monkeypatch.chdir(tmp_path)
+    manager = WorldManager()
+    manager.data = minimal_world
+    manager.ensure_schema()
+    outcome = {
+        "narrative": "The key stays where it is.",
+        "state_updates": [
+            {"tool": "move_entity", "target": "silver key", "owner": "Curator"}
+        ]
+    }
+
+    manager.apply_outcome(outcome)
+    manager.record_turn("give the key to the curator", outcome)
+
+    context = manager.get_recent_turns_context()
+
+    assert "Tool results:" in context
+    assert "status=missing_slot" in context
+
+
 def test_god_mode_fix_accepts_valid_ai_description(tmp_path, monkeypatch, minimal_world):
     monkeypatch.chdir(tmp_path)
     manager = WorldManager()
