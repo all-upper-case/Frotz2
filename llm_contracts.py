@@ -13,6 +13,39 @@ class ContractError(ValueError):
     """Raised when an LLM response cannot safely be applied."""
 
 
+CANONICAL_TOOLS = {
+    "append_memory",
+    "create_character",
+    "create_entity",
+    "describe_entity",
+    "move_entity",
+    "set_entity_visibility",
+    "update_character",
+    "update_player",
+}
+
+TOOL_ALIASES = {
+    "description": "describe_entity",
+    "create_item": "describe_entity",
+    "update_item": "describe_entity",
+    "create_room": "describe_entity",
+    "location": "move_entity",
+}
+
+TOOL_STATUS = {
+    "accepted",
+    "accepted_with_repair",
+    "ambiguous_target",
+    "ignored_duplicate",
+    "ignored_empty",
+    "invalid_entity_type",
+    "invalid_location",
+    "invalid_schema",
+    "missing_target",
+    "rejected_error_response",
+    "unknown_tool",
+}
+
 _REQUIRED_FIELDS = {
     "genesis": (
         "intro_text",
@@ -60,11 +93,45 @@ def _normalize_list_field(data, field):
         raise ContractError(f"{field} must be a list.")
 
 
+def normalize_tool_name(tool_name):
+    """Return the canonical tool name plus whether a compatibility alias was used."""
+    if not isinstance(tool_name, str) or not tool_name.strip():
+        raise ContractError("tool name must be a non-empty string.")
+
+    clean = tool_name.strip().lower()
+    canonical = TOOL_ALIASES.get(clean, clean)
+    if canonical not in CANONICAL_TOOLS:
+        raise ContractError(f"unknown tool: {tool_name}.")
+    return canonical, canonical != clean
+
+
+def normalize_state_update(update):
+    """Normalize a single requested state update without applying it."""
+    if not isinstance(update, dict):
+        raise ContractError("state update must be a JSON object.")
+
+    result = deepcopy(update)
+    canonical, used_alias = normalize_tool_name(result.get("tool"))
+    result["tool"] = canonical
+    if used_alias:
+        result["compatibility_alias"] = update.get("tool")
+    return result
+
+
+def normalize_state_updates(updates):
+    """Normalize known tool aliases in a state_updates list."""
+    if updates is None:
+        return []
+    if not isinstance(updates, list):
+        raise ContractError("state_updates must be a list.")
+    return [normalize_state_update(update) for update in updates]
+
+
 def validate_genesis_response(data):
     result = _ensure_mapping(data, "genesis")
     _ensure_required_strings(result, "genesis")
     _normalize_list_field(result, "new_exits")
-    _normalize_list_field(result, "state_updates")
+    result["state_updates"] = normalize_state_updates(result.get("state_updates"))
     return result
 
 
@@ -72,14 +139,14 @@ def validate_room_response(data):
     result = _ensure_mapping(data, "room")
     _ensure_required_strings(result, "room")
     _normalize_list_field(result, "new_exits")
-    _normalize_list_field(result, "state_updates")
+    result["state_updates"] = normalize_state_updates(result.get("state_updates"))
     return result
 
 
 def validate_turn_response(data):
     result = _ensure_mapping(data, "turn")
     _ensure_required_strings(result, "turn")
-    _normalize_list_field(result, "state_updates")
+    result["state_updates"] = normalize_state_updates(result.get("state_updates"))
     if "narrative_summary_update" in result and result["narrative_summary_update"] is None:
         result.pop("narrative_summary_update")
     return result
