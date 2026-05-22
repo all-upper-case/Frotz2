@@ -1,13 +1,14 @@
 # TODO
 
-A practical backlog for turning the current prototype into a tidier personal engine. The broader product direction now lives in `docs/STEWARDSHIP_ROADMAP.md`, and the planned LLM tool vocabulary lives in `docs/LLM_TOOLS.md`.
+A practical backlog for turning the current prototype into a tidier personal engine. The broader product direction now lives in `docs/STEWARDSHIP_ROADMAP.md`, the planned LLM tool vocabulary lives in `docs/LLM_TOOLS.md`, and the turn-context packet lives in `docs/TURN_CONTEXT.md`.
 
 ## Recently Completed
 
 - Added root project docs plus architecture and workflow notes.
 - Added `docs/LLM_CONTRACTS.md` for expected model response shapes.
 - Added `docs/STEWARDSHIP_ROADMAP.md` for the long-term stewardship direction.
-- Added `docs/LLM_TOOLS.md` for canonical LLM tool operations, compatibility aliases, validation statuses, and visibility levels.
+- Added `docs/LLM_TOOLS.md` for canonical LLM tool operations, compatibility aliases, validation statuses, visibility levels, and player/NPC ownership slots.
+- Added `docs/TURN_CONTEXT.md` for the planned authoritative turn packet and recent full-turn transcript strategy.
 - Clarified that tool-call transparency is toggleable observability, not mandatory approval for every normal state change.
 - Added lightweight LLM response validation for genesis, room generation, and turn narration before state mutation.
 - Added a pytest smoke-test baseline for app import, uninitialized routes, no-key reset behavior, deterministic commands, LLM contracts, and save/load roundtrips.
@@ -21,15 +22,17 @@ A practical backlog for turning the current prototype into a tidier personal eng
 
 - Wire `validate_fix_response()` into the Matrix AI fixer path in `world_manager.py` with focused tests for accepted and rejected fixer outputs.
 - Implement the first canonical tool dispatcher that maps compatibility aliases like `Description` and `Location` to typed engine operations.
-- Add per-tool validation statuses: accepted, accepted_with_repair, invalid_schema, unknown_tool, missing_target, ambiguous_target, invalid_location, invalid_entity_type, ignored_duplicate, and ignored_empty.
+- Implement player/NPC ownership slots for `held`, `worn`, and `body` so moving or creating an entity on a character is never ambiguous.
+- Add per-tool validation statuses: accepted, accepted_with_repair, invalid_schema, unknown_tool, missing_target, missing_owner, missing_slot, ambiguous_target, ambiguous_owner, invalid_location, invalid_slot, invalid_entity_type, ignored_duplicate, and ignored_empty.
 - Implement resolvable disambiguation for visible items, with tests for duplicate names and overlapping words.
 - Add structured turn packets from `WorldManager` and document their contract.
+- Add a recent full-turn buffer, separate from compact narrative memory, and include it in each DM turn prompt.
 - Extend lookup/state handling to characters and non-present entities after the visible-item path is stable.
 
 ## Documentation
 
 - Add examples for authoring safe lore files and switching between `LoreBooks/` entries.
-- Keep `docs/LLM_CONTRACTS.md` and `docs/LLM_TOOLS.md` in sync as model-backed workflows are added.
+- Keep `docs/LLM_CONTRACTS.md`, `docs/LLM_TOOLS.md`, and `docs/TURN_CONTEXT.md` in sync as model-backed workflows are added.
 - Keep `README.md` focused on setup, project shape, and everyday usage.
 
 ## Repository Hygiene
