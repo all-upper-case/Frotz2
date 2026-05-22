@@ -26,9 +26,11 @@ This is the current priority.
 - Build a resolvable disambiguation flow for overlapping item/entity names.
 - Persist pending ambiguity state so follow-up answers like `1`, `second`, or a more specific noun phrase can resolve the original command.
 - Expand entity lookup beyond visible items so characters/NPCs, worn objects, body-part entities, inventory, room contents, and void/non-present entities have consistent handling.
-- Add a structured turn packet from `WorldManager` that captures current room, visible entities, player state, present characters, pending ambiguity, recent narrative memory, and the exact command being processed.
+- Add explicit ownership slots for both the player and NPCs: held, worn, and body.
+- Add a structured turn packet from `WorldManager` that captures current room, visible entities, player state, present characters, pending ambiguity, recent full turns, recent narrative memory, and the exact command being processed.
 - Feed that turn packet into LLM prompts as the authoritative state for each turn.
-- Improve tests around duplicate names, overlapping words, entity ownership, void items, NPC-held items, and malformed LLM state updates.
+- Keep recent full-turn transcript separate from compact `append_memory` summaries. The transcript preserves immediate continuity; summaries preserve long-range continuity.
+- Improve tests around duplicate names, overlapping words, entity ownership, void items, NPC-held items, NPC-worn items, NPC body parts, and malformed LLM state updates.
 
 ## Phase 2: Robust LLM Tooling
 
@@ -36,10 +38,10 @@ The model needs a small, clear tool surface with typo-resistant names and engine
 
 - Define canonical tool operations such as `describe_entity`, `move_entity`, `create_entity`, `update_player`, `create_character`, `update_character`, `set_entity_visibility`, and `append_memory`.
 - Keep legacy names like `Description` and `Location` as compatibility aliases while steering prompts and docs toward canonical operations.
-- Validate each requested tool call before applying it: required fields, known target IDs or resolvable aliases, allowed locations, entity type rules, and ownership constraints.
-- Return structured per-tool statuses: accepted, rejected, ignored, ambiguous, missing_target, invalid_location, invalid_schema, and repaired_alias.
+- Validate each requested tool call before applying it: required fields, known target IDs or resolvable aliases, allowed locations, entity type rules, ownership slots, and owner constraints.
+- Return structured per-tool statuses: accepted, rejected, ignored, ambiguous, missing_target, missing_owner, missing_slot, invalid_location, invalid_slot, invalid_schema, and repaired_alias.
 - Store those statuses in the turn report for optional display.
-- Add tests for valid calls, typo aliases, missing required fields, unknown targets, ambiguous targets, NPC ownership, void movement, and body/worn/inventory distinctions.
+- Add tests for valid calls, typo aliases, missing required fields, unknown targets, ambiguous targets, NPC ownership, void movement, and body/worn/held distinctions.
 
 ## Phase 3: World-State Manager
 
@@ -47,7 +49,7 @@ The current dictionaries work, but the engine needs a clearer state model before
 
 - Introduce a consistent entity model for player, NPCs, rooms, items, body parts, worn objects, inventory objects, and void/non-present objects.
 - Separate stable identity from display names and aliases.
-- Track ownership and containment explicitly: player inventory, player worn, player body, room contents, NPC inventory, NPC worn, NPC body, void, and nowhere.
+- Track ownership and containment explicitly: player held, player worn, player body, room contents, NPC held, NPC worn, NPC body, void, and nowhere.
 - Create a single state-query layer for questions like `what can the player see?`, `what can the player refer to?`, `where is this entity?`, and `who owns this?`.
 - Make the Matrix editor read from and write through that state-query layer instead of hand-rolling its own location logic.
 
@@ -57,8 +59,8 @@ The player should be able to see whether the model's proposed state changes were
 
 - Record each LLM response as a turn report with requested tool calls, accepted changes, rejected changes, warnings, and token usage.
 - Surface a compact version of that report only when the current transparency level calls for it.
-- Track when the LLM invents impossible state, omits expected state updates, targets ambiguous entities, or contradicts the authoritative turn packet.
-- Add a debug view that can show prompt, response, accepted/rejected tool calls, model settings, and resulting state.
+- Track when the LLM invents impossible state, omits expected state updates, targets ambiguous entities, contradicts the authoritative turn packet, or forgets recent full-turn context.
+- Add a debug view that can show prompt, response, accepted/rejected tool calls, model settings, recent full-turn context, and resulting state.
 - Add tests for accepted, rejected, partially applied, and warning-only tool-call batches.
 
 ## Phase 5: Editing, Undo, And Repair
@@ -113,13 +115,14 @@ Once the state layer is more trustworthy, improve the daily feel of the app.
 
 ## Near-Term Implementation Order
 
-1. Wire the remaining fixer validation path safely.
-2. Define the canonical LLM tool vocabulary and compatibility aliases.
-3. Implement resolvable disambiguation for visible items, with tests.
-4. Add the first structured turn packet and document its contract.
-5. Extend lookup/state handling to characters and non-present entities.
-6. Add turn reports and transparency levels.
-7. Begin the world-state manager refactor only after the above behavior is covered by tests.
+1. Document the turn packet and ownership-slot contract.
+2. Wire the remaining fixer validation path safely.
+3. Implement canonical ownership slots for player/NPC held, worn, and body entities.
+4. Implement resolvable disambiguation for visible items, with tests.
+5. Add the first structured turn packet and recent-full-turn buffer.
+6. Extend lookup/state handling to characters and non-present entities.
+7. Add turn reports and transparency levels.
+8. Begin the world-state manager refactor only after the above behavior is covered by tests.
 
 ## Non-Goals For Now
 
