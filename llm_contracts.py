@@ -93,6 +93,15 @@ def _normalize_list_field(data, field):
         raise ContractError(f"{field} must be a list.")
 
 
+def _validate_state_updates_shape(data):
+    _normalize_list_field(data, "state_updates")
+    for update in data["state_updates"]:
+        if not isinstance(update, dict):
+            raise ContractError("state update must be a JSON object.")
+        if not isinstance(update.get("tool"), str) or not update.get("tool", "").strip():
+            raise ContractError("state update tool must be a non-empty string.")
+
+
 def normalize_tool_name(tool_name):
     """Return the canonical tool name plus whether a compatibility alias was used."""
     if not isinstance(tool_name, str) or not tool_name.strip():
@@ -119,7 +128,7 @@ def normalize_state_update(update):
 
 
 def normalize_state_updates(updates):
-    """Normalize known tool aliases in a state_updates list."""
+    """Normalize known tool aliases in a state_updates list for future dispatchers/reports."""
     if updates is None:
         return []
     if not isinstance(updates, list):
@@ -131,7 +140,7 @@ def validate_genesis_response(data):
     result = _ensure_mapping(data, "genesis")
     _ensure_required_strings(result, "genesis")
     _normalize_list_field(result, "new_exits")
-    result["state_updates"] = normalize_state_updates(result.get("state_updates"))
+    _validate_state_updates_shape(result)
     return result
 
 
@@ -139,14 +148,14 @@ def validate_room_response(data):
     result = _ensure_mapping(data, "room")
     _ensure_required_strings(result, "room")
     _normalize_list_field(result, "new_exits")
-    result["state_updates"] = normalize_state_updates(result.get("state_updates"))
+    _validate_state_updates_shape(result)
     return result
 
 
 def validate_turn_response(data):
     result = _ensure_mapping(data, "turn")
     _ensure_required_strings(result, "turn")
-    result["state_updates"] = normalize_state_updates(result.get("state_updates"))
+    _validate_state_updates_shape(result)
     if "narrative_summary_update" in result and result["narrative_summary_update"] is None:
         result.pop("narrative_summary_update")
     return result
