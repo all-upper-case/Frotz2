@@ -12,39 +12,8 @@ from llm_contracts import (
     validate_turn_response,
 )
 
-APP_STATE_FILE = "app_state.json"
-
-def load_app_state():
-    if os.path.exists(APP_STATE_FILE):
-        try:
-            with open(APP_STATE_FILE, "r", encoding="utf-8") as f:
-                data = json.load(f)
-                return data if isinstance(data, dict) else {}
-        except Exception:
-            return {}
-    return {}
-
-
-def save_app_state(**updates):
-    state = load_app_state()
-    state.update({k: v for k, v in updates.items() if v is not None})
-    with open(APP_STATE_FILE, "w", encoding="utf-8") as f:
-        json.dump(state, f, indent=2)
-    return state
-
-
-def get_startup_world_name():
-    state = load_app_state()
-    active_save = state.get("active_save")
-    if isinstance(active_save, str) and active_save.endswith(".json"):
-        candidate = active_save[:-5]
-        if os.path.exists(os.path.join("saves", active_save)):
-            return candidate
-    return None
-
-
 app = Flask(__name__)
-world = WorldManager(get_startup_world_name())
+world = WorldManager()
 ai = LLMInterface()
 audit_chat_history = []
 
@@ -117,15 +86,13 @@ def _save_summary(filename):
     room_id = data.get("player", {}).get("current_room")
     room = data.get("rooms", {}).get(room_id, {}) if room_id else {}
     stat = os.stat(path)
-    meta = data.get("meta", {}) if isinstance(data, dict) else {}
     return {
         "file": filename,
-        "world_name": meta.get("world_name") or (filename[:-5] if filename.endswith(".json") else filename),
-        "active_lore_file": meta.get("active_lore_file"),
+        "world_name": filename[:-5] if filename.endswith(".json") else filename,
         "current": filename == os.path.basename(world.save_path),
         "initialized": bool(data),
         "location": room.get("name", "Unknown"),
-        "total_tokens": meta.get("total_tokens", 0),
+        "total_tokens": data.get("meta", {}).get("total_tokens", 0),
         "modified": stat.st_mtime,
     }
 
@@ -206,11 +173,9 @@ def save_manager():
         for filename in sorted(os.listdir("saves")):
             if filename.endswith(".json"):
                 saves.append(_save_summary(filename))
-    app_state = load_app_state()
     return jsonify({
         "current_save": os.path.basename(world.save_path),
         "current_world": world.world_name,
-        "active_lore_file": app_state.get("active_lore_file"),
         "saves": saves,
         "lore_books": _list_lore_books(),
     })
@@ -236,8 +201,6 @@ def load_save():
     world.save_path = path
     world.data = data
     world.ensure_schema()
-    world.data.setdefault("meta", {})["world_name"] = world.world_name
-    save_app_state(active_save=filename, active_world=world.world_name, active_lore_file=world.data.get("meta", {}).get("active_lore_file"))
     world.save_game()
 
     room = world.get_current_room()
@@ -259,16 +222,6 @@ def _write_lore_from_lorebook(filename):
         lore_text = f.read()
     with open("lore.txt", "w", encoding="utf-8") as f:
         f.write(lore_text)
-    return safe
-
-
-def clear_runtime_debug_logs():
-    for path in ("last_turn_debug.txt", "debug_log.txt"):
-        try:
-            if os.path.exists(path):
-                os.remove(path)
-        except Exception:
-            pass
 
 
 @app.route('/read_lorebook', methods=['POST'])
@@ -390,18 +343,10 @@ def new_game():
     lore_file = payload.get("lore_file")
 
     try:
-        active_lore_file = None
         if lore_file:
-            active_lore_file = _write_lore_from_lorebook(lore_file)
+            _write_lore_from_lorebook(lore_file)
 
-        clear_runtime_debug_logs()
         world = WorldManager()
-        world.data = None
-        save_app_state(
-            active_save=os.path.basename(world.save_path),
-            active_world=world.world_name,
-            active_lore_file=active_lore_file,
-        )
         return reset_game()
     except Exception as e:
         log_system(f"New game failed: {str(e)}")
@@ -417,11 +362,6 @@ def reset_game():
 
         log_system("Initializing World DB...")
         intro = world.initialize_world(genesis_data)
-        app_state = load_app_state()
-        world.data.setdefault("meta", {})["world_name"] = world.world_name
-        world.data.setdefault("meta", {})["active_lore_file"] = app_state.get("active_lore_file")
-        save_app_state(active_save=os.path.basename(world.save_path), active_world=world.world_name, active_lore_file=app_state.get("active_lore_file"))
-        world.save_game()
 
         room = world.get_current_room()
         log_system("World Created Successfully.")
@@ -588,11 +528,8 @@ def build_audit_context():
     sections.append("# PROMPT: ARCHITECT\n" + system_prompts.PROMPT_ARCHITECT)
     sections.append("# PROMPT: DM\n" + system_prompts.PROMPT_DM)
     sections.append("# PROMPT: FIXER\n" + system_prompts.PROMPT_FIXER)
-    sections.append(
-        "# DEBUG NOTE\n"
-        "Global debug_log.txt and last_turn_debug.txt are intentionally excluded from this audit context because they can contain prior saves/worlds. "
-        "Use the current save JSON, current context dump, map summary, active lore, and narrative memory as the authoritative audit source."
-    )
+    sections.append("# LAST TURN DEBUG\n" + _read_text_file("last_turn_debug.txt"))
+    sections.append("# DEBUG LOG TAIL\n" + _read_text_file("debug_log.txt")[-60000:])
     return "\n\n".join(sections)
 
 

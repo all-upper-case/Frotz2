@@ -438,8 +438,8 @@ td select, td input { background: #222; color: #0f0; border: 1px solid #040; wid
 /* Desktop Mod */
 @media (min-width: 900px) {
     .mobile-header { display: none; }
-    .hud { position: static; width: 320px; max-width: 320px; transform: none; background: transparent; overflow: hidden; }
-    .hud-content { width: 100%; border-left: 1px solid #333; max-width: 100%; background: #0c0c0c; }
+    .hud { position: static; width: 320px; transform: none; background: transparent; }
+    .hud-content { width: 100%; border-left: 1px solid #333; max-width: none; background: #0c0c0c; }
     .main-layout { flex-direction: row; }
     .terminal { border-right: 1px solid #333; }
     .input-area { position: static; }

@@ -1,118 +1,65 @@
 {
   "narrative_log": [
-    "You wake to the insistent buzzing of your phone alarm, its glow piercing through the thin veil of sleep still clinging to your mind. The room is dim, the morning light filtering lazily through the half-drawn curtains of your bedroom. Your body feels like it's been through a marathon\u2014muscles aching, head pounding with the remnants of last night's overindulgence. The scent of stale perfume and the faint tang of sweat linger in the air, a souvenir from the club. You groan, rolling over to silence the alarm, and take a deep breath. Today is yours. Well, at least until tonight. Jade begins the day in her bedroom, recovering from a long night of work. Her immediate goals are to shake off the hangover, tend to her sore body, and navigate the day ahead\u2014whether that means productivity, relaxation, or a mix of both. The presence of her younger sister, Chai, in the basement adds a layer of domestic responsibility, though their relationship is more sibling than parental. The house is quiet, suggesting Chai is either still asleep or out. Jade\u2019s work bag and last night\u2019s earnings are likely nearby, and her phone is a critical tool for communication and planning.",
-    "Jade checked her phone messages, revealing texts from her club manager, sister, best friend, and a potential client. The phone\u2019s battery is at 42%.",
-    "Jade checked her phone messages, revealing texts from Marcus (club manager), Chai (sister), Tasha (best friend), and Daniel (potential client). These messages now exist as interactable objects.",
-    "Jade examined her phone messages, revealing detailed interactable objects for Marcus's text, Chai's texts, Tasha's voice note, and Daniel's text.",
-    "Jade checked her texts, revealing four interactable message threads: a text from Marcus (club manager), texts from Chai (sister), a voice note from Tasha (best friend), and a text from Daniel (potential client). The phone\u2019s battery is now at 38%.",
-    "Jade sent a playful text to Chai, who replied with a mix of sarcasm and demands for repayment. The phone\u2019s battery is now at 36%.",
-    "Jade removed and dropped her oversized sleep shirt, leaving her in just her boyshorts and anklet.",
-    "Jade counted her earnings from last night, totaling $875. The wad of cash is now neatly fanned out on the bed.",
-    "The soaking tub has been drained, leaving it empty and dry.",
-    "",
-    "Jade examined the mirror, revealing its detailed description. The mirror is now an interactable object.",
-    "",
-    "The game engine corrected and synchronized the world state, ensuring all descriptions and locations match the established narrative. No new interactable objects or characters were introduced.",
-    "Jade removed her oversized sleep shirt, leaving her in just her boyshorts and anklet. The shirt is now in her inventory.",
-    "Jade removed her lace-trimmed boyshorts, leaving her bare from the waist down. The boyshorts are now in her inventory.",
-    "",
-    "",
-    "Jade took a lewd mirror selfie, which is now saved in her phone\u2019s gallery as *mirror selfie (photo)*. The phone\u2019s battery is now at 35%.",
-    "Jade picked up the wad of cash from the bed and is now holding it.",
-    "Jade dropped her oversized sleep shirt and lace-trimmed boyshorts onto the floor of the master bedroom. She is now completely bare from the waist down, wearing only her silver anklet.",
-    "",
-    "Jade removed and dropped her silver anklet onto the floor of the master bedroom. She is now bare from the waist down, with no jewelry on her ankles.",
-    "The nightstand drawer has been searched, revealing several interactable items: lip balm (nightstand), crumpled receipt, hair ties, velvet jewelry box, vibrator (nightstand), expired condoms, crumpled twenty, and old business cards.",
-    "Jade picked up the vibrator from the nightstand drawer. The vibrator is now in her inventory."
+    "The sunlight filters through the heavy curtains of your bedroom, a relentless intrusion that feels like a physical assault against your eyelids. Your head throbs with the dull, rhythmic ache of a hangover\u2014the price paid for a particularly lucrative Tuesday night at the club. You lie motionless for a moment, listening to the distant sounds of the suburban morning: a neighbor's lawnmower, the faint chirp of birds, and the muffled thump of bass from the basement where Chai is undoubtedly still asleep. The air in the room is stale, smelling of last night's perfume and the lingering scent of expensive gin. It was a good night, but God, you feel every single year of your mid-twenties right now. You wake up in your bedroom with a hangover, needing to recover and prepare for another shift at the club tonight.",
+    "Jade works as a stripper in the city and is currently recovering from a long, profitable shift.",
+    "Jade's sister, Chai, lives in the basement of the house."
   ],
-  "blueprint": "The Guest Bathroom (room_ce86a1c3) is now fully described. Exits confirmed: south to the Guest Bedroom (room_a1cabe46). The blueprint remains unchanged for now, though the Study/Spare Bedroom (room_d31dd666) to the north of the hallway is still planned for future exploration.",
+  "blueprint": "The house consists of the main floor (kitchen, living room, Jade's bedroom, bathroom) and a finished basement where Chai resides.",
   "meta": {
-    "total_tokens": 160338
+    "total_tokens": 1937
   },
+  "pending_notifications": [],
+  "recent_turns": [],
+  "pending_ambiguity": null,
   "player": {
-    "current_room": "room_d31dd666",
-    "inventory": [
-      "i_5dbc69",
-      "i_675f91",
-      "i_529f8d",
-      "i_292d92",
-      "i_9616a2",
-      "i_8b3cd8",
-      "i_9d26d9",
-      "i_a114f2"
-    ],
-    "worn": [
-      "i_31c234"
-    ],
-    "description": "You are Jade, a striking young woman in your early twenties, with skin the color of rich milk chocolate and a cascade of kinky black hair that tumbles past your shoulders. Even in the throes of a hangover, there\u2019s an undeniable vitality to you, a resilience that comes from years of pushing through long nights. You stand completely bare from the waist down, the absence of your usual silver anklet around your left ankle leaving the skin there feeling oddly exposed. Your wrists are bare, save for the faint tan lines where you usually wear your work jewelry. Your nails\u2014both fingers and toes\u2014are painted a deep, shimmering emerald, though the polish is slightly chipped from last night\u2019s performance. A thin sheen of sweat lingers on your skin, a reminder of the heat and exertion of the club, and your muscles ache in protest as you shift, the hangover pulsing behind your temples like a second heartbeat.",
+    "current_room": "room_start",
+    "inventory": [],
+    "worn": [],
+    "body": [],
+    "description": "You are Jade, a young woman in her mid-twenties with skin the color of milk chocolate and kinky black hair. You are currently wearing only black lace panties.",
     "aliases": [
       "me",
       "self",
       "player"
     ]
   },
-  "characters": {},
+  "characters": {
+    "npc_chai": {
+      "id": "npc_chai",
+      "name": "Chai",
+      "aliases": [
+        "chai",
+        "sister"
+      ],
+      "description": "Jade's 22-year-old sister. She is currently living in the finished basement of the house while she finishes college. She is spirited, a bit disorganized, and deeply reliant on her sister's stability.",
+      "items": [],
+      "held": [],
+      "worn": [],
+      "body": [],
+      "location": "room_start"
+    }
+  },
   "rooms": {
     "room_start": {
       "id": "room_start",
-      "name": "Master Bedroom",
-      "description": "The master bedroom is a sanctuary of soft blues and warm woods, a space that feels both lived-in and carefully curated. The king-sized bed, unmade and rumpled, dominates the room, its duvet half-slumped onto the plush carpet. A large window to the east lets in muted morning light, the curtains swaying slightly in the breeze from the cracked-open pane. The walls are adorned with a few tasteful prints\u2014abstract art with splashes of gold and teal\u2014and a full-length mirror leans against the northern wall, reflecting the disarray of the room. To the south, the door to the master bathroom stands ajar, steam from an earlier shower still lingering in the air. The faint scent of lavender and something faintly citrusy\u2014your shampoo, perhaps\u2014mixes with the heavier musk of last night\u2019s exertions. The room feels cozy, if a little cluttered, with a few items strewn about from your hasty undressing. Exits lead east into the upstairs hallway and north into your walk-in closet.\n\nYou can see here: work bag, sequined top, fishnet stockings, high heels, makeup bag, bed, nightstand, glass of water, painkillers, romance novel, hand cream, full-length mirror, walk-in closet, master bathroom, oversized sleep shirt, lace-trimmed boyshorts, silver anklet, nightstand drawer, lip balm (nightstand), crumpled receipt, hair ties, velvet jewelry box, expired condoms, crumpled twenty, old business cards.",
-      "base_description": "The master bedroom is a sanctuary of soft blues and warm woods, a space that feels both lived-in and carefully curated. The king-sized bed, unmade and rumpled, dominates the room, its duvet half-slumped onto the plush carpet. A large window to the east lets in muted morning light, the curtains swaying slightly in the breeze from the cracked-open pane. The walls are adorned with a few tasteful prints\u2014abstract art with splashes of gold and teal\u2014and a full-length mirror leans against the northern wall, reflecting the disarray of the room. To the south, the door to the master bathroom stands ajar, steam from an earlier shower still lingering in the air. The faint scent of lavender and something faintly citrusy\u2014your shampoo, perhaps\u2014mixes with the heavier musk of last night\u2019s exertions. The room feels cozy, if a little cluttered, with a few items strewn about from your hasty undressing. Exits lead east into the upstairs hallway and north into your walk-in closet.",
+      "name": "Jade's Bedroom",
+      "description": "Your bedroom is a sanctuary of organized chaos. The walls are painted a calming sage green, adorned with a few eclectic art prints and a large, ornate mirror that reflects the disarray of your life. A massive, plush king-sized bed dominates the center of the room, its high-thread-count sheets tangled around you in a cocoon of cotton and silk. A mahogany dresser stands against the far wall, topped with an overflowing tray of jewelry and a half-empty bottle of expensive moisturizer. To the left, a walk-in closet is slightly ajar, revealing a glimpse of high heels and a shimmering collection of stage wear. The carpet is a deep, plush cream, currently littered with a discarded robe and a single black pump. A large window allows a sliver of blinding morning light to slice across the floor, illuminating dust motes dancing in the air.\n\nYou can see here: Smartphone, Glass of Water, Nightstand.",
+      "base_description": "Your bedroom is a sanctuary of organized chaos. The walls are painted a calming sage green, adorned with a few eclectic art prints and a large, ornate mirror that reflects the disarray of your life. A massive, plush king-sized bed dominates the center of the room, its high-thread-count sheets tangled around you in a cocoon of cotton and silk. A mahogany dresser stands against the far wall, topped with an overflowing tray of jewelry and a half-empty bottle of expensive moisturizer. To the left, a walk-in closet is slightly ajar, revealing a glimpse of high heels and a shimmering collection of stage wear. The carpet is a deep, plush cream, currently littered with a discarded robe and a single black pump. A large window allows a sliver of blinding morning light to slice across the floor, illuminating dust motes dancing in the air.",
       "exits": {
-        "east": "room_b61f129b",
-        "north": "room_01a92f58",
-        "south": "room_f081d353"
+        "north": "room_945edfce"
       },
       "items": [
-        "i_83edf4",
-        "i_1fb6cd",
-        "i_6e0fbb",
-        "i_a0e8bc",
-        "i_95e949",
-        "i_a9474b",
-        "i_9d0e8f",
-        "i_f4e29e",
-        "i_07951f",
-        "i_f97b4c",
-        "i_e6db70",
-        "i_a31499",
-        "i_d28aa4",
-        "i_c09d83",
-        "i_dfe946",
-        "i_a24dec",
-        "i_04415f",
-        "i_35e64a",
-        "i_f73ba7",
-        "i_f29cb1",
-        "i_b4555f",
-        "i_09e08a",
-        "i_c77c90",
-        "i_1cf5c2",
-        "i_60ab77"
+        "i_1757bd",
+        "i_28c21d",
+        "i_25bed9"
       ],
-      "characters": [],
+      "characters": [
+        "npc_chai"
+      ],
       "visited": true
     },
-    "room_b61f129b": {
-      "id": "room_b61f129b",
-      "name": "Linen Closet",
-      "description": "The linen closet is a narrow, utilitarian space wedged between the master bathroom and the upstairs hallway. The air is thick with the scent of lavender fabric softener and the faint, musty odor of old cotton. Shelves line both walls from floor to ceiling, packed with neatly folded towels, sheets, and blankets in various shades of white, cream, and pale blue. A single bare bulb hangs from the ceiling, casting a harsh, unflattering light that makes the space feel even more cramped. The floor is bare wood, cool underfoot, and a few stray threads and lint balls have gathered in the corners. To the west, the door to the master bathroom stands slightly ajar, while to the east, a closed door leads into the upstairs hallway. The faint sound of the house settling\u2014creaks and groans\u2014echoes softly in the confined space.\n\nYou can see here: stack of towels, basket of laundry supplies, spare pillow, old quilt.",
-      "base_description": "The linen closet is a narrow, utilitarian space wedged between the master bathroom and the upstairs hallway. The air is thick with the scent of lavender fabric softener and the faint, musty odor of old cotton. Shelves line both walls from floor to ceiling, packed with neatly folded towels, sheets, and blankets in various shades of white, cream, and pale blue. A single bare bulb hangs from the ceiling, casting a harsh, unflattering light that makes the space feel even more cramped. The floor is bare wood, cool underfoot, and a few stray threads and lint balls have gathered in the corners. To the west, the door to the master bathroom stands slightly ajar, while to the east, a closed door leads into the upstairs hallway. The faint sound of the house settling\u2014creaks and groans\u2014echoes softly in the confined space.",
-      "exits": {
-        "west": "room_start",
-        "east": "room_1f5d70e2"
-      },
-      "items": [
-        "i_53a902",
-        "i_f915de",
-        "i_875d76",
-        "i_297e48"
-      ],
-      "characters": [],
-      "visited": false
-    },
-    "room_01a92f58": {
-      "id": "room_01a92f58",
+    "room_945edfce": {
+      "id": "room_945edfce",
       "name": "Unknown",
       "description": null,
       "base_description": "...",
@@ -122,876 +69,44 @@
       "items": [],
       "characters": [],
       "visited": false
-    },
-    "room_f081d353": {
-      "id": "room_f081d353",
-      "name": "Master Bathroom",
-      "description": "The master bathroom is a spa-like retreat, all cool marble and warm wood tones, though the morning light streaming in through the frosted skylight above the shower gives it a slightly clinical edge. The air is thick with the lingering humidity of a recent shower, the scent of lavender and citrus from your shampoo mingling with the faint metallic tang of the water. A large, glass-walled shower dominates the eastern wall, its chrome fixtures gleaming, while a deep soaking tub sits beneath the skylight, half-filled with still water. The double vanity stretches along the northern wall, its granite countertop cluttered with toiletries\u2014bottles of lotion, a half-empty tube of toothpaste, a hairbrush tangled with strands of your kinky black hair. A plush, charcoal-gray bath mat lies in front of the tub, its fibers still damp. The southern wall holds a large mirror above the vanity, its surface slightly fogged, reflecting the soft glow of the recessed lighting. To the north, a door leads to a small linen closet, its presence hinted at by the faint scent of fresh laundry. The only exit you can see clearly is the doorway back to the north, leading into your bedroom.\n\nYou can see here: soaking tub, double vanity, bath mat, skylight, loofah, toothbrush.",
-      "base_description": "The master bathroom is a spa-like retreat, all cool marble and warm wood tones, though the morning light streaming in through the frosted skylight above the shower gives it a slightly clinical edge. The air is thick with the lingering humidity of a recent shower, the scent of lavender and citrus from your shampoo mingling with the faint metallic tang of the water. A large, glass-walled shower dominates the eastern wall, its chrome fixtures gleaming, while a deep soaking tub sits beneath the skylight, half-filled with still water. The double vanity stretches along the northern wall, its granite countertop cluttered with toiletries\u2014bottles of lotion, a half-empty tube of toothpaste, a hairbrush tangled with strands of your kinky black hair. A plush, charcoal-gray bath mat lies in front of the tub, its fibers still damp. The southern wall holds a large mirror above the vanity, its surface slightly fogged, reflecting the soft glow of the recessed lighting. To the north, a door leads to a small linen closet, its presence hinted at by the faint scent of fresh laundry. The only exit you can see clearly is the doorway back to the north, leading into your bedroom.",
-      "exits": {
-        "north": "room_start",
-        "east": "room_050e9ab2"
-      },
-      "items": [
-        "i_d372f1",
-        "i_fab794",
-        "i_41b4b8",
-        "i_a0d353",
-        "i_08ab16",
-        "i_b7bd8e"
-      ],
-      "characters": [],
-      "visited": true
-    },
-    "room_050e9ab2": {
-      "id": "room_050e9ab2",
-      "name": "Unknown",
-      "description": null,
-      "base_description": "...",
-      "exits": {
-        "west": "room_f081d353"
-      },
-      "items": [],
-      "characters": [],
-      "visited": false
-    },
-    "room_1f5d70e2": {
-      "id": "room_1f5d70e2",
-      "name": "Upstairs Hallway",
-      "description": "The upstairs hallway stretches before you, a narrow but well-lit corridor that runs the length of the second floor. The walls are painted a soft, warm beige, adorned with a few framed family photos and abstract art pieces that your mother collected over the years. The hardwood floor, polished to a subtle sheen, creaks faintly underfoot as you step forward. A plush runner rug, its edges slightly frayed, runs down the center of the hallway, muffling your steps. To the west, the door to the linen closet stands slightly ajar, while to the east, the hallway opens into what appears to be a guest bedroom. To the north, a closed door likely leads to another room, perhaps a study or spare bedroom. The air here is still, carrying the faint scent of lemon polish and the distant aroma of coffee brewing somewhere downstairs. A single window at the far end of the hallway lets in a sliver of morning light, casting long shadows across the floor.\n\nYou can see here: hallway runner rug, family photos, hallway window, coffee aroma.",
-      "base_description": "The upstairs hallway stretches before you, a narrow but well-lit corridor that runs the length of the second floor. The walls are painted a soft, warm beige, adorned with a few framed family photos and abstract art pieces that your mother collected over the years. The hardwood floor, polished to a subtle sheen, creaks faintly underfoot as you step forward. A plush runner rug, its edges slightly frayed, runs down the center of the hallway, muffling your steps. To the west, the door to the linen closet stands slightly ajar, while to the east, the hallway opens into what appears to be a guest bedroom. To the north, a closed door likely leads to another room, perhaps a study or spare bedroom. The air here is still, carrying the faint scent of lemon polish and the distant aroma of coffee brewing somewhere downstairs. A single window at the far end of the hallway lets in a sliver of morning light, casting long shadows across the floor.",
-      "exits": {
-        "west": "room_b61f129b",
-        "east": "room_a1cabe46",
-        "north": "room_d31dd666"
-      },
-      "items": [
-        "i_b614a2",
-        "i_76121b",
-        "i_99f38c",
-        "i_a9c315"
-      ],
-      "characters": [],
-      "visited": true
-    },
-    "room_a1cabe46": {
-      "id": "room_a1cabe46",
-      "name": "Guest Bedroom",
-      "description": "The guest bedroom is a cozy, understated space that feels like a snapshot of your mother\u2019s taste\u2014elegant but unpretentious. The walls are painted a soft sage green, a color that soothes even in the dim morning light filtering through the half-drawn blinds. A queen-sized bed with a simple wooden frame sits against the far wall, its duvet a muted floral pattern that matches the curtains. The bed is neatly made, though the pillows look slightly lopsided, as if someone had been sitting there recently. A small nightstand stands beside it, its surface bare except for a ceramic lamp with a beige shade. The hardwood floor creaks faintly underfoot, and a thin layer of dust clings to the surface of an antique vanity against the east wall, its mirror reflecting the room\u2019s quiet stillness. To the west, the door back to the upstairs hallway stands open, while a closed door to the north likely leads to a closet or en-suite bathroom. The air smells faintly of lavender and old books, with a hint of the coffee aroma drifting in from the hallway.\n\nYou can see here: floral duvet, ceramic lamp, antique vanity, lavender sachet.",
-      "base_description": "The guest bedroom is a cozy, understated space that feels like a snapshot of your mother\u2019s taste\u2014elegant but unpretentious. The walls are painted a soft sage green, a color that soothes even in the dim morning light filtering through the half-drawn blinds. A queen-sized bed with a simple wooden frame sits against the far wall, its duvet a muted floral pattern that matches the curtains. The bed is neatly made, though the pillows look slightly lopsided, as if someone had been sitting there recently. A small nightstand stands beside it, its surface bare except for a ceramic lamp with a beige shade. The hardwood floor creaks faintly underfoot, and a thin layer of dust clings to the surface of an antique vanity against the east wall, its mirror reflecting the room\u2019s quiet stillness. To the west, the door back to the upstairs hallway stands open, while a closed door to the north likely leads to a closet or en-suite bathroom. The air smells faintly of lavender and old books, with a hint of the coffee aroma drifting in from the hallway.",
-      "exits": {
-        "west": "room_1f5d70e2",
-        "north": "room_ce86a1c3"
-      },
-      "items": [
-        "i_490113",
-        "i_31bd65",
-        "i_403e60",
-        "i_23adc3"
-      ],
-      "characters": [],
-      "visited": false
-    },
-    "room_d31dd666": {
-      "id": "room_d31dd666",
-      "name": "Guest Bathroom",
-      "description": "You push open the door to the guest bathroom, and the scent of lemon-scented cleaner greets you, mingling with the faint, lingering odor of mildew that no amount of scrubbing seems to fully erase. The room is compact but functional, its walls painted a pale, soothing blue that matches the fluffy towels hanging neatly on a chrome rack. A small, frosted window above the toilet lets in a diffused, watery light, casting everything in a soft, muted glow. The porcelain sink is pristine, its surface gleaming under the fluorescent light of a vanity mirror framed in brushed nickel. To your left, a shower-tub combo is tucked into the corner, its white curtain printed with tiny, faded anchors. The floor is tiled in a checkerboard pattern of white and gray, cold underfoot, and a small, wicker basket sits in the corner, overflowing with travel-sized toiletries. The air is cool and slightly damp, the kind of chill that seeps into your bones if you linger too long. To the south, the door leads back into the guest bedroom, while the only other exit is the window, though it\u2019s far too small to squeeze through.\n\nYou can see here: chrome towel rack, vanity mirror, wicker basket, shower curtain.",
-      "base_description": "You push open the door to the guest bathroom, and the scent of lemon-scented cleaner greets you, mingling with the faint, lingering odor of mildew that no amount of scrubbing seems to fully erase. The room is compact but functional, its walls painted a pale, soothing blue that matches the fluffy towels hanging neatly on a chrome rack. A small, frosted window above the toilet lets in a diffused, watery light, casting everything in a soft, muted glow. The porcelain sink is pristine, its surface gleaming under the fluorescent light of a vanity mirror framed in brushed nickel. To your left, a shower-tub combo is tucked into the corner, its white curtain printed with tiny, faded anchors. The floor is tiled in a checkerboard pattern of white and gray, cold underfoot, and a small, wicker basket sits in the corner, overflowing with travel-sized toiletries. The air is cool and slightly damp, the kind of chill that seeps into your bones if you linger too long. To the south, the door leads back into the guest bedroom, while the only other exit is the window, though it\u2019s far too small to squeeze through.",
-      "exits": {
-        "south": "room_1f5d70e2"
-      },
-      "items": [
-        "i_d171ba",
-        "i_cb667b",
-        "i_d52c40",
-        "i_6b7e55"
-      ],
-      "characters": [],
-      "visited": false
-    },
-    "room_ce86a1c3": {
-      "id": "room_ce86a1c3",
-      "name": "Unknown",
-      "description": null,
-      "base_description": null,
-      "exits": {
-        "south": "room_a1cabe46"
-      },
-      "items": [],
-      "characters": [],
-      "visited": false
     }
   },
   "items": {
-    "i_8b3cd8": {
-      "id": "i_8b3cd8",
-      "name": "phone",
+    "i_1757bd": {
+      "id": "i_1757bd",
+      "name": "Smartphone",
       "aliases": [
-        "phone",
         "smartphone",
-        "cell phone",
-        "cell",
-        "mobile",
-        "rose gold phone"
+        "phone"
       ],
-      "description": "Your trusty smartphone, its rose gold case slightly scuffed from years of use. The screen is currently displaying the photo you just took\u2014a mirror selfie that\u2019s equal parts artful and explicit. The battery icon at the top of the screen glows at 35%, a reminder that you\u2019ve been using it heavily this morning. The messaging app is still open in the background, with threads from Marcus (club manager), Chai (sister), Tasha (best friend), and Daniel (potential client) visible. The lock screen wallpaper remains a selfie of you and Chai from last summer, both of you grinning like fools at some beachside diner. The phone\u2019s gallery now includes a new file: *mirror selfie (photo)*.",
+      "description": "A modern smartphone with a cracked screen, lying face-down on the nightstand.",
       "carryable": true,
-      "visible": true
+      "visible": true,
+      "body_part": false
     },
-    "i_04415f": {
-      "id": "i_04415f",
-      "name": "silver anklet",
-      "aliases": [
-        "silver anklet",
-        "anklet",
-        "ankle bracelet",
-        "charm anklet",
-        "silver chain"
-      ],
-      "description": "A delicate chain of silver links circles your left ankle, adorned with tiny charms: a crescent moon, a star, and a tiny heart. It\u2019s lightweight, almost weightless, but you\u2019re acutely aware of its presence, a quiet reminder of someone who\u2019s no longer in your life. The clasp is a little loose, and you\u2019ve had to tighten it more than once to keep it from slipping off.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_31c234": {
-      "id": "i_31c234",
-      "name": "emerald nail polish",
-      "aliases": [
-        "emerald nail polish",
-        "nail polish",
-        "green nail polish",
-        "polish",
-        "nails"
-      ],
-      "description": "Your nails\u2014fingers and toes\u2014are painted a deep, shimmering emerald green, the color rich and jewel-like. The polish is slightly chipped at the edges, particularly on your dominant hand, where the wear and tear of last night\u2019s performance has taken its toll. It\u2019s a bold color, one that stands out against your skin, and it\u2019s become something of a signature for you at the club.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_dfe946": {
-      "id": "i_dfe946",
-      "name": "oversized sleep shirt",
-      "aliases": [
-        "oversized sleep shirt",
-        "sleep shirt",
-        "shirt",
-        "gray shirt",
-        "band shirt",
-        "nightshirt"
-      ],
-      "description": "This sleep shirt is your go-to for lazy mornings and hungover afternoons. It\u2019s a faded gray, the fabric soft and thin from years of washing, with a slightly stretched neckline that slips off one shoulder. The hem barely reaches mid-thigh, leaving your legs mostly bare. It\u2019s emblazoned with the logo of some band you don\u2019t even listen to anymore, a relic from a thrift store find years ago. Despite its worn appearance, it\u2019s absurdly comfortable, and you\u2019ve refused to part with it, even when Chai teases you about it.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_a24dec": {
-      "id": "i_a24dec",
-      "name": "lace-trimmed boyshorts",
-      "aliases": [
-        "lace-trimmed boyshorts",
-        "boyshorts",
-        "underwear",
-        "panties",
-        "black boyshorts",
-        "lace boyshorts"
-      ],
-      "description": "These boyshorts are a staple in your underwear drawer\u2014comfortable, cute, and just a little bit sexy. The black fabric is soft and stretchy, with delicate lace trim along the waistband and legs. They\u2019re not the kind of thing you\u2019d wear to work, but they\u2019re perfect for lounging around the house or sleeping in after a long night. The lace is a little itchy if you\u2019re not used to it, but you\u2019ve long since stopped noticing.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_83edf4": {
-      "id": "i_83edf4",
-      "name": "work bag",
-      "aliases": [
-        "work bag",
-        "duffel bag",
-        "bag",
-        "black bag",
-        "club bag",
-        "stripping bag"
-      ],
-      "description": "A large, black duffel bag that\u2019s seen better days, its fabric scuffed and the zipper slightly sticky. This is where you stash everything you need for a night at the club: your performance outfits, makeup, heels, jewelry, and a few other essentials. Right now, it\u2019s unzipped, its contents spilling out slightly\u2014a sequined top here, a pair of fishnet stockings there. The bag smells faintly of perfume, sweat, and the cheap air freshener you keep inside to mask the odors. A wad of cash is likely tucked into one of the inner pockets, your earnings from last night.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_1fb6cd": {
-      "id": "i_1fb6cd",
-      "name": "sequined top",
-      "aliases": [
-        "sequined top",
-        "top",
-        "silver top",
-        "sequin top",
-        "performance top",
-        "club top"
-      ],
-      "description": "A dazzling, form-fitting top made of thousands of tiny silver sequins. It\u2019s designed to catch the light and hold it, shimmering like liquid metal as you move. The neckline is low, the back even lower, and the sleeves are nonexistent, leaving your arms bare. It\u2019s one of your favorite pieces for performances\u2014sexy, eye-catching, and just a little bit tacky in the best way. Right now, it\u2019s crumpled in a heap, half-spilling out of your work bag, the sequins dull in the dim light of the bedroom.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_6e0fbb": {
-      "id": "i_6e0fbb",
-      "name": "fishnet stockings",
-      "aliases": [
-        "fishnet stockings",
-        "stockings",
-        "fishnets",
-        "nylons",
-        "black fishnets"
-      ],
-      "description": "A pair of black fishnet stockings, the kind that are equal parts elegant and trashy. They\u2019re ripped in a few places\u2014intentional, of course\u2014and the elastic at the top is slightly frayed from repeated use. You wear these under your outfits sometimes, adding a layer of texture and allure to your performances. Right now, they\u2019re tangled up with the rest of your work clothes, one stocking draped over the edge of your bag like a lazy snake.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_a0e8bc": {
-      "id": "i_a0e8bc",
-      "name": "high heels",
-      "aliases": [
-        "high heels",
-        "heels",
-        "shoes",
-        "black heels",
-        "stilettos",
-        "club heels"
-      ],
-      "description": "A pair of strappy black high heels, the kind that are impossible to walk in but look incredible on stage. The stiletto heels are sky-high, the straps delicate but sturdy enough to hold up under the stress of a performance. The soles are slightly scuffed, and the leather is worn in places, but they\u2019re still your go-to shoes for when you want to make an impression. They\u2019re currently lying on their sides near your work bag, as if you kicked them off in a hurry last night.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_95e949": {
-      "id": "i_95e949",
-      "name": "makeup bag",
-      "aliases": [
-        "makeup bag",
-        "bag",
-        "cosmetics bag",
-        "makeup pouch",
-        "vanity bag"
-      ],
-      "description": "A small, zippered pouch filled with the tools of your trade: foundation, concealer, eyeshadow palettes, lipsticks, mascara, and a dozen other products you can\u2019t live without. The bag is a riot of colors, with stains from spilled liquids and powders ground into the fabric. Right now, it\u2019s half-unzipped, a few items peeking out\u2014a tube of red lipstick, a brush with bristles caked in product, a compact mirror with a cracked edge. The scent of powder and perfume clings to it, a familiar and comforting smell.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_a9474b": {
-      "id": "i_a9474b",
-      "name": "bed",
-      "aliases": [
-        "bed",
-        "king bed",
-        "mattress",
-        "duvet",
-        "bedsheets"
-      ],
-      "description": "A king-sized bed with a plush, slightly rumpled duvet in shades of blue and gray. The sheets are soft, high-thread-count cotton, though they\u2019re twisted and tangled from a restless night\u2019s sleep. A few pillows are scattered about\u2014some still on the bed, others on the floor\u2014each one a different shade of blue or white. The mattress is firm but comfortable, the kind that molds to your body after years of use. The bed is unmade, the blankets half-fallen onto the floor, and the scent of your perfume lingers in the fabric.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_9d0e8f": {
-      "id": "i_9d0e8f",
-      "name": "nightstand",
-      "aliases": [
-        "nightstand",
-        "stand",
-        "bedside table",
-        "table"
-      ],
-      "description": "A small, wooden nightstand beside your bed, its surface cluttered with the detritus of daily life. A glass of water, half-drunk and now lukewarm, sits next to a bottle of painkillers, the cap off and a few pills scattered nearby. There\u2019s also a romance novel with a dog-eared page, a tube of hand cream, and a charging cable coiled like a snake. The drawer is slightly ajar, revealing a jumble of odds and ends: lip balm, hair ties, a vibrator you haven\u2019t used in months, and a few condoms that are probably expired.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_f4e29e": {
-      "id": "i_f4e29e",
-      "name": "glass of water",
+    "i_28c21d": {
+      "id": "i_28c21d",
+      "name": "Glass of Water",
       "aliases": [
         "glass of water",
-        "water",
-        "water glass",
-        "tumbler",
-        "glass"
+        "water"
       ],
-      "description": "A clear glass tumbler, half-filled with water that\u2019s gone slightly warm and flat from sitting out all night. The glass is smudged with fingerprints, and a faint ring of lipstick marks the rim where you drank from it last. It\u2019s the kind of thing you\u2019d chug without thinking if your throat wasn\u2019t so dry from last night\u2019s exertions.",
+      "description": "A half-empty glass of lukewarm water resting on the nightstand.",
       "carryable": true,
-      "visible": true
+      "visible": true,
+      "body_part": false
     },
-    "i_07951f": {
-      "id": "i_07951f",
-      "name": "painkillers",
+    "i_25bed9": {
+      "id": "i_25bed9",
+      "name": "Nightstand",
       "aliases": [
-        "painkillers",
-        "pills",
-        "ibuprofen",
-        "medicine",
-        "headache pills"
+        "nightstand",
+        "table"
       ],
-      "description": "A small, white bottle of over-the-counter painkillers, the label promising relief from headaches, muscle aches, and general misery. The cap is off, and a few pills have spilled onto the nightstand, their white tablets stark against the dark wood. You know you should take a couple\u2014your head is pounding, and your body feels like it\u2019s been hit by a truck\u2014but the thought of swallowing them dry makes your stomach churn.",
+      "description": "A small wooden table beside the bed, cluttered with personal items.",
       "carryable": true,
-      "visible": true
-    },
-    "i_f97b4c": {
-      "id": "i_f97b4c",
-      "name": "romance novel",
-      "aliases": [
-        "romance novel",
-        "book",
-        "novel",
-        "paperback",
-        "romance book"
-      ],
-      "description": "A well-worn paperback romance novel, its cover featuring a shirtless man with abs of steel and a woman with flowing hair gazing longingly into the distance. The spine is creased, and the pages are dog-eared in several places, marking your progress. You\u2019ve been reading it on and off for weeks, though you can\u2019t remember the last time you actually picked it up. The book is splayed open on the nightstand, as if you were in the middle of a particularly steamy scene before drifting off to sleep.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_e6db70": {
-      "id": "i_e6db70",
-      "name": "hand cream",
-      "aliases": [
-        "hand cream",
-        "cream",
-        "lavender cream",
-        "lotion",
-        "tube of cream"
-      ],
-      "description": "A small tube of lavender-scented hand cream, its cap missing and the nozzle slightly crusted with dried product. The cream inside is thick and rich, perfect for soothing dry skin after a long night of washing your hands or applying and removing makeup. You use it religiously, though you always forget to put the cap back on, which is why the tube is now half-empty and slightly sticky to the touch.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_a31499": {
-      "id": "i_a31499",
-      "name": "full-length mirror",
-      "aliases": [
-        "mirror",
-        "looking glass",
-        "bathroom mirror",
-        "dressing mirror",
-        "full-length mirror",
-        "standing mirror"
-      ],
-      "description": "A large, rectangular mirror mounted above the double vanity, its surface framed in sleek, matte-black metal. The glass is slightly fogged from the humidity of your shower, with streaks of condensation still clinging to the edges. A few smudges\u2014likely from fingerprints or the swipe of a hand\u2014mar the otherwise reflective surface, but the center is clear enough to reveal your reflection in sharp detail. The mirror\u2019s frame is cool to the touch, and the recessed lighting above casts a soft, even glow across its surface, highlighting the faint imperfections in the glass. A hairline crack, barely noticeable, runs along the bottom left corner, a souvenir from the time Chai accidentally knocked over a bottle of perfume. The mirror reflects the entirety of the bathroom behind you, from the half-drained soaking tub to the cluttered vanity, though the angles make the room look slightly larger than it is.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_d28aa4": {
-      "id": "i_d28aa4",
-      "name": "walk-in closet",
-      "aliases": [
-        "walk-in closet",
-        "closet",
-        "wardrobe",
-        "dressing room"
-      ],
-      "description": "A spacious walk-in closet, its racks and shelves overflowing with clothes, shoes, and accessories. The lighting is warm and flattering, casting a soft glow over the rows of dresses, blouses, jeans, and the occasional sequined monstrosity from your club days. Shoes line the floor\u2014heels, sneakers, boots, and sandals\u2014while shelves above hold folded sweaters, purses, and a few boxes of odds and ends. The scent of fabric softener and leather lingers in the air, a comforting smell that reminds you of lazy Sundays spent organizing and reorganizing your wardrobe. The door to the closet is slightly ajar, a sliver of light spilling into the bedroom.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_c09d83": {
-      "id": "i_c09d83",
-      "name": "master bathroom",
-      "aliases": [
-        "master bathroom",
-        "bathroom",
-        "en-suite bathroom",
-        "shower room"
-      ],
-      "description": "A sleek, modern master bathroom, its walls tiled in shades of gray and white. The shower is a glass-enclosed affair, the floor still damp from your pre-bed rinse last night, and the scent of lavender body wash lingers in the steamy air. A double vanity stretches along one wall, its countertop cluttered with skincare products, a hairdryer, and a few stray bobby pins. The toilet is tucked into a small alcove, its lid closed, and a plush bath mat lies on the floor, slightly askew. The mirror above the sink is fogged from your shower, obscuring your reflection, but you can still make out the outline of your face\u2014tired, but familiar.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_9d26d9": {
-      "id": "i_9d26d9",
-      "name": "wad of cash",
-      "aliases": [
-        "wad of cash",
-        "cash",
-        "money",
-        "bills",
-        "stack of cash",
-        "tips"
-      ],
-      "description": "A thick stack of bills, mostly twenties and fifties with a few hundreds, held together by a slightly stretched rubber band. The money is crumpled from being handled, the edges worn, and it carries the faint scent of perfume, sweat, and the club\u2019s stale air. You\u2019ve already counted it\u2014$875 in total\u2014and the bills are now neatly fanned out, ready to be tucked away or spent as needed. The rubber band is loose, as if it\u2019s been stretched and snapped one too many times.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_5dbc69": {
-      "id": "i_5dbc69",
-      "name": "Marcus's message",
-      "aliases": [
-        "club message",
-        "marcus text",
-        "manager's text",
-        "marcus's message",
-        "text from marcus"
-      ],
-      "description": "A single unread message from Marcus, your club manager, timestamped at 2:17 AM. The text reads: \"Jade, we need to talk about your shift tomorrow. Call me when you get this.\" The tone is vague, but the urgency is clear\u2014he wouldn\u2019t text this late unless it was important. The message is still marked as unread, the notification dot glaring at you like an accusation.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_675f91": {
-      "id": "i_675f91",
-      "name": "Chai's messages",
-      "aliases": [
-        "texts from chai",
-        "chai's messages",
-        "chai texts",
-        "chai's texts",
-        "sister messages",
-        "sister's messages"
-      ],
-      "description": "Three previous messages from your sister, Chai, and now a fourth: a photo of a sleeping kitten with the caption *\"me having sexy dreams while you wait for me to wake up,\"* sent by you. Chai\u2019s reply reads: *\"Wow. First of all, that cat is judging you. Second, I hope your \u2018sexy dreams\u2019 include a bank account that doesn\u2019t rely on me buying my own cereal. Pay me back.\"* The message is accompanied by a GIF of a woman dramatically fainting. The thread is marked as read, the notifications cleared.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_16fc7c": {
-      "id": "i_16fc7c",
-      "name": "Tasha's messages",
-      "aliases": [
-        "tasha's messages",
-        "friend messages",
-        "tasha texts"
-      ],
-      "description": "A series of messages from your best friend, Tasha. The first few are memes\u2014one of a cat wearing sunglasses with the caption \"When you\u2019re too tired to care,\" and another of a woman dramatically fanning herself. The final message reads: \"Girl, you looked FIRE last night. That new top? Chef\u2019s kiss. Also, drinks later? My treat.\" The timestamp shows it was sent at 10:30 AM.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_292d92": {
-      "id": "i_292d92",
-      "name": "Daniel's message",
-      "aliases": [
-        "unknown message",
-        "daniel's text",
-        "daniel text",
-        "daniel's message",
-        "private session message",
-        "client's message",
-        "text from daniel"
-      ],
-      "description": "A single unread message from Daniel, a potential client you met at the club last week. The text reads: \"Hey Jade, it\u2019s Daniel. We met at the club last week\u2014you gave me your number after your set. I\u2019d love to book you for a private event next month. Let me know if you\u2019re interested.\" Attached is a flyer for an upscale lounge opening, the kind of place with dim lighting, overpriced drinks, and clients who think they\u2019re cooler than they are. The message is polite, professional, and just vague enough to make you wonder if this is a genuine opportunity or a guy trying to impress his friends.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_5d0588": {
-      "id": "i_5d0588",
-      "name": "Tasha's voice note",
-      "aliases": [
-        "tasha's voice note",
-        "voice message from tasha",
-        "tasha's note",
-        "best friend's voice note"
-      ],
-      "description": "A voice note from your best friend, Tasha, sent around midnight. In the recording, her voice is groggy but amused as she describes the chaos of a bachelor party, including glitter everywhere. She mentions stealing a bottle of champagne and asks you to call her when you\u2019re up to debrief. The note ends with a loud yawn.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_529f8d": {
-      "id": "i_529f8d",
-      "name": "voice note from Tasha",
-      "aliases": [
-        "voice note from tasha"
-      ],
-      "description": "A 47-second voice note from your best friend, Tasha, sent at 7:30 AM. The preview shows it\u2019s unplayed, and the little waveform icon suggests she was either very excited or very loud\u2014or both. Given Tasha, it\u2019s probably both. The note is likely about last night, your performance, or some drama you don\u2019t remember yet. The play button glows invitingly, daring you to listen.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_d372f1": {
-      "id": "i_d372f1",
-      "name": "soaking tub",
-      "aliases": [
-        "soaking tub",
-        "tub",
-        "bathtub",
-        "soaker",
-        "bath"
-      ],
-      "description": "A deep, freestanding soaking tub with a sleek, modern design. The porcelain is cool and dry now, the water fully drained, leaving behind only a faint ring of residue near the drain. The chrome fixtures gleam under the soft light, and the skylight above casts a golden glow on the empty basin. A loofah, a bar of lavender-scented soap, and a half-melted bath bomb rest on the edge, slightly askew from the disturbance of the draining water. The air above the tub still holds the faintest hint of humidity, mingling with the lingering scent of lavender.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_fab794": {
-      "id": "i_fab794",
-      "name": "double vanity",
-      "aliases": [
-        "double vanity",
-        "vanity",
-        "sink",
-        "counter",
-        "bathroom counter"
-      ],
-      "description": "A long, granite-topped double vanity with two undermount sinks. The countertop is a mess of beauty products\u2014half-empty bottles of foundation, a tube of lip balm, a compact mirror, and a hair tie coiled like a tiny snake. The sinks are spotless, but the faucets are speckled with water droplets. A pair of gold-handled drawers sit beneath the counter, one slightly ajar, revealing a tangle of charging cables and a stray earring.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_41b4b8": {
-      "id": "i_41b4b8",
-      "name": "bath mat",
-      "aliases": [
-        "bath mat",
-        "mat",
-        "rug",
-        "bath rug",
-        "charcoal mat"
-      ],
-      "description": "A plush, charcoal-gray bath mat, its fibers still slightly damp from your earlier shower. It\u2019s soft underfoot, though the edges are beginning to curl from frequent use. A few strands of your hair cling to its surface, glinting in the light.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_a0d353": {
-      "id": "i_a0d353",
-      "name": "skylight",
-      "aliases": [
-        "skylight",
-        "window",
-        "ceiling window",
-        "light",
-        "frosted skylight"
-      ],
-      "description": "A large, frosted skylight set into the ceiling above the tub. It lets in a diffuse, golden light that casts soft shadows across the bathroom. The glass is slightly fogged from the humidity, but you can make out the faint outline of the morning sky\u2014clear and bright, with just a hint of clouds. A gentle breeze seeps in through the cracked-open pane, carrying the faintest scent of fresh air.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_08ab16": {
-      "id": "i_08ab16",
-      "name": "loofah",
-      "aliases": [
-        "loofah",
-        "sponge",
-        "scrubber",
-        "shower loofah",
-        "bath sponge"
-      ],
-      "description": "A well-used loofah, its netting frayed and slightly discolored from frequent scrubbing. It\u2019s damp to the touch, still clinging to the edge of the tub, and smells faintly of lavender and body wash. A few strands of your hair are tangled in its fibers.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_b7bd8e": {
-      "id": "i_b7bd8e",
-      "name": "toothbrush",
-      "aliases": [
-        "toothbrush",
-        "brush",
-        "electric toothbrush",
-        "tooth brush",
-        "oral b"
-      ],
-      "description": "Your electric toothbrush, its bristles splayed from use. The base is plugged into the outlet beneath the vanity, its blue light blinking lazily to indicate it\u2019s charging. The handle is speckled with dried toothpaste, and the brush head is slightly askew, as if you tossed it there in a hurry this morning.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_9616a2": {
-      "id": "i_9616a2",
-      "name": "mirror selfie (photo)",
-      "aliases": [
-        "mirror selfie (photo)"
-      ],
-      "description": "A freshly taken photo stored in your phone\u2019s gallery. The image is a full-body shot of you in the master bathroom, captured in the mirror\u2019s reflection. You\u2019re completely bare from the waist down, save for the delicate silver anklet around your left ankle, the charms catching the light just right. The deep emerald of your nail polish stands out against your skin, and your kinky black hair cascades over your shoulders, framing your face in soft waves. The lighting is natural, warm, and slightly diffused from the skylight above, casting gentle shadows that accentuate the curves of your body. The photo is unedited, unfiltered, and unapologetically lewd\u2014just the way you like it. The timestamp reads today\u2019s date, and the file size is a modest 2.4 MB.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_35e64a": {
-      "id": "i_35e64a",
-      "name": "nightstand drawer",
-      "aliases": [
-        "nightstand drawer"
-      ],
-      "description": "The top drawer of your nightstand, a shallow compartment filled with the detritus of daily life and the occasional intimate secret. The interior is lined with a thin layer of felt, now slightly worn and frayed at the edges, and the wood beneath is scratched from years of use. The contents are a mix of the practical and the personal: a half-empty tube of cherry-flavored lip balm, its cap long lost; a crumpled receipt from a grocery run last week, the ink slightly smudged; a tangle of hair ties, their elastic stretched and frayed; and a small, velvet jewelry box, its hinges stiff from disuse. Near the back, the charging cable for your vibrator lies coiled like a discarded tail, its plug dusty. A few condoms, their expiration dates just barely visible (and regrettably past), are tucked into the corner, their wrappers slightly yellowed with age. A crumpled twenty-dollar bill is wedged beneath a stack of old business cards, its edge peeking out like a secret waiting to be discovered. The scent of lavender from the hand cream above lingers in the drawer, mingling with the faint, musty odor of forgotten things.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_f73ba7": {
-      "id": "i_f73ba7",
-      "name": "lip balm (nightstand)",
-      "aliases": [
-        "lip balm (nightstand)"
-      ],
-      "description": "A half-empty tube of cherry-flavored lip balm, its cap long lost to the void of your nightstand. The tube is slightly dented from being squeezed too hard, and the balm inside has a faintly waxy texture, the cherry scent now mostly faded. The label is peeling at the edges, revealing the sticky residue beneath.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_f29cb1": {
-      "id": "i_f29cb1",
-      "name": "crumpled receipt",
-      "aliases": [
-        "crumpled receipt"
-      ],
-      "description": "A crumpled receipt from a grocery run last week, the paper soft and slightly smudged from handling. The ink is a little faded, but you can still make out the items you purchased: a gallon of milk, a box of cereal (Chai\u2019s favorite), a pack of batteries, and a bottle of wine you never ended up drinking. The total at the bottom reads $42.87, and the date stamp is just barely legible.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_b4555f": {
-      "id": "i_b4555f",
-      "name": "hair ties",
-      "aliases": [
-        "hair ties"
-      ],
-      "description": "A tangled mess of hair ties, their elastic stretched and frayed from years of use. Some are plain black, others are adorned with tiny beads or charms, and a few have lost their elasticity entirely, their loops now limp and useless. They\u2019re knotted together in a way that suggests they\u2019ve been tossed into the drawer without a second thought, their colors muted under a thin layer of dust.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_09e08a": {
-      "id": "i_09e08a",
-      "name": "velvet jewelry box",
-      "aliases": [
-        "velvet jewelry box"
-      ],
-      "description": "A small, rectangular velvet jewelry box, its dark blue fabric slightly faded from age. The hinges are stiff, resisting your efforts to open it, and the clasp is tarnished, its once-shiny surface now dull. The box is just large enough to hold a pair of earrings or a delicate necklace, though you can\u2019t remember the last time you opened it. The velvet inside is slightly crushed, as if something once pressed against it for a long time.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_a114f2": {
-      "id": "i_a114f2",
-      "name": "vibrator (nightstand)",
-      "aliases": [
-        "vibrator (nightstand)"
-      ],
-      "description": "A sleek, black vibrator, its surface smooth and slightly dusty from disuse. The silicone is cool to the touch, and the buttons along the side are faintly sticky, as if they haven\u2019t been pressed in months. The device is ergonomic, its shape designed to fit comfortably in your hand, and its weight is reassuringly solid. The charging cable is coiled nearby, the cord slightly tangled, and the plug is dusty, suggesting it hasn\u2019t been used in a while. Despite its dormant state, the vibrator hums faintly when activated, a quiet reminder of its purpose.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_c77c90": {
-      "id": "i_c77c90",
-      "name": "expired condoms",
-      "aliases": [
-        "expired condoms"
-      ],
-      "description": "A few condoms, their wrappers slightly yellowed with age and their expiration dates just barely legible. The dates are from over a year ago, and the foil packets are slightly crinkled, as if they\u2019ve been handled and then discarded more than once. The brand is one you don\u2019t recognize, and the wrappers are adorned with a logo that looks like it belongs in a sketchy motel vending machine. They\u2019re tucked into the corner of the drawer, forgotten and likely useless.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_1cf5c2": {
-      "id": "i_1cf5c2",
-      "name": "crumpled twenty",
-      "aliases": [
-        "crumpled twenty"
-      ],
-      "description": "A crumpled twenty-dollar bill, its edges soft from handling and its surface slightly faded. The bill is wedged beneath a stack of old business cards, its corner peeking out like a secret waiting to be discovered. The ink is still crisp, and the security features\u2014watermark, security thread\u2014are intact, though the bill has clearly seen better days. It\u2019s a small but welcome surprise, like finding money in the pocket of a coat you haven\u2019t worn in months.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_60ab77": {
-      "id": "i_60ab77",
-      "name": "old business cards",
-      "aliases": [
-        "old business cards"
-      ],
-      "description": "A stack of old business cards, their edges slightly bent and their surfaces smudged from handling. The cards are from a mix of people\u2014some clients, some friends, some strangers you met at parties or events and never followed up with. A few are from other dancers at the club, their numbers scrawled on the back in hasty handwriting. The cards are mostly forgotten, their information outdated or irrelevant, but you\u2019ve never bothered to throw them away. They\u2019re a physical record of the people who\u2019ve passed through your life, for better or worse.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_53a902": {
-      "id": "i_53a902",
-      "name": "stack of towels",
-      "aliases": [
-        "stack of towels",
-        "towels",
-        "bath towels",
-        "white towels",
-        "stack of towels"
-      ],
-      "description": "A towering stack of plush, white bath towels, folded with military precision. They\u2019re soft to the touch, still smelling faintly of lavender from the last wash. One towel near the bottom looks slightly rumpled, as if it was hastily refolded.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_f915de": {
-      "id": "i_f915de",
-      "name": "basket of laundry supplies",
-      "aliases": [
-        "basket of laundry supplies",
-        "laundry basket",
-        "basket",
-        "supplies",
-        "laundry supplies"
-      ],
-      "description": "A wicker basket overflowing with laundry essentials: a half-empty bottle of fabric softener, a box of dryer sheets, a roll of stain remover, and a pair of scissors with one blade slightly rusted. The basket itself is lined with a faded floral cloth.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_875d76": {
-      "id": "i_875d76",
-      "name": "spare pillow",
-      "aliases": [
-        "spare pillow",
-        "pillow",
-        "blue pillow",
-        "spare pillow",
-        "flattened pillow"
-      ],
-      "description": "A single, slightly flattened pillow, its case a pale blue with tiny embroidered flowers. It\u2019s seen better days\u2014one corner is frayed, and the stuffing has started to clump in places\u2014but it\u2019s still soft enough to be comfortable.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_297e48": {
-      "id": "i_297e48",
-      "name": "old quilt",
-      "aliases": [
-        "old quilt",
-        "quilt",
-        "faded quilt",
-        "handmade quilt",
-        "old blanket"
-      ],
-      "description": "A handmade quilt, its once-vibrant colors now faded to muted pastels. The stitching is loose in places, and a few squares are slightly frayed, but it still exudes a sense of warmth and nostalgia. It smells faintly of cedar and old memories.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_b614a2": {
-      "id": "i_b614a2",
-      "name": "hallway runner rug",
-      "aliases": [
-        "hallway runner rug",
-        "rug",
-        "runner",
-        "carpet",
-        "hallway rug"
-      ],
-      "description": "A long, plush runner rug that stretches down the center of the hallway. Its once-vibrant burgundy and gold pattern has faded slightly with age, and the edges are beginning to fray. It feels soft underfoot, muffling the sound of your steps as you walk.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_76121b": {
-      "id": "i_76121b",
-      "name": "family photos",
-      "aliases": [
-        "family photos",
-        "photos",
-        "framed photos",
-        "family pictures",
-        "pictures"
-      ],
-      "description": "A series of framed photos lining the hallway walls. Most of them are candid shots of you and Chai as kids, your mother\u2019s smiling face frozen in time. There\u2019s one of you at your high school graduation, another of Chai blowing out birthday candles, and a few older photos of your mother in her youth. The frames are simple but elegant, matching the understated decor of the house.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_99f38c": {
-      "id": "i_99f38c",
-      "name": "hallway window",
-      "aliases": [
-        "hallway window",
-        "window",
-        "hall window",
-        "glass window"
-      ],
-      "description": "A narrow, floor-to-ceiling window at the far end of the hallway. It lets in a sliver of morning light, illuminating the dust motes floating in the air. The window is slightly ajar, allowing a cool breeze to drift in, carrying with it the faint sounds of birds chirping outside. The view outside is mostly obscured by the overgrown bushes in the backyard, but you can just make out the top of the neighbor\u2019s fence.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_a9c315": {
-      "id": "i_a9c315",
-      "name": "coffee aroma",
-      "aliases": [
-        "coffee aroma",
-        "coffee",
-        "coffee smell",
-        "aroma",
-        "scent"
-      ],
-      "description": "The faint but unmistakable scent of freshly brewed coffee drifts up from downstairs. It\u2019s rich and slightly bitter, mingling with the lemon polish and the faint mustiness of the hallway. The smell is comforting, a reminder that someone\u2014likely Chai\u2014is already awake and moving about the house.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_490113": {
-      "id": "i_490113",
-      "name": "floral duvet",
-      "aliases": [
-        "floral duvet",
-        "duvet",
-        "bedspread",
-        "quilt",
-        "floral bedspread"
-      ],
-      "description": "A queen-sized duvet with a muted floral pattern in shades of cream and pale green. It\u2019s soft to the touch, though slightly rumpled, as if someone had been sitting or lying on it recently. The fabric carries the faint scent of lavender fabric softener.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_31bd65": {
-      "id": "i_31bd65",
-      "name": "ceramic lamp",
-      "aliases": [
-        "ceramic lamp",
-        "lamp",
-        "nightstand lamp",
-        "beige lamp"
-      ],
-      "description": "A simple ceramic lamp with a beige shade, sitting on the nightstand beside the bed. The base is smooth and cool to the touch, painted in a soft off-white. The lamp is currently off, but the cord trails behind it, disappearing into the nightstand\u2019s single drawer.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_403e60": {
-      "id": "i_403e60",
-      "name": "antique vanity",
-      "aliases": [
-        "antique vanity",
-        "vanity",
-        "dressing table",
-        "mirror vanity",
-        "wooden vanity"
-      ],
-      "description": "An old-fashioned vanity with a large, rectangular mirror framed in dark wood. The vanity\u2019s surface is dusty, and the mirror reflects the room with a slight haze, as if it hasn\u2019t been cleaned in a while. A single drawer sits beneath the mirror, its brass handle tarnished with age. The vanity\u2019s legs are carved with delicate floral motifs, and the wood has a rich, warm patina.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_23adc3": {
-      "id": "i_23adc3",
-      "name": "lavender sachet",
-      "aliases": [
-        "lavender sachet",
-        "sachet",
-        "lavender bag",
-        "dried lavender",
-        "purple sachet"
-      ],
-      "description": "A small, fabric sachet tucked between the pillows on the bed. It\u2019s filled with dried lavender, and the scent is faint but noticeable, adding a touch of freshness to the room. The sachet is sewn from a pale purple linen and tied with a thin ribbon.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_d171ba": {
-      "id": "i_d171ba",
-      "name": "chrome towel rack",
-      "aliases": [
-        "chrome towel rack",
-        "towel rack",
-        "rack",
-        "towels",
-        "blue towels"
-      ],
-      "description": "A sleek, chrome towel rack mounted on the wall, holding two neatly folded blue towels. The metal is cool to the touch, and the towels smell faintly of fabric softener.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_cb667b": {
-      "id": "i_cb667b",
-      "name": "vanity mirror",
-      "aliases": [
-        "vanity mirror",
-        "mirror",
-        "vanity",
-        "bathroom mirror"
-      ],
-      "description": "A rectangular mirror framed in brushed nickel, its surface spotless and reflecting the room in crisp detail. The fluorescent light above it hums softly, casting a bright but unflattering glow.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_d52c40": {
-      "id": "i_d52c40",
-      "name": "wicker basket",
-      "aliases": [
-        "wicker basket",
-        "basket",
-        "toiletries basket",
-        "travel toiletries",
-        "mini toiletries"
-      ],
-      "description": "A small, woven wicker basket overflowing with travel-sized toiletries\u2014mini shampoos, conditioners, soaps, and even a few half-used tubes of toothpaste. It looks like a collection of freebies from hotels and spas.",
-      "carryable": true,
-      "visible": true
-    },
-    "i_6b7e55": {
-      "id": "i_6b7e55",
-      "name": "shower curtain",
-      "aliases": [
-        "shower curtain",
-        "curtain",
-        "anchor curtain",
-        "shower curtain"
-      ],
-      "description": "A white shower curtain printed with tiny, faded anchors. It\u2019s slightly yellowed at the edges and smells faintly of mildew, despite the lemon cleaner. The curtain rings rattle softly as you brush against it.",
-      "carryable": true,
-      "visible": true
+      "visible": true,
+      "body_part": false
     }
-  },
-  "pending_notifications": []
+  }
 }

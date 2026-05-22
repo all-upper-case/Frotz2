@@ -75,8 +75,6 @@ class WorldManager:
 
         self.data.setdefault('blueprint', 'Explore.')
         self.data.setdefault('meta', {}).setdefault('total_tokens', 0)
-        self.data['meta'].setdefault('world_name', self.world_name)
-        self.data['meta'].setdefault('active_lore_file', None)
         self.data.setdefault('pending_notifications', [])
         self.data.setdefault('recent_turns', [])
         self.data.setdefault('pending_ambiguity', None)

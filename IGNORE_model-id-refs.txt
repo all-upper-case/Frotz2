@@ -1,0 +1,2 @@
+Mistral Small 4: mistral-small-2603
+Gemma 4 Uncensored: gemma-4-uncensored
