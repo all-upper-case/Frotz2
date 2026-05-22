@@ -1,11 +1,14 @@
 # TODO
 
-A practical backlog for turning the current prototype into a tidier personal engine.
+A practical backlog for turning the current prototype into a tidier personal engine. The broader product direction now lives in `docs/STEWARDSHIP_ROADMAP.md`, and the planned LLM tool vocabulary lives in `docs/LLM_TOOLS.md`.
 
 ## Recently Completed
 
 - Added root project docs plus architecture and workflow notes.
 - Added `docs/LLM_CONTRACTS.md` for expected model response shapes.
+- Added `docs/STEWARDSHIP_ROADMAP.md` for the long-term stewardship direction.
+- Added `docs/LLM_TOOLS.md` for canonical LLM tool operations, compatibility aliases, validation statuses, and visibility levels.
+- Clarified that tool-call transparency is toggleable observability, not mandatory approval for every normal state change.
 - Added lightweight LLM response validation for genesis, room generation, and turn narration before state mutation.
 - Added a pytest smoke-test baseline for app import, uninitialized routes, no-key reset behavior, deterministic commands, LLM contracts, and save/load roundtrips.
 - Hardened the frontend debug modal empty/error states.
@@ -14,10 +17,19 @@ A practical backlog for turning the current prototype into a tidier personal eng
 - Renamed package metadata away from starter-template defaults.
 - Updated `.gitignore` so future runtime saves/debug logs stay local unless intentionally added.
 
+## Current Priority: Consistency And Tool Robustness
+
+- Wire `validate_fix_response()` into the Matrix AI fixer path in `world_manager.py` with focused tests for accepted and rejected fixer outputs.
+- Implement the first canonical tool dispatcher that maps compatibility aliases like `Description` and `Location` to typed engine operations.
+- Add per-tool validation statuses: accepted, accepted_with_repair, invalid_schema, unknown_tool, missing_target, ambiguous_target, invalid_location, invalid_entity_type, ignored_duplicate, and ignored_empty.
+- Implement resolvable disambiguation for visible items, with tests for duplicate names and overlapping words.
+- Add structured turn packets from `WorldManager` and document their contract.
+- Extend lookup/state handling to characters and non-present entities after the visible-item path is stable.
+
 ## Documentation
 
 - Add examples for authoring safe lore files and switching between `LoreBooks/` entries.
-- Expand `docs/LLM_CONTRACTS.md` if new model-backed workflows are added.
+- Keep `docs/LLM_CONTRACTS.md` and `docs/LLM_TOOLS.md` in sync as model-backed workflows are added.
 - Keep `README.md` focused on setup, project shape, and everyday usage.
 
 ## Repository Hygiene
@@ -30,16 +42,26 @@ A practical backlog for turning the current prototype into a tidier personal eng
 ## Engine Behavior
 
 - Run the new pytest suite in a Python-enabled environment and fix any failures found there.
-- Wire `validate_fix_response()` into the Matrix AI fixer path in `world_manager.py` with focused tests for accepted and rejected fixer outputs.
 - Split command parsing from Flask route handlers once command behavior grows.
 - Add safer handling for malformed or partial LLM JSON responses inside `LLMInterface` if provider behavior changes.
 - Consider a world export/import command for moving saves between machines or deployments.
 
 ## Frontend
 
+- Add transparency controls for quiet, summary, debug, and audit modes once turn reports exist.
 - Add command history with up/down arrow recall.
 - Improve visual styling for frontend error messages so failures read as deliberate UI states.
 - Consider separating Matrix editor logic into its own frontend module if it keeps growing.
+
+## Product Roadmap
+
+- Add running token and cost accounting for input tokens, output tokens, total tokens, and estimated costs.
+- Revamp inventory, body parts, worn items, NPC possessions, void/non-present entities, and player-vs-NPC distinctions through the world-state manager work.
+- Add better undo, repair, and edit workflows for player actions and model outputs.
+- Research Venice.ai docs before adding UI controls for temperature, max output tokens, reasoning intensity, and related params.
+- Add clearer scenario creation, save slots, load flows, and export/import.
+- Add better transparency into tool-call accuracy, success/failure, completeness, and consistency warnings.
+- Build a stronger world-state manager after the current behavior has test coverage.
 
 ## Local Workflow
 
