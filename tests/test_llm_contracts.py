@@ -2,6 +2,9 @@ import pytest
 
 from llm_contracts import (
     ContractError,
+    normalize_state_update,
+    normalize_state_updates,
+    normalize_tool_name,
     validate_fix_response,
     validate_genesis_response,
     validate_room_response,
@@ -63,3 +66,35 @@ def test_fix_contract_requires_description():
 
     with pytest.raises(ContractError, match="description"):
         validate_fix_response({})
+
+
+def test_tool_name_normalization_accepts_canonical_and_aliases():
+    assert normalize_tool_name("describe_entity") == ("describe_entity", False)
+    assert normalize_tool_name("Description") == ("describe_entity", True)
+    assert normalize_tool_name("Location") == ("move_entity", True)
+
+
+def test_tool_name_normalization_rejects_unknown_tools():
+    with pytest.raises(ContractError, match="unknown tool"):
+        normalize_tool_name("teleport_everything")
+
+
+def test_state_update_normalization_preserves_alias_context():
+    update = normalize_state_update({"tool": "Location", "name": "silver key", "location": "here"})
+
+    assert update["tool"] == "move_entity"
+    assert update["compatibility_alias"] == "Location"
+
+
+def test_state_update_shape_validation_does_not_rewrite_route_payloads():
+    payload = validate_turn_response({
+        "narrative": "The key appears.",
+        "state_updates": [{"tool": "Description", "name": "silver key", "description": "A small key."}],
+    })
+
+    assert payload["state_updates"][0]["tool"] == "Description"
+
+
+def test_normalize_state_updates_rejects_malformed_updates():
+    with pytest.raises(ContractError, match="state update"):
+        normalize_state_updates(["bad"])
