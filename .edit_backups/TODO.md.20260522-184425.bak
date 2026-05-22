@@ -30,11 +30,11 @@ A practical backlog for turning the current prototype into a tidier personal eng
 - Batch 1 consistency work: aligned the recent-turn buffer with the documented/tested three-turn default, added saved `pending_ambiguity` state, added a first structured turn packet helper, surfaced basic turn reports to the frontend, added frontend command-history recall, added Matrix Body placement, and added first-class runtime handling for `create_character`, `update_character`, and `set_entity_visibility`.
 - Batch 1.1 stabilization: fixed Replit pytest import setup and the missing `state_updates` default in LLM response validation; the full test suite passed afterward.
 - Batch 2 prompt work: strengthened Genesis, Architect, and DM prompts around narrative-state synchronization so the model is explicitly told to use tools whenever narration creates, moves, hides, reveals, equips, removes, transforms, or otherwise persists a world-state fact.
-- Batch 2 engine work: added first-class `move_character` support, `location` placement for `create_character` / `update_character`, room membership updates for NPC movement, character locations in the turn packet, and tests for NPC movement/placement failures.
 
 ## Current Priority: Consistency And Tool Robustness
 
-- Expand the canonical tool dispatcher beyond the Batch 1/2 character and visibility support to stricter room/location validation, fuller duplicate/no-op detection, richer ambiguity reporting, and non-present entity handling.
+- Implement first-class character placement/movement so NPC room presence can be represented in the authoritative room `characters` lists instead of only in `update_character` descriptions and `append_memory`.
+- Expand the canonical tool dispatcher beyond the Batch 1 character/visibility support to stricter room/location validation, fuller duplicate/no-op detection, richer ambiguity reporting, and non-present entity handling.
 - Tighten player/NPC ownership slot validation so rejected owner/slot moves are visible in frontend turn reports with clearer user-facing summary text, not only raw JSON.
 - Add remaining per-tool validation statuses or fuller coverage where still partial: ambiguous_owner, invalid_entity_type, ignored_duplicate, and fuller invalid_location coverage.
 - Continue resolvable disambiguation for visible items, especially tests for duplicate names, overlapping words, and follow-up answers after an ambiguity prompt.

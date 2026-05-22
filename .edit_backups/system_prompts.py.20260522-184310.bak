@@ -58,8 +58,7 @@ REQUIRED JSON STRUCTURE:
   "new_exits": ["south", "up"],
   "blueprint_update": "Adjusted world plan based on this new discovery...",
   "state_updates": [
-    {{ "tool": "create_character", "name": "NPC name", "description": "Persistent description if present in this room.", "location": "here" }},
-    {{ "tool": "move_character", "target": "NPC name", "location": "here|room id|room name|void|nowhere" }},
+    {{ "tool": "create_character", "name": "NPC name", "description": "Persistent description if present in this room." }},
     {{ "tool": "create_entity", "name": "item", "description": "Persistent item description.", "location": "here" }},
     {{ "tool": "move_entity", "target": "item", "owner": "NPC name", "slot": "held|worn|body" }},
     {{ "tool": "set_entity_visibility", "target": "item", "visible": true }},

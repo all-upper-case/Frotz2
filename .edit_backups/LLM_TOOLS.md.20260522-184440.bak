@@ -264,18 +264,6 @@ Required fields:
 }
 ```
 
-### `move_character`
-
-Move an existing character between rooms or remove them from present room lists.
-
-Use this whenever narration establishes that an NPC enters, leaves, follows, waits in, or moves to a concrete location.
-
-Required fields:
-
-- `tool`: `move_character`
-- `target`: character id, exact name, or alias
-- `location`: `here`, room id, room name, `void`, or `nowhere`
-
 ### `set_entity_visibility`
 
 Reveal or hide an entity without moving it.

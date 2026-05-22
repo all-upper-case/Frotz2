@@ -4207,3 +4207,16 @@
   }
 }
 
+--- 2026-05-22 18:46:45 [DM] ---
+[USAGE]: in=5910 out=257 tot=6167
+[OUTPUT]: {
+  "narrative": "You lean in close to Isabel, the scent of her shampoo\u2014something sweet and youthful, like strawberries and sunshine\u2014filling your senses. The closet is so cramped that you can feel the warmth radiating from her skin and the slight, rhythmic tremble of her breath. With a slow, deliberate motion, you press your lips softly against her forehead. \n\nIt is a tender gesture, yet in the charged silence of the closet, it feels heavy with meaning. Isabel closes her eyes, leaning into the contact, her small hands clutching at your arms as if afraid you might pull away. Behind you, Lucas remains motionless, his breath hitching; he is close enough to see the intimacy of the moment, close enough to feel the heat of your body against his own, creating a suffocatingly sweet tension that hangs thick in the air. You can feel the girl's heartbeat quickening under your touch, a frantic little bird trapped beneath her ribs, as she surrenders completely to the comfort and authority of your presence.",
+  "narrative_summary_update": "Vivienne tenderly kisses Isabel's forehead while Lucas watches, deepening the intimate tension within the closet.",
+  "state_updates": [],
+  "_usage": {
+    "input_tokens": 5910,
+    "output_tokens": 257,
+    "total_tokens": 6167
+  }
+}
+
