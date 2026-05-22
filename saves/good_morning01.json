@@ -1,5 +1,4 @@
 {
-  "narrative_thread": "The wine glass is now on the nightstand, joining the other artifacts of your evening routine. The room feels slightly less chaotic, though Miso\u0019s judgment remains unchanged.",
   "blueprint": "The immediate area consists of: 1) Your Bedroom (south from hallway), 2) The Hallway (current west exit), leading to 3) The Bathroom (current location, east from hallway), 4) The Kitchen (west from hallway), and 5) The Living Room (south from hallway, unexplored). The front door remains locked and alarmed in the living room.",
   "meta": {
     "total_tokens": 12660
@@ -15,7 +14,8 @@
       "me",
       "self",
       "player"
-    ]
+    ],
+    "body": []
   },
   "characters": {},
   "rooms": {
@@ -92,7 +92,7 @@
       "id": "room_ed9f53d2",
       "name": "Unknown",
       "description": null,
-      "base_description": null,
+      "base_description": "...",
       "exits": {
         "east": "room_68f315ca"
       },
@@ -310,5 +310,11 @@
       "carryable": false,
       "visible": true
     }
-  }
+  },
+  "pending_notifications": [],
+  "recent_turns": [],
+  "pending_ambiguity": null,
+  "narrative_log": [
+    "The wine glass is now on the nightstand, joining the other artifacts of your evening routine. The room feels slightly less chaotic, though Miso\u0019s judgment remains unchanged."
+  ]
 }

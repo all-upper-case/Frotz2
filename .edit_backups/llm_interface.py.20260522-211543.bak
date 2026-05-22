@@ -138,9 +138,8 @@ class LLMInterface:
             except Exception:
                 pass
             self.log_console(f"HTTP ERROR: {str(e)} | BODY: {body}")
-            detail = f" | Provider body: {body}" if body else ""
             return {
-                "narrative": f"The world logic ripples... (Venice HTTP Error: {e}{detail})",
+                "narrative": f"The world logic ripples... (Venice HTTP Error: {e})",
                 "error": True
             }
 
