@@ -4,14 +4,20 @@ import shutil
 import uuid
 import re
 
+from llm_contracts import ContractError, normalize_person_slot
+
 SAVE_DIR = "saves"
 BACKUP_DIR = "backups"
+RECENT_TURN_LIMIT = 3
 
 DIRECTION_MAP = {
     "n": "north", "north": "north", "s": "south", "south": "south",
     "e": "east", "east": "east", "w": "west", "west": "west",
     "u": "up", "up": "up", "d": "down", "down": "down"
 }
+
+CHARACTER_SLOT_KEYS = ("held", "worn", "body")
+
 
 class WorldManager:
     def __init__(self):
@@ -48,14 +54,25 @@ class WorldManager:
         player = self.data.setdefault('player', {})
         player.setdefault('inventory', [])
         player.setdefault('worn', [])
+        player.setdefault('body', [])
         player.setdefault('current_room', 'room_start')
         player.setdefault('description', 'You look ordinary.')
         player.setdefault('aliases', ['me', 'myself', 'self', 'player'])
 
         self.data.setdefault('characters', {})
+        for char in self.data['characters'].values():
+            if not isinstance(char, dict): continue
+            legacy_items = char.get('items', [])
+            char.setdefault('held', list(legacy_items))
+            char.setdefault('worn', [])
+            char.setdefault('body', [])
+            char['items'] = list(dict.fromkeys(char.get('held', []) + char.get('items', [])))
+            char.setdefault('aliases', [])
+
         self.data.setdefault('blueprint', 'Explore.')
         self.data.setdefault('meta', {}).setdefault('total_tokens', 0)
         self.data.setdefault('pending_notifications', [])
+        self.data.setdefault('recent_turns', [])
 
         if 'narrative_thread' in self.data and isinstance(self.data['narrative_thread'], str):
             self.data['narrative_log'] = [self.data['narrative_thread']]
@@ -84,7 +101,7 @@ class WorldManager:
     def _strip_generated_content(self, text):
         if not text: return "..."
         cleaned = re.split(r'\n\s*(You can see here:|Others present:)', text)[0].strip()
-        if not cleaned: return text if len(text) < 200 else "A hazy area." 
+        if not cleaned: return text if len(text) < 200 else "A hazy area."
         return cleaned
 
     def update_metrics(self, usage):
@@ -98,6 +115,11 @@ class WorldManager:
             ex = ", ".join(f"{k}->{v}" for k, v in room.get('exits', {}).items())
             lines.append(f"Room: {room.get('name', 'Unknown')} (ID: {rid}) | Exits: {ex}")
         return "\n".join(lines)
+
+    def _format_item_line(self, iid):
+        item = self.data['items'].get(iid)
+        if not item: return None
+        return f"- {item['name']} (ID: {iid}): {item['description']}"
 
     def get_context_dump(self):
         room = self.get_current_room()
@@ -123,25 +145,39 @@ class WorldManager:
             lines.append("(Nothing)")
         else:
             for iid in self.data['player']['inventory']:
-                item = self.data['items'].get(iid)
-                if item: lines.append(f"- {item['name']} (ID: {iid}): {item['description']}")
+                item_line = self._format_item_line(iid)
+                if item_line: lines.append(item_line)
 
         lines.append("\n[WORN - Items equipped]")
         if not self.data['player']['worn']:
             lines.append("(Nothing)")
         else:
             for iid in self.data['player']['worn']:
-                item = self.data['items'].get(iid)
-                if item: lines.append(f"- {item['name']} (ID: {iid}): {item['description']}")
+                item_line = self._format_item_line(iid)
+                if item_line: lines.append(item_line)
+
+        lines.append("\n[BODY - Player body-part entities]")
+        if not self.data['player'].get('body', []):
+            lines.append("(Nothing)")
+        else:
+            for iid in self.data['player'].get('body', []):
+                item_line = self._format_item_line(iid)
+                if item_line: lines.append(item_line)
 
         lines.append("\n[CHARACTERS - Others present]")
+        found_character = False
         for cid in room.get('characters', []):
             char = self.data['characters'].get(cid)
             if char:
-                items_text = ""
-                c_items = [self.data['items'][iid]['name'] for iid in char.get('items', []) if iid in self.data['items']]
-                if c_items: items_text = f" (Has: {', '.join(c_items)})"
-                lines.append(f"- {char['name']} (ID: {cid}): {char.get('description', '...').split('.')[0]}.{items_text}")
+                found_character = True
+                lines.append(f"- {char['name']} (ID: {cid}): {char.get('description', '...').split('.')[0]}.")
+                for label, key in [("Held", "held"), ("Worn", "worn"), ("Body", "body")]:
+                    names = [self.data['items'][iid]['name'] for iid in char.get(key, []) if iid in self.data['items']]
+                    if names: lines.append(f"  {label}: {', '.join(names)}")
+        if not found_character: lines.append("(No one else present)")
+
+        lines.append("\n[RECENT FULL TURNS]")
+        lines.append(self.get_recent_turns_context())
 
         lines.append("\n[ALL ROOMS - Global Map Context]")
         for rid, rdata in list(self.data['rooms'].items()):
@@ -152,6 +188,49 @@ class WorldManager:
 
     def get_narrative_history(self):
         return "\n".join([f"- {entry}" for entry in self.data.get('narrative_log', [])])
+
+    def get_recent_turns_context(self, limit=RECENT_TURN_LIMIT):
+        turns = self.data.get('recent_turns', [])[-limit:]
+        if not turns: return "(No recent full turns recorded yet.)"
+
+        lines = []
+        for idx, turn in enumerate(turns, 1):
+            lines.append(f"Turn -{len(turns) - idx + 1}:")
+            lines.append(f"  Player/System input: {turn.get('input', '')}")
+            narrative = turn.get('narrative', '')
+            if narrative:
+                lines.append(f"  Full output: {narrative}")
+            summary = turn.get('summary')
+            if summary:
+                lines.append(f"  Memory summary: {summary}")
+            updates = turn.get('state_updates', [])
+            if updates:
+                lines.append("  Requested state updates:")
+                for update in updates:
+                    lines.append(f"    - {update}")
+        return "\n".join(lines)
+
+    def _summarize_state_update(self, update):
+        if not isinstance(update, dict): return str(update)
+        tool = update.get('tool', 'unknown')
+        target = update.get('target') or update.get('name') or update.get('owner') or 'unknown'
+        bits = [f"tool={tool}", f"target={target}"]
+        for key in ('location', 'owner', 'slot'):
+            if update.get(key): bits.append(f"{key}={update[key]}")
+        return ", ".join(bits)
+
+    def record_turn(self, player_input, outcome):
+        if not self.data: return
+        turns = self.data.setdefault('recent_turns', [])
+        state_updates = [self._summarize_state_update(up) for up in outcome.get('state_updates', [])]
+        turns.append({
+            "input": player_input,
+            "narrative": outcome.get('narrative', ''),
+            "summary": outcome.get('narrative_summary_update', ''),
+            "state_updates": state_updates,
+        })
+        self.data['recent_turns'] = turns[-RECENT_TURN_LIMIT:]
+        self.save_game()
 
     def pop_system_notifications(self):
         msgs = self.data.get('pending_notifications', [])
@@ -167,19 +246,30 @@ class WorldManager:
 
         all_ids = list(self.data['items'].keys())
 
-        # Exact Match
         for iid in all_ids:
             item = self.data['items'][iid]
             if not isinstance(item, dict): continue
             if item.get('name', '').lower() == clean: return iid
             if clean in item.get('aliases', []): return iid
 
-        # Partial Match
         for iid in all_ids:
             item = self.data['items'][iid]
             if not isinstance(item, dict): continue
             if clean in item.get('name', '').lower(): return iid
 
+        return None
+
+    def find_character_id_by_name(self, name):
+        if not name: return None
+        clean = name.lower().strip()
+        if clean in ['me', 'self', 'myself', 'player']:
+            return 'player'
+        for cid, char in self.data.get('characters', {}).items():
+            if clean == cid.lower(): return cid
+            if char.get('name', '').lower() == clean: return cid
+            if clean in [a.lower() for a in char.get('aliases', [])]: return cid
+        for cid, char in self.data.get('characters', {}).items():
+            if clean in char.get('name', '').lower(): return cid
         return None
 
     def find_room_id_by_name(self, name):
@@ -188,7 +278,7 @@ class WorldManager:
         for rid, r in list(self.data['rooms'].items()):
             if not isinstance(r, dict): continue
             if r.get('name', '').lower() == clean: return rid
-            if clean in r.get('name', '').lower(): return rid 
+            if clean in r.get('name', '').lower(): return rid
         return None
 
     def initialize_world(self, genesis_data):
@@ -198,9 +288,9 @@ class WorldManager:
         start_desc = self._strip_generated_content(genesis_data.get('starting_room_description', '...'))
         rooms_db = {
             "room_start": {
-                "id": "room_start", 
+                "id": "room_start",
                 "name": genesis_data.get('starting_room_name', 'Start'),
-                "description": start_desc, 
+                "description": start_desc,
                 "base_description": start_desc,
                 "exits": {}, "items": [], "characters": [], "visited": True
             }
@@ -210,8 +300,10 @@ class WorldManager:
             "narrative_log": [genesis_data.get('intro_text', '') + " " + genesis_data.get('narrative_thread', '')],
             "blueprint": genesis_data.get('blueprint', 'Explore.'),
             "meta": {"total_tokens": start_tokens},
+            "pending_notifications": [],
+            "recent_turns": [],
             "player": {
-                "current_room": "room_start", "inventory": [], "worn": [],
+                "current_room": "room_start", "inventory": [], "worn": [], "body": [],
                 "description": genesis_data.get('player_description', 'You look ordinary.'),
                 "aliases": ['me', 'self', 'player']
             },
@@ -250,7 +342,7 @@ class WorldManager:
         room = room or self.get_current_room()
         if not room: return "Void."
         base = room.get('base_description')
-        if not base: 
+        if not base:
             base = self._strip_generated_content(room.get('description', '...'))
             room['base_description'] = base
         visible = []
@@ -268,7 +360,7 @@ class WorldManager:
         body = [self.data['items'][iid]['name'] for iid in p.get('body', []) if iid in self.data['items']]
         worn = [self.data['items'][iid]['name'] for iid in p.get('worn', []) if iid in self.data['items']]
         inv = [self.data['items'][iid]['name'] for iid in p.get('inventory', []) if iid in self.data['items']]
-        
+
         body_text = f"\n\nDistinguishing features: {', '.join(body)}." if body else ""
         worn_text = f"\n\nYou are wearing: {', '.join(worn)}." if worn else ""
         inv_text = f"\nYou are carrying: {', '.join(inv)}." if inv else ""
@@ -277,13 +369,24 @@ class WorldManager:
     def get_all_visible_items(self):
         room = self.get_current_room()
         candidates = []
+        seen = set()
+
         def add_source(source_list):
             for iid in source_list:
+                if iid in seen: continue
                 item = self.data['items'].get(iid)
-                if item and item.get('visible', True): candidates.append(item)
+                if item and item.get('visible', True):
+                    candidates.append(item)
+                    seen.add(iid)
+
         add_source(self.data['player']['inventory'])
         add_source(self.data['player']['worn'])
+        add_source(self.data['player'].get('body', []))
         add_source(room.get('items', []))
+        for cid in room.get('characters', []):
+            char = self.data['characters'].get(cid, {})
+            for slot in CHARACTER_SLOT_KEYS:
+                add_source(char.get(slot, []))
         return candidates
 
     def get_item_by_name(self, query):
@@ -334,37 +437,115 @@ class WorldManager:
         self.describe_room(room)
         self.save_game()
 
+    def _remove_item_from_all_locations(self, iid):
+        player = self.data['player']
+        for r in self.data['rooms'].values():
+            if isinstance(r, dict) and iid in r.get('items', []): r['items'].remove(iid)
+        for key in ('inventory', 'worn', 'body'):
+            if iid in player.get(key, []): player[key].remove(iid)
+        for char in self.data.get('characters', {}).values():
+            if not isinstance(char, dict): continue
+            for key in ('items', 'held', 'worn', 'body'):
+                if iid in char.get(key, []): char[key].remove(iid)
+
+    def _place_item_for_player(self, iid, slot):
+        player = self.data['player']
+        if slot == 'held':
+            player['inventory'].append(iid)
+        elif slot == 'worn':
+            player['worn'].append(iid)
+        elif slot == 'body':
+            player.setdefault('body', []).append(iid)
+            self.data['items'][iid]['body_part'] = True
+            self.data['items'][iid]['carryable'] = False
+
+    def _place_item_for_character(self, iid, char_id, slot):
+        char = self.data['characters'][char_id]
+        for key in CHARACTER_SLOT_KEYS:
+            char.setdefault(key, [])
+        char[slot].append(iid)
+        if slot == 'held':
+            char.setdefault('items', []).append(iid)
+        if slot == 'body':
+            self.data['items'][iid]['body_part'] = True
+            self.data['items'][iid]['carryable'] = False
+
+    def _apply_item_location(self, iid, update):
+        player = self.data['player']
+        self._remove_item_from_all_locations(iid)
+
+        owner = update.get('owner')
+        slot = update.get('slot')
+        loc = update.get('location', '')
+        loc_clean = loc.lower().strip() if isinstance(loc, str) else ''
+
+        if owner:
+            owner_id = self.find_character_id_by_name(owner)
+            if not owner_id: return False
+            try:
+                slot_clean, _ = normalize_person_slot(slot)
+            except ContractError:
+                return False
+            if owner_id == 'player':
+                self._place_item_for_player(iid, slot_clean)
+            else:
+                self._place_item_for_character(iid, owner_id, slot_clean)
+            return True
+
+        if loc_clean in ('inventory', 'worn', 'body'):
+            slot_clean, _ = normalize_person_slot(loc_clean)
+            self._place_item_for_player(iid, slot_clean)
+        elif loc_clean in ("nowhere", "void"):
+            pass
+        elif loc_clean == "here":
+            self.data['rooms'][player['current_room']]['items'].append(iid)
+        else:
+            target_rid = self.find_room_id_by_name(loc_clean)
+            if target_rid:
+                self.data['rooms'][target_rid]['items'].append(iid)
+            else:
+                char_id = self.find_character_id_by_name(loc_clean)
+                if char_id and char_id != 'player':
+                    self._place_item_for_character(iid, char_id, 'held')
+                else:
+                    self.data['rooms'][player['current_room']]['items'].append(iid)
+        return True
+
     def apply_outcome(self, outcome):
         if not isinstance(outcome, dict): return
         if "_usage" in outcome: self.update_metrics(outcome["_usage"])
-        if 'narrative_summary_update' in outcome: 
+        if 'narrative_summary_update' in outcome:
             self.data['narrative_log'].append(outcome['narrative_summary_update'])
 
         updates = outcome.get('state_updates', [])
         for up in updates:
             tool = up.get('tool', '').strip()
-            # Robust mapping for AI hallucinations
-            if tool in ["create_item", "create_room", "update_item"]: tool = "Description"
-            
-            name = up.get('name', '').strip()
+            if tool in ["create_item", "create_room", "update_item", "describe_entity", "create_entity"]: tool = "Description"
+            if tool == "move_entity": tool = "Location"
+
+            name = (up.get('name') or up.get('target') or '').strip()
             if not name: continue
             clean_name = name.lower()
 
             if clean_name in ['self', 'me', 'myself', 'player']:
-                if tool == "Description":
+                if tool in ["Description", "update_player"]:
                     self.data['player']['description'] = up.get('description', self.data['player']['description'])
-                continue 
+                continue
 
             if tool == "Description":
                 desc = up.get('description', '...')
                 aliases = up.get('aliases', [])
-                is_body_part = up.get('location') == 'body'
-                
+                try:
+                    slot_clean, _ = normalize_person_slot(up.get('slot')) if up.get('slot') else (None, False)
+                except ContractError:
+                    slot_clean = None
+                is_body_part = up.get('location') == 'body' or slot_clean == 'body' or up.get('entity_type') == 'body_part'
+
                 iid = self.find_item_id_by_name(name)
                 if iid:
                     self.data['items'][iid]['description'] = desc
                     if is_body_part: self.data['items'][iid]['body_part'] = True
-                    if aliases: 
+                    if aliases:
                         current_aliases = set(self.data['items'][iid]['aliases'])
                         current_aliases.update([a.lower() for a in aliases])
                         self.data['items'][iid]['aliases'] = list(current_aliases)
@@ -373,57 +554,18 @@ class WorldManager:
                     self.data['items'][new_id] = {
                         "id": new_id, "name": name,
                         "aliases": [clean_name] + [a.lower() for a in aliases],
-                        "description": desc, "carryable": not is_body_part, 
+                        "description": desc, "carryable": not is_body_part,
                         "visible": True, "body_part": is_body_part
                     }
+                    iid = new_id
+
+                if up.get('owner') or up.get('location'):
+                    self._apply_item_location(iid, up)
 
             elif tool == "Location":
-                loc = up.get('location', '').lower()
                 iid = self.find_item_id_by_name(name)
                 if not iid: continue
-                player = self.data['player']
-                
-                # Cleanup existing locations
-                for r in self.data['rooms'].values():
-                    if isinstance(r, dict) and iid in r.get('items', []): r['items'].remove(iid)
-                if iid in player['inventory']: player['inventory'].remove(iid)
-                if iid in player['worn']: player['worn'].remove(iid)
-                if iid in player.get('body', []): player['body'].remove(iid)
-
-                if loc == "nowhere": pass
-                elif loc == "inventory": player['inventory'].append(iid)
-                elif loc == "worn": player['worn'].append(iid)
-                elif loc == "body":
-                    player.setdefault('body', [])
-                    player['body'].append(iid)
-                    self.data['items'][iid]['body_part'] = True
-                    self.data['items'][iid]['carryable'] = False
-                elif loc == "here": self.data['rooms'][player['current_room']]['items'].append(iid)
-                else:
-                    # Check if location is a room
-                    target_rid = self.find_room_id_by_name(loc)
-                    if target_rid: 
-                        self.data['rooms'][target_rid]['items'].append(iid)
-                    else:
-                        # Assume it's an NPC/Character ID or name
-                        # We store NPC items in the characters dict
-                        char_id = None
-                        # Simple check: is this a known character ID or name?
-                        if loc in self.data['characters']:
-                            char_id = loc
-                        else:
-                            # Search by name
-                            for cid, cdata in self.data['characters'].items():
-                                if cdata.get('name', '').lower() == loc:
-                                    char_id = cid
-                                    break
-                        
-                        if char_id:
-                            self.data['characters'][char_id].setdefault('items', [])
-                            self.data['characters'][char_id]['items'].append(iid)
-                        else:
-                            # Fallback to current room
-                            self.data['rooms'][player['current_room']]['items'].append(iid)
+                self._apply_item_location(iid, up)
 
         self.describe_room()
         self.save_game()
@@ -435,13 +577,21 @@ class WorldManager:
             loc = "Void"
             if iid in self.data['player']['inventory']: loc = "Inventory"
             elif iid in self.data['player']['worn']: loc = "Worn"
+            elif iid in self.data['player'].get('body', []): loc = "Body"
             else:
-                for rid, r in self.data['rooms'].items():
-                    if iid in r.get('items', []):
-                        loc = f"Room: {r['name']}"
-                        break
+                for cid, char in self.data.get('characters', {}).items():
+                    for label, key in (("Held by", "held"), ("Worn by", "worn"), ("Body of", "body")):
+                        if iid in char.get(key, []):
+                            loc = f"{label}: {char.get('name', cid)}"
+                            break
+                    if loc != "Void": break
+                if loc == "Void":
+                    for rid, r in self.data['rooms'].items():
+                        if iid in r.get('items', []):
+                            loc = f"Room: {r['name']}"
+                            break
             items_out.append({
-                "id": iid, "name": item['name'], "location": loc, 
+                "id": iid, "name": item['name'], "location": loc,
                 "description": item['description'], "aliases": ", ".join(item['aliases'])
             })
         rooms_out = [{"id": r, "name": d['name']} for r, d in self.data['rooms'].items()]
@@ -450,7 +600,7 @@ class WorldManager:
     def god_mode_update(self, changes, ai_interface):
         logs = []
         trigger_narrative = False
-        
+
         for change in changes:
             iid = change['id']
             if iid not in self.data['items']: continue
@@ -458,31 +608,28 @@ class WorldManager:
 
             if 'newAliases' in change:
                 item['aliases'] = [a.strip().lower() for a in change['newAliases'].split(',')]
-            
+
             if 'newDescription' in change and change['newDescription']:
                 item['description'] = change['newDescription']
 
             new_loc = change.get('newLocation')
             if new_loc:
                 trigger_narrative = True
-                player = self.data['player']
                 old_loc_name = "unknown"
-                for r in self.data['rooms'].values():
-                    if iid in r.get('items', []): 
-                        old_loc_name = r['name']
-                        r['items'].remove(iid)
-                if iid in player['inventory']: 
-                    old_loc_name = "Inventory"
-                    player['inventory'].remove(iid)
-                if iid in player['worn']: 
-                    old_loc_name = "Worn"
-                    player['worn'].remove(iid)
+                god_state = self.get_god_state()
+                for row in god_state.get('items', []):
+                    if row.get('id') == iid:
+                        old_loc_name = row.get('location', 'unknown')
+                        break
 
+                self._remove_item_from_all_locations(iid)
                 loc_name_for_log = new_loc
+                player = self.data['player']
                 if new_loc == "Inventory": player['inventory'].append(iid)
                 elif new_loc == "Worn": player['worn'].append(iid)
+                elif new_loc == "Body": player.setdefault('body', []).append(iid)
                 elif new_loc == "Void": pass
-                else: 
+                else:
                     if new_loc in self.data['rooms']:
                         self.data['rooms'][new_loc]['items'].append(iid)
                         loc_name_for_log = self.data['rooms'][new_loc]['name']
