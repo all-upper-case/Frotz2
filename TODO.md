@@ -16,6 +16,8 @@ A practical backlog for turning the current prototype into a tidier personal eng
 - Added neutral tests for recent-turn recording, NPC held/worn/body placement, and context-dump visibility.
 - Clarified that tool-call transparency is toggleable observability, not mandatory approval for every normal state change.
 - Added lightweight LLM response validation for genesis, room generation, and turn narration before state mutation.
+- Wired Matrix AI fixer responses through `validate_fix_response()` so malformed/error-shaped fixer output is rejected before item descriptions change.
+- Added focused tests for accepted and rejected Matrix AI fixer responses.
 - Added a pytest smoke-test baseline for app import, uninitialized routes, no-key reset behavior, deterministic commands, LLM contracts, and save/load roundtrips.
 - Hardened the frontend debug modal empty/error states.
 - Reworked Matrix editor details rendering to avoid injecting item aliases/descriptions through string-built HTML.
@@ -25,7 +27,6 @@ A practical backlog for turning the current prototype into a tidier personal eng
 
 ## Current Priority: Consistency And Tool Robustness
 
-- Wire `validate_fix_response()` into the Matrix AI fixer path in `world_manager.py` with focused tests for accepted and rejected fixer outputs.
 - Implement the first canonical tool dispatcher that maps compatibility aliases like `Description` and `Location` to typed engine operations with per-tool result reports.
 - Tighten player/NPC ownership slot validation so rejected owner/slot moves are visible in turn reports instead of silently ignored.
 - Add per-tool validation statuses: accepted, accepted_with_repair, invalid_schema, unknown_tool, missing_target, missing_owner, missing_slot, ambiguous_target, ambiguous_owner, invalid_location, invalid_slot, invalid_entity_type, ignored_duplicate, and ignored_empty.
