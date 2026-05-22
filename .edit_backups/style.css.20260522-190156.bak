@@ -147,28 +147,7 @@ li { margin-bottom: 5px; }
 .modal-body { flex: 1; overflow-y: auto; padding: 10px; }
 .modal-footer { padding: 10px; border-top: 1px solid #0f0; text-align: right; }
 #god-save { background: #004400; color: #0f0; border: 1px solid #0f0; padding: 10px 20px; font-weight: bold; cursor: pointer; }
-#god-close, #save-close { background: transparent; border: none; color: #0f0; font-size: 1.2em; cursor: pointer; }
-
-.save-modal-content { border-color: #2aa8ff; color: #8fd3ff; }
-.save-actions { margin-bottom: 20px; }
-.save-actions button {
-    width: 100%; padding: 10px; background: #002244; color: #8fd3ff;
-    border: 1px solid #2aa8ff; font-family: inherit; font-weight: bold;
-}
-.save-list { margin-bottom: 20px; }
-.save-row {
-    display: flex; justify-content: space-between; align-items: center;
-    gap: 10px; border: 1px solid #234; padding: 10px; margin-bottom: 8px;
-    background: #081018;
-}
-.save-info { min-width: 0; }
-.save-meta { color: #7aa5bd; font-size: 0.8em; margin-top: 4px; overflow-wrap: anywhere; }
-.save-row button {
-    background: #003355; color: #8fd3ff; border: 1px solid #2aa8ff;
-    padding: 8px 10px; font-family: inherit; cursor: pointer; white-space: nowrap;
-}
-.save-row button:disabled { opacity: 0.45; cursor: default; }
-.save-empty { color: #7aa5bd; font-style: italic; margin-bottom: 10px; }
+#god-close { background: transparent; border: none; color: #0f0; font-size: 1.2em; cursor: pointer; }
 
 table { width: 100%; border-collapse: collapse; }
 th { text-align: left; border-bottom: 1px solid #0f0; padding: 5px; }

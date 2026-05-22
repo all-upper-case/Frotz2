@@ -75,27 +75,6 @@
         </div>
     </div>
 
-    <!-- SAVE MANAGER MODAL -->
-    <div id="save-modal" class="modal hidden">
-        <div class="modal-content save-modal-content">
-            <div class="modal-header">
-                <h2>SAVE MANAGER</h2>
-                <button id="save-close">X</button>
-            </div>
-            <div class="modal-body">
-                <div class="save-actions">
-                    <button id="new-current-lore-btn">NEW GAME FROM CURRENT LORE</button>
-                </div>
-
-                <h3>LOREBOOKS</h3>
-                <div id="lorebook-list" class="save-list"></div>
-
-                <h3>SAVES</h3>
-                <div id="save-list" class="save-list"></div>
-            </div>
-        </div>
-    </div>
-
     <!-- DEBUG MODAL -->
     <div id="debug-modal" class="modal hidden">
         <div class="modal-content" style="border-color: #ff0; color: #ff0;">
