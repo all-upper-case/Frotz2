@@ -251,11 +251,6 @@ class WorldManager:
                 "present_characters": present_characters,
                 "pending_ambiguity": self.data.get('pending_ambiguity'),
             },
-            "character_locations": {
-                cid: char.get('location', 'unknown')
-                for cid, char in self.data.get('characters', {}).items()
-                if isinstance(char, dict)
-            },
             "recent_full_turns": self.data.get('recent_turns', [])[-RECENT_TURN_LIMIT:],
             "narrative_memory": self.data.get('narrative_log', []),
             "tool_contract": "docs/LLM_TOOLS.md",
@@ -797,17 +792,11 @@ class WorldManager:
                         tool_results.append(self._tool_result(up, tool, 'missing_target'))
                         continue
                     char = self.data['characters'][cid]
-                    duplicate = char.get('description') == desc and not aliases and not up.get('location')
+                    duplicate = char.get('description') == desc and not aliases
                     char['description'] = desc
                     if aliases:
                         char['aliases'] = sorted(set(char.get('aliases', []) + [a.lower() for a in aliases]))
-                    resolved_location = None
-                    if up.get('location'):
-                        applied, resolved_location = self._place_character(cid, up.get('location'))
-                        if not applied:
-                            tool_results.append(self._tool_result(up, tool, 'invalid_location', entity_id=cid, location=up.get('location')))
-                            continue
-                    tool_results.append(self._tool_result(up, tool, 'ignored_duplicate' if duplicate else success_status, entity_id=cid, location=resolved_location))
+                    tool_results.append(self._tool_result(up, tool, 'ignored_duplicate' if duplicate else success_status, entity_id=cid))
                     continue
 
                 if cid and cid != 'player':
@@ -833,46 +822,10 @@ class WorldManager:
                     "worn": [],
                     "body": [],
                 }
-                location = up.get('location', 'here')
-                applied, resolved_location = self._place_character(cid, location)
-                if not applied:
-                    tool_results.append(self._tool_result(up, tool, 'invalid_location', entity_id=cid, location=location))
-                    continue
-                tool_results.append(self._tool_result(up, tool, success_status, entity_id=cid, location=resolved_location))
-                continue
-
-            if tool == 'move_character':
-                if not name:
-                    tool_results.append(self._tool_result(up, tool, 'missing_target', reason='name or target is required'))
-                    continue
-
-                matches = self.find_character_matches(name)
-                if not matches:
-                    tool_results.append(self._tool_result(up, tool, 'missing_target'))
-                    continue
-                if len(matches) > 1:
-                    match_list = [{"id": cid, "name": char.get('name', cid)} for cid, char in matches]
-                    tool_results.append(self._tool_result(up, tool, 'ambiguous_target', matches=match_list))
-                    continue
-
-                cid = matches[0][0]
-                if cid == 'player':
-                    tool_results.append(self._tool_result(up, tool, 'invalid_entity_type', entity_id=cid, reason='move_character cannot move the player'))
-                    continue
-
-                location = up.get('location', '')
-                if not location:
-                    tool_results.append(self._tool_result(up, tool, 'invalid_schema', entity_id=cid, reason='location is required'))
-                    continue
-
-                old_location = self.data['characters'].get(cid, {}).get('location')
-                applied, resolved_location = self._place_character(cid, location)
-                if not applied:
-                    tool_results.append(self._tool_result(up, tool, 'invalid_location', entity_id=cid, location=location))
-                    continue
-
-                status = 'ignored_duplicate' if old_location == resolved_location else success_status
-                tool_results.append(self._tool_result(up, tool, status, entity_id=cid, location=resolved_location))
+                room = self.get_current_room()
+                if room is not None:
+                    room.setdefault('characters', []).append(cid)
+                tool_results.append(self._tool_result(up, tool, success_status, entity_id=cid))
                 continue
 
             if tool in ['describe_entity', 'create_entity']:

@@ -18,7 +18,6 @@ CANONICAL_TOOLS = {
     "create_character",
     "create_entity",
     "describe_entity",
-    "move_character",
     "move_entity",
     "set_entity_visibility",
     "update_character",

@@ -797,17 +797,11 @@ class WorldManager:
                         tool_results.append(self._tool_result(up, tool, 'missing_target'))
                         continue
                     char = self.data['characters'][cid]
-                    duplicate = char.get('description') == desc and not aliases and not up.get('location')
+                    duplicate = char.get('description') == desc and not aliases
                     char['description'] = desc
                     if aliases:
                         char['aliases'] = sorted(set(char.get('aliases', []) + [a.lower() for a in aliases]))
-                    resolved_location = None
-                    if up.get('location'):
-                        applied, resolved_location = self._place_character(cid, up.get('location'))
-                        if not applied:
-                            tool_results.append(self._tool_result(up, tool, 'invalid_location', entity_id=cid, location=up.get('location')))
-                            continue
-                    tool_results.append(self._tool_result(up, tool, 'ignored_duplicate' if duplicate else success_status, entity_id=cid, location=resolved_location))
+                    tool_results.append(self._tool_result(up, tool, 'ignored_duplicate' if duplicate else success_status, entity_id=cid))
                     continue
 
                 if cid and cid != 'player':
