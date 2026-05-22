@@ -2,6 +2,7 @@ import pytest
 
 from llm_contracts import (
     ContractError,
+    normalize_person_slot,
     normalize_state_update,
     normalize_state_updates,
     normalize_tool_name,
@@ -79,11 +80,38 @@ def test_tool_name_normalization_rejects_unknown_tools():
         normalize_tool_name("teleport_everything")
 
 
+def test_person_slot_normalization_accepts_canonical_slots():
+    assert normalize_person_slot("held") == ("held", False)
+    assert normalize_person_slot("worn") == ("worn", False)
+    assert normalize_person_slot("body") == ("body", False)
+
+
+def test_person_slot_normalization_maps_legacy_inventory_to_held():
+    assert normalize_person_slot("inventory") == ("held", True)
+
+
+def test_person_slot_normalization_rejects_unclear_slots():
+    with pytest.raises(ContractError, match="invalid slot"):
+        normalize_person_slot("pocket-ish")
+
+
 def test_state_update_normalization_preserves_alias_context():
     update = normalize_state_update({"tool": "Location", "name": "silver key", "location": "here"})
 
     assert update["tool"] == "move_entity"
     assert update["compatibility_alias"] == "Location"
+
+
+def test_state_update_normalization_preserves_slot_alias_context():
+    update = normalize_state_update({
+        "tool": "move_entity",
+        "target": "lantern",
+        "owner": "Mara",
+        "slot": "inventory",
+    })
+
+    assert update["slot"] == "held"
+    assert update["slot_alias"] == "inventory"
 
 
 def test_state_update_shape_validation_does_not_rewrite_route_payloads():
