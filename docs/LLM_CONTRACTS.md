@@ -2,6 +2,8 @@
 
 Frotz2 asks the model for JSON objects and validates the response before mutating world state. The validation is intentionally lightweight: it rejects error-shaped or clearly malformed responses, while `WorldManager` still owns schema repair for older saves and normal state defaults.
 
+The model-facing tool vocabulary is documented separately in `docs/LLM_TOOLS.md`. Those tool operations are intended to apply automatically after engine validation, with toggleable visibility levels for summary/debug/audit views. They are not intended to require manual approval for every ordinary state update.
+
 ## Shared Rules
 
 - The response must be a JSON object.
@@ -9,6 +11,7 @@ Frotz2 asks the model for JSON objects and validates the response before mutatin
 - `state_updates` must be a list when present. Missing or null `state_updates` becomes an empty list where the contract allows it.
 - `new_exits` must be a list when present. Missing or null `new_exits` becomes an empty list where the contract allows it.
 - Required string fields must be present and non-empty.
+- Tool calls should use canonical names from `docs/LLM_TOOLS.md` once the dispatcher exists; compatibility aliases remain supported during migration.
 
 ## Genesis
 
