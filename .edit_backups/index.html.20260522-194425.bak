@@ -111,37 +111,6 @@
         </div>
     </div>
 
-    <!-- LOREBOOK EDITOR MODAL -->
-    <div id="lore-editor-modal" class="modal hidden">
-        <div class="modal-content save-modal-content">
-            <div class="modal-header">
-                <h2 id="lore-editor-title">LOREBOOK EDITOR</h2>
-                <button id="lore-editor-close">X</button>
-            </div>
-            <div class="modal-body">
-                <textarea id="lore-editor-text" spellcheck="false"></textarea>
-            </div>
-            <div class="modal-footer">
-                <button id="lore-editor-save">SAVE LOREBOOK</button>
-                <button id="lore-editor-new-game">SAVE AND START NEW GAME</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- MAP MODAL -->
-    <div id="map-modal" class="modal hidden">
-        <div class="modal-content map-modal-content">
-            <div class="modal-header">
-                <h2>WORLD MAP</h2>
-                <button id="map-close">X</button>
-            </div>
-            <div class="modal-body">
-                <div id="map-canvas"></div>
-                <div id="map-details" class="map-details"></div>
-            </div>
-        </div>
-    </div>
-
     <!-- DEBUG MODAL -->
     <div id="debug-modal" class="modal hidden">
         <div class="modal-content" style="border-color: #ff0; color: #ff0;">
