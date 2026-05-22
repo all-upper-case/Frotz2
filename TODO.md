@@ -9,6 +9,11 @@ A practical backlog for turning the current prototype into a tidier personal eng
 - Added `docs/STEWARDSHIP_ROADMAP.md` for the long-term stewardship direction.
 - Added `docs/LLM_TOOLS.md` for canonical LLM tool operations, compatibility aliases, validation statuses, visibility levels, and player/NPC ownership slots.
 - Added `docs/TURN_CONTEXT.md` for the planned authoritative turn packet and recent full-turn transcript strategy.
+- Added a bounded `recent_turns` buffer to save data and included recent full turns in the DM context dump.
+- Added initial player/NPC ownership slots for `held`, `worn`, and `body`, including legacy NPC `items` compatibility.
+- Added support for `move_entity` and `create_entity` payloads that use `owner` plus `slot`.
+- Extended visible-item lookup and context dumps to include present NPC held/worn/body entities.
+- Added neutral tests for recent-turn recording, NPC held/worn/body placement, and context-dump visibility.
 - Clarified that tool-call transparency is toggleable observability, not mandatory approval for every normal state change.
 - Added lightweight LLM response validation for genesis, room generation, and turn narration before state mutation.
 - Added a pytest smoke-test baseline for app import, uninitialized routes, no-key reset behavior, deterministic commands, LLM contracts, and save/load roundtrips.
@@ -21,13 +26,12 @@ A practical backlog for turning the current prototype into a tidier personal eng
 ## Current Priority: Consistency And Tool Robustness
 
 - Wire `validate_fix_response()` into the Matrix AI fixer path in `world_manager.py` with focused tests for accepted and rejected fixer outputs.
-- Implement the first canonical tool dispatcher that maps compatibility aliases like `Description` and `Location` to typed engine operations.
-- Implement player/NPC ownership slots for `held`, `worn`, and `body` so moving or creating an entity on a character is never ambiguous.
+- Implement the first canonical tool dispatcher that maps compatibility aliases like `Description` and `Location` to typed engine operations with per-tool result reports.
+- Tighten player/NPC ownership slot validation so rejected owner/slot moves are visible in turn reports instead of silently ignored.
 - Add per-tool validation statuses: accepted, accepted_with_repair, invalid_schema, unknown_tool, missing_target, missing_owner, missing_slot, ambiguous_target, ambiguous_owner, invalid_location, invalid_slot, invalid_entity_type, ignored_duplicate, and ignored_empty.
 - Implement resolvable disambiguation for visible items, with tests for duplicate names and overlapping words.
-- Add structured turn packets from `WorldManager` and document their contract.
-- Add a recent full-turn buffer, separate from compact narrative memory, and include it in each DM turn prompt.
-- Extend lookup/state handling to characters and non-present entities after the visible-item path is stable.
+- Promote the current context dump into a structured turn packet object before formatting it for prompts.
+- Extend lookup/state handling to non-present entities after the visible-item and present-character paths are stable.
 
 ## Documentation
 
@@ -44,7 +48,7 @@ A practical backlog for turning the current prototype into a tidier personal eng
 
 ## Engine Behavior
 
-- Run the new pytest suite in a Python-enabled environment and fix any failures found there.
+- Run the new pytest suite in a Python-enabled environment and fix any failures found there. Python is not installed on the current work PC, so local execution has intentionally not been used.
 - Split command parsing from Flask route handlers once command behavior grows.
 - Add safer handling for malformed or partial LLM JSON responses inside `LLMInterface` if provider behavior changes.
 - Consider a world export/import command for moving saves between machines or deployments.
