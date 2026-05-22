@@ -4,7 +4,7 @@ import shutil
 import uuid
 import re
 
-from llm_contracts import ContractError, normalize_person_slot, validate_fix_response
+from llm_contracts import ContractError, normalize_person_slot, normalize_tool_name, validate_fix_response
 
 SAVE_DIR = "saves"
 BACKUP_DIR = "backups"
@@ -208,6 +208,11 @@ class WorldManager:
                 lines.append("  Requested state updates:")
                 for update in updates:
                     lines.append(f"    - {update}")
+            tool_results = turn.get('tool_results', [])
+            if tool_results:
+                lines.append("  Tool results:")
+                for result in tool_results:
+                    lines.append(f"    - {self._summarize_tool_result(result)}")
         return "\n".join(lines)
 
     def _summarize_state_update(self, update):
@@ -219,15 +224,24 @@ class WorldManager:
             if update.get(key): bits.append(f"{key}={update[key]}")
         return ", ".join(bits)
 
+    def _summarize_tool_result(self, result):
+        if not isinstance(result, dict): return str(result)
+        bits = [f"tool={result.get('tool', 'unknown')}", f"status={result.get('status', 'unknown')}"]
+        for key in ('target', 'entity_id', 'owner', 'owner_id', 'location', 'reason'):
+            if result.get(key): bits.append(f"{key}={result[key]}")
+        return ", ".join(bits)
+
     def record_turn(self, player_input, outcome):
         if not self.data: return
         turns = self.data.setdefault('recent_turns', [])
         state_updates = [self._summarize_state_update(up) for up in outcome.get('state_updates', [])]
+        tool_results = [self._summarize_tool_result(result) for result in outcome.get('tool_results', [])]
         turns.append({
             "input": player_input,
             "narrative": outcome.get('narrative', ''),
             "summary": outcome.get('narrative_summary_update', ''),
             "state_updates": state_updates,
+            "tool_results": tool_results,
         })
         self.data['recent_turns'] = turns[-RECENT_TURN_LIMIT:]
         self.save_game()
@@ -515,6 +529,48 @@ class WorldManager:
                     self.data['rooms'][player['current_room']]['items'].append(iid)
         return True
 
+    def _tool_result(self, update, tool, status, **extra):
+        result = {"tool": tool, "status": status}
+        if isinstance(update, dict):
+            target = update.get('target') or update.get('name')
+            if target: result['target'] = target
+            if update.get('compatibility_alias'):
+                result['compatibility_alias'] = update['compatibility_alias']
+            if update.get('slot_alias'):
+                result['slot_alias'] = update['slot_alias']
+        result.update({k: v for k, v in extra.items() if v is not None})
+        return result
+
+    def _normalize_requested_tool(self, update):
+        normalized = dict(update)
+        canonical, used_alias = normalize_tool_name(normalized.get('tool'))
+        normalized['tool'] = canonical
+        if used_alias:
+            normalized['compatibility_alias'] = update.get('tool')
+        return normalized, used_alias
+
+    def _validate_owner_slot(self, update):
+        owner = update.get('owner')
+        if not owner:
+            return None, None, None
+
+        owner_id = self.find_character_id_by_name(owner)
+        if not owner_id:
+            return 'missing_owner', None, None
+
+        if not update.get('slot'):
+            return 'missing_slot', owner_id, None
+
+        try:
+            slot_clean, used_slot_alias = normalize_person_slot(update.get('slot'))
+        except ContractError:
+            return 'invalid_slot', owner_id, None
+
+        if used_slot_alias:
+            update['slot_alias'] = update.get('slot')
+        update['slot'] = slot_clean
+        return None, owner_id, slot_clean
+
     def apply_outcome(self, outcome):
         if not isinstance(outcome, dict): return
         if "_usage" in outcome: self.update_metrics(outcome["_usage"])
@@ -522,28 +578,70 @@ class WorldManager:
             self.data['narrative_log'].append(outcome['narrative_summary_update'])
 
         updates = outcome.get('state_updates', [])
-        for up in updates:
-            tool = up.get('tool', '').strip()
-            if tool in ["create_item", "create_room", "update_item", "describe_entity", "create_entity"]: tool = "Description"
-            if tool == "move_entity": tool = "Location"
+        tool_results = []
+        if not isinstance(updates, list):
+            outcome['tool_results'] = [self._tool_result({}, 'unknown', 'invalid_schema', reason='state_updates must be a list')]
+            self.describe_room()
+            self.save_game()
+            return
 
-            name = (up.get('name') or up.get('target') or '').strip()
-            if not name: continue
-            clean_name = name.lower()
-
-            if clean_name in ['self', 'me', 'myself', 'player']:
-                if tool in ["Description", "update_player"]:
-                    self.data['player']['description'] = up.get('description', self.data['player']['description'])
+        for raw_update in updates:
+            if not isinstance(raw_update, dict):
+                tool_results.append(self._tool_result({}, 'unknown', 'invalid_schema', reason='state update must be an object'))
                 continue
 
-            if tool == "Description":
-                desc = up.get('description', '...')
+            try:
+                up, used_alias = self._normalize_requested_tool(raw_update)
+            except ContractError as exc:
+                message = str(exc)
+                status = 'unknown_tool' if message.startswith('unknown tool') else 'invalid_schema'
+                tool_results.append(self._tool_result(raw_update, raw_update.get('tool', 'unknown'), status, reason=message))
+                continue
+
+            tool = up['tool']
+            success_status = 'accepted_with_repair' if used_alias else 'accepted'
+            name = (up.get('name') or up.get('target') or '').strip()
+            clean_name = name.lower()
+
+            if tool == 'append_memory':
+                summary = up.get('summary', '')
+                if isinstance(summary, str) and summary.strip():
+                    self.data['narrative_log'].append(summary.strip())
+                    tool_results.append(self._tool_result(up, tool, success_status))
+                else:
+                    tool_results.append(self._tool_result(up, tool, 'ignored_empty', reason='summary is empty'))
+                continue
+
+            if tool == 'update_player' or clean_name in ['self', 'me', 'myself', 'player']:
+                desc = up.get('description', '')
+                if isinstance(desc, str) and desc.strip():
+                    self.data['player']['description'] = desc
+                    tool_results.append(self._tool_result(up, 'update_player', success_status, entity_id='player'))
+                else:
+                    tool_results.append(self._tool_result(up, 'update_player', 'ignored_empty', entity_id='player', reason='description is empty'))
+                continue
+
+            if tool in ['describe_entity', 'create_entity']:
+                if not name:
+                    tool_results.append(self._tool_result(up, tool, 'missing_target', reason='name or target is required'))
+                    continue
+
+                desc = up.get('description', '')
+                if not isinstance(desc, str) or not desc.strip():
+                    tool_results.append(self._tool_result(up, tool, 'ignored_empty', reason='description is empty'))
+                    continue
+
+                owner_status, owner_id, slot_clean = self._validate_owner_slot(up)
+                if owner_status:
+                    tool_results.append(self._tool_result(up, tool, owner_status, owner=up.get('owner'), owner_id=owner_id, slot=up.get('slot')))
+                    continue
+
                 aliases = up.get('aliases', [])
                 try:
-                    slot_clean, _ = normalize_person_slot(up.get('slot')) if up.get('slot') else (None, False)
+                    requested_slot, _ = normalize_person_slot(up.get('slot')) if up.get('slot') else (None, False)
                 except ContractError:
-                    slot_clean = None
-                is_body_part = up.get('location') == 'body' or slot_clean == 'body' or up.get('entity_type') == 'body_part'
+                    requested_slot = None
+                is_body_part = up.get('location') == 'body' or requested_slot == 'body' or up.get('entity_type') == 'body_part'
 
                 iid = self.find_item_id_by_name(name)
                 if iid:
@@ -564,13 +662,43 @@ class WorldManager:
                     iid = new_id
 
                 if up.get('owner') or up.get('location'):
-                    self._apply_item_location(iid, up)
+                    applied = self._apply_item_location(iid, up)
+                    if not applied:
+                        tool_results.append(self._tool_result(up, tool, 'invalid_location', entity_id=iid))
+                        continue
 
-            elif tool == "Location":
+                tool_results.append(self._tool_result(up, tool, success_status, entity_id=iid, owner_id=owner_id, slot=slot_clean))
+                continue
+
+            if tool == 'move_entity':
+                if not name:
+                    tool_results.append(self._tool_result(up, tool, 'missing_target', reason='name or target is required'))
+                    continue
+
                 iid = self.find_item_id_by_name(name)
-                if not iid: continue
-                self._apply_item_location(iid, up)
+                if not iid:
+                    tool_results.append(self._tool_result(up, tool, 'missing_target'))
+                    continue
 
+                if not up.get('owner') and not up.get('location'):
+                    tool_results.append(self._tool_result(up, tool, 'invalid_schema', entity_id=iid, reason='location or owner is required'))
+                    continue
+
+                owner_status, owner_id, slot_clean = self._validate_owner_slot(up)
+                if owner_status:
+                    tool_results.append(self._tool_result(up, tool, owner_status, entity_id=iid, owner=up.get('owner'), owner_id=owner_id, slot=up.get('slot')))
+                    continue
+
+                applied = self._apply_item_location(iid, up)
+                if applied:
+                    tool_results.append(self._tool_result(up, tool, success_status, entity_id=iid, owner_id=owner_id, slot=slot_clean, location=up.get('location')))
+                else:
+                    tool_results.append(self._tool_result(up, tool, 'invalid_location', entity_id=iid))
+                continue
+
+            tool_results.append(self._tool_result(up, tool, 'unknown_tool', reason='tool is recognized but not implemented by WorldManager yet'))
+
+        outcome['tool_results'] = tool_results
         self.describe_room()
         self.save_game()
 
@@ -659,4 +787,4 @@ class WorldManager:
         return None
 
     def get_opposite_dir(self, d):
-        return {"north":"south","south":"north","east":"west","west":"east","up":"down","down":"up"}.get(d)
+        return {"north":"south","south":"north","east":"west","west":"west","up":"down","down":"up"}.get(d)
