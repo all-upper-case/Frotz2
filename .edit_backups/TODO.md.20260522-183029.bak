@@ -38,7 +38,6 @@ A practical backlog for turning the current prototype into a tidier personal eng
 - Tighten player/NPC ownership slot validation so rejected owner/slot moves are visible in frontend turn reports with clearer user-facing summary text, not only raw JSON.
 - Add remaining per-tool validation statuses or fuller coverage where still partial: ambiguous_owner, invalid_entity_type, ignored_duplicate, and fuller invalid_location coverage.
 - Continue resolvable disambiguation for visible items, especially tests for duplicate names, overlapping words, and follow-up answers after an ambiguity prompt.
-- Known non-blocking disambiguation issue: after `x vase` prompts for a choice and the player answers `1`, the engine currently rewrites the original command with a resolved target and may hand it to the LLM, rather than deterministically returning the selected item's existing description for examine/look commands. This is acceptable for now but should be fixed later so simple resolved examine commands use saved item descriptions directly.
 - Continue promoting the context dump into a structured turn packet object before formatting it for prompts; Batch 1 adds the first `get_turn_packet()` helper and includes it in the prompt context.
 - Extend lookup/state handling to non-present entities after the visible-item and present-character paths are stable.
 

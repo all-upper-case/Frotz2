@@ -32,25 +32,6 @@ Still pending:
 - polished frontend transparency controls for quiet/summary/debug/audit views
 - richer non-present entity handling
 
-## Narrative-State Synchronization
-
-The LLM should treat tools as the persistence layer for the story. Narration can describe events freely, but any concrete fact that should remain true after the turn must be represented through a tool call.
-
-Common required mappings:
-
-- Player takes or receives an item: `move_entity` with `owner: "player"` and `slot: "held"`.
-- Player drops or sets down an item: `move_entity` with `location: "here"`.
-- Player wears an item: `move_entity` with `owner: "player"` and `slot: "worn"`.
-- Player removes a worn item but keeps it: `move_entity` with `owner: "player"` and `slot: "held"`.
-- Player body changes persistently: `create_entity` or `describe_entity` with `owner: "player"` and `slot: "body"`, plus `update_player` when the overall player description changes.
-- NPC carries, wears, or has a body-part entity: `move_entity` or `create_entity` with the NPC as `owner` and `slot` set to `held`, `worn`, or `body`.
-- A new persistent object appears: `create_entity`.
-- An object becomes hidden or visible: `set_entity_visibility`.
-- A new NPC is present: `create_character`.
-- A durable fact has no direct physical state yet: `append_memory`.
-
-Known limitation: first-class character room movement is not implemented yet. The prompt currently tells the model to preserve NPC location changes through `update_character` and `append_memory`, but a future dispatcher should support character placement/movement directly so room character lists stay authoritative.
-
 ## Visibility Model
 
 Tool calls should normally apply automatically after validation.

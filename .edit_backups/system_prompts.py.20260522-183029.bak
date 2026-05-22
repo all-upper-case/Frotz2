@@ -103,15 +103,8 @@ REQUIRED JSON STRUCTURE:
   "narrative": "Your atmospheric response to the player's action...",
   "narrative_summary_update": "A one-sentence update for the global narrative log...",
   "state_updates": [
-    {{ "tool": "describe_entity", "target": "existing item or body part", "description": "Updated persistent description." }},
-    {{ "tool": "create_entity", "name": "new item", "description": "Persistent description.", "location": "here" }},
-    {{ "tool": "move_entity", "target": "item", "owner": "player|NPC name", "slot": "held|worn|body" }},
-    {{ "tool": "move_entity", "target": "item", "location": "here|void|nowhere|room id|room name" }},
-    {{ "tool": "create_character", "name": "NPC name", "description": "Persistent description if newly present." }},
-    {{ "tool": "update_character", "target": "NPC name", "description": "Updated persistent NPC description or current known location note." }},
-    {{ "tool": "set_entity_visibility", "target": "item", "visible": true }},
-    {{ "tool": "update_player", "description": "Updated persistent player description." }},
-    {{ "tool": "append_memory", "summary": "One durable continuity fact." }}
+    {{ "tool": "Description", "name": "item", "description": "..." }},
+    {{ "tool": "Location", "name": "item", "location": "..." }}
   ]
 }}
 
