@@ -21,7 +21,7 @@ def log_system(msg):
 def update_files():
     if request.headers.get('X-Secret-Key') != "JosieSecret123":
         return "Unauthorized", 401
-    
+
     content = request.get_data(as_text=True)
     if not content:
         return jsonify({"status": "error", "message": "No data"}), 400
@@ -30,15 +30,15 @@ def update_files():
     # Use a trick to prevent the regex from matching itself in the source code
     marker_regex = r'---FILE' + r':(.*?)---'
     parts = re.split(marker_regex, content)
-    
+
     for i in range(1, len(parts), 2):
         filepath = parts[i].strip()
         code = parts[i+1].strip()
-        
+
         folder = os.path.dirname(filepath)
         if folder and not os.path.exists(folder):
             os.makedirs(folder, exist_ok=True)
-            
+
         with open(filepath, 'w', encoding='utf-8') as f:
             f.write(code)
         updated_files.append(filepath)
@@ -73,7 +73,7 @@ def reset_game():
         room = world.get_current_room()
         log_system("World Created Successfully.")
         return jsonify({
-            "response": f"{intro}\n\n### {room['name']}\n{world.describe_room(room)}", 
+            "response": f"{intro}\n\n### {room['name']}\n{world.describe_room(room)}",
             "state": get_ui_state()
         })
     except ContractError as e:
@@ -95,14 +95,14 @@ def handle_command():
     log_system(f"Cmd: {user_input}")
 
     # DISAMBIGUATION CHECK
-    if len(clean.split()) > 1: 
+    if len(clean.split()) > 1:
         noun = clean.split()[-1]
-        if noun not in ['me', 'self', 'myself', 'player']: 
+        if noun not in ['me', 'self', 'myself', 'player']:
             candidates = world.get_all_visible_items()
 
             exact_matches = [i for i in candidates if noun == i['name'].lower() or noun in i.get('aliases', [])]
             if len(exact_matches) > 0:
-                pass 
+                pass
             else:
                 matches = []
                 for item in candidates:
@@ -204,15 +204,15 @@ def set_model():
     return jsonify({"status": "error"}), 400
 
 def process_ai_turn(inp):
-    thread = world.get_narrative_history() 
-    context_dump = world.get_context_dump()
-
     # Check for System Notifications (from previous syncs not yet popped)
     msgs = world.pop_system_notifications()
     full_input = inp
     if msgs:
         sys_msg = "\n\n".join([f"[SYSTEM NOTICE: {m}]" for m in msgs])
         full_input = f"{sys_msg}\n\nPLAYER ACTION: {inp}"
+
+    thread = world.get_narrative_history()
+    context_dump = world.get_context_dump()
 
     try:
         outcome = validate_turn_response(ai.process_turn(full_input, thread, context_dump))
@@ -221,6 +221,7 @@ def process_ai_turn(inp):
         return jsonify({"response": f"AI turn failed: {str(e)}", "state": get_ui_state()})
 
     world.apply_outcome(outcome)
+    world.record_turn(full_input, outcome)
 
     return jsonify({"response": outcome.get("narrative", "..."), "state": get_ui_state()})
 
@@ -237,9 +238,9 @@ def god_update():
 
     if sys_msg:
         # Trigger immediate AI turn for major reality shifts
+        full_input = f"[SYSTEM EVENT]\n{sys_msg}"
         thread = world.get_narrative_history()
         context_dump = world.get_context_dump()
-        full_input = f"[SYSTEM EVENT]\n{sys_msg}"
 
         try:
             outcome = validate_turn_response(ai.process_turn(full_input, thread, context_dump))
@@ -248,6 +249,7 @@ def god_update():
             return jsonify({"response": f"Reality shift narration failed: {str(e)}", "state": get_ui_state()})
 
         world.apply_outcome(outcome)
+        world.record_turn(full_input, outcome)
 
         return jsonify({
             "response": f"**REALITY SHIFT APPLIED:**\n{outcome.get('narrative', 'State updated.')}",
