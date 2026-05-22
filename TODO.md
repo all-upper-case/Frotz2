@@ -14,6 +14,9 @@ A practical backlog for turning the current prototype into a tidier personal eng
 - Added support for `move_entity` and `create_entity` payloads that use `owner` plus `slot`.
 - Extended visible-item lookup and context dumps to include present NPC held/worn/body entities.
 - Added neutral tests for recent-turn recording, NPC held/worn/body placement, and context-dump visibility.
+- Added the first `WorldManager.apply_outcome()` tool-result reporting pass for accepted/repaired/rejected state updates.
+- Added recent-turn storage/display of compact tool results so the next prompt can see what the engine actually accepted.
+- Added focused tests for accepted legacy aliases, missing move targets, missing owner slots, and recent-turn tool-result context.
 - Clarified that tool-call transparency is toggleable observability, not mandatory approval for every normal state change.
 - Added lightweight LLM response validation for genesis, room generation, and turn narration before state mutation.
 - Wired Matrix AI fixer responses through `validate_fix_response()` so malformed/error-shaped fixer output is rejected before item descriptions change.
@@ -27,9 +30,9 @@ A practical backlog for turning the current prototype into a tidier personal eng
 
 ## Current Priority: Consistency And Tool Robustness
 
-- Implement the first canonical tool dispatcher that maps compatibility aliases like `Description` and `Location` to typed engine operations with per-tool result reports.
-- Tighten player/NPC ownership slot validation so rejected owner/slot moves are visible in turn reports instead of silently ignored.
-- Add per-tool validation statuses: accepted, accepted_with_repair, invalid_schema, unknown_tool, missing_target, missing_owner, missing_slot, ambiguous_target, ambiguous_owner, invalid_location, invalid_slot, invalid_entity_type, ignored_duplicate, and ignored_empty.
+- Expand the canonical tool dispatcher beyond item/player updates to first-class character updates, visibility updates, stricter room/location validation, duplicate detection, and ambiguity reporting.
+- Tighten player/NPC ownership slot validation so rejected owner/slot moves are visible in frontend turn reports, not only stored in recent-turn context.
+- Add remaining per-tool validation statuses: ambiguous_target, ambiguous_owner, invalid_entity_type, ignored_duplicate, and fuller invalid_location coverage.
 - Implement resolvable disambiguation for visible items, with tests for duplicate names and overlapping words.
 - Promote the current context dump into a structured turn packet object before formatting it for prompts.
 - Extend lookup/state handling to non-present entities after the visible-item and present-character paths are stable.
