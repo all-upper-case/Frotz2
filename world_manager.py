@@ -787,4 +787,4 @@ class WorldManager:
         return None
 
     def get_opposite_dir(self, d):
-        return {"north":"south","south":"north","east":"west","west":"west","up":"down","down":"up"}.get(d)
+        return {"north":"south","south":"north","east":"west","west":"east","up":"down","down":"up"}.get(d)
