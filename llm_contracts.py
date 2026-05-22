@@ -32,15 +32,37 @@ TOOL_ALIASES = {
     "location": "move_entity",
 }
 
+PERSON_SLOTS = {
+    "held",
+    "worn",
+    "body",
+}
+
+LEGACY_PLAYER_LOCATIONS = {
+    "inventory": "held",
+    "worn": "worn",
+    "body": "body",
+}
+
+WORLD_LOCATIONS = {
+    "here",
+    "void",
+    "nowhere",
+}
+
 TOOL_STATUS = {
     "accepted",
     "accepted_with_repair",
+    "ambiguous_owner",
     "ambiguous_target",
     "ignored_duplicate",
     "ignored_empty",
     "invalid_entity_type",
     "invalid_location",
     "invalid_schema",
+    "invalid_slot",
+    "missing_owner",
+    "missing_slot",
     "missing_target",
     "rejected_error_response",
     "unknown_tool",
@@ -114,6 +136,18 @@ def normalize_tool_name(tool_name):
     return canonical, canonical != clean
 
 
+def normalize_person_slot(slot):
+    """Return a canonical held/worn/body slot, accepting legacy player locations."""
+    if not isinstance(slot, str) or not slot.strip():
+        raise ContractError("slot must be a non-empty string.")
+
+    clean = slot.strip().lower()
+    canonical = LEGACY_PLAYER_LOCATIONS.get(clean, clean)
+    if canonical not in PERSON_SLOTS:
+        raise ContractError(f"invalid slot: {slot}.")
+    return canonical, canonical != clean
+
+
 def normalize_state_update(update):
     """Normalize a single requested state update without applying it."""
     if not isinstance(update, dict):
@@ -124,6 +158,13 @@ def normalize_state_update(update):
     result["tool"] = canonical
     if used_alias:
         result["compatibility_alias"] = update.get("tool")
+
+    if "slot" in result:
+        canonical_slot, used_slot_alias = normalize_person_slot(result["slot"])
+        result["slot"] = canonical_slot
+        if used_slot_alias:
+            result["slot_alias"] = update.get("slot")
+
     return result
 
 
