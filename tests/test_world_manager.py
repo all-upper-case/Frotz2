@@ -1,6 +1,14 @@
 from world_manager import WorldManager
 
 
+class StubFixInterface:
+    def __init__(self, response):
+        self.response = response
+
+    def generate_fix(self, item_name, current_desc, user_instruction):
+        return self.response
+
+
 def test_world_manager_save_load_roundtrip(tmp_path, monkeypatch, minimal_world):
     monkeypatch.chdir(tmp_path)
     (tmp_path / "lore.txt").write_text("WORLD_NAME: neutral_archive\nA quiet test world.", encoding="utf-8")
@@ -101,3 +109,37 @@ def test_context_dump_includes_recent_turns_and_npc_slots(tmp_path, monkeypatch,
     assert "look at the curator" in context
     assert "Held: curator badge" in context
     assert "Worn: linen glove" in context
+
+
+def test_god_mode_fix_accepts_valid_ai_description(tmp_path, monkeypatch, minimal_world):
+    monkeypatch.chdir(tmp_path)
+    manager = WorldManager()
+    manager.data = minimal_world
+    manager.ensure_schema()
+    ai = StubFixInterface({"description": "A key freshly reconciled with the current scene."})
+
+    message = manager.god_mode_update(
+        [{"id": "item_key", "fixInstruction": "Match the current scene."}],
+        ai,
+    )
+
+    assert manager.data["items"]["item_key"]["description"] == "A key freshly reconciled with the current scene."
+    assert "auto-fixed by AI" in message
+
+
+def test_god_mode_fix_rejects_invalid_ai_description(tmp_path, monkeypatch, minimal_world):
+    monkeypatch.chdir(tmp_path)
+    manager = WorldManager()
+    manager.data = minimal_world
+    manager.ensure_schema()
+    original_description = manager.data["items"]["item_key"]["description"]
+    ai = StubFixInterface({"error": True, "message": "provider failed"})
+
+    message = manager.god_mode_update(
+        [{"id": "item_key", "fixInstruction": "Match the current scene."}],
+        ai,
+    )
+
+    assert manager.data["items"]["item_key"]["description"] == original_description
+    assert "auto-fix rejected" in message
+    assert "provider failed" in message
