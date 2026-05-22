@@ -83,4 +83,4 @@ Required fields:
 }
 ```
 
-The contract helper exists in `llm_contracts.py`; wiring it directly into the fixer path is tracked in `TODO.md` so it can be completed with focused coverage for Matrix workflows.
+`WorldManager.god_mode_update()` validates fixer output with `validate_fix_response()` before changing item descriptions. Valid fixer output is applied normally. Error-shaped, non-object, or missing-description output is rejected and logged in the Matrix continuity message without changing the existing item description.
