@@ -1,10 +1,23 @@
 # Stewardship Roadmap
 
-This roadmap is the working product direction for Frotz2. The goal is not just to add features, but to turn the prototype into a reliable personal interactive-fiction engine with strong state continuity, transparent LLM behavior, and better authoring tools.
+This roadmap is the working product direction for Frotz2. It includes the original stability/TODO work and the newer product direction around consistency, cost tracking, scenario management, LLM controls, and stronger world-state tooling. The goal is not just to add features, but to turn the prototype into a reliable personal interactive-fiction engine with strong state continuity, transparent LLM behavior, and better authoring tools.
 
 ## Guiding Principle
 
-Frotz2 should treat the world state as the source of truth, and the LLM as a narrator and proposer of structured changes. The engine should know what exists, where it is, who owns it, what just happened, what the model tried to change, and whether those changes succeeded.
+Frotz2 should treat the world state as the source of truth, and the LLM as a narrator plus a caller of clearly documented engine tools. The LLM should propose structured operations, the engine should validate and apply safe operations automatically, and the player should be able to inspect what happened at the right level of detail without being forced to approve every ordinary change.
+
+Tool visibility is observability, not a mandatory approval gate. Most turns should flow automatically. Manual intervention belongs in repair, undo, debug, or high-risk workflows.
+
+## Transparency Levels
+
+The engine should support toggleable levels of visibility/intrusiveness:
+
+- `quiet`: normal play; show only narration and standard HUD state.
+- `summary`: show compact notices for partial success, ignored updates, high token cost, or consistency warnings.
+- `debug`: show the turn report with requested tool calls, accepted changes, rejected changes, warnings, model settings, and token usage.
+- `audit`: preserve full prompt/response/state snapshots for deep debugging and repair workflows.
+
+The default should be `quiet` or `summary`, not a stream of approval prompts.
 
 ## Phase 1: Consistency And State Integrity
 
@@ -17,7 +30,18 @@ This is the current priority.
 - Feed that turn packet into LLM prompts as the authoritative state for each turn.
 - Improve tests around duplicate names, overlapping words, entity ownership, void items, NPC-held items, and malformed LLM state updates.
 
-## Phase 2: World-State Manager
+## Phase 2: Robust LLM Tooling
+
+The model needs a small, clear tool surface with typo-resistant names and engine-side validation. Prompt text alone is not enough.
+
+- Define canonical tool operations such as `describe_entity`, `move_entity`, `create_entity`, `update_player`, `create_character`, `update_character`, `set_entity_visibility`, and `append_memory`.
+- Keep legacy names like `Description` and `Location` as compatibility aliases while steering prompts and docs toward canonical operations.
+- Validate each requested tool call before applying it: required fields, known target IDs or resolvable aliases, allowed locations, entity type rules, and ownership constraints.
+- Return structured per-tool statuses: accepted, rejected, ignored, ambiguous, missing_target, invalid_location, invalid_schema, and repaired_alias.
+- Store those statuses in the turn report for optional display.
+- Add tests for valid calls, typo aliases, missing required fields, unknown targets, ambiguous targets, NPC ownership, void movement, and body/worn/inventory distinctions.
+
+## Phase 3: World-State Manager
 
 The current dictionaries work, but the engine needs a clearer state model before it grows much further.
 
@@ -27,17 +51,17 @@ The current dictionaries work, but the engine needs a clearer state model before
 - Create a single state-query layer for questions like `what can the player see?`, `what can the player refer to?`, `where is this entity?`, and `who owns this?`.
 - Make the Matrix editor read from and write through that state-query layer instead of hand-rolling its own location logic.
 
-## Phase 3: Tool-Call Transparency
+## Phase 4: Tool-Call Reports And Consistency Diagnostics
 
-The player should be able to see whether the model's proposed state changes were complete, valid, and actually applied.
+The player should be able to see whether the model's proposed state changes were complete, valid, and actually applied, at the chosen transparency level.
 
-- Record each LLM response as a turn report with requested tool calls, accepted changes, rejected changes, and warnings.
-- Surface a compact version of that report in the debug modal.
-- Add explicit status fields for tool-call success, partial success, ignored updates, unknown targets, ambiguous targets, and validation failures.
-- Track when the LLM invents impossible state or omits required state updates.
-- Add tests for accepted, rejected, and partially applied tool-call batches.
+- Record each LLM response as a turn report with requested tool calls, accepted changes, rejected changes, warnings, and token usage.
+- Surface a compact version of that report only when the current transparency level calls for it.
+- Track when the LLM invents impossible state, omits expected state updates, targets ambiguous entities, or contradicts the authoritative turn packet.
+- Add a debug view that can show prompt, response, accepted/rejected tool calls, model settings, and resulting state.
+- Add tests for accepted, rejected, partially applied, and warning-only tool-call batches.
 
-## Phase 4: Editing, Undo, And Repair
+## Phase 5: Editing, Undo, And Repair
 
 Manual correction should become a first-class workflow rather than an emergency hatch.
 
@@ -47,7 +71,7 @@ Manual correction should become a first-class workflow rather than an emergency 
 - Add a safer Matrix fixer path with `validate_fix_response()` applied before item descriptions are changed.
 - Consider a turn history UI showing prompt, model response, accepted changes, rejected changes, and resulting state.
 
-## Phase 5: Scenario And Save Management
+## Phase 6: Scenario And Save Management
 
 Creating scenarios and managing game states should feel like using the game, not like juggling files.
 
@@ -57,7 +81,7 @@ Creating scenarios and managing game states should feel like using the game, not
 - Add export/import for saves and scenarios.
 - Keep the existing file-based workflow intact for Replit and power-user editing.
 
-## Phase 6: Token And Cost Accounting
+## Phase 7: Token And Cost Accounting
 
 The engine already records total tokens, but it needs a clearer ledger.
 
@@ -67,7 +91,7 @@ The engine already records total tokens, but it needs a clearer ledger.
 - Show session and lifetime totals in the HUD or debug panel.
 - Flag unusually expensive turns.
 
-## Phase 7: LLM Controls
+## Phase 8: LLM Controls
 
 Model settings should be visible and adjustable without code edits.
 
@@ -77,7 +101,7 @@ Model settings should be visible and adjustable without code edits.
 - Include model settings in turn debug reports so behavior is explainable later.
 - Validate requested params before sending them to the provider.
 
-## Phase 8: Interface Polish
+## Phase 9: Interface Polish
 
 Once the state layer is more trustworthy, improve the daily feel of the app.
 
@@ -90,14 +114,16 @@ Once the state layer is more trustworthy, improve the daily feel of the app.
 ## Near-Term Implementation Order
 
 1. Wire the remaining fixer validation path safely.
-2. Implement resolvable disambiguation for visible items, with tests.
-3. Add the first structured turn packet and document its contract.
-4. Extend lookup/state handling to characters and non-present entities.
-5. Add turn reports for LLM tool-call transparency.
-6. Begin the world-state manager refactor only after the above behavior is covered by tests.
+2. Define the canonical LLM tool vocabulary and compatibility aliases.
+3. Implement resolvable disambiguation for visible items, with tests.
+4. Add the first structured turn packet and document its contract.
+5. Extend lookup/state handling to characters and non-present entities.
+6. Add turn reports and transparency levels.
+7. Begin the world-state manager refactor only after the above behavior is covered by tests.
 
 ## Non-Goals For Now
 
+- Do not require manual approval for every normal LLM state update.
 - Do not remove historical saves or debug logs without an explicit cleanup decision.
 - Do not redesign the whole frontend before the state model is more reliable.
 - Do not overfit prompts before the engine can accurately describe its own state.
