@@ -10,6 +10,26 @@ This document defines the intended engine-side tool vocabulary for Frotz2. These
 - Produce turn reports that show what happened without interrupting normal play.
 - Make ownership and body/worn/held distinctions explicit for both the player and NPCs.
 
+## Current Runtime Support
+
+`WorldManager.apply_outcome()` now writes a compact `tool_results` list back onto each processed outcome. This is the first runtime slice of the dispatcher/report model, not the final version.
+
+Currently covered:
+
+- compatibility alias reporting for legacy `Description` and `Location` updates
+- accepted/repaired reports for item descriptions, item creation, item movement, player description updates, and `append_memory`
+- rejected reports for malformed updates, unknown tool names, missing move targets, missing owners, missing owner slots, invalid owner slots, empty descriptions, and missing placement fields
+- recent-turn storage of compact tool results so later prompts can see what the engine accepted or rejected
+
+Still pending:
+
+- first-class character create/update handling
+- first-class visibility handling
+- stricter room/location validation
+- duplicate/no-op detection
+- ambiguous target and ambiguous owner reporting
+- frontend transparency controls for quiet/summary/debug/audit views
+
 ## Visibility Model
 
 Tool calls should normally apply automatically after validation.
@@ -311,7 +331,7 @@ A future turn report should look roughly like this:
 
 ## Implementation Notes
 
-- Keep the existing prompt output compatible until the new tool dispatcher exists.
+- Keep the existing prompt output compatible while the dispatcher is filled in operation by operation.
 - Build the dispatcher as engine code, not prompt-only convention.
 - Prefer resolving by stable IDs first, exact names second, aliases third, and partial matches last.
 - Ambiguous partial matches should not mutate state; they should create pending ambiguity for the player or a repair flow.
