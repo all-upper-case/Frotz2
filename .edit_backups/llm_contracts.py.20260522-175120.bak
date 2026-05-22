@@ -117,8 +117,6 @@ def _normalize_list_field(data, field):
 
 def _validate_state_updates_shape(data):
     _normalize_list_field(data, "state_updates")
-    if "state_updates" not in data or data["state_updates"] is None:
-        data["state_updates"] = []
     for update in data["state_updates"]:
         if not isinstance(update, dict):
             raise ContractError("state update must be a JSON object.")

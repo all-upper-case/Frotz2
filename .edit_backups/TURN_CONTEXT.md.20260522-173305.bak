@@ -9,10 +9,6 @@ The model should not rely on compact memory summaries alone to understand what i
 - Separate short-range turn context from long-range narrative memory.
 - Make tool-call validation and turn reports easier to reason about.
 
-## Current Runtime Status
-
-Batch 1 added a first `WorldManager.get_turn_packet()` helper and includes that packet at the top of the formatted prompt context. It captures the current room, player state, visible room entities, present characters, pending ambiguity state, recent full turns, and narrative memory. The app still formats the packet into the existing text context dump rather than passing a separate structured object all the way through the LLM interface.
-
 ## Recommended Packet Shape
 
 ```json

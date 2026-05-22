@@ -17,19 +17,18 @@ This document defines the intended engine-side tool vocabulary for Frotz2. These
 Currently covered:
 
 - compatibility alias reporting for legacy `Description` and `Location` updates
-- accepted/repaired reports for item descriptions, item creation, item movement, player description updates, character create/update, visibility updates, and `append_memory`
+- accepted/repaired reports for item descriptions, item creation, item movement, player description updates, and `append_memory`
 - rejected reports for malformed updates, unknown tool names, missing move targets, missing owners, missing owner slots, invalid owner slots, empty descriptions, and missing placement fields
-- duplicate/no-op reporting in some first-pass paths, such as unchanged player descriptions, unchanged character descriptions, and unchanged visibility
 - recent-turn storage of compact tool results so later prompts can see what the engine accepted or rejected
-- basic frontend turn-report display so rejected/ignored tool results are visible after a turn
 
 Still pending:
 
+- first-class character create/update handling
+- first-class visibility handling
 - stricter room/location validation
-- fuller duplicate/no-op detection
-- fuller ambiguous target and ambiguous owner reporting
-- polished frontend transparency controls for quiet/summary/debug/audit views
-- richer non-present entity handling
+- duplicate/no-op detection
+- ambiguous target and ambiguous owner reporting
+- frontend transparency controls for quiet/summary/debug/audit views
 
 ## Visibility Model
 

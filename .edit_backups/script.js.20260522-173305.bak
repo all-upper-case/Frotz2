@@ -535,7 +535,6 @@ godSave.onclick = async () => {
         const data = await res.json();
 
         appendLog(data.response || "Reality patch completed.", data.state ? 'system' : 'error');
-        appendTurnReport(data.turn_report);
         if (data.state) updateHUD(data.state);
 
         godSave.textContent = "APPLY REALITY PATCH";

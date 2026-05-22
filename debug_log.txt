@@ -4147,3 +4147,63 @@
   }
 }
 
+--- 2026-05-22 17:36:23 [DM] ---
+[USAGE]: in=7412 out=380 tot=7792
+[OUTPUT]: {
+  "narrative": "As you engage Isabel in her conversation, the quiet of the house seems to deepen, the air thick with the shared secrets and growing curiosities of the three of you. In the corner of the master bedroom, just beyond the open door of the closet, two elegant flower vases sit on a mahogany dresser, their colors stark and vivid against the neutral tones of the room\u2014one a deep, passionate red, the other a cool, serene blue. They stand as silent observers to the unfolding tension, adding to the atmosphere of curated luxury and hidden desires that permeates every inch of the home.",
+  "narrative_summary_update": "Vivienne continues her intimate conversation with Isabel while two decorative vases are noted in the bedroom.",
+  "state_updates": [
+    {
+      "tool": "Description",
+      "name": "Red Flower Vase",
+      "description": "A striking, hand-blown glass vase of deep crimson, its surface polished to a high sheen. It holds a single, wilting rose, adding a touch of melancholic elegance to the room."
+    },
+    {
+      "tool": "Description",
+      "name": "Blue Flower Vase",
+      "description": "A tall, slender vase of cobalt blue glass, its intricate patterns catching the dim light. It contains a few sprigs of dried lavender, their scent faint but present."
+    },
+    {
+      "tool": "Location",
+      "name": "Red Flower Vase",
+      "location": "room_0cdbb675"
+    },
+    {
+      "tool": "Location",
+      "name": "Blue Flower Vase",
+      "location": "room_0cdbb675"
+    }
+  ],
+  "_usage": {
+    "input_tokens": 7412,
+    "output_tokens": 380,
+    "total_tokens": 7792
+  }
+}
+
+--- 2026-05-22 17:37:33 [DM] ---
+[USAGE]: in=7589 out=164 tot=7753
+[OUTPUT]: {
+  "narrative": "You momentarily break your focus from Isabel and Lucas to examine the striking red vase. It's a piece of exquisite craftsmanship, the deep crimson glass swirling with subtle, darker streaks that give it an organic, almost living quality. The surface is smooth and cold to the touch, polished to a mirror-like shine that reflects the dim light of the bedroom. Inside, the single wilting rose seems to struggle against the rigid beauty of its container, its petals beginning to curl and darken at the edges, a stark contrast to the eternal, unyielding brilliance of the vase itself.",
+  "narrative_summary_update": "Vivienne examines the Red Flower Vase, noting its exquisite craftsmanship and the wilting rose within.",
+  "state_updates": [],
+  "_usage": {
+    "input_tokens": 7589,
+    "output_tokens": 164,
+    "total_tokens": 7753
+  }
+}
+
+--- 2026-05-22 17:38:42 [DM] ---
+[USAGE]: in=6629 out=212 tot=6841
+[OUTPUT]: {
+  "narrative": "You reach out and run your fingers along the cool, polished surface of the red glass, feeling the subtle ridges and undulations of the artisan's work. The vase is heavy and solid, a testament to the sheer wealth of the house. As you gaze at the wilting rose inside, you're struck by the contrast: the vase is immortal, unchanging and perfect, while the flower is slowly succumbing to time, its petals drooping in a gesture of surrender. It's a poignant image of beauty and decay, a reminder that even in a place as sterile and controlled as this, nature eventually takes its toll. The deep red of the glass seems to glow with a life of its own, pulsating with a hidden energy that mirrors the tension building within the closet behind you.",
+  "narrative_summary_update": "Vivienne contemplates the contrast between the immortal red vase and the wilting rose it holds, reflecting on beauty and decay.",
+  "state_updates": [],
+  "_usage": {
+    "input_tokens": 6629,
+    "output_tokens": 212,
+    "total_tokens": 6841
+  }
+}
+

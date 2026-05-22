@@ -868,32 +868,6 @@ class WorldManager:
                     tool_results.append(self._tool_result(up, tool, 'invalid_location', entity_id=iid))
                 continue
 
-            if tool == 'set_entity_visibility':
-                if not name:
-                    tool_results.append(self._tool_result(up, tool, 'missing_target', reason='name or target is required'))
-                    continue
-
-                iid = self.find_item_id_by_name(name)
-                if not iid:
-                    matches = self.find_item_matches(name, visible_only=False)
-                    status = 'ambiguous_target' if len(matches) > 1 else 'missing_target'
-                    match_list = [{"id": mid, "name": item.get('name', mid)} for mid, item in matches] if matches else None
-                    tool_results.append(self._tool_result(up, tool, status, matches=match_list))
-                    continue
-
-                if not isinstance(up.get('visible'), bool):
-                    tool_results.append(self._tool_result(up, tool, 'invalid_schema', entity_id=iid, reason='visible must be true or false'))
-                    continue
-
-                item = self.data['items'][iid]
-                if item.get('visible', True) == up['visible']:
-                    tool_results.append(self._tool_result(up, tool, 'ignored_duplicate', entity_id=iid))
-                    continue
-
-                item['visible'] = up['visible']
-                tool_results.append(self._tool_result(up, tool, success_status, entity_id=iid))
-                continue
-
             tool_results.append(self._tool_result(up, tool, 'unknown_tool', reason='tool is recognized but not implemented by WorldManager yet'))
 
         outcome['tool_results'] = tool_results
