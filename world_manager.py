@@ -4,7 +4,7 @@ import shutil
 import uuid
 import re
 
-from llm_contracts import ContractError, normalize_person_slot
+from llm_contracts import ContractError, normalize_person_slot, validate_fix_response
 
 SAVE_DIR = "saves"
 BACKUP_DIR = "backups"
@@ -643,8 +643,12 @@ class WorldManager:
             if change.get('fixInstruction'):
                 trigger_narrative = True
                 response = ai_interface.generate_fix(item['name'], item['description'], change['fixInstruction'])
-                if 'description' in response:
-                    item['description'] = response['description']
+                try:
+                    fixed_response = validate_fix_response(response)
+                except ContractError as exc:
+                    logs.append(f"{item['name']} auto-fix rejected: {exc}")
+                else:
+                    item['description'] = fixed_response['description']
                     logs.append(f"{item['name']} auto-fixed by AI based on: {change['fixInstruction']}")
 
         self.describe_room()
