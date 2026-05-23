@@ -745,49 +745,28 @@ debugBtn.onclick = async () => {
             return;
         }
         
-        if (data.length > 0) {
+        // Find the most recent turn
+        const latest = data[data.length - 1];
+        if (latest) {
             let output = "";
-            data.forEach((entry, index) => {
-                const raw = entry.raw_response_from_llm || {};
-                const usage = raw._usage || entry.usage || {};
-                const role = entry.role || `CALL ${index + 1}`;
-                const model = entry.model || "unknown model";
+            const raw = latest.raw_response_from_llm || {};
+            const usage = raw._usage || {};
+            
+            output += `=== SESSION METRICS ===\n`;
+            output += `Input: ${usage.input_tokens || 0} | Output: ${usage.output_tokens || 0} | Total: ${usage.total_tokens || 0}\n\n`;
+            
+            if (raw.reasoning_content) {
+                output += `=== AI REASONING ===\n${raw.reasoning_content}\n\n`;
+            }
+            
+            output += `=== NARRATIVE ===\n${raw.narrative || "No narrative found."}\n\n`;
+            
+            if (raw.state_updates && raw.state_updates.length > 0) {
+                output += `=== STATE UPDATES ===\n${JSON.stringify(raw.state_updates, null, 2)}\n\n`;
+            }
 
-                output += `=== MODEL CALL ${index + 1}: ${role} ===\n`;
-                output += `Model: ${model}\n`;
-                output += `Timestamp: ${entry.timestamp || "unknown"}\n`;
-                output += `Input: ${usage.input_tokens || 0} | Output: ${usage.output_tokens || 0} | Total: ${usage.total_tokens || 0}\n\n`;
-
-                if (raw.reasoning_content) {
-                    output += `=== AI REASONING ===\n${raw.reasoning_content}\n\n`;
-                }
-
-                if (raw.narrative) {
-                    output += `=== NARRATIVE ===\n${raw.narrative}\n\n`;
-                }
-
-                if (raw.room_name || raw.room_description) {
-                    output += `=== ROOM GENERATION ===\n`;
-                    if (raw.room_name) output += `Room: ${raw.room_name}\n`;
-                    if (raw.room_description) output += `${raw.room_description}\n`;
-                    output += `\n`;
-                }
-
-                if (raw.state_updates && raw.state_updates.length > 0) {
-                    output += `=== STATE UPDATES ===\n${JSON.stringify(raw.state_updates, null, 2)}\n\n`;
-                }
-
-                if (raw.warnings && raw.warnings.length > 0) {
-                    output += `=== WARNINGS ===\n${JSON.stringify(raw.warnings, null, 2)}\n\n`;
-                }
-
-                if (raw.unsupported_claims && raw.unsupported_claims.length > 0) {
-                    output += `=== UNSUPPORTED CLAIMS ===\n${JSON.stringify(raw.unsupported_claims, null, 2)}\n\n`;
-                }
-
-                output += `=== RAW JSON ===\n${JSON.stringify(raw, null, 2)}\n\n`;
-            });
-            debugContent.textContent = output.trim();
+            output += `=== RAW JSON ===\n${JSON.stringify(raw, null, 2)}`;
+            debugContent.textContent = output;
         } else {
             debugContent.textContent = "No turn data available yet.";
         }

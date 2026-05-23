@@ -135,7 +135,7 @@ class LLMInterface:
             data["_usage"] = usage
 
             self._write_debug_log(role, data, usage)
-            self._write_last_turn_debug(role, messages, data, usage)
+            self._write_last_turn_debug(messages, data)
 
             return data
 

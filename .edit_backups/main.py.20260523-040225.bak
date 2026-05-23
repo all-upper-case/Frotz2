@@ -1051,37 +1051,10 @@ def god_update():
         context_dump = world.get_context_dump()
 
         try:
-            narrator_outcome = validate_turn_response(ai.process_turn(full_input, thread, context_dump, get_active_lore_text()))
+            outcome = validate_turn_response(ai.process_turn(full_input, thread, context_dump))
         except ContractError as e:
-            log_system(f"Reality-shift narrator response rejected: {str(e)}")
+            log_system(f"Reality-shift response rejected: {str(e)}")
             return jsonify({"response": f"Reality shift narration failed: {str(e)}", "state": get_ui_state()})
-
-        try:
-            state_outcome = validate_state_manager_response(
-                ai.compile_state_from_narrative(full_input, narrator_outcome, context_dump, get_state_manager_tool_contract())
-            )
-        except ContractError as e:
-            log_system(f"Reality-shift State Manager rejected: {str(e)}")
-            state_outcome = {
-                "state_updates": [],
-                "warnings": [],
-                "unsupported_claims": [],
-                "state_manager_error": str(e),
-            }
-
-        outcome = {
-            "narrative": narrator_outcome.get("narrative", "State updated."),
-            "narrative_summary_update": (
-                state_outcome.get("narrative_summary_update")
-                or narrator_outcome.get("narrative_summary_update")
-                or ""
-            ),
-            "state_updates": state_outcome.get("state_updates", []),
-            "state_manager_warnings": state_outcome.get("warnings", []),
-            "unsupported_claims": state_outcome.get("unsupported_claims", []),
-        }
-        if state_outcome.get("state_manager_error"):
-            outcome["state_manager_error"] = state_outcome["state_manager_error"]
 
         world.apply_outcome(outcome)
         world.record_turn(full_input, outcome)
