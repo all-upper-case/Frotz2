@@ -19,12 +19,7 @@ class LLMInterface:
     def log_console(self, msg):
         print(f"\n[AI] {msg}", flush=True)
 
-    def get_lore(self, lore_text=None):
-        if lore_text is not None:
-            lines = str(lore_text).splitlines(True)
-            cleaned = "".join([l for l in lines if not l.startswith("WORLD_NAME:")])
-            return cleaned or "A mysterious text adventure."
-
+    def get_lore(self):
         if os.path.exists(LORE_FILE):
             with open(LORE_FILE, 'r', encoding='utf-8') as f:
                 lines = f.readlines()
@@ -174,13 +169,13 @@ class LLMInterface:
                 "error": True
             }
 
-    def generate_genesis(self, lore_text=None):
-        lore = self.get_lore(lore_text)
+    def generate_genesis(self):
+        lore = self.get_lore()
         self.log_console("STARTING GENESIS...")
         return self._req(system_prompts.PROMPT_GENESIS.format(lore_bible=lore), "Initiate World Genesis.", "GENESIS")
 
-    def generate_room(self, prev_room, direction, thread, blueprint, map_summary, lore_text=None):
-        lore = self.get_lore(lore_text)
+    def generate_room(self, prev_room, direction, thread, blueprint, map_summary):
+        lore = self.get_lore()
         p_name = prev_room['name'] if prev_room else "The Void"
         p_desc = prev_room['description'] if prev_room else "Nothingness."
         sys = system_prompts.PROMPT_ARCHITECT.format(
@@ -189,22 +184,13 @@ class LLMInterface:
         )
         return self._req(sys, "Describe the new area.", "ARCHITECT")
 
-    def process_turn(self, user_input, thread, context_dump, lore_text=None):
-        lore = self.get_lore(lore_text)
+    def process_turn(self, user_input, thread, context_dump):
+        lore = self.get_lore()
         sys = system_prompts.PROMPT_DM.format(
-            lore_bible=lore, narrative_thread=thread,
+            lore_bible=lore, narrative_thread=thread, 
             context_dump=context_dump
         )
-        return self._req(sys, f"PLAYER ACTION: {user_input}", "NARRATOR")
-
-    def compile_state_from_narrative(self, player_action, narrator_output, context_dump, tool_contract):
-        sys = system_prompts.PROMPT_STATE_MANAGER.format(
-            player_action=player_action,
-            narrator_output=json.dumps(narrator_output, ensure_ascii=False, indent=2),
-            context_dump=context_dump,
-            tool_contract=tool_contract,
-        )
-        return self._req(sys, "Compile the narrator output into state updates only.", "STATE_MANAGER")
+        return self._req(sys, f"PLAYER ACTION: {user_input}", "DM")
 
     def generate_fix(self, item_name, current_desc, user_instruction):
         sys = system_prompts.PROMPT_FIXER.format(

@@ -189,8 +189,8 @@ class LLMInterface:
         )
         return self._req(sys, "Describe the new area.", "ARCHITECT")
 
-    def process_turn(self, user_input, thread, context_dump, lore_text=None):
-        lore = self.get_lore(lore_text)
+    def process_turn(self, user_input, thread, context_dump):
+        lore = self.get_lore()
         sys = system_prompts.PROMPT_DM.format(
             lore_bible=lore, narrative_thread=thread,
             context_dump=context_dump

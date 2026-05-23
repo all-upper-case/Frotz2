@@ -193,8 +193,7 @@ async function refreshSaveManager() {
 
                 const meta = document.createElement('div');
                 meta.className = 'save-meta';
-                const loreStatus = save.has_lore_snapshot ? 'lore snapshot' : (save.active_lore_file ? `lore: ${save.active_lore_file}` : 'no lore snapshot');
-                meta.textContent = `${save.file} | ${save.location || 'Unknown'} | ${save.total_tokens || 0} tokens | ${loreStatus} | ${formatSaveDate(save.modified)}`;
+                meta.textContent = `${save.file} | ${save.location || 'Unknown'} | ${save.total_tokens || 0} tokens | ${formatSaveDate(save.modified)}`;
                 info.appendChild(meta);
 
                 const btn = document.createElement('button');

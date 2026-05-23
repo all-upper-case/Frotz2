@@ -206,16 +206,6 @@ def validate_turn_response(data):
     return result
 
 
-def validate_state_manager_response(data):
-    result = _ensure_mapping(data, "state_manager")
-    _validate_state_updates_shape(result)
-    _normalize_list_field(result, "warnings")
-    _normalize_list_field(result, "unsupported_claims")
-    if "narrative_summary_update" in result and result["narrative_summary_update"] is None:
-        result.pop("narrative_summary_update")
-    return result
-
-
 def validate_fix_response(data):
     result = _ensure_mapping(data, "fix")
     _ensure_required_strings(result, "fix")

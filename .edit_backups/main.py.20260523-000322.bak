@@ -123,7 +123,6 @@ def _save_summary(filename):
         "file": filename,
         "world_name": meta.get("world_name") or (filename[:-5] if filename.endswith(".json") else filename),
         "active_lore_file": meta.get("active_lore_file"),
-        "has_lore_snapshot": bool(meta.get("lore_text_snapshot")),
         "current": filename == os.path.basename(world.save_path),
         "initialized": bool(data),
         "location": room.get("name", "Unknown"),
@@ -239,7 +238,6 @@ def load_save():
     world.data = data
     world.ensure_schema()
     world.data.setdefault("meta", {})["world_name"] = world.world_name
-    restore_lore_txt_from_save_if_possible(world.data)
     save_app_state(active_save=filename, active_world=world.world_name, active_lore_file=world.data.get("meta", {}).get("active_lore_file"))
     world.save_game()
 
@@ -416,15 +414,13 @@ def reset_game():
     world.hard_reset()
     try:
         log_system("Calling Genesis AI...")
-        lore_text = get_active_lore_text()
-        genesis_data = validate_genesis_response(ai.generate_genesis(lore_text))
+        genesis_data = validate_genesis_response(ai.generate_genesis())
 
         log_system("Initializing World DB...")
         intro = world.initialize_world(genesis_data)
         app_state = load_app_state()
         world.data.setdefault("meta", {})["world_name"] = world.world_name
         world.data.setdefault("meta", {})["active_lore_file"] = app_state.get("active_lore_file")
-        world.data.setdefault("meta", {})["lore_text_snapshot"] = lore_text
         save_app_state(active_save=os.path.basename(world.save_path), active_world=world.world_name, active_lore_file=app_state.get("active_lore_file"))
         world.save_game()
 
@@ -551,7 +547,7 @@ def handle_command():
 
         log_system("Generating New Room...")
         try:
-            new_data = validate_room_response(ai.generate_room(prev, user_input, thread, blueprint, map_sum, get_active_lore_text()))
+            new_data = validate_room_response(ai.generate_room(prev, user_input, thread, blueprint, map_sum))
         except ContractError as e:
             world.data['player']['current_room'] = prev_id
             world.save_game()
@@ -632,7 +628,7 @@ def build_audit_context():
         return "WORLD IS NOT INITIALIZED."
 
     sections = []
-    sections.append("# ACTIVE LORE\n" + get_active_lore_text())
+    sections.append("# ACTIVE LORE\n" + _read_text_file("lore.txt"))
     sections.append("# WORLD SAVE JSON\n" + json.dumps(world.data, ensure_ascii=False, indent=2))
     sections.append("# CURRENT CONTEXT DUMP SENT TO MAIN LLM\n" + world.get_context_dump())
     sections.append("# NARRATIVE MEMORY\n" + world.get_narrative_history())
@@ -735,7 +731,7 @@ def process_ai_turn(inp):
     context_dump = world.get_context_dump()
 
     try:
-        narrator_outcome = validate_turn_response(ai.process_turn(full_input, thread, context_dump, get_active_lore_text()))
+        narrator_outcome = validate_turn_response(ai.process_turn(full_input, thread, context_dump))
     except ContractError as e:
         log_system(f"Narrator response rejected: {str(e)}")
         return jsonify({"response": f"AI turn failed: {str(e)}", "state": get_ui_state()})

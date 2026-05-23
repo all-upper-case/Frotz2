@@ -123,7 +123,6 @@ def _save_summary(filename):
         "file": filename,
         "world_name": meta.get("world_name") or (filename[:-5] if filename.endswith(".json") else filename),
         "active_lore_file": meta.get("active_lore_file"),
-        "has_lore_snapshot": bool(meta.get("lore_text_snapshot")),
         "current": filename == os.path.basename(world.save_path),
         "initialized": bool(data),
         "location": room.get("name", "Unknown"),
@@ -735,7 +734,7 @@ def process_ai_turn(inp):
     context_dump = world.get_context_dump()
 
     try:
-        narrator_outcome = validate_turn_response(ai.process_turn(full_input, thread, context_dump, get_active_lore_text()))
+        narrator_outcome = validate_turn_response(ai.process_turn(full_input, thread, context_dump))
     except ContractError as e:
         log_system(f"Narrator response rejected: {str(e)}")
         return jsonify({"response": f"AI turn failed: {str(e)}", "state": get_ui_state()})

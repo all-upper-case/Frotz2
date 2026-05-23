@@ -123,7 +123,6 @@ def _save_summary(filename):
         "file": filename,
         "world_name": meta.get("world_name") or (filename[:-5] if filename.endswith(".json") else filename),
         "active_lore_file": meta.get("active_lore_file"),
-        "has_lore_snapshot": bool(meta.get("lore_text_snapshot")),
         "current": filename == os.path.basename(world.save_path),
         "initialized": bool(data),
         "location": room.get("name", "Unknown"),
@@ -239,7 +238,6 @@ def load_save():
     world.data = data
     world.ensure_schema()
     world.data.setdefault("meta", {})["world_name"] = world.world_name
-    restore_lore_txt_from_save_if_possible(world.data)
     save_app_state(active_save=filename, active_world=world.world_name, active_lore_file=world.data.get("meta", {}).get("active_lore_file"))
     world.save_game()
 
@@ -416,15 +414,13 @@ def reset_game():
     world.hard_reset()
     try:
         log_system("Calling Genesis AI...")
-        lore_text = get_active_lore_text()
-        genesis_data = validate_genesis_response(ai.generate_genesis(lore_text))
+        genesis_data = validate_genesis_response(ai.generate_genesis())
 
         log_system("Initializing World DB...")
         intro = world.initialize_world(genesis_data)
         app_state = load_app_state()
         world.data.setdefault("meta", {})["world_name"] = world.world_name
         world.data.setdefault("meta", {})["active_lore_file"] = app_state.get("active_lore_file")
-        world.data.setdefault("meta", {})["lore_text_snapshot"] = lore_text
         save_app_state(active_save=os.path.basename(world.save_path), active_world=world.world_name, active_lore_file=app_state.get("active_lore_file"))
         world.save_game()
 
@@ -551,7 +547,7 @@ def handle_command():
 
         log_system("Generating New Room...")
         try:
-            new_data = validate_room_response(ai.generate_room(prev, user_input, thread, blueprint, map_sum, get_active_lore_text()))
+            new_data = validate_room_response(ai.generate_room(prev, user_input, thread, blueprint, map_sum))
         except ContractError as e:
             world.data['player']['current_room'] = prev_id
             world.save_game()
@@ -579,60 +575,12 @@ def _read_text_file(path, max_chars=60000):
         return ""
 
 
-def _read_lorebook_text(filename):
-    safe = _safe_filename(filename)
-    if not safe:
-        return ""
-    return _read_text_file(os.path.join("LoreBooks", safe), max_chars=200000)
-
-
-def get_active_lore_text():
-    if world.is_initialized():
-        meta = world.data.get("meta", {}) if isinstance(world.data, dict) else {}
-        snapshot = meta.get("lore_text_snapshot")
-        if isinstance(snapshot, str) and snapshot.strip():
-            return snapshot
-
-        active_lore_file = meta.get("active_lore_file")
-        if active_lore_file:
-            lore_text = _read_lorebook_text(active_lore_file)
-            if lore_text.strip():
-                world.data.setdefault("meta", {})["lore_text_snapshot"] = lore_text
-                world.save_game()
-                return lore_text
-
-    app_state = load_app_state()
-    active_lore_file = app_state.get("active_lore_file")
-    if active_lore_file:
-        lore_text = _read_lorebook_text(active_lore_file)
-        if lore_text.strip():
-            return lore_text
-
-    return _read_text_file("lore.txt", max_chars=200000)
-
-
-def restore_lore_txt_from_save_if_possible(save_data):
-    meta = save_data.get("meta", {}) if isinstance(save_data, dict) else {}
-    lore_text = meta.get("lore_text_snapshot")
-    if not isinstance(lore_text, str) or not lore_text.strip():
-        active_lore_file = meta.get("active_lore_file")
-        lore_text = _read_lorebook_text(active_lore_file) if active_lore_file else ""
-
-    if isinstance(lore_text, str) and lore_text.strip():
-        with open("lore.txt", "w", encoding="utf-8") as f:
-            f.write(lore_text)
-        save_data.setdefault("meta", {})["lore_text_snapshot"] = lore_text
-        return True
-
-    return False
-
-
 def build_audit_context():
     if not world.is_initialized():
         return "WORLD IS NOT INITIALIZED."
 
     sections = []
-    sections.append("# ACTIVE LORE\n" + get_active_lore_text())
+    sections.append("# ACTIVE LORE\n" + _read_text_file("lore.txt"))
     sections.append("# WORLD SAVE JSON\n" + json.dumps(world.data, ensure_ascii=False, indent=2))
     sections.append("# CURRENT CONTEXT DUMP SENT TO MAIN LLM\n" + world.get_context_dump())
     sections.append("# NARRATIVE MEMORY\n" + world.get_narrative_history())
@@ -735,43 +683,10 @@ def process_ai_turn(inp):
     context_dump = world.get_context_dump()
 
     try:
-        narrator_outcome = validate_turn_response(ai.process_turn(full_input, thread, context_dump, get_active_lore_text()))
+        outcome = validate_turn_response(ai.process_turn(full_input, thread, context_dump))
     except ContractError as e:
-        log_system(f"Narrator response rejected: {str(e)}")
+        log_system(f"DM response rejected: {str(e)}")
         return jsonify({"response": f"AI turn failed: {str(e)}", "state": get_ui_state()})
-
-    tool_contract = (
-        "Allowed tools: create_entity, describe_entity, move_entity, set_entity_visibility, "
-        "create_character, update_character, move_character, update_player, append_memory. "
-        "Do not invent room/edit-exit tools yet; put those facts in unsupported_claims."
-    )
-
-    try:
-        state_outcome = validate_state_manager_response(
-            ai.compile_state_from_narrative(full_input, narrator_outcome, context_dump, tool_contract)
-        )
-    except ContractError as e:
-        log_system(f"State manager response rejected: {str(e)}")
-        state_outcome = {
-            "state_updates": [],
-            "warnings": [],
-            "unsupported_claims": [],
-            "state_manager_error": str(e),
-        }
-
-    outcome = {
-        "narrative": narrator_outcome.get("narrative", "..."),
-        "narrative_summary_update": (
-            state_outcome.get("narrative_summary_update")
-            or narrator_outcome.get("narrative_summary_update")
-            or ""
-        ),
-        "state_updates": state_outcome.get("state_updates", []),
-        "state_manager_warnings": state_outcome.get("warnings", []),
-        "unsupported_claims": state_outcome.get("unsupported_claims", []),
-    }
-    if state_outcome.get("state_manager_error"):
-        outcome["state_manager_error"] = state_outcome["state_manager_error"]
 
     world.apply_outcome(outcome)
     world.record_turn(full_input, outcome)

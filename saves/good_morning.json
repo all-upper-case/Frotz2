@@ -1,7 +1,9 @@
 {
   "blueprint": "The Bedroom connects to a narrow Hallway. The Hallway leads to the Bathroom (east), the Stairs (north) down to the Kitchen, and a small Closet (west). The Kitchen connects to a Backyard (south) and the Living Room (east). The Living Room has an exit to the Front Door (north). The Bedroom also has a window (south) that can be opened, though it\u2019s currently shut.",
   "meta": {
-    "total_tokens": 21312
+    "total_tokens": 21312,
+    "world_name": "good_morning",
+    "active_lore_file": null
   },
   "player": {
     "current_room": "room_start",

@@ -123,7 +123,6 @@ def _save_summary(filename):
         "file": filename,
         "world_name": meta.get("world_name") or (filename[:-5] if filename.endswith(".json") else filename),
         "active_lore_file": meta.get("active_lore_file"),
-        "has_lore_snapshot": bool(meta.get("lore_text_snapshot")),
         "current": filename == os.path.basename(world.save_path),
         "initialized": bool(data),
         "location": room.get("name", "Unknown"),
