@@ -887,6 +887,7 @@ class WorldManager:
         tool_results = []
         if not isinstance(updates, list):
             outcome['tool_results'] = [self._tool_result({}, 'unknown', 'invalid_schema', reason='state_updates must be a list')]
+            self.describe_room()
             self.save_game()
             return
 
@@ -910,10 +911,9 @@ class WorldManager:
 
             if tool == 'append_memory':
                 summary = up.get('summary', up.get('entry', ''))
-                if self._append_narrative_memory(summary):
+                if isinstance(summary, str) and summary.strip():
+                    self.data['narrative_log'].append(summary.strip())
                     tool_results.append(self._tool_result(up, tool, success_status))
-                elif isinstance(summary, str) and summary.strip():
-                    tool_results.append(self._tool_result(up, tool, 'ignored_duplicate', reason='summary already stored'))
                 else:
                     tool_results.append(self._tool_result(up, tool, 'ignored_empty', reason='summary is empty'))
                 continue

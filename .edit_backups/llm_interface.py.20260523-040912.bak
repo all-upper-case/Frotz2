@@ -235,8 +235,8 @@ class LLMInterface:
 
     def continue_audit(self, messages):
         user = (
-            "Continue this State Auditor conversation using the included original audit context and conversation history. "
-            "Do not apply changes. Return valid JSON with a single string field named response.\n\n"
+            "Continue this State Auditor conversation. Do not apply changes. "
+            "Return valid JSON with a single string field named response.\n\n"
             + json.dumps(messages, ensure_ascii=False, indent=2)
         )
         return self._req_with_model(system_prompts.PROMPT_AUDITOR, user, "AUDITOR_CHAT", AUDITOR_MODEL)

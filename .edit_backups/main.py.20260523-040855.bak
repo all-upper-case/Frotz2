@@ -848,16 +848,8 @@ def continue_audit():
     if not message:
         return jsonify({"status": "error", "message": "Message is required."}), 400
 
-    if not audit_chat_history:
-        return jsonify({"status": "error", "message": "Run an audit before sending follow-up questions."}), 400
-
     audit_chat_history.append({"role": "user", "content": message})
-    followup_package = {
-        "context_sections": audit_session_sections,
-        "audit_context": audit_session_context,
-        "conversation": audit_chat_history,
-    }
-    result = ai.continue_audit(followup_package)
+    result = ai.continue_audit(audit_chat_history)
     if result.get("error"):
         return jsonify({"status": "error", "message": result.get("narrative", "Audit chat failed.")}), 400
 

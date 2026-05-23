@@ -90,34 +90,6 @@ def test_create_entity_can_place_body_part_on_npc(tmp_path, monkeypatch, minimal
     assert manager.data["items"][body_item_id]["carryable"] is False
 
 
-def test_invalid_state_updates_shape_does_not_crash(tmp_path, monkeypatch, minimal_world):
-    monkeypatch.chdir(tmp_path)
-    manager = WorldManager()
-    manager.data = minimal_world
-    manager.ensure_schema()
-
-    outcome = {"state_updates": {"tool": "append_memory", "summary": "bad shape"}}
-
-    manager.apply_outcome(outcome)
-
-    assert outcome["tool_results"][0]["status"] == "invalid_schema"
-
-
-def test_narrative_summary_update_ignores_empty_and_duplicate(tmp_path, monkeypatch, minimal_world):
-    monkeypatch.chdir(tmp_path)
-    manager = WorldManager()
-    manager.data = minimal_world
-    manager.ensure_schema()
-
-    manager.apply_outcome({"narrative_summary_update": ""})
-    before = list(manager.data["narrative_log"])
-
-    manager.apply_outcome({"narrative_summary_update": "The archive remains quiet."})
-    manager.apply_outcome({"narrative_summary_update": "The archive remains quiet."})
-
-    assert manager.data["narrative_log"] == before + ["The archive remains quiet."]
-
-
 def test_append_memory_accepts_entry_alias(tmp_path, monkeypatch, minimal_world):
     monkeypatch.chdir(tmp_path)
     manager = WorldManager()
