@@ -9,11 +9,11 @@ This document defines the intended engine-side tool vocabulary for Frotz2. These
 - Preserve compatibility with the current `Description` and `Location` update style while moving toward canonical tool names.
 - Produce turn reports that show what happened without interrupting normal play.
 - Make ownership and body/worn/held distinctions explicit for both the player and NPCs.
-- Keep the saved game state synchronized with the narrative: if the model narrates a persistent physical change, it should request the matching tool operation in the same response.
+- Keep the saved game state synchronized with the narrative: if the model narrates a persistent physical change, the State Manager should request the matching tool operation after the Narrator writes the prose.
 
 ## Current Runtime Support
 
-`WorldManager.apply_outcome()` now writes a compact `tool_results` list back onto each processed outcome. This is the first runtime slice of the dispatcher/report model, not the final version.
+`WorldManager.apply_outcome()` now writes a compact `tool_results` list back onto each processed outcome. This is the runtime dispatcher/report model, still growing operation by operation.
 
 Currently covered:
 
@@ -36,7 +36,7 @@ Still pending:
 
 ## Narrative-State Synchronization
 
-The LLM should treat tools as the persistence layer for the story. Narration can describe events freely, but any concrete fact that should remain true after the turn must be represented through a tool call.
+Frotz2 now uses a narrative-first split for ordinary free-form turns. The Narrator writes player-facing prose only. The State Manager then treats tools as the persistence layer for the story. Narration can describe events freely, but any concrete fact that should remain true after the turn must be represented through a State Manager tool operation.
 
 Common required mappings:
 
@@ -51,6 +51,8 @@ Common required mappings:
 - A new NPC is present: `create_character`, using `location` when the character should appear somewhere specific.
 - An existing NPC enters, leaves, follows, waits in, or moves to a concrete place: `move_character`.
 - A durable fact has no direct physical state yet: `append_memory`.
+- A concrete room or named area becomes established: `describe_room`.
+- A concrete path, doorway, hallway, stairway, or direction connects rooms: `connect_rooms`.
 
 Character room movement now has first-class support through `move_character`, but broader NPC state still needs future refinement around schedules, offscreen intent, following behavior, and ambiguity handling.
 
@@ -120,6 +122,18 @@ Examples:
 }
 ```
 
+## Room And Map Model
+
+Rooms live in `world.data["rooms"]` and are connected through each room's `exits` dictionary. The State Manager can now create/update named rooms and connect them through a limited room toolset.
+
+Rules:
+
+- Prefer semantic room names and IDs for meaningful rooms, such as Kitchen or Back Patio.
+- Use `describe_room` when the narration establishes a persistent named room or area.
+- Use `connect_rooms` when the narration establishes a concrete path, doorway, hallway, stairway, or cardinal direction.
+- Unknown/stub rooms can still exist as placeholders created from `new_exits`; Architect or the State Manager can later fill them in.
+- Room descriptions should include obvious exits naturally in prose.
+
 ## Canonical Operations
 
 ### `describe_entity`
@@ -146,7 +160,7 @@ Optional fields:
 }
 ```
 
-Compatibility aliases: `Description`, `create_item`, `update_item`.
+Compatibility aliases: `Description`, `update_item`.
 
 ### `move_entity`
 
@@ -186,7 +200,7 @@ Required fields for a room/void entity:
   "tool": "create_entity",
   "name": "display name",
   "description": "Initial description",
-  "entity_type": "item|body_part",
+  "entity_type": "item|body_part|fixture|furniture|scenery",
   "location": "here|void|room id|room name"
 }
 ```
@@ -213,6 +227,71 @@ Optional fields:
   "carryable": true
 }
 ```
+
+For furniture, built-ins, large appliances, doors, windows, tubs, counters, beds, couches, tables, fixtures, or scenery, use `entity_type: "fixture"`, `"furniture"`, or `"scenery"` and `carryable: false`.
+
+### `describe_room`
+
+Create or update a room description. This is the canonical room-state operation for named rooms or areas that the narration establishes as persistent.
+
+Required fields for creating or updating a room:
+
+```json
+{
+  "tool": "describe_room",
+  "target": "room id, exact room name, or omitted when name is supplied",
+  "name": "Kitchen",
+  "description": "A clean kitchen with stainless appliances."
+}
+```
+
+Optional fields:
+
+```json
+{
+  "exits": {
+    "south": "Living Room",
+    "east": "Pantry"
+  }
+}
+```
+
+Notes:
+
+- If `target` or `name` resolves to an existing room, that room is updated.
+- If no room resolves, the engine creates a semantic room ID from the supplied name.
+- Descriptions are stripped of generated inventory lines before being stored as the room's base description.
+- Exits supplied as a dictionary are connected bidirectionally when possible.
+
+### `connect_rooms`
+
+Connect two rooms through a concrete exit/path.
+
+Required fields:
+
+```json
+{
+  "tool": "connect_rooms",
+  "from": "here|room id|room name",
+  "direction": "north|south|east|west|up|down",
+  "to": "room id or room name"
+}
+```
+
+Optional fields:
+
+```json
+{
+  "to_name": "Kitchen",
+  "bidirectional": true
+}
+```
+
+Notes:
+
+- If the destination room does not exist, the engine creates it with a semantic room ID.
+- By default, the opposite exit is added on the destination room.
+- Use this when narration establishes a concrete path, doorway, hallway, stairway, or directional relationship.
 
 ### `update_player`
 
@@ -248,21 +327,22 @@ Optional fields:
 ```json
 {
   "aliases": ["short name"],
-  "location": "here|room id|void"
+  "location": "here|room id|room name|void|nowhere|offscreen|absent"
 }
 ```
 
 ### `update_character`
 
-Update an existing character without treating them as an item.
+Update an existing character without treating them as an item. A description, aliases, or location may be supplied.
 
-Required fields:
+Example:
 
 ```json
 {
   "tool": "update_character",
   "target": "character id, exact name, or alias",
-  "description": "Updated character description"
+  "description": "Updated character description",
+  "location": "nowhere"
 }
 ```
 
@@ -276,7 +356,7 @@ Required fields:
 
 - `tool`: `move_character`
 - `target`: character id, exact name, or alias
-- `location`: `here`, room id, room name, `void`, or `nowhere`
+- `location`: `here`, room id, room name, `void`, `nowhere`, `offscreen`, `absent`, or equivalent non-present language
 
 ### `set_entity_visibility`
 
@@ -305,7 +385,7 @@ Required fields:
 }
 ```
 
-Compatibility alias: `narrative_summary_update` outside `state_updates`.
+Compatibility alias: `entry` inside `state_updates`, and `narrative_summary_update` outside `state_updates`.
 
 ## Validation Rules
 
@@ -323,6 +403,8 @@ Common rejected statuses:
 - `missing_target`: target did not resolve to an existing entity and the tool cannot create one.
 - `missing_owner`: owner did not resolve to an existing player or character.
 - `missing_slot`: owner was provided without a valid held/worn/body slot.
+- `missing_room`: room reference was missing or did not resolve where required.
+- `missing_direction`: a room-connection operation did not include a valid direction.
 - `ambiguous_target`: target matched multiple entities and needs disambiguation.
 - `ambiguous_owner`: owner matched multiple characters and needs disambiguation.
 - `invalid_location`: requested location is not allowed or does not exist.
