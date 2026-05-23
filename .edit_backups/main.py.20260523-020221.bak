@@ -784,10 +784,9 @@ def set_model():
 def get_state_manager_tool_contract():
     return (
         "Allowed tools: create_entity, describe_entity, move_entity, set_entity_visibility, "
-        "create_character, update_character, move_character, describe_room, connect_rooms, "
-        "update_player, append_memory. "
-        "Use describe_room for concrete room creation/description and connect_rooms for concrete exits/topology. "
-        "Do not duplicate existing entities, characters, rooms, exits, or memory entries already represented in the authoritative world."
+        "create_character, update_character, move_character, update_player, append_memory. "
+        "Do not invent room/edit-exit tools yet; put those facts in unsupported_claims. "
+        "Do not duplicate existing entities, characters, or memory entries already represented in the authoritative world."
     )
 
 

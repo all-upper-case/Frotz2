@@ -904,68 +904,6 @@ class WorldManager:
                     tool_results.append(self._tool_result(up, tool, 'ignored_empty', reason='summary is empty'))
                 continue
 
-            if tool == 'describe_room':
-                room_ref = up.get('target') or up.get('room_id') or up.get('id') or up.get('room')
-                room_name = up.get('name') or up.get('room_name')
-                desc = up.get('description') or up.get('room_description') or up.get('base_description')
-
-                if not room_ref and not room_name:
-                    tool_results.append(self._tool_result(up, tool, 'missing_room'))
-                    continue
-
-                rid, created = self._ensure_room(room_ref, room_name, desc)
-                room = self.data['rooms'][rid]
-
-                exits = up.get('exits')
-                if isinstance(exits, dict):
-                    for dir_name, target_ref in exits.items():
-                        self._connect_rooms(rid, dir_name, target_ref, target_ref)
-
-                tool_results.append(self._tool_result(
-                    up,
-                    tool,
-                    success_status,
-                    entity_id=rid,
-                    location=rid,
-                    created=created,
-                    room_name=room.get('name')
-                ))
-                continue
-
-            if tool == 'connect_rooms':
-                direction = up.get('direction') or up.get('dir')
-                if not direction:
-                    tool_results.append(self._tool_result(up, tool, 'missing_direction'))
-                    continue
-
-                from_ref = up.get('from') or up.get('source') or up.get('room') or 'here'
-                to_ref = up.get('to') or up.get('target') or up.get('destination')
-                to_name = up.get('to_name') or up.get('name') or up.get('room_name')
-                if not to_ref and not to_name:
-                    tool_results.append(self._tool_result(up, tool, 'missing_room'))
-                    continue
-
-                ok, from_rid, norm, to_rid = self._connect_rooms(
-                    from_ref,
-                    direction,
-                    to_ref or to_name,
-                    to_name,
-                    bidirectional=up.get('bidirectional', True) is not False
-                )
-                if not ok:
-                    tool_results.append(self._tool_result(up, tool, 'invalid_location', location=from_ref))
-                    continue
-
-                tool_results.append(self._tool_result(
-                    up,
-                    tool,
-                    success_status,
-                    location=from_rid,
-                    direction=norm,
-                    entity_id=to_rid
-                ))
-                continue
-
             if tool == 'update_player' or clean_name in ['self', 'me', 'myself', 'player']:
                 desc = up.get('description', '')
                 if isinstance(desc, str) and desc.strip():

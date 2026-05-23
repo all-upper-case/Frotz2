@@ -147,13 +147,10 @@ COMMON MAPPINGS:
 - An existing NPC enters/leaves/moves: move_character.
 - A durable nonphysical continuity fact matters later: append_memory.
 
-ROOM TOOLS:
-- Use describe_room to create or update a room when the narrator establishes a concrete room or named area.
-- Use connect_rooms to connect two rooms when the narrator establishes a concrete path, doorway, hallway, or direction.
-- For exits, prefer cardinal directions when clear. If the prose says "to the north" or "north of here," use direction="north".
-- Do not invent exotic non-directional exits unless the current engine supports them.
-
 UNSUPPORTED FOR NOW:
+- Room creation
+- Room description edits
+- Exit/map topology edits
 - Arbitrary custom character stats
 - Automatic repair of contradictory lore
 
