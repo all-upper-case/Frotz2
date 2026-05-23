@@ -13,6 +13,14 @@ The model should not rely on compact memory summaries alone to understand what i
 
 Batch 1 added a first `WorldManager.get_turn_packet()` helper and includes that packet at the top of the formatted prompt context. It captures the current room, player state, visible room entities, present characters, pending ambiguity state, recent full turns, and narrative memory. The app still formats the packet into the existing text context dump rather than passing a separate structured object all the way through the LLM interface.
 
+Ordinary free-form turns now use a narrative-first split:
+
+1. The Narrator receives the current turn context and writes prose-only output.
+2. The State Manager receives the authoritative before-state, player action, narrator output, and tool contract.
+3. The State Manager compiles durable claims into `state_updates`, warnings, unsupported claims, and narrative memory updates.
+4. The engine validates and applies accepted operations.
+5. Compact tool results are stored into recent-turn continuity.
+
 ## Recommended Packet Shape
 
 ```json
@@ -93,3 +101,26 @@ Recent full turns should be saved with the game state or rebuilt from turn repor
 ## Validation Rule
 
 The LLM may narrate freely, but physical state changes should come through the documented tools. The engine should record which proposed tool calls were accepted, repaired, rejected, or ignored, then feed that compact result into the next turn's `recent_full_turns`.
+
+## Auditor Context
+
+Audit mode should not always send one fixed giant context bundle. The runtime now exposes selectable context sections so the user can choose a quick, normal, or deep audit, or manually select categories.
+
+Current categories:
+
+- active lore
+- full save JSON
+- rendered main-model context dump
+- player state
+- current room
+- rooms/exits/map
+- items/entities
+- characters/NPCs
+- narrative memory
+- recent turns
+- core prompts
+- runtime tool contract
+- tool documentation
+- debug-log exclusion note
+
+The rendered context dump intentionally overlaps with other categories and should mostly be reserved for prompt/context debugging. For state consistency audits, the raw save sections are usually a cleaner source of truth.
