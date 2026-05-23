@@ -33,30 +33,6 @@ def test_reset_without_api_key_does_not_initialize_world(isolated_main):
     assert not isolated_main.world.is_initialized()
 
 
-def test_audit_context_manifest_lists_presets(isolated_main):
-    client = isolated_main.app.test_client()
-
-    response = client.get("/audit_context_manifest")
-    payload = response.get_json()
-
-    assert response.status_code == 200
-    assert "quick" in payload["presets"]
-    assert "normal" in payload["presets"]
-    assert "deep" in payload["presets"]
-    assert any(section["key"] == "world_save_json" for section in payload["sections"])
-    assert any(section["key"] == "tool_contract" for section in payload["sections"])
-
-
-def test_build_audit_context_can_select_sections(isolated_main, minimal_world):
-    isolated_main.world.data = minimal_world
-
-    context = isolated_main.build_audit_context(["player_state", "tool_contract"])
-
-    assert "# PLAYER STATE" in context
-    assert "# RUNTIME TOOL CONTRACT" in context
-    assert "# FULL SAVE JSON" not in context
-
-
 def test_deterministic_commands_use_existing_world(isolated_main, minimal_world):
     isolated_main.world.data = minimal_world
     client = isolated_main.app.test_client()

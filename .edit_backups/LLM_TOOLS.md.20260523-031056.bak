@@ -18,21 +18,19 @@ This document defines the intended engine-side tool vocabulary for Frotz2. These
 Currently covered:
 
 - compatibility alias reporting for legacy `Description` and `Location` updates
-- accepted/repaired reports for item descriptions, item creation, item movement, player description updates, character create/update/movement, visibility updates, room description/creation, room connections, and `append_memory`
-- rejected reports for malformed updates, unknown tool names, missing move targets, missing owners, missing owner slots, invalid owner slots, missing rooms, missing directions, empty descriptions, invalid locations, and missing placement fields
-- duplicate/no-op reporting in several first-pass paths, such as unchanged player descriptions, unchanged character descriptions, unchanged visibility, and schema-level duplicate list cleanup
+- accepted/repaired reports for item descriptions, item creation, item movement, player description updates, character create/update, visibility updates, and `append_memory`
+- rejected reports for malformed updates, unknown tool names, missing move targets, missing owners, missing owner slots, invalid owner slots, empty descriptions, and missing placement fields
+- duplicate/no-op reporting in some first-pass paths, such as unchanged player descriptions, unchanged character descriptions, and unchanged visibility
 - recent-turn storage of compact tool results so later prompts can see what the engine accepted or rejected
 - basic frontend turn-report display so rejected/ignored tool results are visible after a turn
-- transactional item movement so invalid destinations do not remove the item from its previous valid location
-- explicit non-carryable fixture/furniture/scenery support through `entity_type` and `carryable: false`
 
 Still pending:
 
-- fuller duplicate/no-op detection across every tool path
+- stricter room/location validation
+- fuller duplicate/no-op detection
 - fuller ambiguous target and ambiguous owner reporting
 - polished frontend transparency controls for quiet/summary/debug/audit views
-- richer non-present entity handling beyond `void`/`nowhere`/offscreen placement
-- Matrix editing for rooms, exits, characters, player state, and narrative memory
+- richer non-present entity handling
 
 ## Narrative-State Synchronization
 

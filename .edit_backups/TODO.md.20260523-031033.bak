@@ -31,11 +31,6 @@ A practical backlog for turning the current prototype into a tidier personal eng
 - Batch 1.1 stabilization: fixed Replit pytest import setup and the missing `state_updates` default in LLM response validation; the full test suite passed afterward.
 - Batch 2 prompt work: strengthened Genesis, Architect, and DM prompts around narrative-state synchronization so the model is explicitly told to use tools whenever narration creates, moves, hides, reveals, equips, removes, transforms, or otherwise persists a world-state fact.
 - Batch 2 engine work: added first-class `move_character` support, `location` placement for `create_character` / `update_character`, room membership updates for NPC movement, character locations in the turn packet, and tests for NPC movement/placement failures.
-- Split ordinary free-form turns into a narrative-first two-model flow: Narrator writes player-facing prose only, then State Manager compiles the prose into validated state updates, warnings, unsupported claims, and memory summaries.
-- Added save/lore self-containment: saves can carry `meta.lore_text_snapshot`, model calls can use explicit active lore text, and loading a save can restore its associated lore into `lore.txt`.
-- Added post-Genesis and post-Architect State Manager passes so opening scenes and generated rooms can be compiled into missing entities, fixtures, worn/body items, character placement, memory, and warnings.
-- Hardened the state dispatcher with transactional item movement, room-ID location resolution, safer offscreen character locations, location-only `update_character`, non-carryable fixture/furniture/scenery metadata, duplicate-list cleanup, and safer null-room context handling.
-- Added first-class room-state operations: `describe_room` and `connect_rooms`, including tests for semantic room creation, bidirectional room connections, and room exit updates.
 
 ## Current Priority: Narrative-First State Management
 
@@ -47,18 +42,16 @@ The next major architecture change is a narrative-first, two-model turn flow:
 4. The UI displays the narrator's prose as the canonical player-facing response.
 5. Audit mode should gain selectable context categories and presets so the user can see exactly what is being sent before running an audit.
 
-Implementation status:
+Implementation order:
 
-- Done: Split ordinary DM turns into Narrator -> State Manager -> engine validation/application.
-- Done: Made the Narrator prompt prose-only and removed instructions telling it to output tools.
-- Done: Added a dedicated State Manager prompt and response contract.
-- Done: Preserved State Manager errors/warnings in turn reports without blocking displayed narrative unless the Narrator itself fails.
-- Done: Made saves/lore more self-contained through active lore snapshots and explicit lore text passed into model calls.
-- In progress: Add audit context presets plus a checklist of individual context categories: active lore, lore snapshot, world save JSON, current room, rooms, exits/map, items, characters, player state, recent turns, narrative memory, prompts, tool docs, and debug artifacts.
-- In progress: Rework Genesis after ordinary turns are split. Do not overbuild at first; likely start with multi-pass environment setup only where useful: floor plan/exits, room population, character placement, and player/NPC worn/held/body items.
-- In progress: Improve starting-room generation so it creates adjacent exits, semantic rooms, and naturally described exits.
-- Next: Expand Matrix beyond item-only editing so rooms, exits, characters, player state, memory, and lore snapshots can be inspected and repaired from the UI.
-- Next: Add targeted world-integrity tests for common save corruption patterns: orphan item IDs, orphan character IDs, duplicate room membership, impossible character locations, missing room reciprocity, and fixture carryability.
+- Split ordinary DM turns into Narrator -> State Manager -> engine validation/application.
+- Make the Narrator prompt prose-only and remove all instructions telling it to output tools.
+- Add a dedicated State Manager prompt and response contract.
+- Preserve state-manager errors/warnings in turn reports without blocking the displayed narrative unless the narrator itself fails.
+- Make saves/lore self-contained so each save carries or restores its own lore snapshot instead of relying on global `lore.txt`.
+- Add audit context presets plus a checklist of individual context categories: active lore, lore snapshot, world save JSON, current room, rooms, exits/map, items, characters, player state, recent turns, narrative memory, prompts, tool docs, and debug artifacts.
+- Rework Genesis after ordinary turns are split. Do not overbuild at first; likely start with multi-pass environment setup only where useful: floor plan/exits, room population, character placement, and player/NPC worn/held/body items.
+- Improve starting-room generation so it creates adjacent exits and describes those exits naturally in the prose.
 
 ## Previous Consistency And Tool Robustness Backlog
 

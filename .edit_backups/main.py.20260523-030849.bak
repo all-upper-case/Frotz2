@@ -830,10 +830,10 @@ def start_audit():
 
     response = result.get("response") or result.get("narrative") or json.dumps(result, indent=2)
     audit_chat_history = [
-        {"role": "user", "content": f"Please audit the current game state. Context sections: {', '.join(selected_sections)}"},
+        {"role": "user", "content": "Please audit the current game state."},
         {"role": "assistant", "content": response},
     ]
-    return jsonify({"status": "success", "response": response, "sections": selected_sections})
+    return jsonify({"status": "success", "response": response})
 
 
 @app.route('/continue_audit', methods=['POST'])

@@ -706,17 +706,7 @@ async function sendAuditorMessage() {
     }
 }
 
-auditorBtn.onclick = openAuditor;
-auditorRun.onclick = runAuditor;
-auditorPreset.onchange = () => applyAuditPreset(auditorPreset.value);
-auditorSelectAll.onclick = () => {
-    auditorSections.querySelectorAll('input[type="checkbox"]').forEach(input => input.checked = true);
-    updateAuditContextSummary();
-};
-auditorSelectNone.onclick = () => {
-    auditorSections.querySelectorAll('input[type="checkbox"]').forEach(input => input.checked = false);
-    updateAuditContextSummary();
-};
+auditorBtn.onclick = startAuditor;
 auditorClose.onclick = () => auditorModal.classList.add('hidden');
 auditorModal.onclick = (e) => { if (e.target === auditorModal) auditorModal.classList.add('hidden'); };
 auditorSend.onclick = sendAuditorMessage;

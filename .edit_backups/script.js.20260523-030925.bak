@@ -578,93 +578,16 @@ function appendAuditorMessage(text, role) {
     auditorLog.scrollTop = auditorLog.scrollHeight;
 }
 
-function formatChars(chars) {
-    if (!chars) return '0 chars';
-    if (chars > 1000) return `${Math.round(chars / 100) / 10}k chars`;
-    return `${chars} chars`;
-}
-
-function selectedAuditSections() {
-    return Array.from(auditorSections.querySelectorAll('input[type="checkbox"]:checked'))
-        .map(input => input.value);
-}
-
-function updateAuditContextSummary() {
-    if (!auditorManifest) return;
-    const selected = selectedAuditSections();
-    const sizes = new Map(auditorManifest.sections.map(section => [section.key, section.chars || 0]));
-    const total = selected.reduce((sum, key) => sum + (sizes.get(key) || 0), 0);
-    auditorContextSummary.textContent = `${selected.length} section(s), about ${formatChars(total)}.`;
-}
-
-function applyAuditPreset(presetName) {
-    if (!auditorManifest) return;
-    const preset = auditorManifest.presets[presetName] || auditorManifest.presets.normal || [];
-    const selected = new Set(preset);
-    auditorSections.querySelectorAll('input[type="checkbox"]').forEach(input => {
-        input.checked = selected.has(input.value);
-    });
-    updateAuditContextSummary();
-}
-
-function renderAuditManifest(manifest) {
-    auditorManifest = manifest;
-    auditorSections.innerHTML = '';
-
-    const defaultPreset = manifest.default_preset || 'normal';
-    auditorPreset.value = defaultPreset;
-
-    manifest.sections.forEach(section => {
-        const row = document.createElement('label');
-        row.className = 'auditor-section-row';
-        row.innerHTML = `
-            <input type="checkbox" value="${section.key}">
-            <span>
-                <strong>${section.label}</strong>
-                <small>${section.description} (${formatChars(section.chars || 0)})</small>
-            </span>
-        `;
-        const checkbox = row.querySelector('input');
-        checkbox.addEventListener('change', updateAuditContextSummary);
-        auditorSections.appendChild(row);
-    });
-
-    applyAuditPreset(defaultPreset);
-}
-
-async function openAuditor() {
+async function startAuditor() {
     auditorModal.classList.remove('hidden');
 
-    if (auditorManifest) return;
-
-    auditorContextSummary.textContent = 'Loading context options...';
-    auditorSections.innerHTML = '';
-    try {
-        const res = await fetch('/audit_context_manifest');
-        const data = await res.json();
-        renderAuditManifest(data);
-    } catch(e) {
-        auditorContextSummary.textContent = 'Could not load audit context options.';
-    }
-}
-
-async function runAuditor() {
-    const sections = selectedAuditSections();
-    if (!sections.length) {
-        appendAuditorMessage('Choose at least one context section before running the audit.', 'system');
-        return;
-    }
-
+    if (auditorStarted) return;
     auditorStarted = true;
     auditorLog.innerHTML = '';
-    appendAuditorMessage(`Building audit context with: ${sections.join(', ')}.`, 'system');
+    appendAuditorMessage('Building full audit context and asking the auditor to review it...', 'system');
 
     try {
-        const res = await fetch('/start_audit', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({sections})
-        });
+        const res = await fetch('/start_audit', {method: 'POST'});
         const data = await res.json();
 
         if (data.status !== 'success') {
@@ -706,17 +629,7 @@ async function sendAuditorMessage() {
     }
 }
 
-auditorBtn.onclick = openAuditor;
-auditorRun.onclick = runAuditor;
-auditorPreset.onchange = () => applyAuditPreset(auditorPreset.value);
-auditorSelectAll.onclick = () => {
-    auditorSections.querySelectorAll('input[type="checkbox"]').forEach(input => input.checked = true);
-    updateAuditContextSummary();
-};
-auditorSelectNone.onclick = () => {
-    auditorSections.querySelectorAll('input[type="checkbox"]').forEach(input => input.checked = false);
-    updateAuditContextSummary();
-};
+auditorBtn.onclick = startAuditor;
 auditorClose.onclick = () => auditorModal.classList.add('hidden');
 auditorModal.onclick = (e) => { if (e.target === auditorModal) auditorModal.classList.add('hidden'); };
 auditorSend.onclick = sendAuditorMessage;

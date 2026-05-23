@@ -151,21 +151,6 @@
                 <button id="auditor-close">X</button>
             </div>
             <div class="modal-body auditor-body">
-                <div id="auditor-controls" class="auditor-controls">
-                    <label for="auditor-preset">Context preset</label>
-                    <select id="auditor-preset">
-                        <option value="quick">Quick</option>
-                        <option value="normal" selected>Normal</option>
-                        <option value="deep">Deep</option>
-                    </select>
-                    <div id="auditor-context-summary" class="auditor-context-summary">Loading context options...</div>
-                    <div class="auditor-control-row">
-                        <button id="auditor-select-all" type="button">ALL</button>
-                        <button id="auditor-select-none" type="button">NONE</button>
-                        <button id="auditor-run" type="button">RUN AUDIT</button>
-                    </div>
-                    <div id="auditor-sections" class="auditor-sections"></div>
-                </div>
                 <div id="auditor-log"></div>
             </div>
             <div class="modal-footer auditor-input-row">
