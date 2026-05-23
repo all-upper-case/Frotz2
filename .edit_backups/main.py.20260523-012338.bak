@@ -562,7 +562,6 @@ def handle_command():
             return jsonify({"response": f"Room generation failed: {str(e)}", "state": get_ui_state()})
 
         world.create_room_from_stub(target, new_data)
-        run_room_state_manager_pass(new_data, target)
         room = world.get_room(target)
         return jsonify({"response": f"### {room['name']}\n{world.describe_room(room)}", "state": get_ui_state()})
 
@@ -688,44 +687,6 @@ def continue_audit():
     response = result.get("response") or result.get("narrative") or json.dumps(result, indent=2)
     audit_chat_history.append({"role": "assistant", "content": response})
     return jsonify({"status": "success", "response": response})
-
-
-def run_room_state_manager_pass(room_data, room_id):
-    narrator_output = {
-        "narrative": (
-            f"ROOM NAME: {room_data.get('room_name', '')}\n"
-            f"ROOM DESCRIPTION:\n{room_data.get('room_description', '')}\n\n"
-            f"BLUEPRINT UPDATE:\n{room_data.get('blueprint_update', '')}"
-        ),
-        "narrative_summary_update": room_data.get("blueprint_update", ""),
-    }
-
-    try:
-        state_outcome = validate_state_manager_response(
-            ai.compile_state_from_narrative(
-                f"ROOM GENERATION: compile the newly generated room {room_id} into missing state updates for visible persistent room objects, fixtures, and durable memory. Do not duplicate state already present.",
-                narrator_output,
-                world.get_context_dump(),
-                get_state_manager_tool_contract(),
-            )
-        )
-    except ContractError as e:
-        log_system(f"Room State Manager pass rejected: {str(e)}")
-        return {
-            "state_updates": [],
-            "warnings": [f"Room State Manager rejected: {str(e)}"],
-            "unsupported_claims": [],
-        }
-
-    outcome = {
-        "narrative": room_data.get("room_description", ""),
-        "narrative_summary_update": state_outcome.get("narrative_summary_update") or room_data.get("blueprint_update", ""),
-        "state_updates": state_outcome.get("state_updates", []),
-        "state_manager_warnings": state_outcome.get("warnings", []),
-        "unsupported_claims": state_outcome.get("unsupported_claims", []),
-    }
-    world.apply_outcome(outcome)
-    return outcome
 
 
 def run_genesis_state_manager_pass(genesis_data, intro_text):

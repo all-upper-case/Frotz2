@@ -90,48 +90,6 @@ def test_create_entity_can_place_body_part_on_npc(tmp_path, monkeypatch, minimal
     assert manager.data["items"][body_item_id]["carryable"] is False
 
 
-def test_append_memory_accepts_entry_alias(tmp_path, monkeypatch, minimal_world):
-    monkeypatch.chdir(tmp_path)
-    manager = WorldManager()
-    manager.data = minimal_world
-    manager.ensure_schema()
-
-    outcome = {
-        "state_updates": [
-            {"tool": "append_memory", "entry": "The curator remembers the locked west cabinet."}
-        ]
-    }
-
-    manager.apply_outcome(outcome)
-
-    assert "The curator remembers the locked west cabinet." in manager.data["narrative_log"]
-    assert outcome["tool_results"][0]["status"] == "accepted"
-
-
-def test_create_character_existing_can_update_location(tmp_path, monkeypatch, minimal_world):
-    monkeypatch.chdir(tmp_path)
-    manager = WorldManager()
-    manager.data = minimal_world
-    manager.ensure_schema()
-
-    outcome = {
-        "state_updates": [
-            {
-                "tool": "create_character",
-                "name": "Curator",
-                "description": "The curator is currently away from the archive.",
-                "location": "nowhere",
-            }
-        ]
-    }
-
-    manager.apply_outcome(outcome)
-
-    assert "npc_curator" not in manager.data["rooms"]["room_start"]["characters"]
-    assert manager.data["characters"]["npc_curator"]["location"] == "nowhere"
-    assert outcome["tool_results"][0]["status"] == "accepted"
-
-
 def test_move_character_can_place_npc_in_named_room(tmp_path, monkeypatch, minimal_world):
     monkeypatch.chdir(tmp_path)
     manager = WorldManager()

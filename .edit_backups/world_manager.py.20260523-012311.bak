@@ -769,7 +769,7 @@ class WorldManager:
             clean_name = name.lower()
 
             if tool == 'append_memory':
-                summary = up.get('summary', up.get('entry', ''))
+                summary = up.get('summary', '')
                 if isinstance(summary, str) and summary.strip():
                     self.data['narrative_log'].append(summary.strip())
                     tool_results.append(self._tool_result(up, tool, success_status))
@@ -819,17 +819,11 @@ class WorldManager:
 
                 if cid and cid != 'player':
                     char = self.data['characters'][cid]
-                    duplicate = char.get('description') == desc and not aliases and not up.get('location')
+                    duplicate = char.get('description') == desc and not aliases
                     char['description'] = desc
                     if aliases:
                         char['aliases'] = sorted(set(char.get('aliases', []) + [a.lower() for a in aliases]))
-                    resolved_location = None
-                    if up.get('location'):
-                        applied, resolved_location = self._place_character(cid, up.get('location'))
-                        if not applied:
-                            tool_results.append(self._tool_result(up, tool, 'invalid_location', entity_id=cid, location=up.get('location')))
-                            continue
-                    tool_results.append(self._tool_result(up, tool, 'ignored_duplicate' if duplicate else success_status, entity_id=cid, location=resolved_location))
+                    tool_results.append(self._tool_result(up, tool, 'ignored_duplicate' if duplicate else success_status, entity_id=cid))
                     continue
 
                 base = re.sub(r'[^a-z0-9]+', '_', name.lower()).strip('_') or 'character'

@@ -114,11 +114,10 @@ PRIORITIES:
 2. Use the smallest conservative state change that makes the state match the prose.
 3. If the authoritative world already represents a concrete fact, do not create a duplicate entity, character, memory entry, or location update for that same fact.
 4. If the narrator's prose is metaphorical, atmospheric, or ambiguous, do not over-compile it into hard state.
-4. If a concrete durable claim cannot be represented with the current tools, put it in unsupported_claims instead of inventing a tool.
-5. Do not put purely atmospheric, sensory, metaphorical, emotional, or stylistic prose in unsupported_claims.
-6. Never invent tool names. Use only the allowed tools below.
-7. If no persistent state changed, return an empty state_updates list.
-8. Include warnings when the prose appears to contradict existing state or when a concrete state change was too ambiguous to apply.
+4. If a claim cannot be represented with the current tools, put it in unsupported_claims instead of inventing a tool.
+5. Never invent tool names. Use only the allowed tools below.
+6. If no persistent state changed, return an empty state_updates list.
+7. Include warnings when the prose appears to contradict existing state or when a state change was too ambiguous to apply.
 
 ALLOWED TOOLS:
 - create_entity
@@ -132,8 +131,6 @@ ALLOWED TOOLS:
 - append_memory
 
 COMMON MAPPINGS:
-- When compiling a newly generated room description, create every concrete visible persistent room object or fixture the player could examine, touch, use, open, sit on, wear, take, or refer to later. Use create_entity with location="here".
-- Do not list ordinary sensory atmosphere as unsupported_claims. Cool air, smells, light, shadows, mood, sounds, and metaphor usually need no state update and no warning.
 - Player takes/receives/picks up an item: move_entity with owner="player", slot="held".
 - Player drops/sets down an item: move_entity with location="here".
 - Player wears an item: move_entity with owner="player", slot="worn".

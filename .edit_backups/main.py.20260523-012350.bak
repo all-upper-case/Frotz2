@@ -562,7 +562,6 @@ def handle_command():
             return jsonify({"response": f"Room generation failed: {str(e)}", "state": get_ui_state()})
 
         world.create_room_from_stub(target, new_data)
-        run_room_state_manager_pass(new_data, target)
         room = world.get_room(target)
         return jsonify({"response": f"### {room['name']}\n{world.describe_room(room)}", "state": get_ui_state()})
 
