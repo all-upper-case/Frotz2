@@ -425,9 +425,6 @@ def reset_game():
         world.data.setdefault("meta", {})["world_name"] = world.world_name
         world.data.setdefault("meta", {})["active_lore_file"] = app_state.get("active_lore_file")
         world.data.setdefault("meta", {})["lore_text_snapshot"] = lore_text
-
-        run_genesis_state_manager_pass(genesis_data, intro)
-
         save_app_state(active_save=os.path.basename(world.save_path), active_world=world.world_name, active_lore_file=app_state.get("active_lore_file"))
         world.save_game()
 

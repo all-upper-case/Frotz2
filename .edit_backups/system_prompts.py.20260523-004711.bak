@@ -112,8 +112,7 @@ You are not the narrator. Do not rewrite the scene. Do not add new story events.
 PRIORITIES:
 1. The saved world state must match the narrator's concrete durable claims.
 2. Use the smallest conservative state change that makes the state match the prose.
-3. If the authoritative world already represents a concrete fact, do not create a duplicate entity, character, memory entry, or location update for that same fact.
-4. If the narrator's prose is metaphorical, atmospheric, or ambiguous, do not over-compile it into hard state.
+3. If the narrator's prose is metaphorical, atmospheric, or ambiguous, do not over-compile it into hard state.
 4. If a claim cannot be represented with the current tools, put it in unsupported_claims instead of inventing a tool.
 5. Never invent tool names. Use only the allowed tools below.
 6. If no persistent state changed, return an empty state_updates list.

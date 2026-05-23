@@ -425,9 +425,6 @@ def reset_game():
         world.data.setdefault("meta", {})["world_name"] = world.world_name
         world.data.setdefault("meta", {})["active_lore_file"] = app_state.get("active_lore_file")
         world.data.setdefault("meta", {})["lore_text_snapshot"] = lore_text
-
-        run_genesis_state_manager_pass(genesis_data, intro)
-
         save_app_state(active_save=os.path.basename(world.save_path), active_world=world.world_name, active_lore_file=app_state.get("active_lore_file"))
         world.save_game()
 
@@ -689,45 +686,6 @@ def continue_audit():
     return jsonify({"status": "success", "response": response})
 
 
-def run_genesis_state_manager_pass(genesis_data, intro_text):
-    narrator_output = {
-        "narrative": (
-            f"{genesis_data.get('intro_text', '')}\n\n"
-            f"STARTING ROOM: {genesis_data.get('starting_room_name', '')}\n"
-            f"{genesis_data.get('starting_room_description', '')}\n\n"
-            f"PLAYER DESCRIPTION:\n{genesis_data.get('player_description', '')}"
-        ),
-        "narrative_summary_update": genesis_data.get("narrative_thread", ""),
-    }
-
-    try:
-        state_outcome = validate_state_manager_response(
-            ai.compile_state_from_narrative(
-                "GENESIS INITIALIZATION: compile the opening narrative, starting room, player description, and physically present/absent starting facts into missing state updates.",
-                narrator_output,
-                world.get_context_dump(),
-                get_state_manager_tool_contract(),
-            )
-        )
-    except ContractError as e:
-        log_system(f"Genesis State Manager pass rejected: {str(e)}")
-        return {
-            "state_updates": [],
-            "warnings": [f"Genesis State Manager rejected: {str(e)}"],
-            "unsupported_claims": [],
-        }
-
-    outcome = {
-        "narrative": intro_text,
-        "narrative_summary_update": state_outcome.get("narrative_summary_update") or genesis_data.get("narrative_thread", ""),
-        "state_updates": state_outcome.get("state_updates", []),
-        "state_manager_warnings": state_outcome.get("warnings", []),
-        "unsupported_claims": state_outcome.get("unsupported_claims", []),
-    }
-    world.apply_outcome(outcome)
-    return outcome
-
-
 @app.route('/models', methods=['GET'])
 def list_models():
     models = ai.get_available_models()
@@ -791,7 +749,11 @@ def process_ai_turn(inp):
         log_system(f"Narrator response rejected: {str(e)}")
         return jsonify({"response": f"AI turn failed: {str(e)}", "state": get_ui_state()})
 
-    tool_contract = get_state_manager_tool_contract()
+    tool_contract = (
+        "Allowed tools: create_entity, describe_entity, move_entity, set_entity_visibility, "
+        "create_character, update_character, move_character, update_player, append_memory. "
+        "Do not invent room/edit-exit tools yet; put those facts in unsupported_claims."
+    )
 
     try:
         state_outcome = validate_state_manager_response(

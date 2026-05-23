@@ -504,10 +504,10 @@ function renderMap(data) {
         node.onclick = () => {
             const exits = Object.entries(room.exits || {})
                 .map(([dir, target]) => `${dir} → ${(byId[target] && byId[target].name) || target}`)
-                .join('\n') || '(none)';
+                .join('\\n') || '(none)';
             const chars = (room.characters || []).join(', ') || '(none)';
             const items = (room.items || []).join(', ') || '(none)';
-            mapDetails.textContent = `${room.name} (${room.id})\n\nVisited: ${room.visited ? 'yes' : 'no'}\nCurrent: ${room.current ? 'yes' : 'no'}\n\nExits:\n${exits}\n\nCharacters: ${chars}\nItems: ${items}`;
+            mapDetails.textContent = `${room.name} (${room.id})\\n\\nVisited: ${room.visited ? 'yes' : 'no'}\\nCurrent: ${room.current ? 'yes' : 'no'}\\n\\nExits:\\n${exits}\\n\\nCharacters: ${chars}\\nItems: ${items}`;
         };
 
         mapCanvas.appendChild(node);

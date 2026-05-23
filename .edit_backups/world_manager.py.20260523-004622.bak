@@ -197,8 +197,7 @@ class WorldManager:
         lines.append("\n[ALL ROOMS - Global Map Context]")
         for rid, rdata in list(self.data['rooms'].items()):
             if not isinstance(rdata, dict): continue
-            room_desc = rdata.get('base_description') or rdata.get('description') or '...'
-            lines.append(f"- {rdata.get('name', 'Unknown')} (ID: {rid}): {room_desc[:100]}...")
+            lines.append(f"- {rdata.get('name', 'Unknown')} (ID: {rid}): {rdata.get('base_description', '...')[:100]}...")
 
         return "\n".join(lines)
 
