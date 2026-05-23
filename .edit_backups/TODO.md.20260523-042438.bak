@@ -58,7 +58,7 @@ Implementation status:
 - In progress: Rework Genesis after ordinary turns are split. Do not overbuild at first; likely start with multi-pass environment setup only where useful: floor plan/exits, room population, character placement, and player/NPC worn/held/body items.
 - In progress: Improve starting-room generation so it creates adjacent exits, semantic rooms, and naturally described exits.
 - Next: Expand Matrix beyond item-only editing so rooms, exits, characters, player state, memory, and lore snapshots can be inspected and repaired from the UI.
-- In progress: Add deterministic world-integrity reporting and tests for common save corruption patterns: orphan item IDs, orphan character IDs, duplicate room membership, impossible character locations, missing room reciprocity, and fixture carryability.
+- Next: Add targeted world-integrity tests for common save corruption patterns: orphan item IDs, orphan character IDs, duplicate room membership, impossible character locations, missing room reciprocity, and fixture carryability.
 
 ## Previous Consistency And Tool Robustness Backlog
 

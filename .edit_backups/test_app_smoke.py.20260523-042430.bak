@@ -57,22 +57,6 @@ def test_build_audit_context_can_select_sections(isolated_main, minimal_world):
     assert "# FULL SAVE JSON" not in context
 
 
-def test_integrity_report_route_returns_report(isolated_main, minimal_world):
-    isolated_main.world.data = minimal_world
-    isolated_main.world.ensure_schema()
-    isolated_main.world.data["characters"]["npc_curator"]["location"] = "room_start"
-    isolated_main.world.data["meta"]["lore_text_snapshot"] = "WORLD_NAME: test\nA quiet test lore."
-
-    client = isolated_main.app.test_client()
-    response = client.get("/integrity_report")
-    payload = response.get_json()
-
-    assert response.status_code == 200
-    assert "status" in payload
-    assert "issues" in payload
-    assert "counts" in payload
-
-
 def test_get_debug_without_artifact_returns_error(isolated_main):
     client = isolated_main.app.test_client()
 

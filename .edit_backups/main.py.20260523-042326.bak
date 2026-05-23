@@ -352,13 +352,6 @@ def map_state():
     })
 
 
-@app.route('/integrity_report', methods=['GET'])
-def integrity_report():
-    if not world.is_initialized():
-        return jsonify({"status": "error", "message": "World is not initialized."}), 400
-    return jsonify(world.get_integrity_report())
-
-
 @app.route('/create_lorebook', methods=['POST'])
 def create_lorebook():
     payload = request.get_json(silent=True) or {}

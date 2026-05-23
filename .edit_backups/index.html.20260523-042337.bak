@@ -144,19 +144,6 @@
         </div>
     </div>
 
-    <!-- INTEGRITY REPORT MODAL -->
-    <div id="integrity-modal" class="modal hidden">
-        <div class="modal-content integrity-modal-content">
-            <div class="modal-header">
-                <h2>WORLD INTEGRITY REPORT</h2>
-                <button id="integrity-close">X</button>
-            </div>
-            <div class="modal-body">
-                <div id="integrity-content" class="integrity-content">Loading integrity report...</div>
-            </div>
-        </div>
-    </div>
-
     <!-- AUDITOR MODAL -->
     <div id="auditor-modal" class="modal hidden">
         <div class="modal-content auditor-modal-content">

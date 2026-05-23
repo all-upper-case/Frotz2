@@ -90,57 +90,6 @@ def test_create_entity_can_place_body_part_on_npc(tmp_path, monkeypatch, minimal
     assert manager.data["items"][body_item_id]["carryable"] is False
 
 
-def test_integrity_report_detects_missing_exit_target(tmp_path, monkeypatch, minimal_world):
-    monkeypatch.chdir(tmp_path)
-    manager = WorldManager()
-    manager.data = minimal_world
-    manager.ensure_schema()
-
-    manager.data["player"]["current_room"] = "room_start"
-    manager.data["characters"]["npc_curator"]["location"] = "room_start"
-    manager.data["meta"]["lore_text_snapshot"] = "WORLD_NAME: test\nA quiet test lore."
-    manager.data["rooms"]["room_start"]["exits"]["east"] = "missing_room"
-
-    report = manager.get_integrity_report()
-
-    assert report["status"] == "critical"
-    assert any(issue["code"] == "missing_exit_target" for issue in report["issues"])
-
-
-def test_integrity_report_detects_item_in_multiple_locations(tmp_path, monkeypatch, minimal_world):
-    monkeypatch.chdir(tmp_path)
-    manager = WorldManager()
-    manager.data = minimal_world
-    manager.ensure_schema()
-
-    manager.data["player"]["current_room"] = "room_start"
-    manager.data["characters"]["npc_curator"]["location"] = "room_start"
-    manager.data["meta"]["lore_text_snapshot"] = "WORLD_NAME: test\nA quiet test lore."
-    manager.data["rooms"]["room_start"]["items"].append("item_lantern")
-
-    report = manager.get_integrity_report()
-
-    assert report["status"] == "critical"
-    assert any(issue["code"] == "item_in_multiple_locations" for issue in report["issues"])
-
-
-def test_integrity_report_detects_carryable_fixture(tmp_path, monkeypatch, minimal_world):
-    monkeypatch.chdir(tmp_path)
-    manager = WorldManager()
-    manager.data = minimal_world
-    manager.ensure_schema()
-
-    manager.data["player"]["current_room"] = "room_start"
-    manager.data["characters"]["npc_curator"]["location"] = "room_start"
-    manager.data["meta"]["lore_text_snapshot"] = "WORLD_NAME: test\nA quiet test lore."
-    manager.data["items"]["item_key"]["entity_type"] = "fixture"
-    manager.data["items"]["item_key"]["carryable"] = True
-
-    report = manager.get_integrity_report()
-
-    assert any(issue["code"] == "noncarryable_marked_carryable" for issue in report["issues"])
-
-
 def test_invalid_state_updates_shape_does_not_crash(tmp_path, monkeypatch, minimal_world):
     monkeypatch.chdir(tmp_path)
     manager = WorldManager()
