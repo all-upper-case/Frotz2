@@ -417,33 +417,12 @@ class WorldManager:
         return None
 
     def find_room_id_by_name(self, name):
-        if not name:
-            return None
-
+        if not name: return None
         clean = name.lower().strip()
-        rooms = self.data.get('rooms', {})
-
-        if clean in rooms:
-            return clean
-
-        exact_matches = []
-        partial_matches = []
-        for rid, room in list(rooms.items()):
-            if not isinstance(room, dict):
-                continue
-            room_name = room.get('name', '').lower().strip()
-            if room_name == clean:
-                exact_matches.append(rid)
-            elif clean and clean in room_name:
-                partial_matches.append(rid)
-
-        if len(exact_matches) == 1:
-            return exact_matches[0]
-        if len(exact_matches) > 1:
-            return None
-
-        if len(partial_matches) == 1:
-            return partial_matches[0]
+        for rid, r in list(self.data['rooms'].items()):
+            if not isinstance(r, dict): continue
+            if r.get('name', '').lower() == clean: return rid
+            if clean in r.get('name', '').lower(): return rid
         return None
 
     def initialize_world(self, genesis_data):
@@ -627,10 +606,10 @@ class WorldManager:
         if not loc_clean:
             return False, None
 
-        if loc_clean in ("void", "nowhere", "unknown", "offscreen", "absent", "away", "not_present", "not present"):
+        if loc_clean in ("void", "nowhere"):
             self._remove_character_from_rooms(char_id)
-            self.data['characters'][char_id]['location'] = "nowhere"
-            return True, "nowhere"
+            self.data['characters'][char_id]['location'] = loc_clean
+            return True, loc_clean
 
         if loc_clean == "here":
             target_rid = self.data['player'].get('current_room')
@@ -677,62 +656,43 @@ class WorldManager:
         loc = update.get('location', '')
         loc_clean = loc.lower().strip() if isinstance(loc, str) else ''
 
-        placement = None
-
+        owner_id = None
+        slot_clean = None
         if owner:
             owner_id = self.find_character_id_by_name(owner)
-            if not owner_id:
-                return False
+            if not owner_id: return False
             try:
                 slot_clean, _ = normalize_person_slot(slot)
             except ContractError:
                 return False
-            placement = ("owner", owner_id, slot_clean)
-
-        elif loc_clean in ('inventory', 'worn', 'body'):
-            slot_clean, _ = normalize_person_slot(loc_clean)
-            placement = ("owner", "player", slot_clean)
-
-        elif loc_clean in ("nowhere", "void"):
-            placement = ("void",)
-
-        elif loc_clean in ("here", "current room", "current_room"):
-            placement = ("room", player['current_room'])
-
-        else:
-            target_rid = self.find_room_id_by_name(loc_clean)
-            if target_rid:
-                placement = ("room", target_rid)
-            else:
-                char_id = self.find_character_id_by_name(loc_clean)
-                if char_id:
-                    if char_id == "player":
-                        placement = ("owner", "player", "held")
-                    else:
-                        placement = ("owner", char_id, "held")
-                else:
-                    return False
 
         self._remove_item_from_all_locations(iid)
 
-        if placement[0] == "void":
-            return True
-
-        if placement[0] == "room":
-            self.data['rooms'][placement[1]].setdefault('items', [])
-            if iid not in self.data['rooms'][placement[1]]['items']:
-                self.data['rooms'][placement[1]]['items'].append(iid)
-            return True
-
-        if placement[0] == "owner":
-            owner_id, slot_clean = placement[1], placement[2]
+        if owner_id:
             if owner_id == 'player':
                 self._place_item_for_player(iid, slot_clean)
             else:
                 self._place_item_for_character(iid, owner_id, slot_clean)
             return True
 
-        return False
+        if loc_clean in ('inventory', 'worn', 'body'):
+            slot_clean, _ = normalize_person_slot(loc_clean)
+            self._place_item_for_player(iid, slot_clean)
+        elif loc_clean in ("nowhere", "void"):
+            pass
+        elif loc_clean == "here":
+            self.data['rooms'][player['current_room']]['items'].append(iid)
+        else:
+            target_rid = self.find_room_id_by_name(loc_clean)
+            if target_rid:
+                self.data['rooms'][target_rid]['items'].append(iid)
+            else:
+                char_id = self.find_character_id_by_name(loc_clean)
+                if char_id and char_id != 'player':
+                    self._place_item_for_character(iid, char_id, 'held')
+                else:
+                    self.data['rooms'][player['current_room']]['items'].append(iid)
+        return True
 
     def _tool_result(self, update, tool, status, **extra):
         result = {"tool": tool, "status": status}
@@ -832,19 +792,11 @@ class WorldManager:
                     continue
 
                 desc = up.get('description', '')
-                has_desc = isinstance(desc, str) and bool(desc.strip())
-                aliases = up.get('aliases', [])
-                has_aliases = isinstance(aliases, list) and bool(aliases)
-                has_location = bool(up.get('location'))
-
-                if tool == 'create_character' and not has_desc:
+                if not isinstance(desc, str) or not desc.strip():
                     tool_results.append(self._tool_result(up, tool, 'ignored_empty', reason='description is empty'))
                     continue
 
-                if tool == 'update_character' and not has_desc and not has_aliases and not has_location:
-                    tool_results.append(self._tool_result(up, tool, 'ignored_empty', reason='description, aliases, or location is required'))
-                    continue
-
+                aliases = up.get('aliases', [])
                 cid = self.find_character_id_by_name(name)
 
                 if tool == 'update_character':
@@ -852,9 +804,8 @@ class WorldManager:
                         tool_results.append(self._tool_result(up, tool, 'missing_target'))
                         continue
                     char = self.data['characters'][cid]
-                    duplicate = (not has_desc or char.get('description') == desc) and not aliases and not up.get('location')
-                    if has_desc:
-                        char['description'] = desc
+                    duplicate = char.get('description') == desc and not aliases and not up.get('location')
+                    char['description'] = desc
                     if aliases:
                         char['aliases'] = sorted(set(char.get('aliases', []) + [a.lower() for a in aliases]))
                     resolved_location = None
@@ -898,7 +849,6 @@ class WorldManager:
                 location = up.get('location', 'here')
                 applied, resolved_location = self._place_character(cid, location)
                 if not applied:
-                    self.data['characters'].pop(cid, None)
                     tool_results.append(self._tool_result(up, tool, 'invalid_location', entity_id=cid, location=location))
                     continue
                 tool_results.append(self._tool_result(up, tool, success_status, entity_id=cid, location=resolved_location))
@@ -958,36 +908,23 @@ class WorldManager:
                     requested_slot, _ = normalize_person_slot(up.get('slot')) if up.get('slot') else (None, False)
                 except ContractError:
                     requested_slot = None
-                entity_kind = str(up.get('entity_type', '')).lower().strip()
-                is_body_part = up.get('location') == 'body' or requested_slot == 'body' or entity_kind == 'body_part'
-                is_fixture = entity_kind in ('fixture', 'furniture', 'scenery', 'immovable', 'fixed')
-                explicit_carryable = up.get('carryable') if isinstance(up.get('carryable'), bool) else None
+                is_body_part = up.get('location') == 'body' or requested_slot == 'body' or up.get('entity_type') == 'body_part'
 
                 iid = self.find_item_id_by_name(name)
                 if iid:
                     self.data['items'][iid]['description'] = desc
-                    if entity_kind:
-                        self.data['items'][iid]['entity_type'] = entity_kind
-                    if is_body_part:
-                        self.data['items'][iid]['body_part'] = True
-                        self.data['items'][iid]['carryable'] = False
-                    elif is_fixture:
-                        self.data['items'][iid]['carryable'] = False
-                    elif explicit_carryable is not None:
-                        self.data['items'][iid]['carryable'] = explicit_carryable
+                    if is_body_part: self.data['items'][iid]['body_part'] = True
                     if aliases:
                         current_aliases = set(self.data['items'][iid]['aliases'])
                         current_aliases.update([a.lower() for a in aliases])
                         self.data['items'][iid]['aliases'] = list(current_aliases)
                 else:
                     new_id = f"i_{uuid.uuid4().hex[:6]}"
-                    carryable = explicit_carryable if explicit_carryable is not None else not (is_body_part or is_fixture)
                     self.data['items'][new_id] = {
                         "id": new_id, "name": name,
                         "aliases": [clean_name] + [a.lower() for a in aliases],
-                        "description": desc, "carryable": carryable,
-                        "visible": True, "body_part": is_body_part,
-                        "entity_type": entity_kind or ("body_part" if is_body_part else "item")
+                        "description": desc, "carryable": not is_body_part,
+                        "visible": True, "body_part": is_body_part
                     }
                     iid = new_id
 

@@ -981,13 +981,11 @@ class WorldManager:
                         self.data['items'][iid]['aliases'] = list(current_aliases)
                 else:
                     new_id = f"i_{uuid.uuid4().hex[:6]}"
-                    carryable = explicit_carryable if explicit_carryable is not None else not (is_body_part or is_fixture)
                     self.data['items'][new_id] = {
                         "id": new_id, "name": name,
                         "aliases": [clean_name] + [a.lower() for a in aliases],
-                        "description": desc, "carryable": carryable,
-                        "visible": True, "body_part": is_body_part,
-                        "entity_type": entity_kind or ("body_part" if is_body_part else "item")
+                        "description": desc, "carryable": not is_body_part,
+                        "visible": True, "body_part": is_body_part
                     }
                     iid = new_id
 

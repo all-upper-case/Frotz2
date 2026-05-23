@@ -27,8 +27,9 @@ CANONICAL_TOOLS = {
 
 TOOL_ALIASES = {
     "description": "describe_entity",
-    "create_item": "create_entity",
+    "create_item": "describe_entity",
     "update_item": "describe_entity",
+    "create_room": "describe_entity",
     "location": "move_entity",
 }
 

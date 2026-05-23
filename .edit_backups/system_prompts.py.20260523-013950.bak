@@ -133,7 +133,6 @@ ALLOWED TOOLS:
 
 COMMON MAPPINGS:
 - When compiling a newly generated room description, create every concrete visible persistent room object or fixture the player could examine, touch, use, open, sit on, wear, take, or refer to later. Use create_entity with location="here".
-- For furniture, built-ins, large appliances, doors, windows, tubs, counters, beds, couches, tables, fixtures, or scenery, set entity_type="fixture", "furniture", or "scenery" and carryable=false.
 - Do not list ordinary sensory atmosphere as unsupported_claims. Cool air, smells, light, shadows, mood, sounds, and metaphor usually need no state update and no warning.
 - Player takes/receives/picks up an item: move_entity with owner="player", slot="held".
 - Player drops/sets down an item: move_entity with location="here".
